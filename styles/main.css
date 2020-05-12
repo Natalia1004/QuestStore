@@ -67,6 +67,13 @@ a:link {
 /*----------
     MAIN NAVIGATION STYLE
 ----------*/
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+}
 
 .main-navigation ul {
     padding-left: 0;
@@ -86,6 +93,7 @@ a:link {
     text-transform: uppercase;
     background: rgba(67, 67, 67, 0.17);
     color: rgb(20, 138, 161);
+    transition: 2s all;
 }
     .main-navigation a:visited {
         color: rgb(20, 138, 161);
@@ -96,24 +104,32 @@ a:link {
         background: rgba(62, 61, 61, 0.51);
     }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 1150px) {
     header {
+        display: flex;
+        justify-content: space-between;
         height: 100px;
         background: rgba(15, 15, 15, 0.80);
         border-top: 3px solid rgb(36, 36, 36);
         border-bottom: 3px solid rgb(36, 36, 36);
         margin-bottom: 100px;
+        padding-right: 20px;
     }
+        .logo{
+            margin-left: 0;
+            max-width: 100%;
+            height: auto;
+        }
 
-    .main-navigation ul{
-        display: flex;
-        justify-content: flex-end;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
+        .main-navigation ul{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;        
+            max-width: 1000px;
+            margin: 0 auto;
+        }
         .main-navigation li {
             margin-left: 20px;
-            width: 15%;
         }
         .main-navigation a {
             background: none;
@@ -146,7 +162,6 @@ a:link {
         display: flex;
         justify-content: center;
     }
-
         .news__featured-info {
             float: left;
             min-width: 300px;
@@ -167,22 +182,30 @@ a:link {
 
 .main-footer {
     padding: 5px 23px;
-    clear: both;
     font-size: 1em;
     color: rgb(78, 184, 206);
+    background: rgba(15, 15, 15, 0.80);
+    border-top: 3px solid rgb(36, 36, 36);
+    border-bottom: 3px solid rgb(36, 36, 36);
+    display: flex;
+    justify-content: flex-end;
 }
     .main-footer__social {
-        font-size: 1em;
+        font-size: 1.3em;
+        margin-top: 5px;
+        margin-bottom: 5px;
         color: rgb(78, 184, 206);
+
+    }
+    .main-footer p{
+        margin-top: 0;
+        margin-bottom: 15px;
     }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 600px) {
     .main-footer {
         display: flex;
         justify-content: flex-end;
-        background: rgba(15, 15, 15, 0.80);
-        border-top: 3px solid rgb(36, 36, 36);
-        border-bottom: 3px solid rgb(36, 36, 36);
     }
     .main-footer__social{
         margin-left: 20px;
