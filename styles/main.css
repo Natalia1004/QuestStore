@@ -107,6 +107,7 @@ a:link {
 @media screen and (min-width: 1150px) {
     header {
         display: flex;
+        align-items: center;  
         justify-content: space-between;
         height: 100px;
         background: rgba(15, 15, 15, 0.80);
@@ -117,8 +118,7 @@ a:link {
     }
         .logo{
             margin-left: 0;
-            max-width: 100%;
-            height: auto;
+            height: 88px;
         }
 
         .main-navigation ul{
