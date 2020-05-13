@@ -174,8 +174,26 @@ a:link {
         margin: 10px;
     }
     .dropdown--input {
-
+        padding: 10px 10px;
+        box-sizing: border-box;
+        border: 2px solid rgb(34,36,49);
+        border-radius: 5px;
+        background-color: rgba(226, 226, 226, 0.94);
+        color:rgb(15, 15, 15);
     }
+    .dropdown__button {
+        background-color: rgb(224, 41, 41);
+        border-radius: 8px;
+        border-color: rgb(224, 41, 41);
+        min-width: 230px;
+        max-width: 350px;
+        height: 50px;
+        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+        font-size: 1.3em;
+        letter-spacing: 2px;
+        margin-top: 15px;
+    }
+
 
 @media screen and (max-width: 1150px) {
     .dropdown {
