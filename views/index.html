@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -22,7 +22,16 @@
                 <ul>
                     <li><a href="index.html">Main</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="login.html">Login</a></li>
+                    <div class="dropdown">
+                        <div class="dropdown-link">Login</div>
+                        <div class="dropdown__content">
+                            <label class="dropdown--margin">Email:</label><br>
+                            <input class="dropdown--margin dropdown--input" type="text" placeholder="email"><br>
+                            <label class="dropdown--margin">Password:</label><br>
+                            <input class="dropdown--margin dropdown--input" type="password" placeholder="password"><br>
+                            <input class="dropdown--margin" type="submit" value="Connect"/>
+                        </div>
+                    </div>
                 </ul>
             </nav>
         </header>
