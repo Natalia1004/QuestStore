@@ -288,7 +288,12 @@ a:link {
     }
     .main-footer__social i {
         margin-left: 10px;
+        transition: 2s all;
     }
+        .main-footer__social i:hover {
+            color: rgb(226, 226, 226);
+            transition: 0.7s color;
+        }
     .main-footer__social p {
         margin-bottom: 0;
         margin-right: 10px;
