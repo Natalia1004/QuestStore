@@ -118,12 +118,11 @@ a:link {
         margin-bottom: 100px;
         padding-right: 20px;
     }
-        .logo{
+        .logo {
             margin-left: 0;
             height: 88px;
         }
-
-        .main-navigation ul{
+        .main-navigation ul {
             display: flex;
             justify-content: flex-end;
             align-items: center;        
@@ -182,9 +181,9 @@ a:link {
         color:rgb(15, 15, 15);
     }
     .dropdown__button {
-        background-color: rgb(224, 41, 41);
+        background-color: rgba(224, 41, 41, 0.8);
         border-radius: 8px;
-        border-color: rgb(224, 41, 41);
+        border-color: rgba(224, 41, 41, 0.8);
         min-width: 230px;
         max-width: 350px;
         height: 50px;
@@ -193,6 +192,9 @@ a:link {
         letter-spacing: 2px;
         margin-top: 15px;
     }
+        .dropdown__button:hover {
+            background-color: rgb(224, 41, 41);
+        }
 
 
 @media screen and (max-width: 1150px) {
