@@ -1,0 +1,301 @@
+/*----------
+    COLOR GUIDE
+
+    WHITE: rgb(226, 226, 226);
+    GREY: rgb(128, 128, 128);
+    DEEPBLUE: rgb(34,36,49);
+    STARBLUE: rgb(78, 184, 206);
+    BLOODRED: rgb(224, 41, 41);
+    BLACK: rgb(15, 15, 15);
+           rgba(15, 15, 15, 0.74);
+
+----------*/
+
+body {
+    font-size: 20px;
+    font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
+    color: rgb(226, 226, 226);
+    background: rgb(34,36,49);
+    background-image: url(../layouts/circuit_board_1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    background: rgb(15, 15, 15); /* IE8 */
+    background: rgba(15, 15, 15, 0.70);
+    margin: 2% 6% 2% 6%;
+    padding: 2% 6% 2% 6%;
+}
+
+h1 {
+    font-size: 3.5em;
+    font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+    line-height: 1.25em;
+    margin-top: 0.8em;
+    margin-bottom: 0;
+    color: rgb(224, 41, 41);
+}
+h2 {
+    font-size: 1.5em;
+    line-height: 1.25em;
+    margin: 0.4219em auto 0.4219em auto;
+    color: rgb(78, 184, 206);
+}
+
+h3 {
+    font-size: 1.7em;
+    font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+    line-height: 1em;
+    margin-top: 0.9em;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    color: rgb(224, 41, 41);
+}
+
+a:link {
+    color: rgb(20, 138, 161);
+}
+    a:visited {
+        color: rgb(78, 184, 206);
+    }
+    a:hover {
+        color: rgb(35, 119, 136);
+    }
+    a:active {
+        color: rgb(66, 6, 6);
+    }
+
+/*----------
+    MAIN NAVIGATION STYLE
+----------*/
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.main-navigation ul {
+    padding-left: 0;
+}
+
+.main-navigation li {
+    list-style: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.main-navigation a, .dropdown-link {
+    display: block;
+    padding: 15px 10px;
+    font-size: 25px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: rgba(67, 67, 67, 0.17);
+    color: rgb(20, 138, 161);
+    transition: 2s all;
+}
+    .main-navigation a:visited {
+        color: rgb(20, 138, 161);
+    }
+    .main-navigation a:hover {
+        color: rgb(255, 255, 255);
+        transition: 0.7s color;
+        background: rgba(62, 61, 61, 0.51);
+    }
+
+@media screen and (min-width: 1150px) {
+    header {
+        display: flex;
+        align-items: center;  
+        justify-content: space-between;
+        height: 100px;
+        background: rgba(15, 15, 15, 0.80);
+        border-top: 3px solid rgb(36, 36, 36);
+        border-bottom: 3px solid rgb(36, 36, 36);
+        margin-bottom: 100px;
+        padding-right: 20px;
+    }
+        .logo {
+            margin-left: 0;
+            height: 88px;
+        }
+        .main-navigation ul {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;        
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .main-navigation li, .dropdown-link {
+            margin-left: 20px;
+        }
+        .main-navigation a, .dropdown-link {
+            background: none;
+        }
+        .main-navigation a:hover, .dropdown-link {
+            background: none;
+        }
+}
+
+/*----------
+    DROPDOWN LOGIN NAVIGATION STYLE
+----------*/
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-link{
+    display: block;
+}
+    .dropdown-link:hover  {
+        color: rgb(226, 226, 226);
+        transition: 0.7s color;
+    }
+    .dropdown:hover .dropdown__content {
+        display: block;
+        padding-top: 30px;
+    }
+    .dropdown__content {
+        display: none;
+        position: absolute;
+        right: 0px;
+        top: 46px;
+        background-color: rgba(34, 36, 49, 0.74);
+        padding: 12px 16px;
+        z-index: 1;
+        border: 1px solid black;
+    }
+    .dropdown--margin {
+        margin: 10px;
+    }
+    .dropdown--input {
+        padding: 10px 10px;
+        box-sizing: border-box;
+        border: 2px solid rgb(34,36,49);
+        border-radius: 5px;
+        background-color: rgba(226, 226, 226, 0.94);
+        color:rgb(15, 15, 15);
+    }
+    .dropdown__button {
+        background-color: rgba(224, 41, 41, 0.8);
+        border-radius: 8px;
+        border-color: rgba(224, 41, 41, 0.8);
+        min-width: 230px;
+        max-width: 350px;
+        height: 50px;
+        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+        font-size: 1.3em;
+        letter-spacing: 2px;
+        margin-top: 15px;
+    }
+        .dropdown__button:hover {
+            background-color: rgb(224, 41, 41);
+        }
+
+
+@media screen and (max-width: 1150px) {
+    .dropdown {
+        display: block;
+    }
+    .dropdown__content {
+        position: static;
+    }
+    .dropdown-link {
+        display: block;
+        text-align: center;
+    }
+}
+
+/*----------
+    MAIN HERO STYLE
+----------*/
+
+.hero-landing {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero-landing p {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*----------
+    MAIN CONTENT STYLE
+----------*/
+
+@media screen and (min-width: 950px) {
+    .news{
+        display: flex;
+        justify-content: center;
+    }
+        .news__featured-info {
+            float: left;
+            min-width: 300px;
+            width: 400px;
+            margin: 3%
+        }
+        .news__featured-info h3 {
+            border-bottom: 3px solid rgb(128, 128, 128);
+        }
+        .news__featured-info p {
+            text-align: justify;
+        }  
+}
+
+/*----------
+    MAIN FOOTER STYLE
+----------*/
+
+.main-footer {
+    padding: 5px 23px;
+    font-size: 1em;
+    color: rgb(78, 184, 206);
+    background: rgba(15, 15, 15, 0.80);
+    border-top: 3px solid rgb(36, 36, 36);
+    border-bottom: 3px solid rgb(36, 36, 36);
+    display: flex;
+    justify-content: flex-end;
+}
+    .main-footer__social {
+        font-size: 1.3em;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        color: rgb(78, 184, 206);
+    }
+    .main-footer p{
+        margin-left: 5px;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+@media screen and (min-width: 600px) {
+    .main-footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .main-footer__social{
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .main-footer__social i {
+        margin-left: 10px;
+        transition: 2s all;
+    }
+        .main-footer__social i:hover {
+            color: rgb(226, 226, 226);
+            transition: 0.7s color;
+        }
+    .main-footer__social p {
+        margin-bottom: 0;
+        margin-right: 10px;
+    }
+}
