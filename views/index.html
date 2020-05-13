@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,6 +8,7 @@
     <link href="../styles/normalize.css" rel="stylesheet">
     <!--Third party resources-->
     <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link href="../styles/fontello/css/queststore-nat.css" rel="stylesheet">
     <!--Our styles-->
     <link href="../styles/main.css" rel="stylesheet" />
@@ -21,7 +22,16 @@
                 <ul>
                     <li><a href="index.html">Main</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="login.html">Login</a></li>
+                    <div class="dropdown">
+                        <div class="dropdown-link">Login</div>
+                        <div class="dropdown__content">
+                            <label class="dropdown--margin">Email:</label><br>
+                            <input id="login_email" class="dropdown--margin dropdown--input" type="text" placeholder="email" required><br>
+                            <label class="dropdown--margin">Password:</label><br>
+                            <input id="login_password" class="dropdown--margin dropdown--input" type="password" placeholder="password" required><br>
+                            <button id="login_button" class="dropdown--margin dropdown__button" type="submit">Log In</button>
+                        </div>
+                    </div>
                 </ul>
             </nav>
         </header>
