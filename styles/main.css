@@ -53,18 +53,9 @@ h3 {
     color: rgb(224, 41, 41);
 }
 
-a:link {
-    color: rgb(20, 138, 161);
+ul {
+    list-style: none;
 }
-    a:visited {
-        color: rgb(78, 184, 206);
-    }
-    a:hover {
-        color: rgb(35, 119, 136);
-    }
-    a:active {
-        color: rgb(66, 6, 6);
-    }
 
 /*----------
     MAIN NAVIGATION STYLE
@@ -115,7 +106,6 @@ a:link {
         background: rgba(15, 15, 15, 0.80);
         border-top: 3px solid rgb(36, 36, 36);
         border-bottom: 3px solid rgb(36, 36, 36);
-        margin-bottom: 100px;
         padding-right: 20px;
     }
         .logo {
@@ -192,6 +182,13 @@ a:link {
         letter-spacing: 2px;
         margin-top: 15px;
     }
+        .dropdown__button a {
+            text-decoration: none;
+            color: rgb(226, 226, 226) !important;
+            transition: color 0s;
+            padding: 0;
+
+        }
         .dropdown__button:hover {
             background-color: rgb(224, 41, 41);
         }
@@ -225,6 +222,38 @@ a:link {
 }
 
 /*----------
+    LANDING STYLE
+----------*/
+
+@media screen and (min-width: 1150px) {
+    .landing {
+        display: flex;
+    }
+
+    .landing__sidebar-menu {
+
+        display: flex;
+        width: 30%;
+    }
+        .landing__sidebar-menu h3 {
+            border-bottom: 3px solid rgb(128, 128, 128);
+            max-width: 230px;
+            margin-left: 50px;
+        }
+        .landing__sidebar-menu ul {
+            margin: 0;
+        }
+
+    .landing__content {
+        display: flex;
+        width: 60%;
+        margin: 40px auto 15px auto;
+        /*delete this after page is done*/
+        background-color: rgba(255, 255, 0, 0.308);
+    }
+}
+
+/*----------
     MAIN CONTENT STYLE
 ----------*/
 
@@ -253,6 +282,7 @@ a:link {
 
 .main-footer {
     padding: 5px 23px;
+    margin-top: 20px;
     font-size: 1em;
     color: rgb(78, 184, 206);
     background: rgba(15, 15, 15, 0.80);
