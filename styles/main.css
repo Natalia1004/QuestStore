@@ -339,3 +339,53 @@ ul {
         margin-right: 10px;
     }
 }
+
+
+/*----------
+    MENTORS VIEW inside landing_content
+----------*/
+
+
+.inside_landing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1%;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+    .show-all_box {
+        position: relative;
+        background-color: rgb(182, 172, 172);
+        /*background-color: #FAFAFA;*/
+        color: #424242;
+        border-radius: 4px;
+        padding: 2rem 2rem 3rem 2rem;
+        margin: 1.5rem 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);
+    }
+
+    .show-all_user {
+        text-align: center;
+        margin: 1.5rem 0 1rem 0;
+    }
+
+    .user_name {
+        font-size: 2.15rem;
+        margin-top: 0.5rem;
+        color: brown;
+    }
+
+    .user_position {
+        color: rgb(151, 87, 87);
+        /*color: #bdbdbd;*/
+        margin-top: 0.4rem;
+        font-size: 1rem;
+        letter-spacing: 0.05rem;
+    }
+
+    .show-all_text {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.02rem;
+        line-height: 1.85rem;
+    }
