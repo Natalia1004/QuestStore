@@ -24,7 +24,7 @@ const addNameAlert = () => {
     const newAlert = document.createElement('div');
     newAlert.className = "alert";
     newAlert.id = "name-alert";
-    newAlert.innerHTML = 'Each word in name must start from a capital letter!';
+    newAlert.innerHTML = 'Name must begin with a capital letter!';
     const nameLabel = nameField.nextSibling;
     const parent = nameField.parentElement;
     parent.insertBefore(newAlert, nameLabel);
@@ -47,7 +47,7 @@ const addEmailAlert = () => {
     const newAlert = document.createElement('div');
     newAlert.className = "alert";
     newAlert.id = "email-alert";
-    newAlert.innerHTML = `It's not a valid email address!`;
+    newAlert.innerHTML = `Invalid email address!`;
     const emailLabel = emailField.nextSibling;
     const parent = emailField.parentElement;
     parent.insertBefore(newAlert, emailLabel);

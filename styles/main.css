@@ -11,6 +11,9 @@
 
 ----------*/
 
+@import url('https://fonts.googleapis.com/css2?family=Monda&display=swap');
+
+
 body {
     font-size: 20px;
     font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
@@ -361,8 +364,119 @@ ul {
         margin-bottom: 0;
         margin-right: 10px;
     }
+
+ 
 }
 
+/*----------
+   Contact Form
+----------*/
+
+.second_header_contact
+    {
+        
+        font-weight: normal;
+        font-size: 40px;
+        font-weight: bold;
+        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 500px;
+        color: #ffffff;
+        text-align: center;
+    }
+
+.contact
+{
+    margin: auto;
+    height: 600px;
+    width: 600px;
+    -moz-box-shadow: inset -3px -3px 10px #eee;
+    -webkit-box-shadow: inset -3px -3px 10px #eee;
+    box-shadow: inset -3px -3px 10px #eee;
+    border-radius: 15px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#name ,#email,#subject,#message
+{
+    -moz-box-shadow: inset -3px -3px 10px #eee;
+    -webkit-box-shadow: inset -3px -3px 10px #eee;
+    box-shadow: inset -3px -3px 10px #eee;
+    border-radius: 15px;
+    width: 350px;
+    height: 30px; 
+}
+#send
+{
+   background-color: #ac0f0f; 
+   color: white; 
+   border-radius: 15px;
+   font-size: 20px;
+   color: #ffffff;
+   font-style: italic;
+   padding: 10px 30px; 
+   width: 250px;
+   height: 50px; 
+   margin-bottom: 5px;
+
+}
+
+.contact input {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 96%;
+    padding: 12px;
+    border-radius: 6px;
+    background-color: rgb(233, 233, 233);
+    border: 1px solid #ccc;
+  }
+ 
+
+.alert {
+    border-radius: 15px;
+    color: #6f0711;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    position: relative;
+    padding: .5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-bottom: 0.7rem;
+    width: 300px;
+  }
+
+  .confirmation {
+    color: #0c5460;
+    background-color: #d1edf1;
+    border-color: #bee5eb;
+    position: relative;
+    padding: .5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    font-size: 12px;
+    margin-bottom: 0.7rem;
+    width: 200px;
+  }
+
+  .contact textarea {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 96%;
+    padding: 12px;
+    border-radius: 6px;
+    background-color: rgb(233, 233, 233);
+    border: 1px solid #ccc;
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
 /*----------
     MENTORS VIEW inside landing_content
