@@ -11,7 +11,8 @@
 
 ----------*/
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monda&display=swap');
+
 
 body {
     font-size: 20px;
@@ -376,13 +377,14 @@ ul {
         
         font-weight: normal;
         font-size: 40px;
-        font-family: 'Raleway', sans-serif;
+        font-weight: bold;
+        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
         margin: auto;
-        margin-bottom: 30px;
+        margin-top: 50px;
+        margin-bottom: 50px;
         width: 500px;
-        color: #f4e6e6;
+        color: #ffffff;
         text-align: center;
-        text-shadow: rgb(155, 15, 15) 2px 3px;
     }
 
 .contact
@@ -411,7 +413,7 @@ ul {
 }
 #send
 {
-   background-color: #2e0619; 
+   background-color: #ac0f0f; 
    color: white; 
    border-radius: 15px;
    font-size: 20px;
