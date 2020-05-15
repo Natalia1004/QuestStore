@@ -259,8 +259,31 @@ ul {
         width: 60%;
         margin: 40px auto 15px auto;
         /*delete this after page is done*/
-        background-color: rgba(255, 255, 0, 0.308);
+        /*background-color: rgba(255, 255, 0, 0.308);*/
     }
+        .landing__content-justify {
+            justify-content: center;
+        }
+}
+
+/*----------
+    FORM STYLE
+----------*/
+
+.form input{
+    width: 350px;
+}
+.form h3 {
+    display: block;
+    border-bottom: 3px solid rgb(128, 128, 128);
+}
+.form textarea {
+    width: 350px !important;
+    resize: none;
+}
+.form__submit {
+    display: flex;
+    justify-content: center;
 }
 
 /*----------
@@ -344,7 +367,6 @@ ul {
 /*----------
     MENTORS VIEW inside landing_content
 ----------*/
-
 
 .inside_landing {
     display: grid;
