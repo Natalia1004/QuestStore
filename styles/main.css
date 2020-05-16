@@ -290,6 +290,35 @@ ul {
 }
 
 /*----------
+    QUEST BOX STYLE
+----------*/
+
+.quest {
+    width: 200px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: fit-content;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    border: 2px solid rgb(34, 36, 49);
+    border-radius: 5px;
+    background-color: rgba(34, 36, 49, 0.74);
+}
+.quest__title{
+    margin-top: 10px;
+}
+.quest__cost {
+    color: orange;
+    margin-top: 0;
+}
+.quest__description{
+    margin: 20px;
+
+}
+
+
+/*----------
     MAIN CONTENT STYLE
 ----------*/
 
