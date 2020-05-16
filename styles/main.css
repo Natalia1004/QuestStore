@@ -259,6 +259,7 @@ ul {
 
     .landing__content {
         display: flex;
+        flex-wrap: wrap;
         width: 60%;
         margin: 40px auto 15px auto;
         /*delete this after page is done*/
@@ -267,6 +268,14 @@ ul {
         .landing__content-justify {
             justify-content: center;
         }
+    .landing__content--margin {
+        margin-top: 0;
+        margin-bottom: 40px;
+    }
+    .landing__content--border {
+        display: block;
+        border-bottom: 3px solid rgb(128, 128, 128);
+    }
 }
 
 /*----------
@@ -298,7 +307,7 @@ ul {
     margin-left: 10px;
     margin-bottom: 10px;
     height: fit-content;
-    display: block;
+    display: inline-block;
     text-align: center;
     box-sizing: border-box;
     border: 2px solid rgb(34, 36, 49);
@@ -314,7 +323,6 @@ ul {
 }
 .quest__description{
     margin: 20px;
-
 }
 
 
