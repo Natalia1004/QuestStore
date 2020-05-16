@@ -273,8 +273,10 @@ ul {
         margin-bottom: 40px;
     }
     .landing__content--border {
-        display: block;
         border-bottom: 3px solid rgb(128, 128, 128);
+    }
+    .landing__content__wrapper {
+        width: 100%;
     }
 }
 
