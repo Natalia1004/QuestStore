@@ -29,6 +29,20 @@ class QuestReward{
     }
 }
 
+function modifyIndividual(){
+    let cost = document.getElementsByClassName("questreward__cost");
+    for (i = 0; i < cost.length; i++) {
+        cost[i].classList.add("questreward--individual");
+    }
+}
+
+function modifyGroup(){
+    let cost = document.getElementsByClassName("questreward__cost");
+    for (i = 0; i < cost.length; i++) {
+        cost[i].classList.add("questreward--group");
+    }
+}
+
 function printAllQuests(){
     let Quests = [
     new QuestReward("Spotter", "50cc", "Spot a major mistake in the assignment."),
@@ -39,11 +53,41 @@ function printAllQuests(){
     new QuestReward("New Me", "500-1000cc", "Set up a SMART goal accepted by a mentor, then achieve it."),
     new QuestReward("Best in field", "500cc", "Students choose the best project of the week. Selected team scores."),
     new QuestReward("Presenting FTW", "500cc", "Do a presentation on a meet-up."),
+    new QuestReward("3D King", "500-1000cc", "Transform rougelike project to be playable in 3D."),
     ]
 
     for (i = 0; i < Quests.length; i++) {
         Quests[i].printQuest();
     }
+}
+
+function printAllIndividualRewards(){
+    let Quests = [
+    new QuestReward("Hint", "50cc", "One mentor advice."),
+    new QuestReward("Remote work", "300cc", "You can spend a day in home office."),
+    new QuestReward("Timetravel", "500cc", "Extend SI week assignment deadline by one day."),
+    new QuestReward("First class", "1000cc", "1h one on one with the mentor of your choosing."),
+    ]
+
+    for (i = 0; i < Quests.length; i++) {
+        Quests[i].printQuest();
+    }
+    modifyIndividual();
+}
+
+function printAllGroupRewards(){
+    let Quests = [
+    new QuestReward("Lecture", "1000cc", "60 min workshop by a mentor(s) of the chosen topic."),
+    new QuestReward("Backup", "1000cc", "Mentor joins a students' team for a one hour."),
+    new QuestReward("Bookworm", "500cc", "Extra material for the current topic."),
+    new QuestReward("Style it up", "5000cc", "All mentors should dress up as pirates (or just funny) for the day."),
+    new QuestReward("Day trip", "5000cc", "The whole course goes to an off-school program instead for a day."),
+    ]
+
+    for (i = 0; i < Quests.length; i++) {
+        Quests[i].printQuest();
+    }
+    modifyGroup();
 }
 
 printAllQuests();
