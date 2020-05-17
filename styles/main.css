@@ -301,7 +301,7 @@ ul {
 }
 
 /*----------
-    QUEST BOX STYLE
+    QUEST/REWARD BOX STYLE
 ----------*/
 
 .questreward {
@@ -316,17 +316,24 @@ ul {
     border-radius: 5px;
     background-color: rgba(34, 36, 49, 0.74);
 }
-.questreward__title{
+.questreward__title {
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
 }
 .questreward__cost {
     color: orange;
     margin-top: 0;
 }
-.questreward__description{
+.questreward__description {
     margin: 20px;
 }
-
+.questreward--individual {
+    color: greenyellow;
+}
+.questreward--group {
+    color: blue;
+}
 
 /*----------
     MAIN CONTENT STYLE
