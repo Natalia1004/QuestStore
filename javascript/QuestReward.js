@@ -25,7 +25,11 @@ class QuestReward{
         QuestReward.appendChild(Cost);
         QuestReward.appendChild(Description);
         //adding quest to landing
-        landingContent.appendChild(QuestReward);
+        let landing__content = document.getElementById("landing__content");
+        let dividerh3 = document.getElementById("dividerh3");
+    
+        /*landing__content.insertBefore(QuestReward, dividerh3);*/
+        landing__content.appendChild(QuestReward);
     }
 }
 
@@ -88,4 +92,18 @@ function printAllGroupRewards(){
         Quests[i].printQuest();
     }
     modifyGroup();
+}
+
+function addH3Div(text){
+    let wrapper = document.createElement("div");
+    let header = document.createElement("h3");
+    wrapper.className = "landing__content__wrapper";
+    header.classList.add("landing__content--border", "landing__content--margin");
+    header.innerText = text;
+    wrapper.appendChild(header);
+
+    let landing__content = document.getElementById("landing__content");
+    let dividerh3 = document.getElementById("dividerh3");
+
+    landing__content.insertBefore(wrapper, dividerh3);
 }
