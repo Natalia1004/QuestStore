@@ -30,14 +30,14 @@ class QuestReward{
 }
 
 function modifyIndividual(){
-    let cost = document.getElementsByClassName("questreward__cost");
+    let cost = document.getElementsByClassName("questreward");
     for (i = 0; i < cost.length; i++) {
         cost[i].classList.add("questreward--individual");
     }
 }
 
 function modifyGroup(){
-    let cost = document.getElementsByClassName("questreward__cost");
+    let cost = document.getElementsByClassName("questreward");
     for (i = 0; i < cost.length; i++) {
         cost[i].classList.add("questreward--group");
     }
@@ -89,5 +89,3 @@ function printAllGroupRewards(){
     }
     modifyGroup();
 }
-
-printAllQuests();
