@@ -328,12 +328,18 @@ ul {
 .questreward__description {
     margin: 20px;
 }
-.questreward--individual {
-    color: greenyellow;
+.questreward--individual .questreward__cost {
+    color: greenyellow !important;
 }
-.questreward--group {
+    .questreward--individual:hover {
+        background-color: rgba(38, 126, 51, 0.74) !important;
+    }
+.questreward--group .questreward__cost {
     color: blue;
 }
+    .questreward--group:hover {
+        background-color: rgba(34, 88, 124, 0.74);
+    }
 
 /*----------
     MAIN CONTENT STYLE
