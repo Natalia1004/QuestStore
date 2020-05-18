@@ -13,38 +13,16 @@
     <link href="../styles/fontello/css/queststore-nat.css" rel="stylesheet">
     <!--Our styles-->
     <link href="../styles/main.css" rel="stylesheet" />
+    <!--Our scripts-->
+    <script defer src="../javascript/Include.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <header>
-            <img class="logo" src="../images/QuestStore-NAT_logo_nobcg.png" alt="QuestStore-NAT"/>
-            <nav class="main-navigation">     
-                <ul>
-                    <li><a href="index.html">Main</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="index.html">Logout</a></li>
-                </ul>
-            </nav>
-        </header>
+        <div w3-include-html="navBarLogged.html"></div>
 
         <div class="landing">
-            <aside class="landing__sidebar-menu">
-                <div class="">
-                    <h3>Main Menu:</h3>
-                    <ul>
-                        <li><button class="dropdown__button"><a href="profile.html">Show My Profile</a></button></li>
-                        <li><button class="dropdown__button"><a href="profile.html">Artifacts Shop</a></button></li>
-                        <li><button class="dropdown__button"><a href="profile.html">Rewards</a></button></li>
-                        <li><button class="dropdown__button"><a href="profile.html">All Students</a></button></li>
-                        <li><button class="dropdown__button"><a href="profile.html">Add Student</a></button></li>
-                        <li><button class="dropdown__button"><a href="addQuestReward.html">Add Quest/Reward</a></button></li>
-                        <li><button class="dropdown__button"><a href="mentorsView.html">All Mentors</a></button></li>
-                        <li><button class="dropdown__button"><a href="profile.html">Add Mentor</a></button></li>
-                        <li><button class="dropdown__button"><a href="profile.html">Add Classroom</a></button></li>
-                    </ul>
-                </div>
-            </aside>
+            <div w3-include-html="sidebar.html"></div>
 
             <div class="landing__content landing__content-justify">
                 <form id="form-quest-reward" action="/" method="GET">
@@ -69,16 +47,7 @@
             </div>
         </div>
 
-        <footer class="main-footer">
-            <div class="main-footer__social">
-                <p>Follow us:</p>
-                <i class="icon-facebook"></i>
-                <i class="icon-linkedin"></i>
-                <i class="icon-youtube"></i>
-                <i class="icon-instagram"></i>
-                <i class="icon-twitter"></i>
-            </div>
-        </footer>
+        <div w3-include-html="footer.html"></div>
     </div>
 </body>
 </html>
