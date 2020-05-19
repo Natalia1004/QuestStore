@@ -6,7 +6,7 @@ class QuestReward{
         this.cost = cost;
         this.description = description;
     }
-    printQuest(){
+    printQuestReward(truth){
         let QuestReward = document.createElement('div');
         let Title = document.createElement('h3');
         let Cost = document.createElement('h3');
@@ -25,11 +25,14 @@ class QuestReward{
         QuestReward.appendChild(Cost);
         QuestReward.appendChild(Description);
         //adding quest to landing
-        let landing__content = document.getElementById("landing__content");
         let dividerh3 = document.getElementById("dividerh3");
-    
-        /*landing__content.insertBefore(QuestReward, dividerh3);*/
-        landing__content.appendChild(QuestReward);
+        
+        if(truth === "put after individual h3") {
+            landingContent.insertBefore(QuestReward, dividerh3);
+        }
+        else{
+            landingContent.appendChild(QuestReward);
+        }
     }
 }
 
@@ -61,11 +64,11 @@ function printAllQuests(){
     ]
 
     for (i = 0; i < Quests.length; i++) {
-        Quests[i].printQuest();
+        Quests[i].printQuestReward();
     }
 }
 
-function printAllIndividualRewards(){
+function printAllIndividualRewards(truth){
     let Quests = [
     new QuestReward("Hint", "50cc", "One mentor advice."),
     new QuestReward("Remote work", "300cc", "You can spend a day in home office."),
@@ -74,7 +77,7 @@ function printAllIndividualRewards(){
     ]
 
     for (i = 0; i < Quests.length; i++) {
-        Quests[i].printQuest();
+        Quests[i].printQuestReward(truth);
     }
     modifyIndividual();
 }
@@ -89,11 +92,12 @@ function printAllGroupRewards(){
     ]
 
     for (i = 0; i < Quests.length; i++) {
-        Quests[i].printQuest();
+        Quests[i].printQuestReward();
     }
     modifyGroup();
 }
 
+//unused function - for education purposes only
 function addH3Div(text){
     let wrapper = document.createElement("div");
     let header = document.createElement("h3");
