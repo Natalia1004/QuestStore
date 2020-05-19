@@ -16,6 +16,8 @@ class QuestReward{
         Title.className = "questreward__title";
         Cost.className = "questreward__cost";
         Description.className = "questreward__description";
+        //js
+        QuestReward.setAttribute("onclick","togglePopup()");
         //values
         Title.innerText = this.title;
         Cost.innerText = this.cost;
