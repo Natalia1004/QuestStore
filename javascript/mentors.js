@@ -1,4 +1,4 @@
-// JavaScript source code
+﻿// JavaScript source code
 
 
 
@@ -65,7 +65,6 @@ function LoadName(index, person) {
     injectionPos.append(userName);
 }
 
-
 function LoadDivs(index) {
     let injectionPos = document.getElementsByClassName("show-all_box")[index];
     let showAllUser = document.createElement("div");
@@ -73,9 +72,9 @@ function LoadDivs(index) {
     injectionPos.appendChild(showAllUser);
 }
 
-
 function LoadIntoLanding() {
     let injectionPos = document.querySelector(".inside_landing");
+    injectionPos.innerHTML = "";
 
     for (let index = 0; index < persons.length; index++) {
         let showAllBox = document.createElement("div");
@@ -87,5 +86,33 @@ function LoadIntoLanding() {
         LoadPosition(index, element);
         LoadPersonDescription(index, element);
     }
+}
 
+
+//-----------------------
+//    ADD MENTOR (mało eleganckie)
+//-------------------------
+
+
+
+function AddForm() {
+    let insertPoint = document.querySelector(".inside_landing");
+    // let insertPoint = document.getElementsByClassName("landing__content")[0];
+    insertPoint.innerHTML = "";
+    let injectDiv = document.createElement("form");
+    injectDiv.className = "form";
+    injectDiv.innerHTML =
+        '<h3 class="dropdown--margin"> </h3>' +
+        '<label class="dropdown--margin">Add Mentor</label><br><br>' +
+        '<label class="dropdown--margin">Enter first name:</label><br>' +
+        '<input id="quest-reward-title" class="dropdown--input dropdown--margin" name="quest-reward-title" type="text" placeholder="Enter name" required/><br>' +
+        '<label class="dropdown--margin">Enter last name:</label><br>' +
+        '<input id="quest-reward-title" class="dropdown--input dropdown--margin" name="quest-reward-title" type="text" placeholder="Enter surname" required/><br>' +
+        '<label class="dropdown--margin">Enter current position in CC:</label><br>' +
+        '<input id="quest-reward-cost" class="dropdown--input dropdown--margin" name="quest-reward-cost" type="number" placeholder="Provide position" required/><br>' +
+        '<label class="dropdown--margin">Bio:</label><br>' +
+        '<textarea id="quest-reward-description" class="dropdown--input dropdown--margin" rows="5", cols="20" placeholder="Please enter short description of mentor here."></textarea><br>' +
+        '<div class="form__submit">' +
+        '<button id="quest-reward-add" class="dropdown__button dropdown--margin" type="submit">Add</button>';
+    insertPoint.append(injectDiv);
 }
