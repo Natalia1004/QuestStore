@@ -583,3 +583,94 @@ ul {
         font-size: 1.02rem;
         line-height: 1.85rem;
     }
+
+      /*----------
+   Student View
+----------*/
+
+.panelWelcome
+{
+    margin: auto;
+    margin-top: 15px;
+    height: 500px;
+    width: 900px;
+    -moz-box-shadow: inset -3px -3px 10px #eee;
+    -webkit-box-shadow: inset -3px -3px 10px #eee;
+    box-shadow: inset -3px -3px 10px #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.welcomeHeader
+{
+    font-size: 70px;
+    text-align: center;
+}
+
+.student_panel
+{
+    margin-top: 10px;
+    margin: auto;
+    width:700px;
+    height: auto;
+    grid-template-rows: repeat(5, 4fr);
+    -moz-box-shadow: inset -3px -3px 10px #eee;
+    -webkit-box-shadow: inset -3px -3px 10px #eee;
+    box-shadow: inset -3px -3px 10px #eee;
+    border-radius: 15px;
+}
+
+.header_profile
+{ 
+    display: grid;
+    grid-template-columns: repeat(2, 4fr);
+    text-align: center;
+    margin:30px;
+    font-size:40px;
+    margin-bottom: 100px;
+}
+
+#nameStudent
+{
+    grid-column: 1/2;
+}
+#coolcoins
+{
+    grid-column: 2/2;
+}
+
+.artifacts
+{
+    grid-template-rows: repeat(5, 4fr);
+}
+
+.header_artifacts
+{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 35px;
+    color: #d71c2f;
+    margin-bottom: 50px;
+}
+
+#artifact
+{
+    grid-row: 2/6;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+#deleteItem
+    {
+        clear: left;
+        background-color: #ac0f0f; 
+        color: white; 
+        border-radius: 15px;
+        font-size: 18px;
+        color: #ffffff;
+        width: 100px;
+        height: 40px; 
+        margin: auto;
+        text-align: center;
+    }
