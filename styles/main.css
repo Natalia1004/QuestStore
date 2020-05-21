@@ -438,7 +438,7 @@ ul {
         margin: auto;
         margin-top: 50px;
         margin-bottom: 50px;
-        width: 500px;
+        width: 60%;
         color: #ffffff;
         text-align: center;
     }
@@ -446,8 +446,8 @@ ul {
 .contact
 {
     margin: auto;
-    height: 600px;
-    width: 600px;
+    height: 100%;
+    width: 60%;
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
@@ -464,20 +464,19 @@ ul {
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
-    width: 350px;
-    height: 30px; 
+    width: 60%;
+    height: 30%; 
 }
 #send
 {
    background-color: #ac0f0f; 
    color: white; 
    border-radius: 15px;
-   font-size: 20px;
+   font-size: 100%;
    color: #ffffff;
    font-style: italic;
-   padding: 10px 30px; 
-   width: 250px;
-   height: 50px; 
+   width: 30%;
+   height: 40px;
    margin-bottom: 5px;
 
 }
@@ -505,7 +504,7 @@ ul {
     border-radius: 10px;
     font-size: 12px;
     margin-bottom: 0.7rem;
-    width: 300px;
+    width: 40%;
   }
 
   .confirmation {
@@ -518,7 +517,7 @@ ul {
     border-radius: .25rem;
     font-size: 12px;
     margin-bottom: 0.7rem;
-    width: 200px;
+    width: 50%;
   }
 
   .contact textarea {
@@ -533,6 +532,7 @@ ul {
     resize: none;
     font-family: Arial, Helvetica, sans-serif;
   }
+
 
 /*----------
     MENTORS VIEW inside landing_content
@@ -605,11 +605,13 @@ ul {
 .welcomeHeader
 {
     font-size: 70px;
+    margin: center;
     text-align: center;
 }
 
 .student_panel
 {
+    margin: center;
     margin-top: 10px;
     margin: auto;
     width:700px;
@@ -628,7 +630,8 @@ ul {
     text-align: center;
     margin:30px;
     font-size:40px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
+    margin: center;
 }
 
 #nameStudent
@@ -640,9 +643,12 @@ ul {
     grid-column: 2/2;
 }
 
+
+
 .artifacts
 {
     grid-template-rows: repeat(5, 4fr);
+    margin: center;
 }
 
 .header_artifacts
@@ -652,13 +658,23 @@ ul {
     font-size: 35px;
     color: #d71c2f;
     margin-bottom: 50px;
+    margin: auto;
 }
+#Level
+    {
+    text-align: right;
+    font-size: 30px;
+    margin-bottom: 60px;
+    margin-right: 12px;
+
+    }
 
 #artifact
 {
     grid-row: 2/6;
     margin-left: 30px;
     margin-bottom: 30px;
+    margin: auto;
 }
 
 #deleteItem
@@ -673,4 +689,8 @@ ul {
         height: 40px; 
         margin: auto;
         text-align: center;
+        margin: auto;
     }
+
+
+    
