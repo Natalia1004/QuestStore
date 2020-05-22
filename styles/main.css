@@ -191,7 +191,6 @@ ul {
             color: rgb(226, 226, 226) !important;
             transition: color 0s;
             padding: 0;
-
         }
         .dropdown__button:hover {
             background-color: rgb(224, 41, 41);
@@ -308,6 +307,7 @@ ul {
 ----------*/
 
 .questreward {
+    cursor:pointer;
     width: 200px;
     margin-left: 10px;
     margin-bottom: 10px;
@@ -343,6 +343,71 @@ ul {
 }
     .questreward--group:hover {
         background-color: rgba(34, 88, 124, 0.74);
+    }
+
+/*----------
+    POPUP BOX STYLE
+----------*/
+.popup__overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height:100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 1;
+    display: none;
+}
+.popup__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    background: rgba(34, 36, 49, 0.84);
+    width: 500px;
+    height: fit-content;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid rgb(34, 36, 49);
+    border-radius: 8px;
+}
+.popup__close-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: rgb(224, 41, 41);
+    color: rgb(226, 226, 226);
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: center;
+    border-radius: 30%;
+}
+.popup.active .popup__overlay {
+    display: block;
+}
+.popup.active .popup__content {
+    transition: all 500ms ease-in-out;
+    transform: translate(-50%,-50%) scale(1);
+}
+.button--color--individual {
+    background-color: rgba(78, 224, 41, 0.6);
+    border-color: rgba(78, 224, 41, 0.6);
+}
+    .button--color--individual:hover {
+        background-color: rgba(78, 224, 41, 0.9);
+    }
+.button--color--group {
+    background-color: rgba(44, 41, 224, 0.4);
+    border-color: rgba(44, 41, 224, 0.4);
+}
+    .button--color--group:hover {
+        background-color: blue;
     }
 
 /*----------
@@ -733,3 +798,24 @@ ul {
         
 
     
+/*-----------------------
+//    ADD CLASSROOM
+//-------------------------*/
+
+fieldset {
+    font-size: 30px;
+    padding: 50px 300px 50px 300px;
+}
+
+legend {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+#proceed_button {
+    font-size: 20px;
+    color: black;
+    padding: 10px 50px 10px 50px;
+}
+

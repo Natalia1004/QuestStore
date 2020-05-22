@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuestStore-NAT</title>
+    <link href="../styles/normalize.css" rel="stylesheet">
+    <!--Third party resources-->
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <link rel="icon" href="../images/QuestStore-NAT_icon.jpg" type="image">
+    <link href="../styles/fontello/css/queststore-nat.css" rel="stylesheet">
+    <!--Our styles-->
+    <link href="../styles/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div w3-include-html="navBarLogged.html"></div>
+        <div class="landing">
+            <div w3-include-html="sidebar.html"></div>
+            <div class="landing__content landing__content-justify">
+                <form id="form-quest-reward" action="/" method="GET">
+                    <fieldset>      
+                        <legend>Create classrom </legend>      
+                        <input type="checkbox" class="create_classroom" value="Student1" onclick="GetSelectedStudents()">Student 1<br>      
+                        <input type="checkbox" class="create_classroom" value="Student2" onclick="GetSelectedStudents()">Student 2<br>      
+                        <input type="checkbox" class="create_classroom" value="Student3" onclick="GetSelectedStudents()">Student 3<br>
+                        <input type="checkbox" class="create_classroom" value="Student4" onclick="GetSelectedStudents()">Student 4<br>      
+                        <input type="checkbox" class="create_classroom" value="Student5" onclick="GetSelectedStudents()">Student 5<br>      
+                        <input type="checkbox" class="create_classroom" value="Student6" onclick="GetSelectedStudents()">Student 6<br>      
+                        <br>      
+                        <input id="proceed_button" type="submit" value="Proceed" />      
+                    </fieldset> 
+                </form>
+            </div>
+        </div>
+     
+        <div w3-include-html="footer.html"></div>
+    </div>
+    <script src="../javascript/mentors.js" async defer></script>
+    <script src="../javascript/Include.js" async defer></script>
+
+</body>
+
+</html>
