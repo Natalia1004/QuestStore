@@ -402,6 +402,13 @@ ul {
     .button--color--individual:hover {
         background-color: rgba(78, 224, 41, 0.9);
     }
+.button--color--group {
+    background-color: rgba(44, 41, 224, 0.4);
+    border-color: rgba(44, 41, 224, 0.4);
+}
+    .button--color--group:hover {
+        background-color: blue;
+    }
 
 /*----------
     MAIN CONTENT STYLE
