@@ -28,9 +28,11 @@ class QuestReward{
         let dividerh3 = document.getElementById("dividerh3");
         
         if(truth === "put after individual h3") {
+            QuestReward.setAttribute("onclick","togglePopup()");
             landingContent.insertBefore(QuestReward, dividerh3);
         }
         else{
+            QuestReward.setAttribute("onclick","togglePopupGroup()");
             landingContent.appendChild(QuestReward);
         }
     }
