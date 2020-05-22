@@ -694,3 +694,24 @@ ul {
 
 
     
+/*-----------------------
+//    ADD CLASSROOM
+//-------------------------*/
+
+fieldset {
+    font-size: 30px;
+    padding: 50px 300px 50px 300px;
+}
+
+legend {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+#proceed_button {
+    font-size: 20px;
+    color: black;
+    padding: 10px 50px 10px 50px;
+}
+

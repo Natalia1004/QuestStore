@@ -141,3 +141,24 @@ function AddStudent(){
         '<button id="quest-reward-add" class="dropdown__button dropdown--margin" type="submit">Add</button>';
     insertPoint.append(injectDiv);
 }
+
+
+//-----------------------
+//    ADD CLASSROOM
+//-------------------------
+
+function GetSelectedStudents()  
+{  
+    var checkboxes = document.getElementsByClassName("create_classroom");  
+    var numberOfCheckedItems = 0;  
+    for(var i = 0; i < checkboxes.length; i++)  
+    {  
+        if(checkboxes[i].checked)  
+            numberOfCheckedItems++;  
+    }  
+    if(numberOfCheckedItems > 22)  
+    {  
+        alert("You can't select more than 22 students!");  
+        return false;  
+    }  
+}  
