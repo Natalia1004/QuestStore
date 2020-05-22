@@ -590,37 +590,39 @@ ul {
 
 .panelWelcome
 {
-    margin: auto;
+    margin-left: 10px;
     margin-top: 15px;
     height: 500px;
-    width: 900px;
+    width: 80%;
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    line-height: 500%;
 }
 .welcomeHeader
 {
     font-size: 70px;
-    margin: center;
+    margin: auto;
     text-align: center;
 }
 
 .student_panel
 {
-    margin: center;
-    margin-top: 10px;
-    margin: auto;
-    width:700px;
-    height: auto;
-    grid-template-rows: repeat(5, 4fr);
+    
+    margin-top: 20px;
+    margin-left: 20px;
+    width:90%;
+    height: 80%;
+    grid-template-rows: repeat(5, 5fr);
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
+    align-items: center;
 }
 
 .header_profile
@@ -628,10 +630,9 @@ ul {
     display: grid;
     grid-template-columns: repeat(2, 4fr);
     text-align: center;
-    margin:30px;
     font-size:40px;
-    margin-bottom: 80px;
-    margin: center;
+    margin-bottom: 60px;
+    margin-top: 40px;
 }
 
 #nameStudent
@@ -643,12 +644,10 @@ ul {
     grid-column: 2/2;
 }
 
-
-
 .artifacts
 {
     grid-template-rows: repeat(5, 4fr);
-    margin: center;
+    margin: auto;
 }
 
 .header_artifacts
@@ -657,8 +656,7 @@ ul {
     margin-top: 10px;
     font-size: 35px;
     color: #d71c2f;
-    margin-bottom: 50px;
-    margin: auto;
+    margin-bottom: 60px;
 }
 #Level
     {
@@ -691,6 +689,47 @@ ul {
         text-align: center;
         margin: auto;
     }
+    @media screen and (max-width: 650px){
+        .panelWelcome
+            {
+            margin: auto;
+            margin-top: 15px;
+            height: 300px;
+            width: 90%;
+            -moz-box-shadow: inset -3px -3px 10px #eee;
+            -webkit-box-shadow: inset -3px -3px 10px #eee;
+            box-shadow: inset -3px -3px 10px #eee;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 500%;
+        }
+        
+        .welcomeHeader{
+            font-size: 30px;
+            line-height: 150%;
+        }
 
+        .header_profile
+        { 
+            font-size:25px;
+            margin-top:20px;
+        }
+
+        #Level
+        {
+            font-size: 20px;
+        }
+
+        .header_artifacts
+        {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 25px;
+            color: #d71c2f;
+            margin-bottom: 60px;
+        }
+        
 
     
