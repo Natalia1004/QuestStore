@@ -16,8 +16,6 @@ class QuestReward{
         Title.className = "questreward__title";
         Cost.className = "questreward__cost";
         Description.className = "questreward__description";
-        //js
-        QuestReward.setAttribute("onclick","togglePopup()");
         //values
         Title.innerText = this.title;
         Cost.innerText = this.cost;
@@ -30,9 +28,11 @@ class QuestReward{
         let dividerh3 = document.getElementById("dividerh3");
         
         if(truth === "put after individual h3") {
+            QuestReward.setAttribute("onclick","togglePopup()");
             landingContent.insertBefore(QuestReward, dividerh3);
         }
         else{
+            QuestReward.setAttribute("onclick","togglePopupGroup()");
             landingContent.appendChild(QuestReward);
         }
     }
