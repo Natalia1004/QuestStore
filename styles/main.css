@@ -825,15 +825,45 @@ legend {
     font-size: 20px;
     color: black;
     padding: 10px 50px 10px 50px;
-<<<<<<< HEAD
 }
 
-
-
-/*-----------------------
+/*----------------------
     MENTOR PROFILE
--------------------------*/
+-----------------------*/
 
-=======
+.mentor_panel {
+    display: flex;
+    align-self: center;
 }
->>>>>>> 75c454e59fb8daa96b03b7497f75522ba9f82fab
+
+
+.mentor-header_profile {
+    margin: auto;
+    position: relative;
+    justify-self: center;
+    align-self: center;
+
+    color: #d8d2d2;
+    padding: 2rem 2rem 3rem 2rem;
+    text-align: center;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);
+    -moz-box-shadow: inset -3px -3px 10px #eee;
+    -webkit-box-shadow: inset -3px -3px 10px #eee;
+    box-shadow: inset -3px -3px 10px #eee;
+    border-radius: 15px;
+}
+
+
+#nameMentor
+{
+    font-size: 3.rem;
+    margin-top: 0.5rem;
+}
+
+
+#mentor_assignement {
+    margin-top: 0.4rem;
+    font-size: 2rem;
+    letter-spacing: 0.05rem;
+}
