@@ -657,7 +657,7 @@ ul {
 {
     margin-left: 10px;
     margin-top: 15px;
-    height: 500px;
+    height: 650px;
     width: 80%;
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
@@ -696,8 +696,7 @@ ul {
     grid-template-columns: repeat(2, 4fr);
     text-align: center;
     font-size:40px;
-    margin-bottom: 60px;
-    margin-top: 40px;
+    padding: 50px;
 }
 
 #nameStudent
@@ -712,7 +711,7 @@ ul {
 .artifacts
 {
     grid-template-rows: repeat(5, 4fr);
-    margin: auto;
+    padding: 30px;
 }
 
 .header_artifacts
@@ -722,6 +721,7 @@ ul {
     font-size: 35px;
     color: #d71c2f;
     margin-bottom: 60px;
+    
 }
 #Level
     {
@@ -733,6 +733,14 @@ ul {
     }
 
 #artifact
+{
+    grid-row: 2/6;
+    margin-left: 30px;
+    margin-bottom: 40px;
+    margin: auto;
+}
+
+#usedArtifact
 {
     grid-row: 2/6;
     margin-left: 30px;
