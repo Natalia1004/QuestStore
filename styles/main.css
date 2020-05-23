@@ -191,7 +191,6 @@ ul {
             color: rgb(226, 226, 226) !important;
             transition: color 0s;
             padding: 0;
-
         }
         .dropdown__button:hover {
             background-color: rgb(224, 41, 41);
@@ -308,6 +307,7 @@ ul {
 ----------*/
 
 .questreward {
+    cursor:pointer;
     width: 200px;
     margin-left: 10px;
     margin-bottom: 10px;
@@ -343,6 +343,71 @@ ul {
 }
     .questreward--group:hover {
         background-color: rgba(34, 88, 124, 0.74);
+    }
+
+/*----------
+    POPUP BOX STYLE
+----------*/
+.popup__overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height:100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 1;
+    display: none;
+}
+.popup__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    background: rgba(34, 36, 49, 0.84);
+    width: 500px;
+    height: fit-content;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid rgb(34, 36, 49);
+    border-radius: 8px;
+}
+.popup__close-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: rgb(224, 41, 41);
+    color: rgb(226, 226, 226);
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: center;
+    border-radius: 30%;
+}
+.popup.active .popup__overlay {
+    display: block;
+}
+.popup.active .popup__content {
+    transition: all 500ms ease-in-out;
+    transform: translate(-50%,-50%) scale(1);
+}
+.button--color--individual {
+    background-color: rgba(78, 224, 41, 0.6);
+    border-color: rgba(78, 224, 41, 0.6);
+}
+    .button--color--individual:hover {
+        background-color: rgba(78, 224, 41, 0.9);
+    }
+.button--color--group {
+    background-color: rgba(44, 41, 224, 0.4);
+    border-color: rgba(44, 41, 224, 0.4);
+}
+    .button--color--group:hover {
+        background-color: blue;
     }
 
 /*----------
@@ -590,37 +655,39 @@ ul {
 
 .panelWelcome
 {
-    margin: auto;
+    margin-left: 10px;
     margin-top: 15px;
     height: 500px;
-    width: 900px;
+    width: 80%;
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    line-height: 500%;
 }
 .welcomeHeader
 {
     font-size: 70px;
-    margin: center;
+    margin: auto;
     text-align: center;
 }
 
 .student_panel
 {
-    margin: center;
-    margin-top: 10px;
-    margin: auto;
-    width:700px;
-    height: auto;
-    grid-template-rows: repeat(5, 4fr);
+    
+    margin-top: 20px;
+    margin-left: 20px;
+    width:90%;
+    height: 80%;
+    grid-template-rows: repeat(5, 5fr);
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
+    align-items: center;
 }
 
 .header_profile
@@ -628,10 +695,9 @@ ul {
     display: grid;
     grid-template-columns: repeat(2, 4fr);
     text-align: center;
-    margin:30px;
     font-size:40px;
-    margin-bottom: 80px;
-    margin: center;
+    margin-bottom: 60px;
+    margin-top: 40px;
 }
 
 #nameStudent
@@ -643,12 +709,10 @@ ul {
     grid-column: 2/2;
 }
 
-
-
 .artifacts
 {
     grid-template-rows: repeat(5, 4fr);
-    margin: center;
+    margin: auto;
 }
 
 .header_artifacts
@@ -657,8 +721,7 @@ ul {
     margin-top: 10px;
     font-size: 35px;
     color: #d71c2f;
-    margin-bottom: 50px;
-    margin: auto;
+    margin-bottom: 60px;
 }
 #Level
     {
@@ -691,7 +754,48 @@ ul {
         text-align: center;
         margin: auto;
     }
+    @media screen and (max-width: 650px){
+        .panelWelcome
+            {
+            margin: auto;
+            margin-top: 15px;
+            height: 300px;
+            width: 90%;
+            -moz-box-shadow: inset -3px -3px 10px #eee;
+            -webkit-box-shadow: inset -3px -3px 10px #eee;
+            box-shadow: inset -3px -3px 10px #eee;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 500%;
+        }
+        
+        .welcomeHeader{
+            font-size: 30px;
+            line-height: 150%;
+        }
 
+        .header_profile
+        { 
+            font-size:25px;
+            margin-top:20px;
+        }
+
+        #Level
+        {
+            font-size: 20px;
+        }
+
+        .header_artifacts
+        {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 25px;
+            color: #d71c2f;
+            margin-bottom: 60px;
+        }
+        
 
     
 /*-----------------------
