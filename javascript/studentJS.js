@@ -121,7 +121,6 @@ function printAllIndividualRewards(){
     new QuestReward("Remote work", "300cc", "You can spend a day in home office."),
     new QuestReward("Timetravel", "500cc", "Extend SI week assignment deadline by one day."),
     new QuestReward("Timetravel", "500cc", "Extend SI week assignment deadline by one day."),
-    new QuestReward("Timetravel", "500cc", "Extend SI week assignment deadline by one day."),
     ]
 
     for (i = 0; i < Quests.length; i++) {
