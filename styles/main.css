@@ -835,7 +835,7 @@ legend {
 
 .mentor_panel {
     display: flex;
-    align-self: center;
+    justify-content: center;
 }
 
 
