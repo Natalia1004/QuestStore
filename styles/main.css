@@ -486,9 +486,7 @@ ul {
     .main-footer__social p {
         margin-bottom: 0;
         margin-right: 10px;
-    }
-
- 
+    } 
 }
 
 /*----------
@@ -596,10 +594,10 @@ ul {
 
     .show-all_box {
         position: relative;
-        background-color: rgb(171, 175, 175);
+        background-color: rgba(57, 59, 73, 0.74);
         /*background-color: #FAFAFA;*/
 /*        color: #424242;*/
-        color: black;
+        color: rgb(226, 226, 226);
         border-radius: 4px;
         padding: 2rem 2rem 3rem 2rem;
         margin: 1.5rem 1.5rem;
@@ -614,7 +612,7 @@ ul {
     .user_name {
         font-size: 2.15rem;
         margin-top: 0.5rem;
-        color: brown;
+
     }
 
     .user_position {
@@ -628,12 +626,9 @@ ul {
 
     .show-all_text {
         text-align: center;
-        font-weight: 600;
-        font-size: 1.02rem;
-        line-height: 1.85rem;
     }
 
-      /*----------
+/*----------
    Student View
 ----------*/
 
@@ -693,17 +688,17 @@ ul {
 .artifacts
 {
     grid-template-rows: repeat(5, 4fr);
-    padding: 30px;
+    padding: 0px 130px;
 }
 
 .header_artifacts
 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
     font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
     font-size: 45px;
     color: #d71c2f;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     
 }
 #Level
