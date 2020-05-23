@@ -596,7 +596,7 @@ ul {
 
     .show-all_box {
         position: relative;
-        background-color: rgb(171, 175, 175);
+        background-color: rgba(171, 175, 175, 0.801);
         /*background-color: #FAFAFA;*/
 /*        color: #424242;*/
         color: black;
@@ -629,7 +629,7 @@ ul {
     .show-all_text {
         text-align: center;
         font-weight: 600;
-        font-size: 1.02rem;
+        font-size: 1.12rem;
         line-height: 1.85rem;
     }
 
