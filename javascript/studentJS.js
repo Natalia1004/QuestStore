@@ -89,7 +89,7 @@ class QuestRewardUsed{
         QuestReward.appendChild(Description);
         
         //adding quest to landing
-        let landing__content = document.getElementById("artifact");
+        let landing__content = document.getElementById("usedArtifact");
     
         landing__content.appendChild(QuestReward);
     }
