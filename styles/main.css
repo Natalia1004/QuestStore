@@ -835,6 +835,10 @@ legend {
 
 
 .mentor_panel {
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 650px;
+    width: 80%;
     display: flex;
     justify-content: center;
 }
