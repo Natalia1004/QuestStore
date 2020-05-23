@@ -839,9 +839,7 @@ legend {
     height: 650px;
     width: 80%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    line-height: 300%;
 }
 
 
