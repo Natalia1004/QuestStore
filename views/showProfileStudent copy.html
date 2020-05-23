@@ -37,7 +37,12 @@
                         <li><button class="dropdown__button"><a href="showProfileStudent.html">Show My Profile</a></button></li>
                         <li><button class="dropdown__button"><a href="allRewards.html">Artifacts Shop</a></button></li>
                         <li><button class="dropdown__button"><a href="allQuests.html">Quests</a></button></li>
-                        <li><button class="dropdown__button"><a href="UsedArtifacts.html">Used Artifacts</a></button></li>
+                        <li><button class="dropdown__button"><a href="profile.html">All Students</a></button></li>
+                        <li><button class="dropdown__button"><a href="profile.html">Add Student</a></button></li>
+                        <li><button class="dropdown__button"><a href="addQuestReward.html">Add Quest/Reward</a></button></li>
+                        <li><button class="dropdown__button"><a href="mentorsView.html">All Mentors</a></button></li>
+                        <li><button class="dropdown__button"><a href="profile.html">Add Mentor</a></button></li>
+                        <li><button class="dropdown__button"><a href="profile.html">Add Classroom</a></button></li>
                     </ul>
                 </div>
             </aside>
@@ -60,7 +65,16 @@
                             printAllIndividualRewards();
                         }, false);
                     </script>
-
+                     </div>
+                </div>
+                <div class = "artifacts">
+                <div class = "header_artifacts">Used Artifacts</div>
+                <div id = "usedArtifact">
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            printUsedRewards();
+                        }, false);
+                    </script>
                 </div>
             </div>
             </div>
