@@ -616,7 +616,7 @@ ul {
 
     .show-all_box {
         position: relative;
-        background-color: rgb(182, 172, 172);
+        background-color: rgb(145, 148, 148);
         /*background-color: #FAFAFA;*/
         color: #424242;
         border-radius: 4px;
@@ -641,6 +641,7 @@ ul {
         /*color: #bdbdbd;*/
         margin-top: 0.4rem;
         font-size: 1rem;
+        font-weight: 900;
         letter-spacing: 0.05rem;
     }
 
