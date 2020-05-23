@@ -515,10 +515,6 @@ ul {
     margin: auto;
     height: 100%;
     width: 60%;
-    -moz-box-shadow: inset -3px -3px 10px #eee;
-    -webkit-box-shadow: inset -3px -3px 10px #eee;
-    box-shadow: inset -3px -3px 10px #eee;
-    border-radius: 15px;
     flex-direction: column;
     display: flex;
     align-items: center;
@@ -530,26 +526,12 @@ ul {
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
-    border-radius: 15px;
     width: 60%;
     height: 30%; 
 }
-#send
-{
-   background-color: #ac0f0f; 
-   color: white; 
-   border-radius: 15px;
-   font-size: 100%;
-   color: #ffffff;
-   font-style: italic;
-   width: 30%;
-   height: 40px;
-   margin-bottom: 5px;
-
-}
 
 .contact input {
-    font-size: 15px;
+    font-size: 20px;
     margin-top: 10px;
     margin-bottom: 15px;
     width: 96%;
@@ -588,7 +570,7 @@ ul {
   }
 
   .contact textarea {
-    font-size: 15px;
+    font-size: 20px;
     margin-top: 10px;
     margin-bottom: 15px;
     width: 96%;
@@ -597,7 +579,7 @@ ul {
     background-color: rgb(233, 233, 233);
     border: 1px solid #ccc;
     resize: none;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
   }
 
 
@@ -674,6 +656,7 @@ ul {
 .welcomeHeader
 {
     font-size: 70px;
+    font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
     margin: auto;
     text-align: center;
 }
@@ -686,9 +669,6 @@ ul {
     width:90%;
     height: 80%;
     grid-template-rows: repeat(5, 5fr);
-    -moz-box-shadow: inset -3px -3px 10px #eee;
-    -webkit-box-shadow: inset -3px -3px 10px #eee;
-    box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
     align-items: center;
 }
@@ -698,7 +678,7 @@ ul {
     display: grid;
     grid-template-columns: repeat(2, 4fr);
     text-align: center;
-    font-size:40px;
+    font-size:50px;
     padding: 50px;
 }
 
@@ -721,14 +701,15 @@ ul {
 {
     text-align: center;
     margin-top: 10px;
-    font-size: 35px;
+    font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+    font-size: 45px;
     color: #d71c2f;
     margin-bottom: 60px;
     
 }
 #Level
     {
-    text-align: right;
+    text-align: center;
     font-size: 30px;
     margin-bottom: 60px;
     margin-right: 12px;
@@ -753,18 +734,30 @@ ul {
 
 #deleteItem
     {
-        clear: left;
-        background-color: #ac0f0f; 
-        color: white; 
-        border-radius: 15px;
-        font-size: 18px;
-        color: #ffffff;
-        width: 100px;
-        height: 40px; 
-        margin: auto;
-        text-align: center;
-        margin: auto;
+        background-color: rgba(224, 41, 41, 0.8);
+        border-radius: 8px;
+        border-color: rgba(224, 41, 41, 0.8);
+        min-width: 100px;
+        max-width: 200px;
+        height: fit-content;
+        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+        font-size: 1.3em;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        padding: 7px;
+        color: rgb(226, 226, 226);
     }
+
+    
+        #deleteItem a {
+            text-decoration: none;
+            color: rgb(226, 226, 226) !important;
+            transition: color 0s;
+            padding: 0;
+        }
+        #deleteItem:hover {
+            background-color: rgb(224, 41, 41);
+        }
     @media screen and (max-width: 650px){
         .panelWelcome{
             margin: auto;
