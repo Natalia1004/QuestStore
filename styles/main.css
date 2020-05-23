@@ -584,7 +584,7 @@ ul {
 
 
 /*----------
-    MENTORS VIEW inside landing_content
+    MENTORS/STUDENTS VIEW inside landing_content
 ----------*/
 
 .inside_landing {
@@ -592,15 +592,14 @@ ul {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-flow: row;
     grid-auto-columns: auto;
-    /*grid-gap: 1%;*/
-    /*grid-auto-rows: minmax(100px, auto);*/
 }
 
     .show-all_box {
         position: relative;
-        background-color: rgb(145, 148, 148);
+        background-color: rgb(171, 175, 175);
         /*background-color: #FAFAFA;*/
-        color: #424242;
+/*        color: #424242;*/
+        color: black;
         border-radius: 4px;
         padding: 2rem 2rem 3rem 2rem;
         margin: 1.5rem 1.5rem;
@@ -846,17 +845,17 @@ fieldset {
     padding: 2rem 2rem 3rem 2rem;
     text-align: center;
 
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);
-    -moz-box-shadow: inset -3px -3px 10px #eee;
+/*    box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);*/
+/*    -moz-box-shadow: inset -3px -3px 10px #eee;*/
     -webkit-box-shadow: inset -3px -3px 10px #eee;
-    box-shadow: inset -3px -3px 10px #eee;
+/*    box-shadow: inset -3px -3px 10px #eee;*/
     border-radius: 15px;
 }
 
 
 #nameMentor
 {
-    font-size: 3.rem;
+    font-size: 3.0rem;
     margin-top: 0.5rem;
 }
 
@@ -865,4 +864,8 @@ fieldset {
     margin-top: 0.4rem;
     font-size: 2rem;
     letter-spacing: 0.05rem;
+}
+
+fieldset .dropdown__button{
+    font-size: 1.8rem;
 }
