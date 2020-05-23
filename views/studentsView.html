@@ -19,16 +19,8 @@
 
 <body>
     <div class="container">
-        <header>
-            <img class="logo" src="../images/QuestStore-NAT_logo_nobcg.png" alt="QuestStore-NAT" />
-            <nav class="main-navigation">
-                <ul>
-                    <li><a href="index.html">Main</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="index.html">Logout</a></li>
-                </ul>
-            </nav>
-        </header>
+        <div w3-include-html="navBarLogged.html"></div>
+
 
         <div class="landing">
             <aside class="landing__sidebar-menu">
@@ -47,22 +39,14 @@
                     </ul>
                 </div>
             </aside>
-            <div class = "panelWelcome">
-                <div class = "welcomeHeader">WELCOME !<br><span id = "nameStudent"></span></div>
+            <div class="panelWelcome">
+                <div class="welcomeHeader">WELCOME !<br><span id="nameStudent"></span></div>
             </div>
         </div>
 
-        <footer class="main-footer">
-            <div class="main-footer__social">
-                <p>Follow us:</p>
-                <i class="icon-facebook"></i>
-                <i class="icon-linkedin"></i>
-                <i class="icon-youtube"></i>
-                <i class="icon-instagram"></i>
-                <i class="icon-twitter"></i>
-            </div>
-        </footer>
+
+        <div w3-include-html="footer.html"></div>
     </div>
-    
+    <script src="../javascript/Include.js" async defer></script>
 </body>
 </html>

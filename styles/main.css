@@ -26,7 +26,7 @@ body {
 
 .container {
     background: rgb(15, 15, 15); /* IE8 */
-    background: rgba(15, 15, 15, 0.70);
+    background: rgba(15, 15, 15, 0.8);
     margin: 2% 6% 2% 6%;
     padding: 2% 6% 2% 6%;
 }
@@ -515,10 +515,6 @@ ul {
     margin: auto;
     height: 100%;
     width: 60%;
-    -moz-box-shadow: inset -3px -3px 10px #eee;
-    -webkit-box-shadow: inset -3px -3px 10px #eee;
-    box-shadow: inset -3px -3px 10px #eee;
-    border-radius: 15px;
     flex-direction: column;
     display: flex;
     align-items: center;
@@ -530,26 +526,12 @@ ul {
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
-    border-radius: 15px;
     width: 60%;
     height: 30%; 
 }
-#send
-{
-   background-color: #ac0f0f; 
-   color: white; 
-   border-radius: 15px;
-   font-size: 100%;
-   color: #ffffff;
-   font-style: italic;
-   width: 30%;
-   height: 40px;
-   margin-bottom: 5px;
-
-}
 
 .contact input {
-    font-size: 15px;
+    font-size: 20px;
     margin-top: 10px;
     margin-bottom: 15px;
     width: 96%;
@@ -588,7 +570,7 @@ ul {
   }
 
   .contact textarea {
-    font-size: 15px;
+    font-size: 20px;
     margin-top: 10px;
     margin-bottom: 15px;
     width: 96%;
@@ -597,12 +579,12 @@ ul {
     background-color: rgb(233, 233, 233);
     border: 1px solid #ccc;
     resize: none;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
   }
 
 
 /*----------
-    MENTORS VIEW inside landing_content
+    MENTORS/STUDENTS VIEW inside landing_content
 ----------*/
 
 .inside_landing {
@@ -610,15 +592,14 @@ ul {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-flow: row;
     grid-auto-columns: auto;
-    /*grid-gap: 1%;*/
-    /*grid-auto-rows: minmax(100px, auto);*/
 }
 
     .show-all_box {
         position: relative;
-        background-color: rgb(182, 172, 172);
+        background-color: rgb(171, 175, 175);
         /*background-color: #FAFAFA;*/
-        color: #424242;
+/*        color: #424242;*/
+        color: black;
         border-radius: 4px;
         padding: 2rem 2rem 3rem 2rem;
         margin: 1.5rem 1.5rem;
@@ -641,6 +622,7 @@ ul {
         /*color: #bdbdbd;*/
         margin-top: 0.4rem;
         font-size: 1rem;
+        font-weight: 900;
         letter-spacing: 0.05rem;
     }
 
@@ -673,6 +655,7 @@ ul {
 .welcomeHeader
 {
     font-size: 70px;
+    font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
     margin: auto;
     text-align: center;
 }
@@ -685,9 +668,6 @@ ul {
     width:90%;
     height: 80%;
     grid-template-rows: repeat(5, 5fr);
-    -moz-box-shadow: inset -3px -3px 10px #eee;
-    -webkit-box-shadow: inset -3px -3px 10px #eee;
-    box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
     align-items: center;
 }
@@ -697,7 +677,7 @@ ul {
     display: grid;
     grid-template-columns: repeat(2, 4fr);
     text-align: center;
-    font-size:40px;
+    font-size:50px;
     padding: 50px;
 }
 
@@ -720,14 +700,15 @@ ul {
 {
     text-align: center;
     margin-top: 10px;
-    font-size: 35px;
+    font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+    font-size: 45px;
     color: #d71c2f;
     margin-bottom: 60px;
     
 }
 #Level
     {
-    text-align: right;
+    text-align: center;
     font-size: 30px;
     margin-bottom: 60px;
     margin-right: 12px;
@@ -752,18 +733,30 @@ ul {
 
 #deleteItem
     {
-        clear: left;
-        background-color: #ac0f0f; 
-        color: white; 
-        border-radius: 15px;
-        font-size: 18px;
-        color: #ffffff;
-        width: 100px;
-        height: 40px; 
-        margin: auto;
-        text-align: center;
-        margin: auto;
+        background-color: rgba(224, 41, 41, 0.8);
+        border-radius: 8px;
+        border-color: rgba(224, 41, 41, 0.8);
+        min-width: 100px;
+        max-width: 200px;
+        height: fit-content;
+        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+        font-size: 1.3em;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        padding: 7px;
+        color: rgb(226, 226, 226);
     }
+
+    
+        #deleteItem a {
+            text-decoration: none;
+            color: rgb(226, 226, 226) !important;
+            transition: color 0s;
+            padding: 0;
+        }
+        #deleteItem:hover {
+            background-color: rgb(224, 41, 41);
+        }
     @media screen and (max-width: 650px){
         .panelWelcome{
             margin: auto;
@@ -852,17 +845,17 @@ fieldset {
     padding: 2rem 2rem 3rem 2rem;
     text-align: center;
 
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);
-    -moz-box-shadow: inset -3px -3px 10px #eee;
+/*    box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);*/
+/*    -moz-box-shadow: inset -3px -3px 10px #eee;*/
     -webkit-box-shadow: inset -3px -3px 10px #eee;
-    box-shadow: inset -3px -3px 10px #eee;
+/*    box-shadow: inset -3px -3px 10px #eee;*/
     border-radius: 15px;
 }
 
 
 #nameMentor
 {
-    font-size: 3.rem;
+    font-size: 3.0rem;
     margin-top: 0.5rem;
 }
 
@@ -871,4 +864,8 @@ fieldset {
     margin-top: 0.4rem;
     font-size: 2rem;
     letter-spacing: 0.05rem;
+}
+
+fieldset .dropdown__button{
+    font-size: 1.8rem;
 }
