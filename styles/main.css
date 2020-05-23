@@ -763,8 +763,7 @@ ul {
         margin: auto;
     }
     @media screen and (max-width: 650px){
-        .panelWelcome
-            {
+        .panelWelcome{
             margin: auto;
             margin-top: 15px;
             height: 300px;
@@ -803,6 +802,7 @@ ul {
             color: #d71c2f;
             margin-bottom: 60px;
         }
+    }
         
 
     
