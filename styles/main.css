@@ -816,16 +816,16 @@ fieldset {
     font-size: 30px;
     align-self: center;
     border: none;
-    /* padding: 50px 300px 50px 300px; */
+   
 }
 
 
-/* #proceed_button {
-    font-size: 20px;
-    color: black;
-    padding: 10px 50px 10px 50px;
-} */
-
+.create_classroom {
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding-left: 100px; 
+    border: 1px solid white
+}
 
 /*----------------------
     MENTOR PROFILE

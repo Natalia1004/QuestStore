@@ -22,23 +22,29 @@
             <div w3-include-html="sidebar.html"></div>
             <div class="landing__content landing__content-justify">
                 <form id="form-quest-reward" action="/" method="GET">
-                    <!-- <fieldset> -->
-                        <div class="form"></div>      
-                        <h3 class="dropdown--margin">Create classrom </h3>      
-                        <input type="checkbox" class="create_classroom" value="Student1" onclick="GetSelectedStudents()">Student 1<br>      
-                        <input type="checkbox" class="create_classroom" value="Student2" onclick="GetSelectedStudents()">Student 2<br>      
-                        <input type="checkbox" class="create_classroom" value="Student3" onclick="GetSelectedStudents()">Student 3<br>
-                        <input type="checkbox" class="create_classroom" value="Student4" onclick="GetSelectedStudents()">Student 4<br>      
-                        <input type="checkbox" class="create_classroom" value="Student5" onclick="GetSelectedStudents()">Student 5<br>      
-                        <input type="checkbox" class="create_classroom" value="Student6" onclick="GetSelectedStudents()">Student 6<br>      
-                        <br>      
-                        <input class="dropdown__button" type="submit" value="Proceed" />   
-                    </div>   
-                    <!-- </fieldset>  -->
+                    <fieldset>
+                    <!-- <div class="form"> -->
+                        <h3 class="dropdown--margin">Create classrom </h3>
+                        <input type="checkbox" class="create_classroom" value="Student1"
+                            onclick="GetSelectedStudents()">  Student 1<br>
+                        <input type="checkbox" class="create_classroom" value="Student2"
+                            onclick="GetSelectedStudents()">  Student 2<br>
+                        <input type="checkbox" class="create_classroom" value="Student3"
+                            onclick="GetSelectedStudents()">  Student 3<br>
+                        <input type="checkbox" class="create_classroom" value="Student4"
+                            onclick="GetSelectedStudents()">  Student 4<br>
+                        <input type="checkbox" class="create_classroom" value="Student5"
+                            onclick="GetSelectedStudents()">  Student 5<br>
+                        <input type="checkbox" class="create_classroom" value="Student6"
+                            onclick="GetSelectedStudents()">  Student 6<br>
+                        <br>
+                        <input class="dropdown__button" type="submit" value="Proceed" />
+                    <!-- </div> -->
+                    </fieldset> 
                 </form>
             </div>
         </div>
-     
+
         <div w3-include-html="footer.html"></div>
     </div>
     <script src="../javascript/mentors.js" async defer></script>
