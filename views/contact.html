@@ -7,35 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuestStore-NAT</title>
     <link href="../styles/normalize.css" rel="stylesheet">
-	<link rel = "stylesheet" href = "../styles/main.css">
     <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="icon" href="../images/QuestStore-NAT_icon.jpg" type="image">
 	<script src="../javascript/ValidationContact.js" defer></script>
 	<link href="../styles/fontello/css/queststore-nat.css" rel="stylesheet">
+	<!--Our styles-->
+	<link href="../styles/main.css" rel="stylesheet" />
+	<!--Our scripts-->
+	<script defer src="../javascript/Include.js"></script>
 </head>
 
  <body>
 	<div class="container">
-	<header>
-		<img class="logo" src="../images/QuestStore-NAT_logo_nobcg.png" alt="QuestStore-NAT"/>
-		<nav class="main-navigation"> 
-			<ul>
-				<li><a href= "index.html">MENU</a></li>
-				<li><a href= "contact.html" target = "_blank" class = "link">CONTACT</a></li>
-				<div class="dropdown">
-					<div class="dropdown-link">Login</div>
-					<div class="dropdown__content">
-						<label class="dropdown--margin">Email:</label><br>
-						<input id="login_email" class="dropdown--margin dropdown--input" type="text" placeholder="email" required><br>
-						<label class="dropdown--margin">Password:</label><br>
-						<input id="login_password" class="dropdown--margin dropdown--input" type="password" placeholder="password" required><br>
-						<button id="login_button" class="dropdown--margin dropdown__button" type="submit">Log In</button>
-					</div>
-				</div>
-			</ul>
-		</nav>
-	</header>
+		<header>
+            <img class="logo" src="../images/QuestStore-NAT_logo_nobcg.png" alt="QuestStore-NAT"/>
+            <nav class="main-navigation">     
+                <ul>
+                    <li><a href="index.html">Main</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <div class="dropdown">
+                        <div class="dropdown-link">Login</div>
+                        <div class="dropdown__content">
+                            <label class="dropdown--margin">Email:</label><br>
+                            <input id="login_email" class="dropdown--margin dropdown--input" type="text" placeholder="email" required><br>
+                            <label class="dropdown--margin">Password:</label><br>
+                            <input id="login_password" class="dropdown--margin dropdown--input" type="password" placeholder="password" required><br>
+                            <button id="login_button" class="dropdown--margin dropdown__button" type="submit"><a href="profile.html">Log In</a></button>
+                        </div>
+                    </div>
+                </ul>
+            </nav>
+		</header>
+		
 	<main>
 		<article>
 			<div class = "second_header_contact">Contact Us!</div>
@@ -51,16 +55,7 @@
         <script src="../javascript/ValidationContact.js" defer></script>
 	</main>
 	
-	<footer class="main-footer">
-		<div class="main-footer__social">
-			<p>Follow us:</p>
-			<i class="icon-facebook"></i>
-			<i class="icon-linkedin"></i>
-			<i class="icon-youtube"></i>
-			<i class="icon-instagram"></i>
-			<i class="icon-twitter"></i>
-		</div>
-	</footer>
+		<div w3-include-html="footer.html"></div>
     </div>
 </body>
 
