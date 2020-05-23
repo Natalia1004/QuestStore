@@ -54,6 +54,8 @@ class QuestReward{
         QuestReward.appendChild(button);
         button.onclick = function(){ 
             QuestReward.remove();
+            console.log(QuestReward.Description);
+            printUsedRewards(QuestReward);
         }
         //adding quest to landing
         let landing__content = document.getElementById("artifact");
@@ -101,10 +103,12 @@ function modifyIndividual(){
         cost[i].classList.add("questrewardIndividual");
     }
 }
-function printUsedRewards(){
+function printUsedRewards(QuestReward){
     let UsedQuestReward = [
         new QuestRewardUsed("Hint", "50cc", "One mentor advice."),
     ]
+    UsedQuestReward.push(QuestReward)
+
     for (i = 0; i < UsedQuestReward.length; i++) {
         UsedQuestReward[i].printQuestUsed();
     }
