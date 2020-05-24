@@ -2,7 +2,7 @@ const nameField = document.getElementById('name');
 const emailField = document.getElementById('email');
 const subjectField = document.getElementById('subject');
 const messageField = document.getElementById('message');
-const sendButton = document.getElementsByClassName('dropdown__button');
+const sendButton = document.getElementById('send');
 
 const checkName = () => {
     const nameComponents = nameField.value.split(" ");

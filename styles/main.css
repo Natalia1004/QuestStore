@@ -199,6 +199,7 @@ ul {
         }
 
 
+
 @media screen and (max-width: 1150px) {
     .dropdown {
         display: block;
@@ -526,6 +527,7 @@ ul {
     box-shadow: inset -3px -3px 10px #eee;
     width: 60%;
     height: 30%; 
+    color: #000000;
 }
 
 .contact input {
@@ -579,6 +581,30 @@ ul {
     resize: none;
     font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
   }
+    #send {
+        background-color: rgba(224, 41, 41, 0.8);
+        border-radius: 8px;
+        border-color: rgba(224, 41, 41, 0.8);
+        min-width: 230px;
+        max-width: 350px;
+        height: fit-content;
+        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+        font-size: 1.3em;
+        letter-spacing: 2px;
+        margin-top: 15px;
+        padding: 7px;
+        color: rgb(226, 226, 226);
+    }
+        #send a {
+            text-decoration: none;
+            color: rgb(226, 226, 226) !important;
+            transition: color 0s;
+            padding: 0;
+        }
+        #send:hover {
+            background-color: rgb(224, 41, 41);
+        }
+
 
 
 /*----------
