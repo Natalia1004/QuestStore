@@ -801,12 +801,10 @@ ul {
 
 
 fieldset {
-    font-size: 30px;
+    font-size: 1.7rem;
     align-self: center;
     border: none;
-   
 }
-
 
 .create_classroom {
     font-size: 0.9rem;
@@ -829,7 +827,6 @@ fieldset {
     justify-content: center;
 }
 
-
 .mentor-header_profile {
     margin: auto;
     position: relative;
@@ -847,13 +844,11 @@ fieldset {
     border-radius: 15px;
 }
 
-
 #nameMentor
 {
     font-size: 3.0rem;
     margin-top: 0.5rem;
 }
-
 
 #mentor_assignement {
     margin-top: 0.4rem;
