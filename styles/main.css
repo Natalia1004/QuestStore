@@ -551,7 +551,7 @@ ul {
     padding: .5rem 1rem;
     border: 1px solid transparent;
     border-radius: 10px;
-    font-size: 12px;
+    font-size: 15px;
     margin-bottom: 0.7rem;
     width: 40%;
   }
@@ -564,7 +564,8 @@ ul {
     padding: .5rem 1rem;
     border: 1px solid transparent;
     border-radius: .25rem;
-    font-size: 12px;
+    font-size: 15px;
+    margin-top: 10px;
     margin-bottom: 0.7rem;
     width: 50%;
   }
