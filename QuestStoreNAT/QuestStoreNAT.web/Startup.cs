@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace QuestStoreNAT.Core
+namespace QuestStoreNAT.web
 {
     public class Startup
     {

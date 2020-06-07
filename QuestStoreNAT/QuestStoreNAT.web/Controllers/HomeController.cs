@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using QuestStoreNAT.Core.Models;
+using QuestStoreNAT.web.Models;
 
-namespace QuestStoreNAT.Core.Controllers
+namespace QuestStoreNAT.web.Controllers
 {
     public class HomeController : Controller
     {

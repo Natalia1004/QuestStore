@@ -1,6 +1,6 @@
 using System;
 
-namespace QuestStoreNAT.Core.Models
+namespace QuestStoreNAT.web.Models
 {
     public class ErrorViewModel
     {
