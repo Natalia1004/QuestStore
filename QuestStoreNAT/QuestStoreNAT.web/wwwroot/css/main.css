@@ -494,23 +494,20 @@ ul {
    Contact Form
 ----------*/
 
-.second_header_contact
-    {
-        
-        font-weight: normal;
-        font-size: 40px;
-        font-weight: bold;
-        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
-        margin: auto;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        width: 60%;
-        color: #ffffff;
-        text-align: center;
-    }
+.second_header_contact { 
+    font-weight: normal;
+    font-size: 40px;
+    font-weight: bold;
+    font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 60%;
+    color: #ffffff;
+    text-align: center;
+}
 
-.contact
-{
+.contact {
     margin: auto;
     height: 100%;
     width: 60%;
@@ -520,8 +517,7 @@ ul {
     justify-content: space-around;
 }
 
-#name ,#email,#subject,#message
-{
+#name ,#email,#subject,#message {
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
@@ -605,6 +601,14 @@ ul {
         #send:hover {
             background-color: rgb(224, 41, 41);
         }
+
+.contact-width {
+    width: 500px;
+}
+
+.contact_textbox--height {
+    height: 200px;
+}
 
 /*----------
     MENTORS/STUDENTS VIEW inside landing_content
@@ -863,8 +867,7 @@ fieldset {
     border-radius: 15px;
 }
 
-#nameMentor
-{
+#nameMentor {
     font-size: 3.0rem;
     margin-top: 0.5rem;
 }
@@ -875,6 +878,16 @@ fieldset {
     letter-spacing: 0.05rem;
 }
 
-fieldset .dropdown__button{
+fieldset .dropdown__button {
     font-size: 1.8rem;
+}
+
+/*----------------------
+    WARNING
+-----------------------*/
+
+.text-danger {
+    color: darkred;
+    width: 100px;
+    padding-left: 20px;
 }

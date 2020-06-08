@@ -18,14 +18,28 @@ namespace QuestStoreNAT.web.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult Contact()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(ContactForm contactForm)
+        {
+            if (ModelState.IsValid)
+            {
+                //SEND us an Email or Store the message in the database
+                TempData["Message"] = "You have sent us a message. Give us a minute and we will get back to you shortly.";
+                return RedirectToAction("Index");
+            }
+            return View("Error");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
