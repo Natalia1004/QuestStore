@@ -19,7 +19,7 @@ body {
     font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
     color: rgb(226, 226, 226);
     background: rgb(34,36,49);
-    background-image: url(../layouts/circuit_board_1.jpg);
+    background-image: url(../images/main_background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -606,8 +606,6 @@ ul {
             background-color: rgb(224, 41, 41);
         }
 
-
-
 /*----------
     MENTORS/STUDENTS VIEW inside landing_content
 ----------*/
@@ -684,7 +682,6 @@ ul {
 
 .student_panel
 {
-    
     margin-top: 20px;
     margin-left: 20px;
     width:90%;
@@ -726,8 +723,8 @@ ul {
     font-size: 45px;
     color: #d71c2f;
     margin-bottom: 20px;
-    
 }
+
 #Level
     {
     text-align: center;
@@ -767,9 +764,7 @@ ul {
         margin-bottom: 10px;
         padding: 7px;
         color: rgb(226, 226, 226);
-    }
-
-    
+    }  
         #deleteItem a {
             text-decoration: none;
             color: rgb(226, 226, 226) !important;
@@ -820,12 +815,10 @@ ul {
             margin-bottom: 60px;
         }
     }
-        
     
 /*-----------------------
 //    ADD CLASSROOM
 //-------------------------*/
-
 
 fieldset {
     font-size: 1.7rem;
@@ -843,7 +836,6 @@ fieldset {
 /*----------------------
     MENTOR PROFILE
 -----------------------*/
-
 
 .mentor_panel {
     margin-left: 10px;

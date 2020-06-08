@@ -1,48 +1,58 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QuestStoreNAT.web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QuestStoreNAT.web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - QuestStoreNAT.web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - QuestStore-NAT</title>
+    <link href="~/css/normalize.css" rel="stylesheet" />
+    <!--Third party resources-->
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet" />
+    <link rel="icon" href="~/images/QuestStore-NAT_icon.jpg" type="image">
+    <link href="~/css/fontello/css/queststore-nat.css" rel="stylesheet" />
+    <!--Our styles-->
+    <link href="~/css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img class="logo" src="~/images/QuestStore-NAT_logo_no_background.png" alt="QuestStore-NAT" asp-append-version="true" />
+            <nav class="main-navigation">
+                <ul>
+                    <li><a asp-controller="home" asp-action="index">Main</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <div class="dropdown">
+                        <div class="dropdown-link">Login</div>
+                        <div class="dropdown__content">
+                            <label class="dropdown--margin">Email:</label><br>
+                            <input id="login_email" class="dropdown--margin dropdown--input" type="text" placeholder="email" required><br>
+                            <label class="dropdown--margin">Password:</label><br>
+                            <input id="login_password" class="dropdown--margin dropdown--input" type="password" placeholder="password" required><br>
+                            <button id="login_button" class="dropdown--margin dropdown__button" type="submit"><a href="profile.html">Log In</a></button>
+                        </div>
+                    </div>
+                </ul>
+            </nav>
+        </header>
+
+        @RenderBody()
+
+        <footer class="main-footer">
+            <div class="main-footer__social">
+                <p>Follow us:</p>
+                <i class="icon-facebook"></i>
+                <i class="icon-linkedin"></i>
+                <i class="icon-youtube"></i>
+                <i class="icon-instagram"></i>
+                <i class="icon-twitter"></i>
+            </div>
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
 </body>
 </html>
