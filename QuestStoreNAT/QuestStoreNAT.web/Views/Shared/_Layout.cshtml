@@ -40,7 +40,9 @@
 
         @if (TempData["Message"] != null)
         {
-            @TempData["Message"]
+            <div class="hero-landing">
+                <h5 class="info-box">@TempData["Message"]</h5>
+            </div>
         }
 
         @RenderBody()

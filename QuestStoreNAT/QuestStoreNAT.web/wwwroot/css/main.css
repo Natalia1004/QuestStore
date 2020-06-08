@@ -198,8 +198,6 @@ ul {
             background-color: rgb(224, 41, 41);
         }
 
-
-
 @media screen and (max-width: 1150px) {
     .dropdown {
         display: block;
@@ -252,7 +250,7 @@ ul {
         }
         .landing__sidebar-menu .dropdown__button {
             background-color: rgba(34, 36, 49, 0.74);
-            border-color: rgba(34, 36, 49);
+            border-color: rgb(34, 36, 49);
         }
         .landing__sidebar-menu .dropdown__button:hover {
             background-color: rgba(224, 41, 41, 0.8);
@@ -890,4 +888,16 @@ fieldset .dropdown__button {
     color: darkred;
     width: 100px;
     padding-left: 20px;
+}
+
+.info-box {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    width: fit-content;
+    color: darkseagreen;
+    background: rgba(15, 15, 15, 0.80);
+    border: 3px solid rgb(36, 36, 36);
+    border-radius: 8px;
+    padding: 20px;
 }
