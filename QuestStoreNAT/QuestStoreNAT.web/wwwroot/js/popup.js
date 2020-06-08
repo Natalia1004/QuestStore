@@ -4,4 +4,4 @@ function togglePopup(){
 
 function togglePopupGroup(){
     document.getElementById("popup--group").classList.toggle("active");
-  }
+}

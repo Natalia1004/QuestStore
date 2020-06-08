@@ -40,7 +40,7 @@
 
         @if (TempData["Message"] != null)
         {
-            <div class="hero-landing">
+            <div id="info_box" class="hero-landing" onclick="TurnOff()">
                 <h5 class="info-box">@TempData["Message"]</h5>
             </div>
         }
