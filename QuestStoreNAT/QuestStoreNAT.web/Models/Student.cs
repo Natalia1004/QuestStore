@@ -4,9 +4,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace QuestStoreNAT.web.Models
-
 {
-    public class Student
+    public class Student : IUser
     {
         public int StudentID { get; set; }
 

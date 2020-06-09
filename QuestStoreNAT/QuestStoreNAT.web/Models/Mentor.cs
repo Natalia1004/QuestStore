@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestStoreNAT.web.Models
 {
-    public class Mentor
+    public class Mentor : IUser
     {
         public int MentorID { get; set; }
 

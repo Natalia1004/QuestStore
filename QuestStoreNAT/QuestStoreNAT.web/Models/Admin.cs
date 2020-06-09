@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestStoreNAT.web.Models
 {
-    public class Admin
+    public class Admin : IUser
     {
         public int AdminId { get; set; }
 
