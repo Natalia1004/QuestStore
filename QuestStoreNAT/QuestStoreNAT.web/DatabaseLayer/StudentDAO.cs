@@ -14,7 +14,7 @@ namespace QuestStoreNAT.web.Services
             using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
             connection.Open();
 
-            string sql = $"SELECT * FROM students";
+            string sql = $"SELECT * FROM "NATQuest"."Students"";
             using NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             using NpgsqlDataReader reader = command.ExecuteReader();
 
