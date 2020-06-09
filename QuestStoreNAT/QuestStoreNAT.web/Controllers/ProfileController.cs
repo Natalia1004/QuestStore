@@ -9,11 +9,12 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class ProfileController : Controller
     {
-        private readonly Student testStudentModel;
+        private readonly IUser testStudentModel;
 
-        public ProfileController()
+        public ProfileController(IUser user)
         {
-            testStudentModel = new Student();
+            testStudentModel = user;
+            //testStudentModel = new Student();
             testStudentModel.FirstName = "Robert";
         }
 
