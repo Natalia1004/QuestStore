@@ -19,7 +19,7 @@
 <body>
     <div class="container">
         <header>
-            <img class="logo" src="~/images/QuestStore-NAT_logo_no_background.png" alt="QuestStore-NAT" asp-append-version="true" />
+            <a asp-controller="home" asp-action="index"><img class="logo" src="~/images/QuestStore-NAT_logo_no_background.png" alt="QuestStore-NAT" asp-append-version="true" /></a>
             <nav class="main-navigation">
                 <ul>
                     <li><a asp-controller="home" asp-action="index">Main</a></li>
@@ -31,7 +31,7 @@
                             <input id="login_email" class="dropdown--margin dropdown--input" type="text" placeholder="email" required><br>
                             <label class="dropdown--margin">Password:</label><br>
                             <input id="login_password" class="dropdown--margin dropdown--input" type="password" placeholder="password" required><br>
-                            <button id="login_button" class="dropdown--margin dropdown__button" type="submit"><a href="profile.html">Log In</a></button>
+                            <button id="login_button" class="dropdown--margin dropdown__button" type="submit"><a asp-controller="profile" asp-action="index">Log In</a></button>
                         </div>
                     </div>
                 </ul>
@@ -60,7 +60,6 @@
 
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
         @RenderSection("Scripts", required: false)
 </body>
 </html>
