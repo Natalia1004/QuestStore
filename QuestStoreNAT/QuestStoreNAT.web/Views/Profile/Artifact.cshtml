@@ -3,7 +3,7 @@
     ViewData["Title"] = "Artifact";
 }
 
-    <div class="container">
+<div class="container">
         <div w3-include-html="navBarLogged.html"></div>
 
         <div class="landing">
@@ -13,25 +13,19 @@
             <div id="landing__content" class="landing__content">
                 <div class="landing__content__wrapper">
                     <h3 class="landing__content--border landing__content--margin">Would you like to buy something for yourself?</h3>
+                    @foreach (var artifact in Model)
+                    {
+                        <div class="questreward">
+                            <h3 class="questreward__title">@artifact.Name</h3>
+                            <h3 class="questreward__cost">@artifact.Cost</h3>
+                            <p class="questreward__description">@artifact.Description</p>
+                        </div>
+                    }
                 </div>
                 <div id="dividerh3" class="landing__content__wrapper">
                     <h3 class="landing__content--border landing__content--margin">Would you like to buy something for the group?</h3>
                 </div>
-                <!--Ensures the entire DOM tree is loaded and then execute the function.-->
-                <script>document.addEventListener('DOMContentLoaded', function() {
-                        printAllIndividualRewards("put after individual h3");
-                    }, false);</script>
-                <script>document.addEventListener('DOMContentLoaded', function() {
-                        printAllGroupRewards();
-                    }, false);</script>
-
-                <!--
-            <div class="questreward" onclick="togglePopup()">
-                <h3 class="questreward__title">Test Reward</h3>
-                <h3 class="questreward__cost">34cc</h3>
-                <p class="questreward__description">Simple description of what is going on</p>
-            </div>
-            -->
+                
 
                 <div id="popup" class="popup">
                     <div class="popup__overlay"></div>
