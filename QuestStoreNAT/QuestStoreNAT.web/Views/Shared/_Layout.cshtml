@@ -31,7 +31,7 @@
                             <input id="login_email" class="dropdown--margin dropdown--input" type="text" placeholder="email" required><br>
                             <label class="dropdown--margin">Password:</label><br>
                             <input id="login_password" class="dropdown--margin dropdown--input" type="password" placeholder="password" required><br>
-                            <button id="login_button" class="dropdown--margin dropdown__button" type="submit"><a asp-controller="profile" asp-action="index">Log In</a></button>
+                            <button id="login_button" class="dropdown--margin dropdown__button" type="submit"><a asp-controller="profile" asp-action="welcome">Log In</a></button>
                         </div>
                     </div>
                 </ul>
@@ -61,5 +61,6 @@
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         @RenderSection("Scripts", required: false)
+    </div>
 </body>
 </html>
