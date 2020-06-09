@@ -16,10 +16,9 @@ namespace QuestStoreNAT.web.Services
 
         public static NpgsqlConnection CreateNewConnection()
         {
-            string accessConnection = "Host=localhost;Username=nataliafilipek;Password=postgres;Database=students";
+            string accessConnection = "Host=kandula.db.elephantsql.com;Username=jvdwmero;Password=GSy9rkphAxYyU__75_leDG1iIFQFQMVe;Database=jvdwmero";
             NpgsqlConnection connection = new NpgsqlConnection(accessConnection);
             return connection;
-
         }
     }
 }
