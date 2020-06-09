@@ -3,7 +3,7 @@ using QuestStoreNAT.web.Models;
 using System.Collections.Generic;
 using Npgsql;
 
-namespace QuestStoreNAT.web.Services
+namespace QuestStoreNAT.web.DatabaseLayer
 {
     public class StudentDAO : IStudentDAO
     {
@@ -14,7 +14,7 @@ namespace QuestStoreNAT.web.Services
             using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
             connection.Open();
 
-            string sql = $"SELECT * FROM "NATQuest"."Students"";
+            string sql = $"SELECT * FROM \"NATQuest\".\"Students\"";
             using NpgsqlCommand command = new NpgsqlCommand(sql, connection);
             using NpgsqlDataReader reader = command.ExecuteReader();
 

@@ -2,7 +2,7 @@
 using QuestStoreNAT.web.Models;
 using System.Collections.Generic;
 
-namespace QuestStoreNAT.web.DatabaseLayer
+namespace QuestStoreNAT.web.Services
 {
     public interface IStudentDAO
     {

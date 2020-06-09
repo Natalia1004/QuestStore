@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public interface IStudentDAO
+    public interface IArtifactDAO
     {
-        List<Student> GetAllRows();    
+        List<Artifact> GetAllRows();
     }
 }

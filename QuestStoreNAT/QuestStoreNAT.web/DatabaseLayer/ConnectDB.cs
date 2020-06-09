@@ -1,7 +1,7 @@
 ﻿using System;
 using Npgsql;
 
-namespace QuestStoreNAT.web.Services
+namespace QuestStoreNAT.web.DatabaseLayer
 {
     public class ConnectDB
     {
