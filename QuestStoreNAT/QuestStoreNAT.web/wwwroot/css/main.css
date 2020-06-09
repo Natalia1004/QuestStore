@@ -19,7 +19,7 @@ body {
     font-family:  "Questrial", "segoe UI", Arial, Calibri, sans-serif;
     color: rgb(226, 226, 226);
     background: rgb(34,36,49);
-    background-image: url(../layouts/circuit_board_1.jpg);
+    background-image: url(../images/main_background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -198,8 +198,6 @@ ul {
             background-color: rgb(224, 41, 41);
         }
 
-
-
 @media screen and (max-width: 1150px) {
     .dropdown {
         display: block;
@@ -252,7 +250,7 @@ ul {
         }
         .landing__sidebar-menu .dropdown__button {
             background-color: rgba(34, 36, 49, 0.74);
-            border-color: rgba(34, 36, 49);
+            border-color: rgb(34, 36, 49);
         }
         .landing__sidebar-menu .dropdown__button:hover {
             background-color: rgba(224, 41, 41, 0.8);
@@ -494,23 +492,20 @@ ul {
    Contact Form
 ----------*/
 
-.second_header_contact
-    {
-        
-        font-weight: normal;
-        font-size: 40px;
-        font-weight: bold;
-        font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
-        margin: auto;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        width: 60%;
-        color: #ffffff;
-        text-align: center;
-    }
+.second_header_contact { 
+    font-weight: normal;
+    font-size: 40px;
+    font-weight: bold;
+    font-family:  "VT323", "segoe UI", Arial, Calibri, sans-serif;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 60%;
+    color: #ffffff;
+    text-align: center;
+}
 
-.contact
-{
+.contact {
     margin: auto;
     height: 100%;
     width: 60%;
@@ -520,8 +515,7 @@ ul {
     justify-content: space-around;
 }
 
-#name ,#email,#subject,#message
-{
+#name ,#email,#subject,#message {
     -moz-box-shadow: inset -3px -3px 10px #eee;
     -webkit-box-shadow: inset -3px -3px 10px #eee;
     box-shadow: inset -3px -3px 10px #eee;
@@ -606,7 +600,13 @@ ul {
             background-color: rgb(224, 41, 41);
         }
 
+.contact-width {
+    width: 500px;
+}
 
+.contact_textbox--height {
+    height: 200px;
+}
 
 /*----------
     MENTORS/STUDENTS VIEW inside landing_content
@@ -685,7 +685,6 @@ ul {
 
 .student_panel
 {
-    
     margin-top: 20px;
     margin-left: 20px;
     width:90%;
@@ -727,8 +726,8 @@ ul {
     font-size: 45px;
     color: #d71c2f;
     margin-bottom: 20px;
-    
 }
+
 #Level
     {
     text-align: center;
@@ -768,9 +767,7 @@ ul {
         margin-bottom: 10px;
         padding: 7px;
         color: rgb(226, 226, 226);
-    }
-
-    
+    }  
         #deleteItem a {
             text-decoration: none;
             color: rgb(226, 226, 226) !important;
@@ -821,12 +818,10 @@ ul {
             margin-bottom: 60px;
         }
     }
-        
     
 /*-----------------------
 //    ADD CLASSROOM
 //-------------------------*/
-
 
 fieldset {
     font-size: 1.7rem;
@@ -844,7 +839,6 @@ fieldset {
 /*----------------------
     MENTOR PROFILE
 -----------------------*/
-
 
 .mentor_panel {
     margin-left: 10px;
@@ -872,8 +866,7 @@ fieldset {
     border-radius: 15px;
 }
 
-#nameMentor
-{
+#nameMentor {
     font-size: 3.0rem;
     margin-top: 0.5rem;
 }
@@ -884,6 +877,28 @@ fieldset {
     letter-spacing: 0.05rem;
 }
 
-fieldset .dropdown__button{
+fieldset .dropdown__button {
     font-size: 1.8rem;
+}
+
+/*----------------------
+    WARNING
+-----------------------*/
+
+.text-danger {
+    color: darkred;
+    width: 100px;
+    padding-left: 20px;
+}
+
+.info-box {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    width: fit-content;
+    color: darkseagreen;
+    background: rgba(15, 15, 15, 0.80);
+    border: 3px solid rgb(36, 36, 36);
+    border-radius: 8px;
+    padding: 20px;
 }
