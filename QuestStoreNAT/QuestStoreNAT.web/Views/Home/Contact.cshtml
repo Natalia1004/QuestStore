@@ -7,7 +7,7 @@
 <article>
     <div class="second_header_contact"><h3>Contact Us!</h3></div>
     <div class="contact">
-        <form asp-action="Create" class="contact-width">
+        <form asp-controller="Home" asp-action="Create" method="post" class="contact-width">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <input asp-for="Name" class="dropdown--input dropdown--margin" placeholder="Enter name" />
