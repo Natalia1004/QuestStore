@@ -1,0 +1,13 @@
+﻿@model IUser
+
+@{
+    ViewData["Title"] = "Welcome Page";
+}
+
+<div class="landing">
+
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+    <div class="panelWelcome">
+        <div class="welcomeHeader">WELCOME<br><span id="nameStudent">@Model.FirstName !</span></div>
+    </div>
+</div>
