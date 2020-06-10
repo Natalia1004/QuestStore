@@ -6,17 +6,14 @@ using Npgsql;
 namespace QuestStoreNAT.web.DatabaseLayer
 {
     public class ArtifactDAO : IArtifactDAO
-    {
+    { 
         public List<Artifact> GetAllRows()
         {
             List<Artifact> dataArtifacts = new List<Artifact>();
 
-            using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
-            connection.Open();
-
             string sql = $"SELECT * FROM \"NATQuest\".\"Artifacts\" ";
-            using NpgsqlCommand command = new NpgsqlCommand(sql, connection);
-            using NpgsqlDataReader reader = command.ExecuteReader();
+
+            using NpgsqlDataReader reader = ConnectDB.ExecuteReader(sql);
 
             int countOfData = reader.FieldCount;
 
@@ -34,6 +31,12 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 dataArtifacts.Add(artifact);
             }
             return dataArtifacts;
+        }
+
+        public static void InsertRow(string tableName, string[] values)
+        {
+            string sql = $"INSERT INTO {tableName} VALUES ({string.Join(',', values)})";
+            ConnectDB.ExecuteNonQuery(sql);
         }
     }
 }

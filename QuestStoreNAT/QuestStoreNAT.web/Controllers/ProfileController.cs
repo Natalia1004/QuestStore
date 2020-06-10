@@ -30,10 +30,5 @@ namespace QuestStoreNAT.web.Controllers
             return View();
         }
 
-        public IActionResult Artifact()
-        {
-            var artifact = new ArtifactDAO();
-            return View("Artifact", artifact.GetAllRows());
-        }
     }
 }

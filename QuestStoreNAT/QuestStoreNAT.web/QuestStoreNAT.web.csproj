@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="DatabaseLayer\" />
+    <Folder Include="Views\Artifact\" />
   </ItemGroup>
 
   <ItemGroup>
