@@ -7,8 +7,6 @@ namespace QuestStoreNAT.web.Models
     {
         public int ArtifactID { get; set; }
 
-        public int ArtifactStatusID { get; set; }
-
         public int ArtifactTypeID { get; set; }
 
         [Required(ErrorMessage = "Name required")]

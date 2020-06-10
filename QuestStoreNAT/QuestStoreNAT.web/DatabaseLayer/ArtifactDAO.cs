@@ -11,9 +11,12 @@ namespace QuestStoreNAT.web.DatabaseLayer
         {
             List<Artifact> dataArtifacts = new List<Artifact>();
 
-            string sql = $"SELECT * FROM \"NATQuest\".\"Artifacts\" ";
+            using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
+            connection.Open();
 
-            using NpgsqlDataReader reader = ConnectDB.ExecuteReader(sql);
+            string sql = $"SELECT * FROM \"NATQuest\".\"Artifacts\" ";
+            using NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+            using NpgsqlDataReader reader = command.ExecuteReader();
 
             int countOfData = reader.FieldCount;
 
@@ -22,11 +25,10 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 Artifact artifact = new Artifact()
                 {
                     ArtifactID = Convert.ToInt16(reader[0]),
-                    ArtifactStatusID = Convert.ToInt16(reader[1]),
-                    ArtifactTypeID = Convert.ToInt16(reader[2]),
-                    Name = Convert.ToString(reader[3]),
-                    Cost = Convert.ToInt16(reader[4]),
-                    Description = Convert.ToString(reader[5]),
+                    ArtifactTypeID = Convert.ToInt16(reader[1]),
+                    Name = Convert.ToString(reader[2]),
+                    Cost = Convert.ToInt16(reader[3]),
+                    Description = Convert.ToString(reader[4]),
                 };
                 dataArtifacts.Add(artifact);
             }

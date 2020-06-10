@@ -14,15 +14,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             command.ExecuteNonQuery();
         }
 
-        public static NpgsqlDataReader ExecuteReader(string sql)
-        {
-            using NpgsqlConnection connection = CreateNewConnection();
-            connection.Open();
-            using NpgsqlCommand command = new NpgsqlCommand(sql, connection);
-            using NpgsqlDataReader reader = command.ExecuteReader();
-            return reader;
-        }
-
         public static NpgsqlConnection CreateNewConnection()
         {
             string accessConnection = "Host=kandula.db.elephantsql.com;Username=jvdwmero;Password=GSy9rkphAxYyU__75_leDG1iIFQFQMVe;Database=jvdwmero";
