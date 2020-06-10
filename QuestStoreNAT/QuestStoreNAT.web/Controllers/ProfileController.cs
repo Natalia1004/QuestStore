@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.DatabaseLayer;
 
 namespace QuestStoreNAT.web.Controllers
 {
@@ -27,6 +28,12 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult MyProfile()
         {
             return View();
+        }
+
+        public IActionResult Artifact()
+        {
+            var artifact = new ArtifactDAO();
+            return View("Artifact", artifact.GetAllRows());
         }
     }
 }
