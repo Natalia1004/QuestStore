@@ -5,7 +5,7 @@ namespace QuestStoreNAT.web.Models
     public class ContactForm
     {
         [Required]
-        [MaxLength(255)]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         [Required]

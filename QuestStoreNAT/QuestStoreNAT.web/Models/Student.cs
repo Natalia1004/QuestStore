@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace QuestStoreNAT.web.Models
@@ -9,24 +7,29 @@ namespace QuestStoreNAT.web.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public int ClassID { get; set; }
 
         public int GroupID { get; set; }
-        public List<Quest> StudentQuests { get; set; }
-        public List<Artifact> StudentArtifacts { get; set; }
 
         [Required]
         public Credentials Credentials { get; set; }
 
-        [Required(ErrorMessage = "Firstname required")]
+        [Required(ErrorMessage = "First name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Lastname required")]
+        [Required(ErrorMessage = "Last name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
         public string LastName { get; set; }
 
+        [Required]
         public int Wallet { get; set; }
+
+        [Required]
         public int OverallWalletLevel { get; set; }
+
+        public List<Quest> StudentQuests { get; set; }
+        public List<Artifact> StudentArtifacts { get; set; }
     }
 }

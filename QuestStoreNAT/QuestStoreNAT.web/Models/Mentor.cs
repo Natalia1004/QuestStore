@@ -12,11 +12,11 @@ namespace QuestStoreNAT.web.Models
         [Required]
         public Credentials Credentials { get; set; }
 
-        [Required(ErrorMessage = "Firstname Required")]
+        [Required(ErrorMessage = "First name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Lastname Required")]
+        [Required(ErrorMessage = "Last name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
         public string LastName { get; set; }
 
