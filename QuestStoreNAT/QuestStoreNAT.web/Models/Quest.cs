@@ -2,7 +2,7 @@
 
 namespace QuestStoreNAT.web.Models
 {
-    public class Artifact
+    public class Quest
     {
         public int Id { get; set; }
 

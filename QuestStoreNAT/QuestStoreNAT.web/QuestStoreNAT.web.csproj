@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
     <Compile Remove="Views\StudentView\**" />
+    <Content Remove="Services\**" />
     <Content Remove="Views\StudentView\**" />
+    <EmbeddedResource Remove="Services\**" />
     <EmbeddedResource Remove="Views\StudentView\**" />
+    <None Remove="Services\**" />
     <None Remove="Views\StudentView\**" />
     <Content Remove="Views\Artifacts\ArtifactsShop.cshtml" />
   </ItemGroup>
@@ -19,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="DatabaseLayer\" />
   </ItemGroup>
 
