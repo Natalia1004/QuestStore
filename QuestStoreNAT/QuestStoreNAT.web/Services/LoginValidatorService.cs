@@ -1,4 +1,5 @@
 ﻿using QuestStoreNAT.web.DatabaseLayer;
+using QuestStoreNAT.web.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuestStoreNAT.web.Services
 {
-    public class LoginValidatorService
+    public class LoginValidatorService : ILoginValidatorService
     {
         private readonly CredentialsDAO _CredentialsDAO; 
 
@@ -16,11 +17,13 @@ namespace QuestStoreNAT.web.Services
             _CredentialsDAO = new CredentialsDAO();
         }
 
-        public bool VerifyLogin (string email, string password)
+        public bool IsValidLogin (Credentials enteredCredentials)
         {
-            var fullCredentials = _CredentialsDAO.FindCredentials(email);
+            var fullDbCredentials = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
 
-            if (fullCredentials.Password == password)
+            if (fullDbCredentials is null) return false;
+
+            if (fullDbCredentials.Password == enteredCredentials.Password)
             {
                 return true;
             }
