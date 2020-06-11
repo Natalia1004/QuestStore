@@ -24,6 +24,13 @@ namespace QuestStoreNAT.web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Login(Credentials credentials)
+        {
+
+            return View("TestView", credentials);
+        }
+
         [HttpGet]
         public IActionResult Contact()
         {
