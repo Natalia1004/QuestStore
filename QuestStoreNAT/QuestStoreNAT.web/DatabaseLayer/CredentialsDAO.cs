@@ -18,7 +18,8 @@ namespace QuestStoreNAT.web.DatabaseLayer
             if (String.IsNullOrEmpty(email)) throw new ArgumentNullException(nameof(email));
 
             using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
-            var query = $"SELECT * FROM \"NATQuest\".\"{dbTableName}\" WHERE Email = '{email}' LIMIT 1;";
+            connection.Open();
+            var query = $"SELECT * FROM \"NATQuest\".\"{dbTableName}\" WHERE \"NATQuest\".\"Credentials\".\"Email\" = '{email}' LIMIT 1;";
             using var command = new NpgsqlCommand(query, connection);
             var reader = command.ExecuteReader();
 
