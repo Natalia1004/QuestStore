@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="DatabaseLayer\" />
+    <Folder Include="Views\Artifact\" />
   </ItemGroup>
 
   <ItemGroup>
