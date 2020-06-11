@@ -11,5 +11,8 @@ namespace QuestStoreNAT.web.Models
 
         [Required]
         public int GroupId { get; set; }
+
+        [Required]
+        public CompletionStatus CompletionStatus { get; set; }
     }
 }
