@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ILoginValidatorService _loginValidatorService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ILoginValidatorService loginValidatorService)
         {
             _logger = logger;
+            _loginValidatorService = loginValidatorService;
         }
 
         [HttpGet]
@@ -27,7 +30,10 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult Login(Credentials credentials)
         {
-
+            if (_loginValidatorService.IsValidLogin(credentials))
+            {
+                return RedirectToAction("Contact");
+            }
             return View("TestView", credentials);
         }
 

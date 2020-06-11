@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web
 {
@@ -25,6 +26,7 @@ namespace QuestStoreNAT.web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUser, Student>();
+            services.AddScoped<ILoginValidatorService, LoginValidatorService>();
 
             services.AddControllersWithViews();
         }
