@@ -10,7 +10,7 @@
                 <h3 class="landing__content--border landing__content--margin">Would you like to buy something for yourself?</h3>
                 @foreach (var artifact in Model)
                 {
-                    if (artifact.ArtifactTypeID == 0)
+                    if (artifact.Type == TypeClassification.Individual)
                     {
                     <div class="questreward">
                         <h3 class="questreward__title">@artifact.Name</h3>
@@ -24,7 +24,7 @@
                 <h3 class="landing__content--border landing__content--margin">Would you like to buy something for the group?</h3>
                 @foreach (var artifact in Model)
                 {
-                    if (artifact.ArtifactTypeID == 1)
+                    if (artifact.Type == TypeClassification.Group)
                     {
                         <div class="questreward">
                             <h3 class="questreward__title">@artifact.Name</h3>
