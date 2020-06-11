@@ -6,7 +6,7 @@ using Npgsql;
 namespace QuestStoreNAT.web.DatabaseLayer
 {
     public class ArtifactDAO : IArtifactDAO
-    {
+    { 
         public List<Artifact> GetAllRows()
         {
             List<Artifact> dataArtifacts = new List<Artifact>();
@@ -24,16 +24,21 @@ namespace QuestStoreNAT.web.DatabaseLayer
             {
                 Artifact artifact = new Artifact()
                 {
-                    ArtifactID = Convert.ToInt16(reader[0]),
-                    ArtifactStatusID = Convert.ToInt16(reader[1]),
-                    ArtifactTypeID = Convert.ToInt16(reader[2]),
-                    Name = Convert.ToString(reader[3]),
-                    Cost = Convert.ToInt16(reader[4]),
-                    Description = Convert.ToString(reader[5]),
+                    Id = Convert.ToInt16(reader[0]),
+                    Type = (TypeClassification)Convert.ToInt16(reader[1]),
+                    Name = Convert.ToString(reader[2]),
+                    Cost = Convert.ToInt16(reader[3]),
+                    Description = Convert.ToString(reader[4]),
                 };
                 dataArtifacts.Add(artifact);
             }
             return dataArtifacts;
+        }
+
+        public static void InsertRow(string tableName, string[] values)
+        {
+            string sql = $"INSERT INTO {tableName} VALUES ({string.Join(',', values)})";
+            ConnectDB.ExecuteNonQuery(sql);
         }
     }
 }

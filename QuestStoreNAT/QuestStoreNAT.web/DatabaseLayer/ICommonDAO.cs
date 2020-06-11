@@ -1,11 +1,10 @@
 ﻿using System;
-using QuestStoreNAT.web.Models;
 using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public interface IStudentDAO
+    public interface ICommonDAO
     {
-        List<Student> GetAllRows();    
+        void DeleteRow(string tableName, int id);
     }
 }

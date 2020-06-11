@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QuestStoreNAT.web.Models
 {
     public class ContactForm
     {
         [Required]
-        [MaxLength(255)]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         [Required]
