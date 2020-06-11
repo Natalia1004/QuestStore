@@ -6,7 +6,7 @@ namespace QuestStoreNAT.web.Models
     {
         public int Id { get; set; }
 
-        public Type Type { get; set; }
+        public TypeClassification Type { get; set; }
 
         [Required(ErrorMessage = "Name required")]
         [StringLength(20, ErrorMessage = "1 to 20 characters.", MinimumLength = 1)]

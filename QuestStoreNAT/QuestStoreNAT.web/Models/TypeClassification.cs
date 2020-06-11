@@ -1,6 +1,6 @@
 ﻿namespace QuestStoreNAT.web.Models
 {
-    public enum Type
+    public enum TypeClassification
     {
         Individual,
         Group

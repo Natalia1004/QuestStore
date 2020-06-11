@@ -24,8 +24,8 @@ namespace QuestStoreNAT.web.DatabaseLayer
             {
                 Artifact artifact = new Artifact()
                 {
-                    ArtifactID = Convert.ToInt16(reader[0]),
-                    ArtifactTypeID = Convert.ToInt16(reader[1]),
+                    Id = Convert.ToInt16(reader[0]),
+                    Type = (TypeClassification)Convert.ToInt16(reader[1]),
                     Name = Convert.ToString(reader[2]),
                     Cost = Convert.ToInt16(reader[3]),
                     Description = Convert.ToString(reader[4]),
