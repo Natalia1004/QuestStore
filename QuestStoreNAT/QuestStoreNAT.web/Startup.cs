@@ -27,6 +27,7 @@ namespace QuestStoreNAT.web
         {
             services.AddSingleton<IUser, Student>();
             services.AddScoped<ILoginValidatorService, LoginValidatorService>();
+            services.AddSingleton<ICurrentSession, CurrentSession>();
 
             services.AddControllersWithViews();
         }
