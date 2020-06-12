@@ -14,11 +14,13 @@ namespace QuestStoreNAT.web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ILoginValidatorService _loginValidatorService;
+        private readonly ICurrentSession _session;
 
-        public HomeController(ILogger<HomeController> logger, ILoginValidatorService loginValidatorService)
+        public HomeController(ILogger<HomeController> logger, ILoginValidatorService loginValidatorService, ICurrentSession session)
         {
             _logger = logger;
             _loginValidatorService = loginValidatorService;
+            _session = session;
         }
 
         [HttpGet]
@@ -28,13 +30,17 @@ namespace QuestStoreNAT.web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(Credentials credentials)
+        public IActionResult Login(Credentials enterdCredentials)
         {
-            if (_loginValidatorService.IsValidLogin(credentials))
+            if (_loginValidatorService.IsValidLogin(enterdCredentials))
             {
-                return RedirectToAction("Contact");
+                _session.LoggedUserRole = _loginValidatorService.UserRole;
+                //enterdCredentials.Role = _loginValidatorService.UserRole;
+                // TempData["iuser"] = _loginValidatorService.User; --> przekazanie obiektu do innego kontrollera
+                //_session.LoggedUser = _loginUserRetrival.IUser
+                return RedirectToAction("Welcome", "Profile");
             }
-            return View("TestView", credentials);
+            return View("TestView", enterdCredentials);
         }
 
         [HttpGet]
@@ -48,7 +54,7 @@ namespace QuestStoreNAT.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //SEND us an Email or Store the message in the database
+                //Send us an Email or Store the message in the database
                 TempData["Message"] = "You have sent us a message. Give us a minute and we will get back to you shortly.";
                 return RedirectToAction("Index");
             }
