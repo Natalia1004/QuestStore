@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web
 {
@@ -24,7 +25,9 @@ namespace QuestStoreNAT.web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IUser, Student>();
+            services.AddScoped<ILoginValidatorService, LoginValidatorService>();
+            services.AddScoped<IUserFinderService, UserFinderService>();
+            services.AddSingleton<ICurrentSession, CurrentSession>();
 
             services.AddControllersWithViews();
         }
