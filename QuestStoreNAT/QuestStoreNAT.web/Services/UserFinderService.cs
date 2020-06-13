@@ -1,6 +1,5 @@
 ﻿using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
-using System;
 
 namespace QuestStoreNAT.web.Services
 {
@@ -12,13 +11,13 @@ namespace QuestStoreNAT.web.Services
             {
                 case Role.Admin:
                     var adminDAO = new AdminDAO();
-                    return adminDAO.FindAdmin(email);
+                    return adminDAO.FindOneRecordBy(email);
                 case Role.Mentor:
-                    //TODO Mentor retrival
-                    return new Mentor();
+                    var mentorDAO = new MentorDAO();
+                    return mentorDAO.FindOneRecordBy(email);
                 default:
-                    //TODO Student retrival
-                    return new Student();
+                    var studentDAO = new StudentDAO();
+                    return studentDAO.FindOneRecordBy(email);
             }
         }
     }
