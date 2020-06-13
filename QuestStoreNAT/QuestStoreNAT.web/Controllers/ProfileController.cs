@@ -13,29 +13,23 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class ProfileController : Controller
     {
-        private readonly IUser testStudentModel;
         private readonly ICurrentSession _session;
 
-        public ProfileController(IUser user, ICurrentSession session)
+        public ProfileController(ICurrentSession session)
         {
-            testStudentModel = user;
             _session = session;
-            testStudentModel.FirstName = "Robert";
-            testStudentModel.Credentials = new Credentials();
-            testStudentModel.Credentials.Role = Role.Admin;
         }
 
         public IActionResult Welcome()
         {
             ViewData["role"] = _session.LoggedUserRole;
-            //ten widok działa na modelu IUser
-            return View(testStudentModel);
+            var model = _session.LoggedUser;
+            return View(model);
         }
 
         public IActionResult MyProfile()
         {
             return View();
         }
-
     }
 }

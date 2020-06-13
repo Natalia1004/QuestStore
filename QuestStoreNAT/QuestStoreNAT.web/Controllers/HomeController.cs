@@ -15,12 +15,17 @@ namespace QuestStoreNAT.web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ILoginValidatorService _loginValidatorService;
         private readonly ICurrentSession _session;
+        private readonly IUserFinderService _userFinderService;
 
-        public HomeController(ILogger<HomeController> logger, ILoginValidatorService loginValidatorService, ICurrentSession session)
+        public HomeController(ILogger<HomeController> logger, 
+                              ILoginValidatorService loginValidatorService, 
+                              ICurrentSession session,
+                              IUserFinderService userFinderService)
         {
             _logger = logger;
             _loginValidatorService = loginValidatorService;
             _session = session;
+            _userFinderService = userFinderService;
         }
 
         [HttpGet]
@@ -34,13 +39,12 @@ namespace QuestStoreNAT.web.Controllers
         {
             if (_loginValidatorService.IsValidLogin(enterdCredentials))
             {
-                _session.LoggedUserRole = _loginValidatorService.UserRole;
-                //enterdCredentials.Role = _loginValidatorService.UserRole;
-                // TempData["iuser"] = _loginValidatorService.User; --> przekazanie obiektu do innego kontrollera
-                //_session.LoggedUser = _loginUserRetrival.IUser
+                _session.LoggedUserRole = _loginValidatorService.GetUserRole();
+                _session.LoggedUser = _userFinderService.RetrieveUser(_session.LoggedUserRole, enterdCredentials.Email);
                 return RedirectToAction("Welcome", "Profile");
             }
-            return View("TestView", enterdCredentials);
+            TempData["Message"] = "Login failed. Either e-mail or password was incorect. Try again or contact us.";
+            return View("Contact");
         }
 
         [HttpGet]
