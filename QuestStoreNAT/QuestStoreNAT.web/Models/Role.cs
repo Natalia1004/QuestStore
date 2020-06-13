@@ -2,8 +2,8 @@
 {
     public enum Role
     {
-        Student,
+        Admin,
         Mentor,
-        Admin
+        Student
     }
 }
