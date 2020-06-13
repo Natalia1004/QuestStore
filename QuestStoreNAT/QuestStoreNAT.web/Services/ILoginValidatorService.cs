@@ -4,7 +4,7 @@ namespace QuestStoreNAT.web.Services
 {
     public interface ILoginValidatorService
     {
+        public Role GetUserRole();
         bool IsValidLogin(Credentials enteredCredentials);
-        public Role UserRole { get; set; }
     }
 }
