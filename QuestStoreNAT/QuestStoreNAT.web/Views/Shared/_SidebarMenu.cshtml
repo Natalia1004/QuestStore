@@ -12,7 +12,7 @@
             {
                 <li><a href="Students_All.html"><button class="dropdown__button">All Students</button></a></li>
                 <li><a href="Student_Add.html"><button class="dropdown__button">Add Student</button></a></li>
-                <li><a href="addQuestReward.html"><button class="dropdown__button">Add Quest/Artifact</button></a></li>
+                <li><input class="dropdown__button" type="button" value="Add Quest" onclick="location.href='@Url.Action("addquest", "quest")'" /></li>
             }
             @if ((Role)ViewData["role"] == Role.Admin)
             {
