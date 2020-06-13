@@ -1,6 +1,5 @@
 ﻿using System;
 using QuestStoreNAT.web.Models;
-using System.Collections.Generic;
 using Npgsql;
 
 namespace QuestStoreNAT.web.DatabaseLayer
@@ -10,7 +9,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         private const string dbTableName = "Credentials";
         private enum CredentialsEnum
         {
-            id, role, email, password
+            Id, Role, Email, Password
         }
 
         public Credentials FindCredentials(string email)
@@ -19,7 +18,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
             using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
             connection.Open();
-            var query = $"SELECT * FROM \"NATQuest\".\"{dbTableName}\" WHERE \"NATQuest\".\"Credentials\".\"Email\" = '{email}' LIMIT 1;";
+            var query = $"SELECT * FROM \"NATQuest\".\"{dbTableName}\" WHERE \"NATQuest\".\"{dbTableName}\".\"Email\" = '{email}' LIMIT 1;";
             using var command = new NpgsqlCommand(query, connection);
             var reader = command.ExecuteReader();
 
@@ -34,10 +33,10 @@ namespace QuestStoreNAT.web.DatabaseLayer
         private Credentials ProvideOneRecord(NpgsqlDataReader reader)
         {
             var credentials = new Credentials();
-            credentials.Id = reader.GetInt32((int)CredentialsEnum.id);
-            credentials.Role = (Role)reader.GetInt32((int)CredentialsEnum.role);
-            credentials.Email = reader.GetString((int)CredentialsEnum.email);
-            credentials.Password = reader.GetString((int)CredentialsEnum.password);
+            credentials.Id = reader.GetInt32((int)CredentialsEnum.Id);
+            credentials.Role = (Role)reader.GetInt32((int)CredentialsEnum.Role);
+            credentials.Email = reader.GetString((int)CredentialsEnum.Email);
+            credentials.Password = reader.GetString((int)CredentialsEnum.Password);
             return credentials;
         }
     }
