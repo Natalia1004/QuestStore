@@ -24,9 +24,8 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         public override string ProvideQueryStringToAdd(Quest questToAdd)
         {
-            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"NATQuest\".\"{DBTableName}\".\"QuestID\", \"NATQuest\".\"{DBTableName}\".\"QuestTypeID\",\"NATQuest\".\"{DBTableName}\".\"Name\",\"NATQuest\".\"{DBTableName}\".\"Cost\",\"NATQuest\".\"{DBTableName}\".\"Description\")" +
-                        $"VALUES({questToAdd.Id}, " +
-                               $"{questToAdd.Type}, " +
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"QuestTypeId\", \"Name\", \"Cost\", \"Description\")" +
+                        $"VALUES({(int)questToAdd.Type}, " +
                                $"'{questToAdd.Name}', " +
                                $"{questToAdd.Cost}, " +
                                $"'{questToAdd.Description}');";
@@ -36,11 +35,11 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public override string ProvideQueryStringToUpdate(Quest questToUpdate)
         {
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
-                        $"SET \"NATQuest\".\"{DBTableName}\".\"QuestTypeID\" = {questToUpdate.Type}, " +
-                            $"\"NATQuest\".\"{DBTableName}\".\"Name\" = '{questToUpdate.Name}', " +
-                            $"\"NATQuest\".\"{DBTableName}\".\"Cost\" = '{questToUpdate.Cost}', " +
-                            $"\"NATQuest\".\"{DBTableName}\".\"Description\" = '{questToUpdate.Description}'" +
-                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"QuestID\" = {questToUpdate.Id};";
+                        $"SET \"QuestTypeId\" = {questToUpdate.Type}, " +
+                            $"\"Name\" = '{questToUpdate.Name}', " +
+                            $"\"Cost\" = '{questToUpdate.Cost}', " +
+                            $"\"Description\" = '{questToUpdate.Description}'" +
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"QuestId\" = {questToUpdate.Id};";
             return query;
         }
     }
