@@ -287,15 +287,13 @@ ul {
     FORM STYLE
 ----------*/
 
-.form-width {
-    width: 400px;
-}
 .form input{
     width: 350px;
 }
 .form h3 {
     display: block;
     border-bottom: 3px solid rgb(128, 128, 128);
+    margin-bottom: 30px;
 }
 .form textarea {
     width: 350px !important;
@@ -307,8 +305,6 @@ ul {
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column !important;
 }
 
 /*----------
@@ -617,7 +613,7 @@ ul {
 }
 
 /*----------
-    MENTORS/STUDENTS VIEW inside landing_content
+    MENTORS/STUDENTS VIEW inside landing__content
 ----------*/
 
 .inside_landing {
