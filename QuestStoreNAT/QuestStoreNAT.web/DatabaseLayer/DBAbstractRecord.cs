@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
@@ -6,6 +7,8 @@ namespace QuestStoreNAT.web.DatabaseLayer
     {
         public abstract string DBTableName { get; set; }
         public abstract T ProvideOneRecord(NpgsqlDataReader reader);
+        public abstract string ProvideQueryStringToAdd(T recordToAdd);
+        public abstract string ProvideQueryStringToUpdate(T recordToUpdate);
 
         public virtual T FindOneRecordBy(string email)
         {
@@ -20,6 +23,42 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 oneRecord = ProvideOneRecord(reader);
             };
             return oneRecord;
+        }
+
+        public List<T> FetchAllRecords()
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\"";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<T>();
+            while (reader.Read())
+            {
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+        }
+
+        public virtual void AddRecord(T recordToAdd)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = ProvideQueryStringToAdd(recordToAdd);
+            ExecuteQuery(connection, query);
+        }
+
+        public virtual void UpdateRecord(int id, T recordToUpdate)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = ProvideQueryStringToUpdate(recordToUpdate);
+            ExecuteQuery(connection, query);
+        }
+
+        public virtual void DeleteRecord(int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE id = {id}";
+            ExecuteQuery(connection, query);
         }
 
         protected NpgsqlConnection OpenConnectionToDB()
