@@ -24,7 +24,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         public override string ProvideQueryStringToAdd(Quest questToAdd)
         {
-            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"QuestTypeId\", \"Name\", \"Cost\", \"Description\")" +
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"QuestType\", \"Name\", \"Cost\", \"Description\")" +
                         $"VALUES({(int)questToAdd.Type}, " +
                                $"'{questToAdd.Name}', " +
                                $"{questToAdd.Cost}, " +
@@ -35,11 +35,11 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public override string ProvideQueryStringToUpdate(Quest questToUpdate)
         {
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
-                        $"SET \"QuestTypeId\" = {questToUpdate.Type}, " +
+                        $"SET \"QuestType\" = {(int)questToUpdate.Type}, " +
                             $"\"Name\" = '{questToUpdate.Name}', " +
                             $"\"Cost\" = '{questToUpdate.Cost}', " +
                             $"\"Description\" = '{questToUpdate.Description}'" +
-                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"QuestId\" = {questToUpdate.Id};";
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"Id\" = {questToUpdate.Id};";
             return query;
         }
     }
