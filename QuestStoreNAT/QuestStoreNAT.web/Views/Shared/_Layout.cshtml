@@ -24,16 +24,7 @@
                 <ul>
                     <li><a asp-controller="home" asp-action="index">Main</a></li>
                     <li><a asp-controller="home" asp-action="contact">Contact</a></li>
-                    <div class="dropdown">
-                        <div class="dropdown-link">Login</div>
-                        <div class="dropdown__content">
-                            <label class="dropdown--margin">Email:</label><br>
-                            <input id="login_email" class="dropdown--margin dropdown--input" type="text" placeholder="email" required><br>
-                            <label class="dropdown--margin">Password:</label><br>
-                            <input id="login_password" class="dropdown--margin dropdown--input" type="password" placeholder="password" required><br>
-                            <button id="login_button" class="dropdown--margin dropdown__button" type="submit"><a asp-controller="profile" asp-action="welcome">Log In</a></button>
-                        </div>
-                    </div>
+                    @RenderSection("Login", required: false)
                 </ul>
             </nav>
         </header>

@@ -6,22 +6,45 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ILoginValidatorService _loginValidatorService;
+        private readonly ICurrentSession _session;
+        private readonly IUserFinderService _userFinderService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, 
+                              ILoginValidatorService loginValidatorService, 
+                              ICurrentSession session,
+                              IUserFinderService userFinderService)
         {
             _logger = logger;
+            _loginValidatorService = loginValidatorService;
+            _session = session;
+            _userFinderService = userFinderService;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(Credentials enterdCredentials)
+        {
+            if (_loginValidatorService.IsValidLogin(enterdCredentials))
+            {
+                _session.LoggedUserRole = _loginValidatorService.GetUserRole();
+                _session.LoggedUser = _userFinderService.RetrieveUser(_session.LoggedUserRole, enterdCredentials.Email);
+                return RedirectToAction("Welcome", "Profile");
+            }
+            TempData["Message"] = "Login failed. Either e-mail or password was incorect. Try again or contact us.";
+            return View("Contact");
         }
 
         [HttpGet]
@@ -35,7 +58,7 @@ namespace QuestStoreNAT.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //SEND us an Email or Store the message in the database
+                //Send us an Email or Store the message in the database
                 TempData["Message"] = "You have sent us a message. Give us a minute and we will get back to you shortly.";
                 return RedirectToAction("Index");
             }
