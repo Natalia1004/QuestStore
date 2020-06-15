@@ -27,11 +27,25 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult AddQuest(Quest questToAdd)
         {
+            if (ModelState.IsValid)
+            {
+                var questDAO = new QuestDAO();
+                questDAO.AddRecord(questToAdd);
+
+                ViewData["role"] = _session.LoggedUserRole;
+                return RedirectToAction("ViewAllQuests", "Quest");
+            }
+            return RedirectToAction("Error", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult ViewAllQuests()
+        {
             var questDAO = new QuestDAO();
-            questDAO.AddRecord(questToAdd);
+            var model = questDAO.FetchAllRecords();
 
             ViewData["role"] = _session.LoggedUserRole;
-            return View();
+            return View(model);
         }
     }
 }
