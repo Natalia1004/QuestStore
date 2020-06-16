@@ -1,0 +1,48 @@
+﻿@model QuestStoreNAT.web.Models.Quest
+
+@{
+    ViewData["Title"] = "AddQuest";
+}
+
+<div class="landing">
+
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+
+    <div id="landing__content" class="landing__content landing__content-justify ">
+        <form id="form-quest-reward" asp-controller="Quest" asp-action="AddQuest" method="post" class="form-width">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form">
+                <h3 class="dropdown--margin">Add Quest</h3>
+
+                    <label asp-for="Name" class="dropdown--margin"></label><br />
+                    <input asp-for="Name" class="dropdown--input dropdown--margin" /><br />
+                    <span asp-validation-for="Name" class="text-danger"></span><br />
+
+
+                    <label asp-for="Cost" class="dropdown--margin"></label><br />
+                    <input asp-for="Cost" class="dropdown--input dropdown--margin" /><br />
+                    <span asp-validation-for="Cost" class="text-danger"></span><br />
+
+
+                    <label asp-for="Type" class="dropdown--margin"></label><br />
+                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<TypeClassification>()" class="dropdown--input dropdown--margin">
+                        <option value="">Please select</option>
+                    </select><br />
+                    <span asp-validation-for="Type" class="text-danger"></span><br />
+
+
+                    <label asp-for="Description" class="dropdown--margin"></label><br />
+                    <textarea asp-for="Description" class="dropdown--input dropdown--margin contact_textbox--height"></textarea><br />
+                    <span asp-validation-for="Description" class="text-danger"></span><br />
+
+                </div>
+            <div class="form__submit">
+                <input type="submit" value="Add Quest" class="dropdown__button dropdown--margin" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

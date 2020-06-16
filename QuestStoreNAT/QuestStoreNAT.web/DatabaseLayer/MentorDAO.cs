@@ -21,5 +21,15 @@ namespace QuestStoreNAT.web.DatabaseLayer
             //TODO Credential retrieval ?
             return mentor;
         }
+
+        public override string ProvideQueryStringToAdd(Mentor mentorToAdd)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string ProvideQueryStringToUpdate(Mentor mentorToUpdate)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -20,5 +20,15 @@ namespace QuestStoreNAT.web.DatabaseLayer
             //TODO Credential retrieval ?
             return admin;
         }
+
+        public override string ProvideQueryStringToAdd(Admin adminToAdd)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string ProvideQueryStringToUpdate(Admin adminToUpdate)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
