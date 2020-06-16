@@ -1,4 +1,5 @@
-﻿@model List<Quest>
+﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
+@model List<Quest>
 
 @{
     ViewData["Title"] = "ViewAllQuests";
@@ -19,7 +20,11 @@
                 <h3 class="questreward__title">@quest.Name</h3>
                 <h3 class="questreward__cost">@quest.Cost</h3>
                 <p class="questreward__description">@quest.Description</p>
-                <!--TODO Add, Edit, Delete buttons-->
+                @if (Session.LoggedUserRole == Role.Mentor | Session.LoggedUserRole == Role.Admin)
+                {
+                    <a asp-action="EditQuest" asp-route-id="@quest.Id" class="dropdown__button dropdown--margin">Edit</a>
+                    <a asp-action="DeleteQuest" asp-route-id="@quest.Id" class="dropdown__button dropdown--margin">Delete</a>
+                }
             </div>
         }
 
@@ -32,6 +37,11 @@
                 <h3 class="questreward__title">@quest.Name</h3>
                 <h3 class="questreward__cost">@quest.Cost</h3>
                 <p class="questreward__description">@quest.Description</p>
+                @if (Session.LoggedUserRole == Role.Mentor | Session.LoggedUserRole == Role.Admin)
+                {
+                    <a asp-action="EditQuest" asp-route-id="@quest.Id" class="dropdown__button dropdown--margin">Edit</a>
+                    <a asp-action="DeleteQuest" asp-route-id="@quest.Id" class="dropdown__button dropdown--margin">Delete</a>
+                }
             </div>
         }
 
