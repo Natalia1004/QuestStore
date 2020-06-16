@@ -25,6 +25,21 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return oneRecord;
         }
 
+        public virtual T FindOneRecordBy(int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"Id\" = '{id}' LIMIT 1;";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var oneRecord = default(T);
+            while (reader.Read())
+            {
+                oneRecord = ProvideOneRecord(reader);
+            };
+            return oneRecord;
+        }
+
         public List<T> FetchAllRecords()
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
@@ -47,7 +62,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             ExecuteQuery(connection, query);
         }
 
-        public virtual void UpdateRecord(int id, T recordToUpdate)
+        public virtual void UpdateRecord(T recordToUpdate)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
             string query = ProvideQueryStringToUpdate(recordToUpdate);
@@ -57,7 +72,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public virtual void DeleteRecord(int id)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
-            string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE id = {id}";
+            string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"Id\" = {id}";
             ExecuteQuery(connection, query);
         }
 
