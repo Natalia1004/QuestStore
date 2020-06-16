@@ -1,51 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
-using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
     public class QuestController : Controller
     {
-        private readonly ICurrentSession _session;
+        private readonly QuestDAO questDAO;
 
-        public QuestController(ICurrentSession session)
+        public QuestController()
         {
-            _session = session;
+            questDAO = new QuestDAO();
+        }
+
+        [HttpGet]
+        public IActionResult ViewAllQuests()
+        {
+            var model = questDAO.FetchAllRecords();
+            return View(model);
         }
 
         [HttpGet]
         public IActionResult AddQuest()
         {
-            ViewData["role"] = _session.LoggedUserRole;
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddQuest(Quest questToAdd)
         {
             if (ModelState.IsValid)
             {
-                var questDAO = new QuestDAO();
                 questDAO.AddRecord(questToAdd);
-
-                ViewData["role"] = _session.LoggedUserRole;
+                TempData["Message"] = $"You have succesfully added the \"{questToAdd.Name}\" Quest!";
                 return RedirectToAction("ViewAllQuests", "Quest");
             }
             return RedirectToAction("Error", "Home");
         }
 
         [HttpGet]
-        public IActionResult ViewAllQuests()
+        public IActionResult EditQuest(int id)
         {
-            var questDAO = new QuestDAO();
-            var model = questDAO.FetchAllRecords();
-
-            ViewData["role"] = _session.LoggedUserRole;
+            var model = questDAO.FindOneRecordBy(id);
+            if (model == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
             return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditQuest(Quest questToEdit)
+        {
+            if (ModelState.IsValid)
+            {
+                questDAO.UpdateRecord(questToEdit);
+                TempData["Message"] = $"You have updated the \"{questToEdit.Name}\" Quest!";
+                return RedirectToAction("ViewAllQuests", "Quest");
+            }
+            return RedirectToAction("Error", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult DeleteQuest(int id)
+        {
+            var model = questDAO.FindOneRecordBy(id);
+            if (model == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteQuest(Quest questToDelete)
+        {
+            questDAO.DeleteRecord(questToDelete.Id);
+            TempData["Message"] = $"You have deleted the \"{questToDelete.Name}\" Quest!";
+            return RedirectToAction("ViewAllQuests", "Quest");
         }
     }
 }
