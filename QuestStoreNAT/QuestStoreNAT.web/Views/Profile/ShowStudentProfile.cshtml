@@ -1,0 +1,32 @@
+﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
+@model IUser
+    ViewData["Title"] = "ShowStudentProfile";
+}
+
+<div class="landing">
+
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+        <div class="student_panel">
+            <div class="header_profile">
+                <div id="nameStudent">@Model.CredentialsID</div>
+                <div id="coolcoins"></div>
+            </div>
+            <div id="Level"></div>
+            <div class="artifacts">
+                <div class="header_artifacts">Your Artifacts</div>
+                <div id="artifact">
+                    <script>document.addEventListener('DOMContentLoaded', function () {
+                            printAllIndividualRewards();
+                        }, false);</script>
+                </div>
+            </div>
+            <div class="artifacts">
+                <div class="header_artifacts">Used Artifacts</div>
+                <div id="usedArtifact">
+                    <script>document.addEventListener('DOMContentLoaded', function () {
+                            printUsedRewards();
+                        }, false);</script>
+                </div>
+            </div>
+        </div>
+</div>

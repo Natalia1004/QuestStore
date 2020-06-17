@@ -5,40 +5,44 @@ using Npgsql;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public class ArtifactDAO : IArtifactDAO
-    { 
-        public List<Artifact> GetAllRows()
+    public class ArtifactDAO : DBAbstractRecord<Artifact>
+    {
+        public override string DBTableName { get; set; } = "Artifacts";
+        private enum ArtifactEnum
         {
-            List<Artifact> dataArtifacts = new List<Artifact>();
-
-            using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
-            connection.Open();
-
-            string sql = $"SELECT * FROM \"NATQuest\".\"Artifacts\" ";
-            using NpgsqlCommand command = new NpgsqlCommand(sql, connection);
-            using NpgsqlDataReader reader = command.ExecuteReader();
-
-            int countOfData = reader.FieldCount;
-
-            while (reader.Read())
-            {
-                Artifact artifact = new Artifact()
-                {
-                    Id = Convert.ToInt16(reader[0]),
-                    Type = (TypeClassification)Convert.ToInt16(reader[1]),
-                    Name = Convert.ToString(reader[2]),
-                    Cost = Convert.ToInt16(reader[3]),
-                    Description = Convert.ToString(reader[4]),
-                };
-                dataArtifacts.Add(artifact);
-            }
-            return dataArtifacts;
+            Id, ArtifactTypeID, Name, Cost, Description
         }
 
-        public static void InsertRow(string tableName, string[] values)
+        public override Artifact ProvideOneRecord(NpgsqlDataReader reader)
         {
-            string sql = $"INSERT INTO {tableName} VALUES ({string.Join(',', values)})";
-            ConnectDB.ExecuteNonQuery(sql);
+            var artifact = new Artifact();
+            artifact.Id = reader.GetInt32((int)ArtifactEnum.Id);
+            artifact.Name = reader.GetString((int)ArtifactEnum.Name);
+            artifact.Cost = reader.GetInt32((int)ArtifactEnum.Cost);
+            artifact.Description = reader.GetString((int)ArtifactEnum.Description);
+            artifact.Type = (TypeClassification)reader.GetInt32((int)ArtifactEnum.ArtifactTypeID);
+            return artifact;
+        }
+
+        public override string ProvideQueryStringToAdd(Artifact artifactToAdd)
+        {
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"ArtifactTypeID\", \"Name\", \"Cost\", \"Description\")" +
+                        $"VALUES({(int)artifactToAdd.Type}, " +
+                               $"'{artifactToAdd.Name}', " +
+                               $"{artifactToAdd.Cost}, " +
+                               $"'{artifactToAdd.Description}');";
+            return query;
+        }
+
+        public override string ProvideQueryStringToUpdate(Artifact artifactToUpdate)
+        {
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                        $"SET \"ArtifactTypeID\" = {(int)artifactToUpdate.Type}, " +
+                            $"\"Name\" = '{artifactToUpdate.Name}', " +
+                            $"\"Cost\" = '{artifactToUpdate.Cost}', " +
+                            $"\"Description\" = '{artifactToUpdate.Description}'" +
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"Id\" = {artifactToUpdate.Id};";
+            return query;
         }
     }
 }

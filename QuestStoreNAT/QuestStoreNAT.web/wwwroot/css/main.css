@@ -312,11 +312,11 @@ ul {
 ----------*/
 
 .questreward {
-    cursor:pointer;
+    cursor: pointer;
     width: 200px;
+    height: fit-content;
     margin-left: 10px;
     margin-bottom: 10px;
-    height: fit-content;
     display: inline-block;
     text-align: center;
     box-sizing: border-box;
