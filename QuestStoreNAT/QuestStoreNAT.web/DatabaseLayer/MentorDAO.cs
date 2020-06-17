@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Npgsql;
 using QuestStoreNAT.web.Models;
 
@@ -15,6 +16,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             Id, FirstName, LastName, Bio
         }
 
+
         public override Mentor ProvideOneRecord(NpgsqlDataReader reader)
         {
             var mentor = new Mentor();
@@ -26,34 +28,47 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return mentor;
         }
 
+
         public override string ProvideQueryStringToAdd(Mentor mentorToAdd)
         {
             throw new System.NotImplementedException();
         }
 
+
         public override string ProvideQueryStringToUpdate(Mentor mentorToUpdate)
         {
-            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" SET (\"FirstName\" = {mentorToUpdate.FirstName}, " +
-                        $"\"Surname\" = {mentorToUpdate.LastName}, \"Bio\" = {mentorToUpdate.Bio}, " +
-                       $"WHERE (\"ID\" = {mentorToUpdate.Id}";
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                        $"SET (\"FirstName\" = {mentorToUpdate.FirstName}," +
+                        $"\"Surname\" = {mentorToUpdate.LastName}," +
+                        $"\"Bio\" = {mentorToUpdate.Bio})" +
+                        $"WHERE \"ID\" = {mentorToUpdate.Id};";
             return query;
         }
 
 
-#region outOfAbstraction
+        public override void UpdateRecord( Mentor mentorToUpdate )
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = ProvideQueryStringToUpdate(mentorToUpdate);
+            ExecuteQuery(connection , query);
+        }
+
+
+        #region outOfAbstraction
         public string ProvideQueryStringReturningID( Mentor mentorToAdd )
         {
             var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"FirstName\", \"Surname\", \"Bio\", \"CredentialID\")" +
-                       $"VALUES({mentorToAdd.FirstName}, " +
+                       $"VALUES('{mentorToAdd.FirstName}', " +
                               $"'{mentorToAdd.LastName}', " +
                               $"'{mentorToAdd.Bio}', " +
-                              $"{mentorToAdd.CredentialID}) RETURNING ID ";
+                              $"{mentorToAdd.CredentialID}) RETURNING ID;";
             return query;
         }
 
+
         public int AddMentorByCredentialsReturningID(int credentialID ) // credentialID from CredentialsDAO.AddRecordReturningID(Credentials newCredential)
         {
-            Mentor newMentor = new Mentor
+            var newMentor = new Mentor
             {
                 FirstName = "" ,
                 LastName = "" ,
@@ -64,6 +79,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             string query = ProvideQueryStringToAdd(newMentor);
             return ExecuteScalar(connection , query); // MentorID used to instanly update Mentor
         }
+
 
         private int ExecuteScalar( NpgsqlConnection connection , string query )
         {

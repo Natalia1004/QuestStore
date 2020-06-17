@@ -20,10 +20,10 @@
 
   <ItemGroup>
     <Folder Include="Views\Artifact\" />
+    <Folder Include="Views\Student\" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Views\Home\StudentVIew.cshtml" />
-    <Compile Remove="Views\Student\ViewAllStudents.cshtml" />
   </ItemGroup>
 </Project>
