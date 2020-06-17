@@ -293,6 +293,7 @@ ul {
 .form h3 {
     display: block;
     border-bottom: 3px solid rgb(128, 128, 128);
+    margin-bottom: 30px;
 }
 .form textarea {
     width: 350px !important;
@@ -301,6 +302,9 @@ ul {
 .form__submit {
     display: flex;
     justify-content: center;
+}
+
+.form-group {
 }
 
 /*----------
@@ -609,7 +613,7 @@ ul {
 }
 
 /*----------
-    MENTORS/STUDENTS VIEW inside landing_content
+    MENTORS/STUDENTS VIEW inside landing__content
 ----------*/
 
 .inside_landing {
@@ -888,6 +892,7 @@ fieldset .dropdown__button {
 .text-danger {
     color: darkred;
     width: 100px;
+    height: 0;
     padding-left: 20px;
 }
 
