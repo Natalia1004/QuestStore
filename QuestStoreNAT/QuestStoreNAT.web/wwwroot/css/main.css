@@ -287,7 +287,19 @@ ul {
     FORM STYLE
 ----------*/
 
-.form input{
+.form {
+    width: auto;
+}
+.form-limit {
+    width: 400px;
+}
+.form-label {
+    display: block;
+    margin-bottom: 0;
+}
+.form-select {
+}
+.form input {
     width: 350px;
 }
 .form h3 {
@@ -296,16 +308,19 @@ ul {
     margin-bottom: 30px;
 }
 .form textarea {
-    width: 350px !important;
+    width: 350px;
     resize: none;
 }
 .form__submit {
     display: flex;
     justify-content: center;
 }
-
-.form-group {
+.form-margin {
+    margin-left:auto;
+    margin-right:auto;
+    margin-left: 25px;
 }
+
 
 /*----------
     QUEST/REWARD BOX STYLE
