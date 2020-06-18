@@ -2,9 +2,9 @@
 {
     public enum Role
     {
+        None,
         Admin,
         Mentor,
         Student,
-        None
     }
 }
