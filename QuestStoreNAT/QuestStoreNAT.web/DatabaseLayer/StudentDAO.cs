@@ -38,12 +38,12 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public override string ProvideQueryStringToUpdate( Student studentToUpdate )
         {
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
-                        $"SET (\"ClassID\" = {studentToUpdate.ClassID}," + 
+                        $"SET \"ClassID\" = {studentToUpdate.ClassID}," + 
                         $"\"GroupID\" = {studentToUpdate.GroupID}," +
-                        $"\"FirstName\" = {studentToUpdate.FirstName}, " +
-                        $"\"Surname\" = {studentToUpdate.LastName}," +
+                        $"\"FirstName\" = '{studentToUpdate.FirstName}', " +
+                        $"\"Surname\" = '{studentToUpdate.LastName}'," +
                         $"\"CoinsBalance\" = {studentToUpdate.Wallet}," +
-                        $"\"CoinsTotal\" = {studentToUpdate.OverallWalletLevel})" +
+                        $"\"CoinsTotal\" = {studentToUpdate.OverallWalletLevel}" +
                         $"WHERE \"ID\" = {studentToUpdate.Id};";
             return query;
         }
@@ -61,11 +61,11 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public string ProvideQueryStringReturningID( Student studentToAdd )
         {
             var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" " +
-                        $"(\"ClassID\", \"GroupID\", \"CredentialID\", \"FirstName\", \"Surname\", \"CoinsBalance\", \"CoinsTotal\")" +
+                        $"(\"ClassID\", \"GroupID\", \"Credential_ID\", \"FirstName\", \"Surname\", \"CoinsBalance\", \"CoinsTotal\")" +
                         $"VALUES({studentToAdd.ClassID}, {studentToAdd.GroupID}, {studentToAdd.CredentialID}," +
                               $"'{studentToAdd.FirstName}','{studentToAdd.LastName}'," +
                               $"{studentToAdd.Wallet}," +
-                              $"{studentToAdd.OverallWalletLevel}) RETURNING ID;";
+                              $"{studentToAdd.OverallWalletLevel}) RETURNING \"ID\";";
             return query;
         }
 
@@ -74,8 +74,8 @@ namespace QuestStoreNAT.web.DatabaseLayer
         {
             var newStudent = new Student
             {
-                ClassID = -1,
-                GroupID = -1,
+                ClassID = 200,
+                GroupID = 200,
                 CredentialID = credentialID,
                 FirstName = "" ,
                 LastName = "" ,
@@ -84,7 +84,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             };
 
             using NpgsqlConnection connection = OpenConnectionToDB();
-            string query = ProvideQueryStringToAdd(newStudent);
+            string query = ProvideQueryStringReturningID(newStudent);
             return ExecuteScalar(connection , query); // StudentID used to instanly update Student
         }
 

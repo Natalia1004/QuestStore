@@ -4,22 +4,23 @@
     <div class="">
         <h3>Main Menu:</h3>
         <ul>
-            @if (Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor | Session.LoggedUserRole == Role.Student)
+            @if ( Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor | Session.LoggedUserRole == Role.Student )
             {
                 <li><input class="dropdown__button" type="button" value="Show My Profile" onclick="location.href='@Url.Action("MyProfile", "Profile")'" /></li>
                 <li><a href="allRewards.html"><button class="dropdown__button">Artifacts Shop</button></a></li>
                 <li><input class="dropdown__button" type="button" value="View all Quests" onclick="location.href='@Url.Action("ViewAllQuests", "Quest")'" /></li>
             }
-            @if (Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor)
+            @if ( Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor )
             {
-                <li><a href="Students_All.html"><button class="dropdown__button">All Students</button></a></li>
+                <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Student")'">All Students</button></li>
                 <li><a href="Student_Add.html"><button class="dropdown__button">Add Student</button></a></li>
                 <li><input class="dropdown__button" type="button" value="Add Quest" onclick="location.href='@Url.Action("AddQuest", "Quest")'" /></li>
             }
-            @if (Session.LoggedUserRole == Role.Admin)
+            @if ( Session.LoggedUserRole == Role.Admin )
             {
-                <li><a href="Mentors_All.html"><button class="dropdown__button">All Mentors</button></a></li>
-                <li><a href="Mentor_Add.html"><button class="dropdown__button">Add Mentor</button></a></li>
+                @*<li><a href="Mentors_All.html"><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Mentor")'">All Mentors</button></a></li>*@
+                <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Mentor")'">All Mentors</button></li>
+                <li><button class="dropdown__button" onclick="location.href='@Url.Action("AddCredentials", "Credentials")'">Add Mentor</button></li>
                 <li><a href="Classroom_Add.html"><button class="dropdown__button">Add Classroom</button></a></li>
             }
         </ul>

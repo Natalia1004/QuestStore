@@ -38,7 +38,7 @@ namespace QuestStoreNAT.web.Controllers
             var allStudents = _studentDAO.FetchAllRecords();
             var studentToEdit = allStudents.FirstOrDefault(m => m.Id == editedStudent.Id);
             _studentDAO.UpdateRecord(studentToEdit);
-            return RedirectToAction("Index" , "Mentor");
+            return RedirectToAction("Index" , "Student");
         }
     }
 }

@@ -18,12 +18,12 @@ namespace QuestStoreNAT.web.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_mentorDAO.FetchAllRecords());
         }
 
-        public IActionResult Create(int id)
+        public IActionResult Create(int credentialId)
         {
-            var mentorId = _mentorDAO.AddMentorByCredentialsReturningID(id);
+            var mentorId = _mentorDAO.AddMentorByCredentialsReturningID(credentialId);
             return RedirectToAction("Edit" , "Mentor" , mentorId);
         }
 
@@ -33,12 +33,13 @@ namespace QuestStoreNAT.web.Controllers
             return View(mentorToEdit);
         }
 
+        [HttpPost]
         public IActionResult Edit(Mentor editedMentor)
         {
             var allMentors = _mentorDAO.FetchAllRecords();
             var mentorToEdit = allMentors.FirstOrDefault(m => m.Id == editedMentor.Id);
             _mentorDAO.UpdateRecord(mentorToEdit);
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index", "Mentor");
         }
     }
 }

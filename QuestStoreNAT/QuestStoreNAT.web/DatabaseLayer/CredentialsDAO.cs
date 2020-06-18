@@ -48,22 +48,30 @@ namespace QuestStoreNAT.web.DatabaseLayer
         #endregion
 
 
-        #region IdReturtingDAOimplementation
+        #region IdReturningDAOimplementation
 
         public override string ProvideQueryStringToAdd( Credentials credentialToAdd )
         {
             var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"Role\", \"Email\", \"Password\")" +
-                        $"VALUES({credentialToAdd.Role}, " +
-                               $"'{credentialToAdd.Email}', " +
-                               $"{credentialToAdd.Password}) RETURNING ID ";
+                        $"VALUES({(int)credentialToAdd.Role}, " +
+                               $"'{(string)credentialToAdd.Email}', " +
+                               $"'{(string)credentialToAdd.Password}') RETURNING \"ID\";";
             return query;
         }
+
+
 
         public override int AddRecordReturningID(Credentials newCredential)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
             string query = ProvideQueryStringToAdd(newCredential);
-            return ExecuteScalar(connection , query);
+            return ExecuteScalar(connection, query);
+
+            //command.Parameters.AddWithValue("@Role", newCredential.Role);
+            //command.Parameters.AddWithValue("@Email" , newCredential.Email);
+            //command.Parameters.AddWithValue("@Password" , newCredential.Password);
+            //command.Prepare();
+            //return Convert.ToInt32(command.ExecuteScalar());
         }
 
         #endregion

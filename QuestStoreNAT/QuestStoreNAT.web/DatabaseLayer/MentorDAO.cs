@@ -13,7 +13,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         private enum MentorsEnum
         {
-            Id, FirstName, LastName, Bio
+            Id, FirstName, LastName, Bio, CredentialID
         }
 
 
@@ -24,6 +24,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             mentor.FirstName = reader.GetString((int)MentorsEnum.FirstName);
             mentor.LastName = reader.GetString((int)MentorsEnum.LastName);
             mentor.Bio = reader.GetString((int)MentorsEnum.Bio);
+            mentor.CredentialID = reader.GetInt32((int)MentorsEnum.CredentialID);
             //TODO Credential retrieval ?
             return mentor;
         }
@@ -38,9 +39,9 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public override string ProvideQueryStringToUpdate(Mentor mentorToUpdate)
         {
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
-                        $"SET (\"FirstName\" = {mentorToUpdate.FirstName}," +
-                        $"\"Surname\" = {mentorToUpdate.LastName}," +
-                        $"\"Bio\" = {mentorToUpdate.Bio})" +
+                        $"SET \"FirstName\" = '{mentorToUpdate.FirstName}'," +
+                        $"\"Surname\" = '{mentorToUpdate.LastName}'," +
+                        $"\"Bio\" = '{mentorToUpdate.Bio}'" +
                         $"WHERE \"ID\" = {mentorToUpdate.Id};";
             return query;
         }
@@ -57,11 +58,11 @@ namespace QuestStoreNAT.web.DatabaseLayer
         #region outOfAbstraction
         public string ProvideQueryStringReturningID( Mentor mentorToAdd )
         {
-            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"FirstName\", \"Surname\", \"Bio\", \"CredentialID\")" +
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"FirstName\", \"Surname\", \"Bio\", \"Credential_ID\")" +
                        $"VALUES('{mentorToAdd.FirstName}', " +
                               $"'{mentorToAdd.LastName}', " +
                               $"'{mentorToAdd.Bio}', " +
-                              $"{mentorToAdd.CredentialID}) RETURNING ID;";
+                              $"{mentorToAdd.CredentialID}) RETURNING \"ID\";";
             return query;
         }
 
@@ -76,7 +77,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 CredentialID = credentialID
             };
             using NpgsqlConnection connection = OpenConnectionToDB();
-            string query = ProvideQueryStringToAdd(newMentor);
+            string query = ProvideQueryStringReturningID(newMentor);
             return ExecuteScalar(connection , query); // MentorID used to instanly update Mentor
         }
 
