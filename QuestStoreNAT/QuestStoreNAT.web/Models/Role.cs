@@ -4,6 +4,7 @@
     {
         Admin,
         Mentor,
-        Student
+        Student,
+        None
     }
 }
