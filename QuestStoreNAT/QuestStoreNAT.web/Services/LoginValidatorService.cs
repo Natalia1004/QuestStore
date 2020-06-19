@@ -5,12 +5,12 @@ namespace QuestStoreNAT.web.Services
 {
     public class LoginValidatorService : ILoginValidatorService
     {
-        private readonly CredentialsDAO _CredentialsDAO;
+        private readonly ClassEnrolmentDAO _CredentialsDAO;
         private Role UserRole { get; set; }
 
         public LoginValidatorService()
         {
-            _CredentialsDAO = new CredentialsDAO(); 
+            _CredentialsDAO = new ClassEnrolmentDAO(); 
         }
 
         public bool IsValidLogin (Credentials enteredCredentials)

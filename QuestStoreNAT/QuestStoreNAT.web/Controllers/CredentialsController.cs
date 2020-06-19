@@ -10,9 +10,9 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class CredentialsController : Controller
     {
-        private readonly CredentialsDAO _credentialsDAO;
+        private readonly ClassEnrolmentDAO _credentialsDAO;
 
-        public CredentialsController(CredentialsDAO credentialsDAO)
+        public CredentialsController(ClassEnrolmentDAO credentialsDAO)
         {
             _credentialsDAO = credentialsDAO;
         }
