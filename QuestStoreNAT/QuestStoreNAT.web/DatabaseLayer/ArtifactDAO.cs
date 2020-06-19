@@ -17,10 +17,10 @@ namespace QuestStoreNAT.web.DatabaseLayer
         {
             var artifact = new Artifact();
             artifact.Id = reader.GetInt32((int)ArtifactEnum.Id);
+            artifact.Type = (TypeClassification)reader.GetInt32((int)ArtifactEnum.ArtifactTypeID);
             artifact.Name = reader.GetString((int)ArtifactEnum.Name);
             artifact.Cost = reader.GetInt32((int)ArtifactEnum.Cost);
             artifact.Description = reader.GetString((int)ArtifactEnum.Description);
-            artifact.Type = (TypeClassification)reader.GetInt32((int)ArtifactEnum.ArtifactTypeID);
             return artifact;
         }
 
@@ -44,5 +44,25 @@ namespace QuestStoreNAT.web.DatabaseLayer
                         $"WHERE \"NATQuest\".\"{DBTableName}\".\"Id\" = {artifactToUpdate.Id};";
             return query;
         }
+
+        public List<Artifact> FetchAllRecords(int id, int statusArtifact)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT \"NATQuest\".\"Artifacts\".\"ID\",\"NATQuest\".\"Artifacts\".\"ArtifactTypeID\", \"NATQuest\".\"Artifacts\".\"Name\", \"NATQuest\".\"Artifacts\".\"Cost\", \"NATQuest\".\"Artifacts\".\"Description\" FROM \"NATQuest\".\"Students\" JOIN \"NATQuest\".\"OwnedArtifactStudent\" " +
+                $"ON \"NATQuest\".\"Students\".\"ID\" = \"NATQuest\".\"OwnedArtifactStudent\".\"StudentID\"" +
+                $"JOIN \"NATQuest\".\"ArtifactStatus\" ON \"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactStatusID\" = \"NATQuest\".\"ArtifactStatus\".\"ID\"" +
+                $"JOIN \"NATQuest\".\"Artifacts\" ON \"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactID\" = \"NATQuest\".\"Artifacts\".\"ID\" WHERE \"NATQuest\".\"ArtifactStatus\".\"ID\" = {statusArtifact} AND \"NATQuest\".\"Students\".\"ID\" ={id} ";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<Artifact>();
+            while (reader.Read())
+            {
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+
+        }
+
     }
 }

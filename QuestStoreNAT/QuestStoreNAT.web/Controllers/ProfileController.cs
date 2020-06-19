@@ -36,10 +36,23 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult ShowStudentProfile()
         {
             ViewData["role"] = _session.LoggedUserRole;
-            var credentials = new Credentials();
-            int id = credentials.Id;
-            var student = new StudentDAO();
-            return View(student.FindOneRecordBy(id));
+            var model = _session.LoggedUser;
+            var CredentialID = model.Credential;
+            var Student = new StudentDAO();
+            var targetStudent = Student.FindOneRecordBy(CredentialID);
+            targetStudent.StudentArtifacts = new ArtifactDAO().FetchAllRecords(targetStudent.Id, 0);
+            targetStudent.UsedStudentArtifacts = new ArtifactDAO().FetchAllRecords(targetStudent.Id, 1);
+            return View(targetStudent);
+        }
+
+        public IActionResult UseArtifact(int id)
+        {
+            ViewData["role"] = _session.LoggedUserRole;
+            var student = _session.LoggedUser;
+            var ownedArtifactStudentDAO = new OwnedArtifactStudentDAO();
+            var model = ownedArtifactStudentDAO.FindOneRecordBy(id);
+            ownedArtifactStudentDAO.DeleteRecord(model.Id);
+            return RedirectToAction("ShowStudentProfile", "Profile");
         }
     }
 }

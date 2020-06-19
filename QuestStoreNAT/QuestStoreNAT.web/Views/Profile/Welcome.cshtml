@@ -1,14 +1,15 @@
-﻿@model IUser
+﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
+@model IUser
 
 @{
     ViewData["Title"] = "Welcome Page";
 }
 
-    <div class="landing">
+<div class="landing">
 
-        <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
         <div class="panelWelcome">
             <div class="welcomeHeader">WELCOME<br><span id="nameStudent">@Model.FirstName !</span></div>
         </div>
 
-    </div>
+</div>

@@ -1,5 +1,7 @@
-﻿using Npgsql;
+﻿using System;
+using Npgsql;
 using QuestStoreNAT.web.Models;
+using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
@@ -19,6 +21,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             student.LastName = reader.GetString((int)StudentEnum.Surname);
             student.Wallet = reader.GetInt32((int)StudentEnum.CoinsTotal);
             student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.CoinsBalance);
+            student.Credential = reader.GetInt16((int)StudentEnum.CredentialID);
             return student;
         }
 
@@ -46,5 +49,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
         {
             throw new System.NotImplementedException();
         }
+
     }
 }

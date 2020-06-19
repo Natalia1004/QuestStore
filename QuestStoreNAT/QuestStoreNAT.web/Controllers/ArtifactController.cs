@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
+using Microsoft.AspNetCore.Http;
+using QuestStoreNAT.web.Services;
+using System.Runtime.ConstrainedExecution;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,10 +16,12 @@ namespace QuestStoreNAT.web.Controllers
     public class ArtifactController : Controller
     {
         private readonly ArtifactDAO artifactDAO;
+        private readonly ICurrentSession _session;
 
-        public ArtifactController()
+        public ArtifactController(ICurrentSession session)
         {
             artifactDAO = new ArtifactDAO();
+            _session = session;
         }
 
         [HttpGet]
@@ -85,6 +90,24 @@ namespace QuestStoreNAT.web.Controllers
             TempData["Message"] = $"You have deleted the \"{artifactToDelete.Name}\" Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
+        
+        public IActionResult BuyArtifact(int id)
+        {
+            var currentUser = _session.LoggedUser;
+            var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.Credential);
+            //var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
+            var model = new OwnedArtifactStudentDAO();
+            var newRecord = new OwnedArtifactStudent()
+            {
+                StudentId = currentStudent.Id,
+                ArtifactId = id,
+                CompletionStatus = 0,
+            };
+            model.AddRecord(newRecord);
+            return RedirectToAction("ViewAllArtifacts", "Artifact");
+        }
+        
+
     }
 }
 

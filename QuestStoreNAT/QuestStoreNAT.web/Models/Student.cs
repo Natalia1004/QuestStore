@@ -32,5 +32,6 @@ namespace QuestStoreNAT.web.Models
 
         public List<Quest> StudentQuests { get; set; }
         public List<Artifact> StudentArtifacts { get; set; }
+        public List<Artifact> UsedStudentArtifacts { get; set; }
     }
 }
