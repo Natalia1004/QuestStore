@@ -39,7 +39,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
                             $"\"Name\" = '{questToUpdate.Name}', " +
                             $"\"Cost\" = '{questToUpdate.Cost}', " +
                             $"\"Description\" = '{questToUpdate.Description}'" +
-                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"Id\" = {questToUpdate.Id};";
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {questToUpdate.Id};";
             return query;
         }
     }
