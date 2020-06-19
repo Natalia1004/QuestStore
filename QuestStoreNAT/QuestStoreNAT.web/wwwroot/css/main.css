@@ -57,6 +57,10 @@ h3 {
     color: rgb(224, 41, 41);
 }
 
+a {
+    text-decoration: none;
+}
+
 ul {
     list-style: none;
 }
@@ -287,7 +291,19 @@ ul {
     FORM STYLE
 ----------*/
 
-.form input{
+.form {
+    width: auto;
+}
+.form-limit {
+    width: 400px;
+}
+.form-label {
+    display: block;
+    margin-bottom: 0;
+}
+.form-select {
+}
+.form input {
     width: 350px;
 }
 .form h3 {
@@ -296,16 +312,19 @@ ul {
     margin-bottom: 30px;
 }
 .form textarea {
-    width: 350px !important;
+    width: 350px;
     resize: none;
 }
 .form__submit {
     display: flex;
     justify-content: center;
 }
-
-.form-group {
+.form-margin {
+    margin-left:auto;
+    margin-right:auto;
+    margin-left: 25px;
 }
+
 
 /*----------
     QUEST/REWARD BOX STYLE
@@ -314,7 +333,8 @@ ul {
 .questreward {
     cursor:pointer;
     width: 200px;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-bottom: 10px;
     height: fit-content;
     display: inline-block;
@@ -349,6 +369,9 @@ ul {
     .questreward--group:hover {
         background-color: rgba(34, 88, 124, 0.74);
     }
+.admin-controll {
+    margin-bottom: 20px;
+}
 
 /*----------
     POPUP BOX STYLE
@@ -900,10 +923,20 @@ fieldset .dropdown__button {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
-    width: fit-content;
+    width: auto;
     color: darkseagreen;
     background: rgba(15, 15, 15, 0.80);
     border: 3px solid rgb(36, 36, 36);
     border-radius: 8px;
     padding: 20px;
+}
+.info-box-landing {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+.delete-title {
+    width: 100%;
+    text-align:center;
+    margin-bottom: 20px;
 }
