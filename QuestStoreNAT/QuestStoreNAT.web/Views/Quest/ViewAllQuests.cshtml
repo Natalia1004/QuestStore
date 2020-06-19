@@ -13,7 +13,7 @@
 
         @if (TempData["QuestMessage"] != null)
         {
-            <div id="info_box" class="hero-landing" onclick="TurnOff()">
+            <div id="info_box" class="hero-landing info-box-landing" onclick="TurnOff()">
                 <h5 class="info-box">@TempData["QuestMessage"]</h5>
             </div>
         }
@@ -29,8 +29,10 @@
                 <p class="questreward__description">@quest.Description</p>
                 @if (Session.LoggedUserRole == Role.Mentor | Session.LoggedUserRole == Role.Admin)
                 {
-                    <a asp-action="EditQuest" asp-route-id="@quest.Id" class="dropdown__button dropdown--margin">Edit</a>
-                    <a asp-action="DeleteQuest" asp-route-id="@quest.Id" class="dropdown__button dropdown--margin">Delete</a>
+                <div class="admin-controll">
+                    <a asp-action="EditQuest" asp-route-id="@quest.Id" class="dropdown__button">Edit</a>
+                    <a asp-action="DeleteQuest" asp-route-id="@quest.Id" class="dropdown__button">Delete</a>
+                </div>
                 }
             </div>
         }
@@ -46,8 +48,10 @@
                 <p class="questreward__description">@quest.Description</p>
                 @if (Session.LoggedUserRole == Role.Mentor | Session.LoggedUserRole == Role.Admin)
                 {
-                    <a asp-action="EditQuest" asp-route-id="@quest.Id" class="dropdown__button dropdown--margin">Edit</a>
-                    <a asp-action="DeleteQuest" asp-route-id="@quest.Id" class="dropdown__button dropdown--margin">Delete</a>
+                <div class="admin-controll">
+                    <a asp-action="EditQuest" asp-route-id="@quest.Id" class="dropdown__button">Edit</a>
+                    <a asp-action="DeleteQuest" asp-route-id="@quest.Id" class="dropdown__button">Delete</a>
+                </div>
                 }
             </div>
         }
