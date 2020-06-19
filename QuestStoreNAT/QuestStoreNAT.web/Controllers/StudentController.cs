@@ -36,9 +36,7 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult Edit(Student editedStudent)
         {
-            var allStudents = _studentDAO.FetchAllRecords();
-            var studentToEdit = allStudents.FirstOrDefault(m => m.Id == editedStudent.Id);
-            _studentDAO.UpdateRecord(studentToEdit);
+            _studentDAO.UpdateRecord(editedStudent);
             return RedirectToAction("Index" , "Student");
         }
     }

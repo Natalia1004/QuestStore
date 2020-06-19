@@ -36,10 +36,21 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult Edit(Mentor editedMentor)
         {
-            var allMentors = _mentorDAO.FetchAllRecords();
-            var mentorToEdit = allMentors.FirstOrDefault(m => m.Id == editedMentor.Id);
-            _mentorDAO.UpdateRecord(mentorToEdit);
+            _mentorDAO.UpdateRecord(editedMentor);
             return RedirectToAction("Index", "Mentor");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _mentorDAO.DeleteRecord(id);
+            return RedirectToAction("Index" , "Mentor");
+        }
+
+        public IActionResult Details( int id )
+        {
+            var mentor = _mentorDAO.FetchAllRecords()
+                .FirstOrDefault(m => m.Id == id);
+            return View(mentor);
         }
     }
 }
