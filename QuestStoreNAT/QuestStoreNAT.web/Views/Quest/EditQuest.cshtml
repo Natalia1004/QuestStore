@@ -4,43 +4,46 @@
     ViewData["Title"] = "EditQuest";
 }
 
-<h1>EditQuest</h1>
+<div class="landing">
 
-<h4>Quest</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditQuest">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cost" class="control-label"></label>
-                <input asp-for="Cost" class="form-control" />
-                <span asp-validation-for="Cost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+
+    <div id="landing__content" class="landing__content landing__content-justify ">
+        <div class="form-limit">
+            <form class="form" asp-controller="Quest" asp-action="EditQuest" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <h3 class="dropdown--margin">Edit Quest</h3>
+
+                <label asp-for="Name" class="dropdown--margin form-label form-margin"></label>
+                <input asp-for="Name" class="dropdown--input dropdown--margin form-margin" />
+                <span asp-validation-for="Name" class="text-danger"></span><br />
+
+
+                <label asp-for="Cost" class="dropdown--margin form-label form-margin"></label>
+                <input asp-for="Cost" class="dropdown--input dropdown--margin form-margin" />
+                <span asp-validation-for="Cost" class="text-danger"></span><br />
+
+                <div>
+                    <label asp-for="Type" class="dropdown--margin form-select form-margin"></label>
+                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<TypeClassification>()" class="dropdown--input dropdown--margin">
+                        <option value="">Please select</option>
+                    </select>
+                </div>
+                <span asp-validation-for="Type" class="text-danger"></span><br />
+
+
+                <label asp-for="Description" class="dropdown--margin form-label form-margin"></label>
+                <textarea asp-for="Description" class="dropdown--input dropdown--margin contact_textbox--height form-margin"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span><br />
+
+
+                <div class="form__submit">
+                    <button type="submit" class="dropdown__button dropdown--margin">Edit Quest</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="ViewAllQuests">Back to List</a>
 </div>
 
 @section Scripts {

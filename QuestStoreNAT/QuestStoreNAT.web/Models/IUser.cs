@@ -4,7 +4,6 @@
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int Credential { get; set; }
-        //public Credentials Credentials { get; set; }
+        public int CredentialId { get; set; }
     }
 }

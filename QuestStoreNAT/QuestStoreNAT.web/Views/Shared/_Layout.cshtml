@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,7 +26,14 @@
                 <ul>
                     <li><a asp-controller="home" asp-action="index">Main</a></li>
                     <li><a asp-controller="home" asp-action="contact">Contact</a></li>
-                    @RenderSection("Login", required: false)
+                    @if (Session.LoggedUserRole == Role.None)
+                    {
+                        <partial name="~/Views/Shared/_Login.cshtml"/>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="home" asp-action="logout">Logout</a></li>
+                    }
                 </ul>
             </nav>
         </header>
@@ -51,6 +60,7 @@
 
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
         @RenderSection("Scripts", required: false)
     </div>
 </body>
