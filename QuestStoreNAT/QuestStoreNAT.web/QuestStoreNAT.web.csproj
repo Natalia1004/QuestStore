@@ -24,6 +24,5 @@
 
   <ItemGroup>
     <Compile Remove="Views\Home\StudentVIew.cshtml" />
-    <Compile Remove="Views\Student\ViewAllStudents.cshtml" />
   </ItemGroup>
 </Project>

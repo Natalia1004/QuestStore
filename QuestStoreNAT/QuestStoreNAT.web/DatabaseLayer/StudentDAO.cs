@@ -1,4 +1,7 @@
-﻿using Npgsql;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+using Npgsql;
 using QuestStoreNAT.web.Models;
 
 namespace QuestStoreNAT.web.DatabaseLayer
@@ -6,31 +9,94 @@ namespace QuestStoreNAT.web.DatabaseLayer
     public class StudentDAO : DBAbstractRecord<Student>
     {
         public override string DBTableName { get; set; } = "Students";
+
         private enum StudentEnum
         {
-            Id, ClassId, GroupId, Email, Password, FirstName, LastName, Wallet, Level
+            Id, ClassId, GroupId, Email, Password, FirstName, LastName, Level, Wallet, CredentialID
         }
+
 
         public override Student ProvideOneRecord(NpgsqlDataReader reader)
         {
             var student = new Student();
             student.Id = reader.GetInt32((int)StudentEnum.Id);
+            student.ClassID = reader.GetInt32((int)StudentEnum.ClassId);
+            student.GroupID = reader.GetInt32((int)StudentEnum.GroupId);
             student.FirstName = reader.GetString((int)StudentEnum.FirstName);
             student.LastName = reader.GetString((int)StudentEnum.LastName);
-            student.Wallet = reader.GetInt32((int)StudentEnum.Wallet);
-            student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.Level);
-            //TODO Credential retrieval ?
+            student.Wallet = reader.GetInt32((int)StudentEnum.Level);
+            student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.Wallet);
+            student.CredentialID = reader.GetInt32((int)StudentEnum.CredentialID);
             return student;
         }
+
 
         public override string ProvideQueryStringToAdd(Student studentToAdd)
         {
             throw new System.NotImplementedException();
         }
 
-        public override string ProvideQueryStringToUpdate(Student studentToUpdate)
+
+        public override string ProvideQueryStringToUpdate( Student studentToUpdate )
         {
-            throw new System.NotImplementedException();
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                        $"SET \"ClassID\" = {studentToUpdate.ClassID}," + 
+                        $"\"GroupID\" = {studentToUpdate.GroupID}," +
+                        $"\"FirstName\" = '{studentToUpdate.FirstName}', " +
+                        $"\"Surname\" = '{studentToUpdate.LastName}'," +
+                        $"\"CoinsBalance\" = {studentToUpdate.Wallet}," +
+                        $"\"CoinsTotal\" = {studentToUpdate.OverallWalletLevel}" +
+                        $"WHERE \"ID\" = {studentToUpdate.Id};";
+            return query;
         }
+
+
+        public override void UpdateRecord( Student studentToUpdate )
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = ProvideQueryStringToUpdate(studentToUpdate);
+            ExecuteQuery(connection , query);
+        }
+
+
+        #region outOfAbstraction
+        public string ProvideQueryStringReturningID( Student studentToAdd )
+        {
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" " +
+                        $"(\"ClassID\", \"GroupID\", \"Credential_ID\", \"FirstName\", \"Surname\", \"CoinsBalance\", \"CoinsTotal\")" +
+                        $"VALUES({studentToAdd.ClassID}, {studentToAdd.GroupID}, {studentToAdd.CredentialID}," +
+                              $"'{studentToAdd.FirstName}','{studentToAdd.LastName}'," +
+                              $"{studentToAdd.Wallet}," +
+                              $"{studentToAdd.OverallWalletLevel}) RETURNING \"ID\";";
+            return query;
+        }
+
+
+        public int AddStudentByCredentialsReturningID( int credentialID ) // credentialID from CredentialsDAO.AddRecordReturningID(Credentials newCredential)
+        {
+            var newStudent = new Student
+            {
+                ClassID = 200,
+                GroupID = 200,
+                CredentialID = credentialID,
+                FirstName = "" ,
+                LastName = "" ,
+                Wallet = 0 ,
+                OverallWalletLevel = 0
+            };
+
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = ProvideQueryStringReturningID(newStudent);
+            return ExecuteScalar(connection , query); // StudentID used to instanly update Student
+        }
+
+
+        private int ExecuteScalar( NpgsqlConnection connection , string query )
+        {
+            using var command = new NpgsqlCommand(query , connection);
+            command.Prepare();
+            return Convert.ToInt32(command.ExecuteScalar());
+        }
+        #endregion
     }
 }

@@ -11,5 +11,7 @@ namespace QuestStoreNAT.web.Models
 
         [Required]
         public int MentorID { get; set; }
+        public virtual Mentor MentorCE {get; set;}
+        public virtual Classroom ClassroomCE { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace QuestStoreNAT.web.Models
         public int GroupID { get; set; }
 
         [Required]
-        public int CredentialId { get; set; }
+        public int CredentialID { get; set; }
 
         [Required(ErrorMessage = "First name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
