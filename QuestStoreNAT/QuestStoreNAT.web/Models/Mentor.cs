@@ -10,8 +10,7 @@ namespace QuestStoreNAT.web.Models
         public List<Classroom> MentorClassrooms { get; set; }
 
         [Required]
-        public int Credential { get; set; }
-        //public Credentials Credentials { get; set; }
+        public int CredentialId { get; set; }
 
         [Required(ErrorMessage = "First name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
