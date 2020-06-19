@@ -12,7 +12,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         private enum StudentEnum
         {
-            Id, ClassId, GroupId, Email, Password, FirstName, LastName, Wallet, Level
+            Id, ClassId, GroupId, Email, Password, FirstName, LastName, Level, Wallet, CredentialID
         }
 
 
@@ -20,11 +20,13 @@ namespace QuestStoreNAT.web.DatabaseLayer
         {
             var student = new Student();
             student.Id = reader.GetInt32((int)StudentEnum.Id);
+            student.ClassID = reader.GetInt32((int)StudentEnum.ClassId);
+            student.GroupID = reader.GetInt32((int)StudentEnum.GroupId);
             student.FirstName = reader.GetString((int)StudentEnum.FirstName);
             student.LastName = reader.GetString((int)StudentEnum.LastName);
-            student.Wallet = reader.GetInt32((int)StudentEnum.Wallet);
-            student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.Level);
-            //TODO Credential retrieval ?
+            student.Wallet = reader.GetInt32((int)StudentEnum.Level);
+            student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.Wallet);
+            student.CredentialID = reader.GetInt32((int)StudentEnum.CredentialID);
             return student;
         }
 

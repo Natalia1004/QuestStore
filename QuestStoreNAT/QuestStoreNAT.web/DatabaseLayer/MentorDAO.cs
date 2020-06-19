@@ -25,7 +25,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             mentor.LastName = reader.GetString((int)MentorsEnum.LastName);
             mentor.Bio = reader.GetString((int)MentorsEnum.Bio);
             mentor.CredentialID = reader.GetInt32((int)MentorsEnum.CredentialID);
-            //TODO Credential retrieval ?
             return mentor;
         }
 

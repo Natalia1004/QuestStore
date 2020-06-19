@@ -13,7 +13,7 @@
             @if ( Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor )
             {
                 <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Student")'">All Students</button></li>
-                <li><a href="Student_Add.html"><button class="dropdown__button">Add Student</button></a></li>
+                <li><button class="dropdown__button" onclick="location.href='@Url.Action("AddCredentials", "Credentials")'">Add Student</button></li>
                 <li><input class="dropdown__button" type="button" value="Add Quest" onclick="location.href='@Url.Action("AddQuest", "Quest")'" /></li>
             }
             @if ( Session.LoggedUserRole == Role.Admin )

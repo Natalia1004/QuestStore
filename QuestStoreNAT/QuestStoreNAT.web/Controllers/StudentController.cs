@@ -33,6 +33,7 @@ namespace QuestStoreNAT.web.Controllers
             return View(studentToEdit);
         }
 
+        [HttpPost]
         public IActionResult Edit(Student editedStudent)
         {
             var allStudents = _studentDAO.FetchAllRecords();
