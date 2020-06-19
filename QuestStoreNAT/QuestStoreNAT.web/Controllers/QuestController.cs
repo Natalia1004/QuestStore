@@ -75,8 +75,9 @@ namespace QuestStoreNAT.web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteQuest(Quest questToDelete)
         {
+            var questToDeleteFromDB = questDAO.FindOneRecordBy(questToDelete.Id);
             questDAO.DeleteRecord(questToDelete.Id);
-            TempData["QuestMessage"] = $"You have deleted the \"{questToDelete.Name}\" Quest!";
+            TempData["QuestMessage"] = $"You have deleted the \"{questToDeleteFromDB.Name}\" Quest!";
             return RedirectToAction("ViewAllQuests", "Quest");
         }
     }
