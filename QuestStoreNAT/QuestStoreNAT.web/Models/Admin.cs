@@ -8,7 +8,6 @@ namespace QuestStoreNAT.web.Models
 
         [Required]
         public int CredentialID { get; set; }
-        //public Credentials Credentials { get; set; }
 
         [Required(ErrorMessage = "First name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]

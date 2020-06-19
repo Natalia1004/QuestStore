@@ -5,6 +5,6 @@
         None,
         Admin,
         Mentor,
-        Student
+        Student,
     }
 }

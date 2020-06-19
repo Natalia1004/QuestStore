@@ -72,7 +72,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public virtual void DeleteRecord(int id)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
-            string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"Id\" = {id}";
+            string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {id}";
             ExecuteQuery(connection, query);
         }
 

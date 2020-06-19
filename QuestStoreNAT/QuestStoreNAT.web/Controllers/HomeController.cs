@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.Models;
@@ -32,6 +28,14 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            _session.LoggedUserRole = Role.None;
+            _session.LoggedUser = null;
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

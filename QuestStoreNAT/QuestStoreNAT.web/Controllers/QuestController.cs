@@ -32,7 +32,7 @@ namespace QuestStoreNAT.web.Controllers
             if (ModelState.IsValid)
             {
                 questDAO.AddRecord(questToAdd);
-                TempData["Message"] = $"You have succesfully added the \"{questToAdd.Name}\" Quest!";
+                TempData["QuestMessage"] = $"You have succesfully added the \"{questToAdd.Name}\" Quest!";
                 return RedirectToAction("ViewAllQuests", "Quest");
             }
             return RedirectToAction("Error", "Home");
@@ -55,7 +55,7 @@ namespace QuestStoreNAT.web.Controllers
             if (ModelState.IsValid)
             {
                 questDAO.UpdateRecord(questToEdit);
-                TempData["Message"] = $"You have updated the \"{questToEdit.Name}\" Quest!";
+                TempData["QuestMessage"] = $"You have updated the \"{questToEdit.Name}\" Quest!";
                 return RedirectToAction("ViewAllQuests", "Quest");
             }
             return RedirectToAction("Error", "Home");
@@ -75,8 +75,9 @@ namespace QuestStoreNAT.web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteQuest(Quest questToDelete)
         {
+            var questToDeleteFromDB = questDAO.FindOneRecordBy(questToDelete.Id);
             questDAO.DeleteRecord(questToDelete.Id);
-            TempData["Message"] = $"You have deleted the \"{questToDelete.Name}\" Quest!";
+            TempData["QuestMessage"] = $"You have deleted the \"{questToDeleteFromDB.Name}\" Quest!";
             return RedirectToAction("ViewAllQuests", "Quest");
         }
     }
