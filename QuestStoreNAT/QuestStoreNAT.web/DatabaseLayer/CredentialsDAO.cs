@@ -66,12 +66,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             using NpgsqlConnection connection = OpenConnectionToDB();
             string query = ProvideQueryStringToAdd(newCredential);
             return ExecuteScalar(connection, query);
-
-            //command.Parameters.AddWithValue("@Role", newCredential.Role);
-            //command.Parameters.AddWithValue("@Email" , newCredential.Email);
-            //command.Parameters.AddWithValue("@Password" , newCredential.Password);
-            //command.Prepare();
-            //return Convert.ToInt32(command.ExecuteScalar());
         }
 
         #endregion
