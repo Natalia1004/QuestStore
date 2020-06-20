@@ -31,16 +31,14 @@
                 </div>
             </div>
             <div class="artifacts">
-                <div class="header_artifacts">Group Artifacts</div>
+                <div class="header_artifacts">Used Artifacts</div>
                 @foreach (var artifact in Model.UsedStudentArtifacts)
                 {
-            <div class="questreward questreward--individual">
-                <h3 class="questreward__title">@artifact.Name</h3>
-                <h3 class="questreward__cost">@artifact.Cost</h3>
-                <p class="questreward__description">@artifact.Description</p>
-                <a asp-action="UseArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Use</a>
-
-            </div>
+                    <div class="questreward questreward--individual">
+                    <h3 class="questreward__title">@artifact.Name</h3>
+                    <h3 class="questreward__cost">@artifact.Cost</h3>
+                    <p class="questreward__description">@artifact.Description</p>
+                </div>
                 }
             </div>
             </div>
