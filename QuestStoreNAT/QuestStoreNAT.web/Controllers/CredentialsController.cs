@@ -28,15 +28,15 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult AddCredentialsAsAdmin([FromForm] Credentials newCredentials)
         {
-            var credentialID = _credentialsDAO.AddRecordReturningID(newCredentials);
+            var id = _credentialsDAO.AddRecordReturningID(newCredentials);
             switch ( newCredentials.Role )
             {
                 case Role.Admin:
-                    return RedirectToAction("Index" , "Admin" , credentialID);
+                    return RedirectToAction("Index" , "Admin" , id);
                 case Role.Mentor:
-                    return RedirectToAction("Create" , "Mentor" , credentialID);
+                    return RedirectToAction("Create" , "Mentor" , id);
                 case Role.Student:
-                    return RedirectToAction("Create" , "Student" , credentialID);
+                    return RedirectToAction("Create" , "Student" , id);
                 default:
                     return View();
             }

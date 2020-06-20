@@ -23,9 +23,9 @@
                             <p class="show-all_text">@student.Wallet</p>
                             @if ( Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor )
                             {
-                            <a asp-action="Edit" asp-route-id="@student.Id" class="dropdown__button dropdown--margin">Edit</a>
+                            <a asp-action="Edit" asp-route-Id="@student.Id" class="dropdown__button dropdown--margin">Edit</a>
                             <a asp-action="Delete" asp-route-id="@student.Id" class="dropdown__button dropdown--margin">Delete</a>
-                            @*  *@}
+                            }
                         </div>
                     </div>
                 }

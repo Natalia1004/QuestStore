@@ -18,18 +18,18 @@ namespace QuestStoreNAT.web.Controllers
         }
         public IActionResult Index()
         {
-            return View(_studentDAO.FetchAllRecords());
+            return View(_studentDAO.FetchAllRecords().OrderBy(s => s.Id).ToList());
         }
 
         public IActionResult Create(int id)
         {
-            var studentId = _studentDAO.AddStudentByCredentialsReturningID(id);
-            return RedirectToAction("Edit" , "Student" , studentId);
+            var Id = _studentDAO.AddStudentByCredentialsReturningID(id);
+            return RedirectToAction("Edit" , "Student" , new { Id = Id });
         }
-
-        public IActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult Edit(int Id)
         {
-            var studentToEdit = _studentDAO.FindOneRecordBy(id);
+            var studentToEdit = _studentDAO.FindOneRecordBy(Id);
             return View(studentToEdit);
         }
 
@@ -43,7 +43,7 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult Delete( int id )
         {
             _studentDAO.DeleteRecord(id);
-            return RedirectToAction("Index" , "Mentor");
+            return RedirectToAction("Index" , "Student");
         }
     }
 }

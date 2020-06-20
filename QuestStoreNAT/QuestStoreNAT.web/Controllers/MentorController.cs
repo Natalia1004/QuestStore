@@ -18,18 +18,18 @@ namespace QuestStoreNAT.web.Controllers
         }
         public IActionResult Index()
         {
-            return View(_mentorDAO.FetchAllRecords());
+            return View(_mentorDAO.FetchAllRecords().OrderBy(m=>m.Id).ToList());
         }
 
         public IActionResult Create(int id)
         {
-            var mentorId = _mentorDAO.AddMentorByCredentialsReturningID(id);
-            return RedirectToAction("Edit" , "Mentor" , mentorId);
+            var Id = _mentorDAO.AddMentorByCredentialsReturningID(id);
+            return RedirectToAction("Edit" , "Mentor" , new { Id = Id });
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int Id)
         {
-            var mentorToEdit = _mentorDAO.FindOneRecordBy(id);
+            var mentorToEdit = _mentorDAO.FindOneRecordBy(Id);
             return View(mentorToEdit);
         }
 
