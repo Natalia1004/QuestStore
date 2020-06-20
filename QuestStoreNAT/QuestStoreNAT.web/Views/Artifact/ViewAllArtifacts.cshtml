@@ -31,7 +31,7 @@
                     {
                         <div class="admin-controll">
                             <a asp-action="EditArtifact" asp-route-id="@artifact.Id" class="dropdown__button">Edit</a>
-                            <a asp-action="DeleteArtufact" asp-route-id="@artifact.Id" class="dropdown__button">Delete</a>
+                            <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="dropdown__button">Delete</a>
                         </div>
                     }
                     @if (Session.LoggedUserRole == Role.Student)

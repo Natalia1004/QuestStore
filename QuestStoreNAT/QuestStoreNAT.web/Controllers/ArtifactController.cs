@@ -86,7 +86,8 @@ namespace QuestStoreNAT.web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteArtifact(Artifact artifactToDelete)
         {
-            artifactDAO.DeleteRecord(artifactToDelete.Id);
+            var questToDeleteFromDB = artifactDAO.FindOneRecordBy(artifactToDelete.Id);
+            artifactDAO.DeleteRecord(questToDeleteFromDB.Id);
             TempData["Message"] = $"You have deleted the \"{artifactToDelete.Name}\" Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
@@ -112,6 +113,7 @@ namespace QuestStoreNAT.web.Controllers
             currentStudent.Wallet = currentWalletValue;
             new StudentDAO().UpdateRecord(currentStudent);
             model.AddRecord(newRecord);
+            TempData["Message"] = $"You bought Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
         
