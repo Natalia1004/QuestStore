@@ -25,7 +25,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             student.LastName = reader.GetString((int)StudentEnum.Surname);
             student.Wallet = reader.GetInt32((int)StudentEnum.CoinsTotal);
             student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.CoinsBalance);
-            student.CredentialId = reader.GetInt16((int)StudentEnum.CredentialID);
+            student.CredentialID = reader.GetInt16((int)StudentEnum.CredentialID);
             return student;
         }
 
@@ -49,8 +49,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             throw new System.NotImplementedException();
         }
 
-
-        public override string ProvideQueryStringToUpdate( Student studentToUpdate )
+        public override string ProvideQueryStringToUpdate(Student studentToUpdate)
         {
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
                         $"SET \"ClassID\" = {studentToUpdate.ClassID}," + 
@@ -63,6 +62,15 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return query;
         }
 
+        /*
+        public override string ProvideQueryStringToUpdate(Student studentToUpdate)
+        {
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                        $"SET \"CoinsTotal\" = {studentToUpdate.Wallet} " +
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {studentToUpdate.Id};";
+            return query;
+        }
+        */
 
         public override void UpdateRecord( Student studentToUpdate )
         {
@@ -70,7 +78,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             string query = ProvideQueryStringToUpdate(studentToUpdate);
             ExecuteQuery(connection , query);
         }
-
 
         #region outOfAbstraction
         public string ProvideQueryStringReturningID( Student studentToAdd )
@@ -83,7 +90,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
                               $"{studentToAdd.OverallWalletLevel}) RETURNING \"ID\";";
             return query;
         }
-
 
         public int AddStudentByCredentialsReturningID( int credentialID ) // credentialID from CredentialsDAO.AddRecordReturningID(Credentials newCredential)
         {
@@ -103,25 +109,12 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return ExecuteScalar(connection , query); // StudentID used to instanly update Student
         }
 
-
         private int ExecuteScalar( NpgsqlConnection connection , string query )
         {
             using var command = new NpgsqlCommand(query , connection);
             command.Prepare();
             return Convert.ToInt32(command.ExecuteScalar());
         }
-
-
-        public override string ProvideQueryStringToUpdate(Student studentToUpdate)
-        {
-            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
-                        $"SET \"CoinsTotal\" = {studentToUpdate.Wallet} " +
-                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {studentToUpdate.Id};";
-            return query;
-        }
-
         #endregion
     }
-
-   
 }

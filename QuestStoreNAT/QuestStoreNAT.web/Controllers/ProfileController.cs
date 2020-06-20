@@ -37,7 +37,7 @@ namespace QuestStoreNAT.web.Controllers
         {
             ViewData["role"] = _session.LoggedUserRole;
             var model = _session.LoggedUser;
-            var CredentialID = model.CredentialId;
+            var CredentialID = model.CredentialID;
             var Student = new StudentDAO();
             var targetStudent = Student.FindOneRecordBy(CredentialID);
             targetStudent.level = new LevelStudent().levelStudent(targetStudent.OverallWalletLevel);
@@ -50,7 +50,7 @@ namespace QuestStoreNAT.web.Controllers
         {
             ViewData["role"] = _session.LoggedUserRole;
             var student = _session.LoggedUser;
-            var currentStudent = new StudentDAO().FindOneRecordBy(student.CredentialId);
+            var currentStudent = new StudentDAO().FindOneRecordBy(student.CredentialID);
             var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
             var ownedArtifactStudentDAO = new OwnedArtifactStudentDAO();
             var model = ownedArtifactStudentDAO.FindOneRecordBy(id, currentStudent.Id);
