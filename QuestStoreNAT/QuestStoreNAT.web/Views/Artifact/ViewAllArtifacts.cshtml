@@ -19,7 +19,7 @@
             }
 
             <div class="landing__content__wrapper">
-                <h3 class="landing__content--border landing__content--margin">Have you compleated a task by yourself?</h3>
+                <h3 class="landing__content--border landing__content--margin">Would you like to buy something for yourself?</h3>
             </div>
             @foreach (var artifact in Model.Where(q => q.Type == TypeClassification.Individual))
             {
@@ -36,13 +36,15 @@
                     }
                     @if (Session.LoggedUserRole == Role.Student)
                     {
-                        <a asp-action="BuyArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Buy</a>
+                        <div class="admin-controll">
+                            <a asp-action="BuyArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Buy</a>
+                        </div>
                     }
                 </div>
             }
 
             <div id="dividerh3" class="landing__content__wrapper">
-                <h3 class="landing__content--border landing__content--margin">Did you accomplish something as a group?</h3>
+                <h3 class="landing__content--border landing__content--margin">Would you like to buy something for the group?</h3>
             </div>
             @foreach (var artifact in Model.Where(q => q.Type == TypeClassification.Group))
             {
@@ -59,7 +61,9 @@
                     }
                     @if (Session.LoggedUserRole == Role.Student)
                     {
-                        <a asp-action="BuyArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Buy</a>
+                        <div class="admin-controll">
+                            <a asp-action="BuyArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Buy</a>
+                        </div>
                     }
                 </div>
             }
