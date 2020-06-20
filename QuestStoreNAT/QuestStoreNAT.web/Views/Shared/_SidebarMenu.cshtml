@@ -19,16 +19,15 @@
             }
             @if (Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor)
             {
-                <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Student")'">All Students</button></li>
-                <li><button class="dropdown__button" onclick="location.href='@Url.Action("AddCredentials", "Credentials")'">Add Student</button></li>
+                <li><button class="dropdown__button" onclick="location.href='@Url.Action("AddCredentials", "Credentials")'">Add User</button></li>
                 <li><input class="dropdown__button" type="button" value="Add Quest" onclick="location.href='@Url.Action("AddQuest", "Quest")'" /></li>
                 <li><input class="dropdown__button" type="button" value="Add Artifact" onclick="location.href='@Url.Action("AddArtifact", "Artifact")'" /></li>
+                <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Student")'">All Students</button></li>
             }
             @if (Session.LoggedUserRole == Role.Admin)
             {
                 @*<li><a href="Mentors_All.html"><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Mentor")'">All Mentors</button></a></li>*@
                 <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Mentor")'">All Mentors</button></li>
-                <li><button class="dropdown__button" onclick="location.href='@Url.Action("AddCredentials", "Credentials")'">Add Mentor</button></li>
                 <li><a href="Classroom_Add.html"><button class="dropdown__button">Add Classroom</button></a></li>
             }
         </ul>
