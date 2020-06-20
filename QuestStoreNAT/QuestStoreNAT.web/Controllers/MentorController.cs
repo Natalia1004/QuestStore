@@ -21,22 +21,22 @@ namespace QuestStoreNAT.web.Controllers
             return View(_mentorDAO.FetchAllRecords());
         }
 
-        public IActionResult Create(int credentialId)
+        public IActionResult Create(int id)
         {
-            var mentorId = _mentorDAO.AddMentorByCredentialsReturningID(credentialId);
+            var mentorId = _mentorDAO.AddMentorByCredentialsReturningID(id);
             return RedirectToAction("Edit" , "Mentor" , mentorId);
         }
 
-        public IActionResult Edit(int mentorId)
+        public IActionResult Edit(int id)
         {
-            var mentorToEdit = _mentorDAO.FindOneRecordBy(mentorId);
+            var mentorToEdit = _mentorDAO.FindOneRecordBy(id);
             return View(mentorToEdit);
         }
 
         [HttpPost]
-        public IActionResult Edit(Mentor editedMentor)
+        public IActionResult Edit(Mentor Mentor)
         {
-            _mentorDAO.UpdateRecord(editedMentor);
+            _mentorDAO.UpdateRecord(Mentor);
             return RedirectToAction("Index", "Mentor");
         }
 
@@ -48,8 +48,7 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult Details( int id )
         {
-            var mentor = _mentorDAO.FetchAllRecords()
-                .FirstOrDefault(m => m.Id == id);
+            var mentor = _mentorDAO.FetchAllRecords().FirstOrDefault(m => m.Id == id);
             return View(mentor);
         }
     }
