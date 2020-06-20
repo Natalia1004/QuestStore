@@ -56,8 +56,8 @@ namespace QuestStoreNAT.web.DatabaseLayer
                         $"\"GroupID\" = {studentToUpdate.GroupID}," +
                         $"\"FirstName\" = '{studentToUpdate.FirstName}', " +
                         $"\"Surname\" = '{studentToUpdate.LastName}'," +
-                        $"\"CoinsBalance\" = {studentToUpdate.Wallet}," +
-                        $"\"CoinsTotal\" = {studentToUpdate.OverallWalletLevel}" +
+                        $"\"CoinsTotal\" = {studentToUpdate.Wallet}," +
+                        $"\"CoinsBalance\" = {studentToUpdate.OverallWalletLevel}" +
                         $"WHERE \"ID\" = {studentToUpdate.Id};";
             return query;
         }
