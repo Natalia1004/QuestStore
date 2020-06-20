@@ -41,10 +41,12 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult EditQuest(int id)
         {
+            var iinntt = id;
             var model = questDAO.FindOneRecordBy(id);
             if (model == null)
             {
-                return RedirectToAction("Error", "Home");
+                //Response.StatusCode = 404;
+                return View("NotFound", iinntt);
             }
             return View(model);
         }

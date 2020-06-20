@@ -1,0 +1,14 @@
+﻿@model System.Int32
+
+@{
+    ViewBag.Title = "Not Found";
+}
+
+@Model.ToString() 
+<h3 class="margin10">@ViewBag.ErrorMessage</h3>
+<h3 class="margin10">@ViewBag.Path</h3>
+<h3 class="margin10">@ViewBag.QueryString</h3>
+
+<h3 class="margin10">Quest with Id: @Model was not found</h3>
+
+<div class="margin10 margin50down"><a asp-action="index" asp-controller="home" class="info-box">Click here to navigate to the home page</a></div>

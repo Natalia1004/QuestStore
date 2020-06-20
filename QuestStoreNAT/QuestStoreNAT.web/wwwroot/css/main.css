@@ -935,8 +935,21 @@ fieldset .dropdown__button {
     margin-left: auto;
     text-align: center;
 }
+
+/*DELETE QUEST VIEW*/
 .delete-title {
     width: 100%;
     text-align:center;
     margin-bottom: 20px;
+}
+
+/*----------------------
+    GENERAL
+-----------------------*/
+
+.margin10 {
+    margin: 10px;
+}
+.margin50down {
+    margin-bottom: 50px;
 }

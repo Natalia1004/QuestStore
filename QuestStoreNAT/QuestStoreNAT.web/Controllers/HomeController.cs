@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.Models;
@@ -54,6 +55,7 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult Contact()
         {
+            //throw new Exception("Error in Contacts"); testing ErrorController
             return View();
         }
 
