@@ -27,17 +27,23 @@ namespace QuestStoreNAT.web.Controllers
             return RedirectToAction("Edit" , "Student" , studentId);
         }
 
-        public IActionResult Edit(int studentId)
+        public IActionResult Edit(int id)
         {
-            var studentToEdit = _studentDAO.FindOneRecordBy(studentId);
+            var studentToEdit = _studentDAO.FindOneRecordBy(id);
             return View(studentToEdit);
         }
 
         [HttpPost]
-        public IActionResult Edit(Student editedStudent)
+        public IActionResult Edit(Student Student)
         {
-            _studentDAO.UpdateRecord(editedStudent);
+            _studentDAO.UpdateRecord(Student);
             return RedirectToAction("Index" , "Student");
+        }
+
+        public IActionResult Delete( int id )
+        {
+            _studentDAO.DeleteRecord(id);
+            return RedirectToAction("Index" , "Mentor");
         }
     }
 }
