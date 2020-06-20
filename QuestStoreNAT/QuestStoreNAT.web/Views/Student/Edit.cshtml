@@ -1,4 +1,4 @@
-﻿@model QuestStoreNAT.web.Models.Student
+﻿@*@model QuestStoreNAT.web.Models.Student
 
 @{
     ViewData["Title"] = "EditStudent";
@@ -41,6 +41,54 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
+
+
+@model QuestStoreNAT.web.Models.Student
+
+@{
+    ViewData["Title"] = "EditStudent";
+}
+
+<div class="landing">
+
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+
+        <div id="landing__content" class="landing__content landing__content-justify ">
+            <div class="form-limit">
+
+                <form class="form" asp-action="Edit" asp-controller="Student" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <h3 class="dropdown--margin">Edit Student</h3>
+
+
+                    <label class="dropdown--margin form-label form-margin" asp-for="ClassID"></label>
+                    <input class="dropdown--input dropdown--margin form-margin" asp-for="ClassID" />
+                    <span asp-validation-for="ClassID" class="text-danger"></span><br>
+
+                    <label class="dropdown--margin form-label form-margin" asp-for="GroupID"></label>
+                    <input class="dropdown--input dropdown--margin form-margin" asp-for="GroupID" />
+                    <span asp-validation-for="GroupID" class="text-danger"></span><br>
+
+                    <label class="dropdown--margin form-label form-margin" asp-for="FirstName"></label>
+                    <input class="dropdown--input dropdown--margin form-margin" asp-for="FirstName" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span><br>
+
+                    <label class="dropdown--margin form-label form-margin" asp-for="LastName"></label>
+                    <input class="dropdown--input dropdown--margin form-margin" asp-for="LastName" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+
+                    <div class="form-submit">
+                        <button type="submit" class="dropdown__button dropdown--margin">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 </div>
 
 @section Scripts {
