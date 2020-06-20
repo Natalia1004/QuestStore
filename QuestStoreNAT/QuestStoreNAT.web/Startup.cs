@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.Services;
 
@@ -28,6 +29,10 @@ namespace QuestStoreNAT.web
             services.AddScoped<ILoginValidatorService, LoginValidatorService>();
             services.AddScoped<IUserFinderService, UserFinderService>();
             services.AddSingleton<ICurrentSession, CurrentSession>();
+            services.AddScoped<MentorDAO>();
+            services.AddScoped<StudentDAO>();
+            services.AddScoped<CredentialsDAO>();
+            //services.AddScoped<ClassEnrolmentDAO>();
 
             services.AddControllersWithViews();
         }

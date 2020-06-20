@@ -13,7 +13,7 @@ namespace QuestStoreNAT.web.Models
         public int GroupID { get; set; }
 
         [Required]
-        public int CredentialId { get; set; }
+        public int CredentialID { get; set; }
 
         [Required(ErrorMessage = "First name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
@@ -31,5 +31,7 @@ namespace QuestStoreNAT.web.Models
 
         public List<Quest> StudentQuests { get; set; }
         public List<Artifact> StudentArtifacts { get; set; }
+        public List<Artifact> UsedStudentArtifacts { get; set; }
+        public int level { get; set; }
     }
 }

@@ -55,6 +55,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return allRecords;
         }
 
+
         public virtual void AddRecord(T recordToAdd)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
@@ -86,6 +87,13 @@ namespace QuestStoreNAT.web.DatabaseLayer
         protected void ExecuteQuery(NpgsqlConnection connection, string query)
         {
             using var command = new NpgsqlCommand(query, connection);
+            command.Prepare();
+            command.ExecuteNonQuery();
+        }
+
+        protected void ExecuteReader( NpgsqlConnection connection , string query )
+        {
+            using var command = new NpgsqlCommand(query , connection);
             command.Prepare();
             command.ExecuteNonQuery();
         }

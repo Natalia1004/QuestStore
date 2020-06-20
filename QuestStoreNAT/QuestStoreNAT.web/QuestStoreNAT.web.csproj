@@ -10,6 +10,7 @@
     <EmbeddedResource Remove="Views\StudentView\**" />
     <None Remove="Views\StudentView\**" />
     <Content Remove="Views\Artifacts\ArtifactsShop.cshtml" />
+    <Content Remove="Views\Artifact\Artifact.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,11 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Artifact\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Views\Home\StudentVIew.cshtml" />
-    <Compile Remove="Views\Student\ViewAllStudents.cshtml" />
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@
         <div class="landing__content__wrapper">
             <h3 class="landing__content--border landing__content--margin">Have you compleated a task by yourself?</h3>
         </div>
-        @foreach (var quest in Model.Where(q => q.Type == TypeClassification.Individual))
+        @foreach (var quest in Model.Where(q => q.Type == TypeClassification.Individual).OrderBy(q=>q.Cost))
         {
             <div class="questreward questreward--individual">
                 <h3 class="questreward__title">@quest.Name</h3>
@@ -40,7 +40,7 @@
         <div id="dividerh3" class="landing__content__wrapper">
             <h3 class="landing__content--border landing__content--margin">Did you accomplish something as a group?</h3>
         </div>
-        @foreach (var quest in Model.Where(q => q.Type == TypeClassification.Group))
+        @foreach (var quest in Model.Where(q => q.Type == TypeClassification.Group).OrderBy(q => q.Cost))
         {
             <div class="questreward questreward--group">
                 <h3 class="questreward__title">@quest.Name</h3>
