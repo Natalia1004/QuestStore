@@ -1,0 +1,26 @@
+﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
+@model List<Classroom>
+
+<div class="landing">
+
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+
+        <div id="landing__content" class="landing__content">
+
+            @if ( Session.LoggedUserRole == Role.Admin )
+            {
+                @foreach ( var classroom in Model )
+                {
+                    <div class="questreward questreward--individual">
+                        <h3 class="questreward__title">@classroom.Name</h3>
+                      
+                        <a asp-action="Edit" asp-route-id="@classroom.Id" class="dropdown__button dropdown--margin">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@classroom.Id" class="dropdown__button dropdown--margin">Delete</a>
+                    </div>
+                }
+            }
+            <div id="dividerh3" class="landing__content__wrapper">
+                <h3 class="landing__content--border landing__content--margin">Did you accomplish something as a group?</h3>
+            </div>
+        </div>
+</div>
