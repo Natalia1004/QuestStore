@@ -94,8 +94,8 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult BuyArtifact(int id)
         {
             var currentUser = _session.LoggedUser;
-            var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.Credential);
-            //var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
+            var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.CredentialId);
+            var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
             var model = new OwnedArtifactStudentDAO();
             var newRecord = new OwnedArtifactStudent()
             {
@@ -103,6 +103,14 @@ namespace QuestStoreNAT.web.Controllers
                 ArtifactId = id,
                 CompletionStatus = 0,
             };
+            if (currentStudent.Wallet < artifactToBuy.Cost)
+            {
+                TempData["Message"] = $"You don't have enough money. Sorry!";
+                return RedirectToAction("ViewAllArtifacts", "Artifact");
+            }
+            int currentWalletValue = currentStudent.Wallet - artifactToBuy.Cost;
+            currentStudent.Wallet = currentWalletValue;
+            new StudentDAO().UpdateRecord(currentStudent);
             model.AddRecord(newRecord);
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }

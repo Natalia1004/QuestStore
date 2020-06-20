@@ -21,7 +21,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             student.LastName = reader.GetString((int)StudentEnum.Surname);
             student.Wallet = reader.GetInt32((int)StudentEnum.CoinsTotal);
             student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.CoinsBalance);
-            student.Credential = reader.GetInt16((int)StudentEnum.CredentialID);
+            student.CredentialId = reader.GetInt16((int)StudentEnum.CredentialID);
             return student;
         }
 
@@ -47,8 +47,12 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         public override string ProvideQueryStringToUpdate(Student studentToUpdate)
         {
-            throw new System.NotImplementedException();
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                        $"SET \"CoinsTotal\" = {studentToUpdate.Wallet} " +
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {studentToUpdate.Id};";
+            return query;
         }
-
     }
+
+   
 }
