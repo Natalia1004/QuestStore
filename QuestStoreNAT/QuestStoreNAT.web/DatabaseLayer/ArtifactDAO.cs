@@ -48,10 +48,10 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public List<Artifact> FetchAllRecords(int id, int statusArtifact)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
-            var query = $"SELECT \"NATQuest\".\"Artifacts\".\"ID\",\"NATQuest\".\"Artifacts\".\"ArtifactTypeID\", \"NATQuest\".\"Artifacts\".\"Name\", \"NATQuest\".\"Artifacts\".\"Cost\", \"NATQuest\".\"Artifacts\".\"Description\" FROM \"NATQuest\".\"Students\" JOIN \"NATQuest\".\"OwnedArtifactStudent\" " +
+            var query = $"SELECT \"NATQuest\".\"Artifacts\".\"ID\",\"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactStatusID\", \"NATQuest\".\"Artifacts\".\"Name\", \"NATQuest\".\"Artifacts\".\"Cost\", \"NATQuest\".\"Artifacts\".\"Description\" FROM \"NATQuest\".\"Students\" JOIN \"NATQuest\".\"OwnedArtifactStudent\" " +
                 $"ON \"NATQuest\".\"Students\".\"ID\" = \"NATQuest\".\"OwnedArtifactStudent\".\"StudentID\"" +
                 $"JOIN \"NATQuest\".\"ArtifactStatus\" ON \"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactStatusID\" = \"NATQuest\".\"ArtifactStatus\".\"ID\"" +
-                $"JOIN \"NATQuest\".\"Artifacts\" ON \"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactID\" = \"NATQuest\".\"Artifacts\".\"ID\" WHERE \"NATQuest\".\"ArtifactStatus\".\"ID\" = {statusArtifact} AND \"NATQuest\".\"Students\".\"ID\" ={id} ";
+                $"JOIN \"NATQuest\".\"Artifacts\" ON \"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactID\" = \"NATQuest\".\"Artifacts\".\"ID\" WHERE \"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactStatusID\" = {statusArtifact} AND \"NATQuest\".\"Students\".\"ID\" ={id} ";
             using var command = new NpgsqlCommand(query, connection);
             var reader = command.ExecuteReader();
 

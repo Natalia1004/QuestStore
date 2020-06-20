@@ -37,7 +37,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
                         $"SET \"StudentID\" = {OwnedArtifactStudentToUpdate.StudentId}, " +
                             $"\"ArtifactID\" = '{OwnedArtifactStudentToUpdate.ArtifactId}', " +
-                            $"\"ArtifactStatusID\" = '{OwnedArtifactStudentToUpdate.CompletionStatus}', " +
+                            $"\"ArtifactStatusID\" = '{OwnedArtifactStudentToUpdate.CompletionStatus}' " +
                         $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {OwnedArtifactStudentToUpdate.Id};";
             return query;
         }
@@ -56,5 +56,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             };
             return oneRecord;
         }
+
     }
 }
