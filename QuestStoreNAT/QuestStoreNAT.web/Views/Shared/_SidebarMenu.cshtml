@@ -4,27 +4,26 @@
     <div class="">
         <h3>Main Menu:</h3>
         <ul>
-            @if ( Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor | Session.LoggedUserRole == Role.Student )
+            @if (Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor | Session.LoggedUserRole == Role.Student)
             {
                 @if (Session.LoggedUserRole == Role.Student)
                 {
-                <li><a asp-action="ShowStudentProfile" asp-controller="Profile"><button class="dropdown__button">Show My Profile</button></a></li>
+                    <li><a asp-action="ShowStudentProfile" asp-controller="Profile"><button class="dropdown__button">Show My Profile</button></a></li>
                 }
                 else
                 {
-                <li><input class="dropdown__button" type="button" value="Show My Profile" onclick="location.href='@Url.Action("MyProfile", "Profile")'" /></li>
+                    <li><input class="dropdown__button" type="button" value="Show My Profile" onclick="location.href='@Url.Action("MyProfile", "Profile")'" /></li>
                 }
                 <li><a asp-action="ViewAllArtifacts" asp-controller="Artifact"><button class="dropdown__button">Artifacts Shop</button></a></li>
                 <li><input class="dropdown__button" type="button" value="View all Quests" onclick="location.href='@Url.Action("ViewAllQuests", "Quest")'" /></li>
             }
-            @if ( Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor )
+            @if (Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor)
             {
                 <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Student")'">All Students</button></li>
                 <li><button class="dropdown__button" onclick="location.href='@Url.Action("AddCredentials", "Credentials")'">Add Student</button></li>
                 <li><input class="dropdown__button" type="button" value="Add Quest" onclick="location.href='@Url.Action("AddQuest", "Quest")'" /></li>
-                <li><a asp-action="AddArtifact" asp-controller="Artifact"><button class="dropdown__button">Add Artifact</button></a></li>
             }
-            @if ( Session.LoggedUserRole == Role.Admin )
+            @if (Session.LoggedUserRole == Role.Admin)
             {
                 @*<li><a href="Mentors_All.html"><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Mentor")'">All Mentors</button></a></li>*@
                 <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Mentor")'">All Mentors</button></li>
@@ -32,5 +31,5 @@
                 <li><a href="Classroom_Add.html"><button class="dropdown__button">Add Classroom</button></a></li>
             }
         </ul>
-    </div>
+</div>
 </aside>
