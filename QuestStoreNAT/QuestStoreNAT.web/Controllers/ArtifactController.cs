@@ -43,7 +43,7 @@ namespace QuestStoreNAT.web.Controllers
             if (ModelState.IsValid)
             {
                 artifactDAO.AddRecord(artifactToAdd);
-                TempData["Message"] = $"You have succesfully added the \"{artifactToAdd.Name}\" Artifact!";
+                TempData["ArtifactMessage"] = $"You have succesfully added the \"{artifactToAdd.Name}\" Artifact!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             return RedirectToAction("Error", "Home");
@@ -66,7 +66,7 @@ namespace QuestStoreNAT.web.Controllers
             if (ModelState.IsValid)
             {
                 artifactDAO.UpdateRecord(artifactToEdit);
-                TempData["Message"] = $"You have updated the \"{artifactToEdit.Name}\" Artifact!";
+                TempData["ArrifactMessage"] = $"You have updated the \"{artifactToEdit.Name}\" Artifact!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             return RedirectToAction("Error", "Home");
@@ -88,7 +88,7 @@ namespace QuestStoreNAT.web.Controllers
         {
             var questToDeleteFromDB = artifactDAO.FindOneRecordBy(artifactToDelete.Id);
             artifactDAO.DeleteRecord(questToDeleteFromDB.Id);
-            TempData["Message"] = $"You have deleted the \"{artifactToDelete.Name}\" Artifact!";
+            TempData["ArtifactMessage"] = $"You have deleted the \"{artifactToDelete.Name}\" Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
         
@@ -106,14 +106,14 @@ namespace QuestStoreNAT.web.Controllers
             };
             if (currentStudent.Wallet < artifactToBuy.Cost)
             {
-                TempData["Message"] = $"You don't have enough money. Sorry!";
+                TempData["ArtifactMessage"] = $"You don't have enough money. Sorry!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             int currentWalletValue = currentStudent.Wallet - artifactToBuy.Cost;
             currentStudent.Wallet = currentWalletValue;
             new StudentDAO().UpdateRecord(currentStudent);
             model.AddRecord(newRecord);
-            TempData["Message"] = $"You bought Artifact!";
+            TempData["ArtifactMessage"] = $"You bought Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
         
