@@ -54,7 +54,8 @@ namespace QuestStoreNAT.web.Controllers
             var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
             var ownedArtifactStudentDAO = new OwnedArtifactStudentDAO();
             var model = ownedArtifactStudentDAO.FindOneRecordBy(id, currentStudent.Id);
-            ownedArtifactStudentDAO.DeleteRecord(model.Id);
+            model.CompletionStatus = 1;
+            ownedArtifactStudentDAO.UpdateRecord(model);
             return RedirectToAction("ShowStudentProfile", "Profile");
         }
     }
