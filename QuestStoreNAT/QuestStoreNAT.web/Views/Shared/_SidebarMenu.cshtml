@@ -22,6 +22,7 @@
                 <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Student")'">All Students</button></li>
                 <li><button class="dropdown__button" onclick="location.href='@Url.Action("AddCredentials", "Credentials")'">Add Student</button></li>
                 <li><input class="dropdown__button" type="button" value="Add Quest" onclick="location.href='@Url.Action("AddQuest", "Quest")'" /></li>
+                <li><input class="dropdown__button" type="button" value="Add Artifact" onclick="location.href='@Url.Action("AddArtifact", "Artifact")'" /></li>
             }
             @if (Session.LoggedUserRole == Role.Admin)
             {
