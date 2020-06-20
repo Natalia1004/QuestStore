@@ -48,8 +48,7 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult Details( int id )
         {
-            var mentor = _mentorDAO.FetchAllRecords()
-                .FirstOrDefault(m => m.Id == id);
+            var mentor = _mentorDAO.FetchAllRecords().FirstOrDefault(m => m.Id == id);
             return View(mentor);
         }
     }
