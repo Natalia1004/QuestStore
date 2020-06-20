@@ -23,7 +23,9 @@
                         <h3 class="questreward__title">@artifact.Name</h3>
                         <h3 class="questreward__cost">@artifact.Cost</h3>
                         <p class="questreward__description">@artifact.Description</p>
+                        <div class="admin-controll">
                         <a asp-action="UseArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Use</a>
+                        </div>
                     </div>
                     }
                 </div>
