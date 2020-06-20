@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using Npgsql;
 using QuestStoreNAT.web.Models;
+using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
@@ -12,7 +11,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         private enum StudentEnum
         {
-            Id, ClassId, GroupId, Email, Password, FirstName, LastName, Level, Wallet, CredentialID
+            Id, ClassId, GroupId, Email, Password, FirstName, Surname, CoinsTotal, CoinsBalance, CredentialID
         }
 
 
@@ -23,13 +22,27 @@ namespace QuestStoreNAT.web.DatabaseLayer
             student.ClassID = reader.GetInt32((int)StudentEnum.ClassId);
             student.GroupID = reader.GetInt32((int)StudentEnum.GroupId);
             student.FirstName = reader.GetString((int)StudentEnum.FirstName);
-            student.LastName = reader.GetString((int)StudentEnum.LastName);
-            student.Wallet = reader.GetInt32((int)StudentEnum.Level);
-            student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.Wallet);
-            student.CredentialID = reader.GetInt32((int)StudentEnum.CredentialID);
+            student.LastName = reader.GetString((int)StudentEnum.Surname);
+            student.Wallet = reader.GetInt32((int)StudentEnum.CoinsTotal);
+            student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.CoinsBalance);
+            student.CredentialId = reader.GetInt16((int)StudentEnum.CredentialID);
             return student;
         }
 
+        public override Student FindOneRecordBy(int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"Credential_ID\" = '{id}';";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var oneRecord = default(Student);
+            while (reader.Read())
+            {
+                oneRecord = ProvideOneRecord(reader);
+            };
+            return oneRecord;
+        }
 
         public override string ProvideQueryStringToAdd(Student studentToAdd)
         {
@@ -97,6 +110,18 @@ namespace QuestStoreNAT.web.DatabaseLayer
             command.Prepare();
             return Convert.ToInt32(command.ExecuteScalar());
         }
+
+
+        public override string ProvideQueryStringToUpdate(Student studentToUpdate)
+        {
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                        $"SET \"CoinsTotal\" = {studentToUpdate.Wallet} " +
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {studentToUpdate.Id};";
+            return query;
+        }
+
         #endregion
     }
+
+   
 }

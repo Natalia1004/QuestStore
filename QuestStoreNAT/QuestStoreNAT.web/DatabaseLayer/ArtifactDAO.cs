@@ -5,40 +5,64 @@ using Npgsql;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public class ArtifactDAO : IArtifactDAO
-    { 
-        public List<Artifact> GetAllRows()
+    public class ArtifactDAO : DBAbstractRecord<Artifact>
+    {
+        public override string DBTableName { get; set; } = "Artifacts";
+        private enum ArtifactEnum
         {
-            List<Artifact> dataArtifacts = new List<Artifact>();
+            Id, ArtifactTypeID, Name, Cost, Description
+        }
 
-            using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
-            connection.Open();
+        public override Artifact ProvideOneRecord(NpgsqlDataReader reader)
+        {
+            var artifact = new Artifact();
+            artifact.Id = reader.GetInt32((int)ArtifactEnum.Id);
+            artifact.Type = (TypeClassification)reader.GetInt32((int)ArtifactEnum.ArtifactTypeID);
+            artifact.Name = reader.GetString((int)ArtifactEnum.Name);
+            artifact.Cost = reader.GetInt32((int)ArtifactEnum.Cost);
+            artifact.Description = reader.GetString((int)ArtifactEnum.Description);
+            return artifact;
+        }
 
-            string sql = $"SELECT * FROM \"NATQuest\".\"Artifacts\" ";
-            using NpgsqlCommand command = new NpgsqlCommand(sql, connection);
-            using NpgsqlDataReader reader = command.ExecuteReader();
+        public override string ProvideQueryStringToAdd(Artifact artifactToAdd)
+        {
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"ArtifactTypeID\", \"Name\", \"Cost\", \"Description\")" +
+                        $"VALUES({(int)artifactToAdd.Type}, " +
+                               $"'{artifactToAdd.Name}', " +
+                               $"{artifactToAdd.Cost}, " +
+                               $"'{artifactToAdd.Description}');";
+            return query;
+        }
 
-            int countOfData = reader.FieldCount;
+        public override string ProvideQueryStringToUpdate(Artifact artifactToUpdate)
+        {
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                        $"SET \"ArtifactTypeID\" = {(int)artifactToUpdate.Type}, " +
+                            $"\"Name\" = '{artifactToUpdate.Name}', " +
+                            $"\"Cost\" = '{artifactToUpdate.Cost}', " +
+                            $"\"Description\" = '{artifactToUpdate.Description}'" +
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"Id\" = {artifactToUpdate.Id};";
+            return query;
+        }
 
+        public List<Artifact> FetchAllRecords(int id, int statusArtifact)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT \"NATQuest\".\"Artifacts\".\"ID\",\"NATQuest\".\"Artifacts\".\"ArtifactTypeID\", \"NATQuest\".\"Artifacts\".\"Name\", \"NATQuest\".\"Artifacts\".\"Cost\", \"NATQuest\".\"Artifacts\".\"Description\" FROM \"NATQuest\".\"Students\" JOIN \"NATQuest\".\"OwnedArtifactStudent\" " +
+                $"ON \"NATQuest\".\"Students\".\"ID\" = \"NATQuest\".\"OwnedArtifactStudent\".\"StudentID\"" +
+                $"JOIN \"NATQuest\".\"ArtifactStatus\" ON \"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactStatusID\" = \"NATQuest\".\"ArtifactStatus\".\"ID\"" +
+                $"JOIN \"NATQuest\".\"Artifacts\" ON \"NATQuest\".\"OwnedArtifactStudent\".\"ArtifactID\" = \"NATQuest\".\"Artifacts\".\"ID\" WHERE \"NATQuest\".\"ArtifactStatus\".\"ID\" = {statusArtifact} AND \"NATQuest\".\"Students\".\"ID\" ={id} ";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<Artifact>();
             while (reader.Read())
             {
-                Artifact artifact = new Artifact()
-                {
-                    Id = Convert.ToInt16(reader[0]),
-                    Type = (TypeClassification)Convert.ToInt16(reader[1]),
-                    Name = Convert.ToString(reader[2]),
-                    Cost = Convert.ToInt16(reader[3]),
-                    Description = Convert.ToString(reader[4]),
-                };
-                dataArtifacts.Add(artifact);
-            }
-            return dataArtifacts;
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+
         }
 
-        public static void InsertRow(string tableName, string[] values)
-        {
-            string sql = $"INSERT INTO {tableName} VALUES ({string.Join(',', values)})";
-            ConnectDB.ExecuteNonQuery(sql);
-        }
     }
 }

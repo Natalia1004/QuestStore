@@ -13,6 +13,6 @@ namespace QuestStoreNAT.web.Models
         public int StudentId { get; set; }
 
         [Required]
-        public CompletionStatus CompletionStatus { get; set; }
+        public int CompletionStatus { get; set; }
     }
 }
