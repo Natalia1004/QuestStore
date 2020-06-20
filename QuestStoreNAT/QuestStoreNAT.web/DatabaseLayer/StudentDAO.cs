@@ -25,7 +25,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             student.LastName = reader.GetString((int)StudentEnum.Surname);
             student.Wallet = reader.GetInt32((int)StudentEnum.CoinsTotal);
             student.OverallWalletLevel = reader.GetInt32((int)StudentEnum.CoinsBalance);
-            student.CredentialId = reader.GetInt16((int)StudentEnum.CredentialID);
+            student.CredentialID = reader.GetInt16((int)StudentEnum.CredentialID);
             return student;
         }
 
