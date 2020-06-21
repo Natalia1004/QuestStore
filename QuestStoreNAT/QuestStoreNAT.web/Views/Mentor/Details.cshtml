@@ -5,35 +5,45 @@
 }
 
 
-<h1>Mentor Details</h1>
+<div class="landing">
 
-<div>
-    <h4>Mentor</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bio)
-        </dd>
-    </dl>
-</div>
-<div>
-    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>*@ |
-    <a asp-action="Index">Back to List</a>
-    <a asp-action="Index" asp-controller="ClassEnrolment" asp-route-id="@Model.Id">Enrolment</a> |
-    <a asp-action="Index">Back to List</a>
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+
+        <div id="landing__content" class="landing__content">
+
+            <h1>Mentor Details</h1>
+
+            <hr />
+            <a asp-action="Index">Back to List</a>
+
+            <div class="grid_table">
+                <span>
+                    <strong>First Name</strong>
+                </span>
+                <span>
+                    <strong>Last Name</strong>
+                </span>
+                <span>
+                    <strong>Bio</strong>
+                </span>
+                <span>
+                    <strong>Class Enrolment</strong>
+                </span>
+
+                <span>@Html.DisplayFor(model => model.FirstName)</span>
+                <span>@Html.DisplayFor(model => model.LastName)</span>
+                <span>@Html.DisplayFor(model => model.Bio)</span>
+                <span>
+                    @if ( Model.MentorClassrooms.Count() == 0 )
+                    {
+                        <span>The mentor has not been assigned to any class so far</span>
+                    }
+                    @foreach ( var item in Model.MentorClassrooms )
+                    {
+                        @item.Name<br />
+                    }
+                </span>
+            </div>
+
+        </div>
 </div>
