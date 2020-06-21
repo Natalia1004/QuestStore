@@ -4,43 +4,41 @@
     ViewData["Title"] = "EditStudent";
 }
 
-<h1>Edit Student</h1>
+<div class="landing">
 
-<h4>Student</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" asp-controller="Student" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ClassID" class="control-label"></label>
-                <input asp-for="ClassID" class="form-control" />
-                <span asp-validation-for="ClassID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GroupID" class="control-label"></label>
-                <input asp-for="GroupID" class="form-control" />
-                <span asp-validation-for="GroupID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <div id="landing__content" class="landing__content landing__content-justify ">
+            <div class="form-limit">
+
+                <form class="form" asp-action="Edit" asp-controller="Student" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <h3 class="dropdown--margin">Edit Student</h3>
+
+
+                    <label class="dropdown--margin form-label form-margin" asp-for="ClassID"></label>
+                    <input class="dropdown--input dropdown--margin form-margin" asp-for="ClassID" />
+                    <span asp-validation-for="ClassID" class="text-danger"></span><br>
+
+                    <label class="dropdown--margin form-label form-margin" asp-for="GroupID"></label>
+                    <input class="dropdown--input dropdown--margin form-margin" asp-for="GroupID" />
+                    <span asp-validation-for="GroupID" class="text-danger"></span><br>
+
+                    <label class="dropdown--margin form-label form-margin" asp-for="FirstName"></label>
+                    <input class="dropdown--input dropdown--margin form-margin" asp-for="FirstName" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span><br>
+
+                    <label class="dropdown--margin form-label form-margin" asp-for="LastName"></label>
+                    <input class="dropdown--input dropdown--margin form-margin" asp-for="LastName" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+
+                    <div class="form-submit">
+                        <button type="submit" class="dropdown__button dropdown--margin">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 </div>
 
 @section Scripts {
