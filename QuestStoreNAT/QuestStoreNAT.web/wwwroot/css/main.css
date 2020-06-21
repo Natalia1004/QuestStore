@@ -1006,14 +1006,19 @@ table {
     table-layout: fixed;
 }*/
 
+
+
 .grid_table {
     display: grid;
+/*    justify-items: center;*/
     grid-template-columns: repeat(4, 1fr);
     border-top: 1px solid black;
     border-right: 1px solid black;
 }
 
     .grid_table > span {
+        align-self: center;
+        justify-self:center;
         padding: 8px, 4px;
         border-left: 1px solid black;
         border-bottom: 1px solid black;
