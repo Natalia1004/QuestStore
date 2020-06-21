@@ -989,3 +989,32 @@ fieldset .dropdown__button {
     text-align: center;
     margin-bottom: 20px;
 }
+
+
+/*----TABLE ------*/
+/*td {
+    white-space: pre;
+    word-wrap: break-word;
+}
+
+th {
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+table {
+    table-layout: fixed;
+}*/
+
+.grid_table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+    .grid_table > span {
+        padding: 8px, 4px;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+    }
