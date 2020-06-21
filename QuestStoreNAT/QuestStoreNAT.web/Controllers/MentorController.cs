@@ -12,11 +12,15 @@ namespace QuestStoreNAT.web.Controllers
     {
         private readonly MentorDAO _mentorDAO;
         private readonly ClassEnrolmentDAO _classEnrolmentDAO;
+        private readonly GroupDAO _groupDAO;
+        private readonly StudentDAO _studentDAO;
 
-        public MentorController(MentorDAO mentorDAO, ClassEnrolmentDAO classEnrolmentDAO)
+        public MentorController(MentorDAO mentorDAO, ClassEnrolmentDAO classEnrolmentDAO, GroupDAO groupDAO, StudentDAO studentDAO )
         {
             _mentorDAO = mentorDAO;
             _classEnrolmentDAO = classEnrolmentDAO;
+            _groupDAO = groupDAO;
+            _studentDAO = studentDAO;
         }
         public IActionResult Index()
         {
@@ -51,10 +55,12 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult Details( int id )
         {
             var mentor = _mentorDAO.FetchAllRecords().FirstOrDefault(m => m.Id == id);
-            var mentorsEnrolled = _classEnrolmentDAO.FetchAllRecordsJoin().Where(ce => ce.MentorCE.Id == id).Select(ce => ce.ClassroomCE).ToList();
-            if ( !( mentorsEnrolled == null ) )
+            var mentorClassrooms = _classEnrolmentDAO.FetchAllRecordsJoin().Where(ce => ce.MentorCE.Id == id).Select(ce => ce.ClassroomCE).ToList();
+            var mentorGroups = _groupDAO.FetchAllRecordsByIdJoin(id);
+            var mentorStudents = _studentDAO.FetchAllRecordsByIdJoin(id);
+            if ( !( mentorClassrooms == null ) )
             {
-                mentor.MentorClassrooms = mentorsEnrolled;
+                mentor.MentorClassrooms = mentorClassrooms;
             }
             return View(mentor);
         }

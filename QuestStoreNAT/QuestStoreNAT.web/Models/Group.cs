@@ -21,12 +21,14 @@ namespace QuestStoreNAT.web.Models
 
         public Group()
         {
-            GroupWallet = CalculateGroupWallet();
+            //GroupWallet = CalculateGroupWallet();
         }
 
+        /* ---ponieważ na razie liczymy wallet dla grupy trochę inaczej tymczasowo to zakomentowałem ----
         public int CalculateGroupWallet()
         {
             return GroupStudents.Sum(student => student.Wallet);
         }
+        */
     }
 }

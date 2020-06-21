@@ -9,39 +9,44 @@
 
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
 
-        <div id="landing__content" class="landing__content">
+        <div>
 
             <h1>Mentor Details</h1>
 
             <hr />
             <a asp-action="Index">Back to List</a>
-                <div class="grid_table">
-                    <span>
-                        <strong>First Name</strong>
-                    </span>
-                    <span>
-                        <strong>Last Name</strong>
-                    </span>
-                    <span>
-                        <strong>Bio</strong>
-                    </span>
-                    <span>
-                        <strong>Class Enrolment</strong>
-                    </span>
+            <div class="grid_table">
+                <span>
+                    <strong>First Name</strong>
+                </span>
+                <span>
+                    <strong>Last Name</strong>
+                </span>
+                <span>
+                    <strong>Bio</strong>
+                </span>
+                <span>
+                    <strong>Class Enrolment</strong>
+                </span>
+                @*<span>
+                    <strong>Students Assigned</strong>
+                </span>*@
 
-                    <span>@Html.DisplayFor(model => model.FirstName)</span>
-                    <span>@Html.DisplayFor(model => model.LastName)</span>
-                    <span>@Html.DisplayFor(model => model.Bio)</span>
-                    <span>
-                        @if ( Model.MentorClassrooms.Count() == 0 )
-                        {
-                            <span>The mentor has not been assigned to any class so far</span>
-                        }
-                        @foreach ( var item in Model.MentorClassrooms )
-                        {
-                            <li>@item.Name</li>
-                        }
-                    </span>
+                <span>@Html.DisplayFor(model => model.FirstName)</span>
+                <span>@Html.DisplayFor(model => model.LastName)</span>
+                <span>@Html.DisplayFor(model => model.Bio)</span>
+                <span>
+                    @if ( Model.MentorClassrooms.Count() == 0 )
+                    {
+                        <span>The mentor has not been assigned to any class so far</span>
+                    }
+                    @foreach ( var item in Model.MentorClassrooms )
+                    {
+                        <li><a>@item.Name</a></li>
+                    }
+                </span>
+                
+
             </div>
         </div>
 </div>
