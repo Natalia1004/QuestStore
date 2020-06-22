@@ -74,7 +74,8 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 $"GR.\"Name\" AS \"Name\", GR.\"CoinsTotal\" AS \"GroupWallet\" " +
                 $"FROM \"NATQuest\".\"Groups\" GR INNER JOIN \"NATQuest\".\"Students\" ST " +
                 $"ON GR.\"ClassID\" = ST.\"ClassID\") AS grupy " +
-                $"ON klasy.\"ClassID\" = grupy.\"ClassroomID\" WHERE klasy.\"MentorID\" = {id};";
+                $"ON klasy.\"ClassID\" = grupy.\"ClassroomID\" " +
+                $"WHERE klasy.\"MentorID\" = {id};"; // 
             return query;
         }
 

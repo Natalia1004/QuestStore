@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.ViewModels;
 
 namespace QuestStoreNAT.web.Controllers
 {
@@ -56,13 +57,16 @@ namespace QuestStoreNAT.web.Controllers
         {
             var mentor = _mentorDAO.FetchAllRecords().FirstOrDefault(m => m.Id == id);
             var mentorClassrooms = _classEnrolmentDAO.FetchAllRecordsJoin().Where(ce => ce.MentorCE.Id == id).Select(ce => ce.ClassroomCE).ToList();
-            var mentorGroups = _groupDAO.FetchAllRecordsByIdJoin(id);
+            var mentorGroups = _groupDAO.FetchAllRecordsByIdJoin(id).GroupBy(g => g.Id).Select(g => g.FirstOrDefault()).ToList();
             var mentorStudents = _studentDAO.FetchAllRecordsByIdJoin(id);
-            if ( !( mentorClassrooms == null ) )
+            var mentorViewModel = new MentorDetailsViewModel
             {
-                mentor.MentorClassrooms = mentorClassrooms;
-            }
-            return View(mentor);
+                Mentor = mentor ,
+                Classrooms = mentorClassrooms ,
+                Groups = mentorGroups ,
+                Students = mentorStudents
+            };
+            return View(mentorViewModel);
         }
     }
 }
