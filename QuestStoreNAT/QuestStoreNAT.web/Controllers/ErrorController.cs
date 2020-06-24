@@ -10,18 +10,24 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult HttpStatusCodeHandler(int statusCode)
         {
             var statusCodeResult = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+
             switch (statusCode)
             {
                 case 404:
                     ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found!";
                     ViewBag.Path = statusCodeResult.OriginalPath;
                     ViewBag.QueryString = statusCodeResult.OriginalQueryString;
-                    break;
+                    return View("NotFound");
+                case 500:
+                    ViewBag.ErrorMessage = "Sorry, there was an server error. Try later or...";
+                    ViewBag.Path = statusCodeResult.OriginalPath;
+                    ViewBag.QueryString = statusCodeResult.OriginalQueryString;
+                    return View("Error");
             }
-            return View("NotFound");
+            return View("Error");
         }
 
-        //[Route("Error")]
+        [Route("Error")]
         [AllowAnonymous]
         public IActionResult Error()
         {
