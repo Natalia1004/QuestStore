@@ -41,7 +41,7 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult Login(Credentials enterdCredentials)
         {
-            if (_loginValidatorService.IsValidLogin(enterdCredentials))
+            if (_loginValidatorService.IsValidPasswordHASH(enterdCredentials))
             {
                 _session.LoggedUserRole = _loginValidatorService.GetUserRole();
                 _session.LoggedUser = _userFinderService.RetrieveUser(_session.LoggedUserRole, enterdCredentials.Email);
