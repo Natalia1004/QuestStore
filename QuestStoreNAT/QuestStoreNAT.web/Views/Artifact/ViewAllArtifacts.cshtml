@@ -62,7 +62,7 @@
                 @if (Session.LoggedUserRole == Role.Student)
                 {
                     <div class="admin-controll">
-                        <a asp-action="BuyArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Buy</a>
+                        <a asp-action="BuyGroupArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Buy</a>
                     </div>
                 }
             </div>
