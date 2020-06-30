@@ -62,16 +62,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return query;
         }
 
-        /*
-        public override string ProvideQueryStringToUpdate(Student studentToUpdate)
-        {
-            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
-                        $"SET \"CoinsTotal\" = {studentToUpdate.Wallet} " +
-                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {studentToUpdate.Id};";
-            return query;
-        }
-        */
-
         public override void UpdateRecord( Student studentToUpdate )
         {
             using NpgsqlConnection connection = OpenConnectionToDB();

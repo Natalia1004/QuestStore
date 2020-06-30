@@ -63,6 +63,24 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return allRecords;
 
         }
+        public List<Artifact> FetchAllGroupArtifacts(int id, int statusArtifact)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT \"NATQuest\".\"Artifacts\".\"ID\",\"NATQuest\".\"OwnedArtifactGroup\".\"ArtifactStatusID\", \"NATQuest\".\"Artifacts\".\"Name\", \"NATQuest\".\"Artifacts\".\"Cost\", \"NATQuest\".\"Artifacts\".\"Description\" FROM \"NATQuest\".\"Groups\" JOIN \"NATQuest\".\"OwnedArtifactGroup\" " +
+                $"ON \"NATQuest\".\"Groups\".\"ID\" = \"NATQuest\".\"OwnedArtifactGroup\".\"GroupID\"" +
+                $"JOIN \"NATQuest\".\"ArtifactStatus\" ON \"NATQuest\".\"OwnedArtifactGroup\".\"ArtifactStatusID\" = \"NATQuest\".\"ArtifactStatus\".\"ID\"" +
+                $"JOIN \"NATQuest\".\"Artifacts\" ON \"NATQuest\".\"OwnedArtifactGroup\".\"ArtifactID\" = \"NATQuest\".\"Artifacts\".\"ID\" WHERE \"NATQuest\".\"OwnedArtifactGroup\".\"ArtifactStatusID\" = {statusArtifact} AND \"NATQuest\".\"Groups\".\"ID\" ={id} ";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<Artifact>();
+            while (reader.Read())
+            {
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+
+        }
 
     }
 }

@@ -116,8 +116,18 @@ namespace QuestStoreNAT.web.Controllers
             TempData["ArtifactMessage"] = $"You bought Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
-        
-
+        [HttpGet]
+        public IActionResult ViewGroupArtifacts()
+        {
+            ViewData["role"] = _session.LoggedUserRole;
+            var model = _session.LoggedUser;
+            var CredentialID = model.CredentialID;
+            var Student = new StudentDAO();
+            var targetStudent = Student.FindOneRecordBy(CredentialID);
+            targetStudent.GroupArtifacts = new ArtifactDAO().FetchAllGroupArtifacts(targetStudent.GroupID, 0);
+            targetStudent.UsedGroupArtifacts = new ArtifactDAO().FetchAllGroupArtifacts(targetStudent.GroupID, 1);
+            return View(targetStudent);
+        }
     }
 }
 
