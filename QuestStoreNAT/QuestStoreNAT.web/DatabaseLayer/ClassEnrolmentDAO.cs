@@ -33,7 +33,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             classEnrol.Id = reader.GetInt32(0);
             classEnrol.MentorCE = new Mentor
             {
-                Id = reader.GetInt32(1) ,
+                Id = reader.GetInt32(1),
                 FirstName = reader.GetString(2) ,
                 LastName = reader.GetString(3)
             };
