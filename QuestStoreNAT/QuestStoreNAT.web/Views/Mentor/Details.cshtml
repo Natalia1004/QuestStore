@@ -1,4 +1,4 @@
-﻿@model QuestStoreNAT.web.Models.Mentor
+﻿@model MentorDetailsViewModel
 
 @{
     ViewData["Title"] = "DetailsMentor";
@@ -9,77 +9,76 @@
 
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
 
-        <div id="landing__content" class="landing__content">
-
+        <div>
             <h1>Mentor Details</h1>
+            <div class="table_container">
 
                 <hr />
-                @*<div class="table-responsive table-bordered">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">First Name </th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Bio</th>
-                                <th scope="col">Assignement to class</th>
-                            </tr>
-                        </thead>
-                
-                        <tbody>
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(model => model.FirstName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => model.LastName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => model.Bio)
-                                </td>
-
-                                @if ( Model.MentorClassrooms.Count() == 0 )
-                                {
-                                    <td>The mentor has not been assigned to any class so far</td>
-                                }
-                                @foreach ( var item in Model.MentorClassrooms )
-                                {
-                                    <td>@item.Name</td>
-                                }
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>*@
-                <a asp-action="Index">Back to List</a>
-
-                <div class="grid_table">
-                    <span>
+                <div id="mentor" class="grid_table">
+                    <span class="headerSpan">
                         <strong>First Name</strong>
                     </span>
-                    <span>
+                    <span class="headerSpan">
                         <strong>Last Name</strong>
                     </span>
-                    <span>
+                    <span class="headerSpan">
                         <strong>Bio</strong>
                     </span>
-                    <span>
-                        <strong>Class Enrolment</strong>
-                    </span>
+                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.FirstName)</span>
+                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.LastName)</span>
+                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.Bio)</span>
+                </div>
 
-                    <span>@Html.DisplayFor(model => model.FirstName)</span>
-                    <span>@Html.DisplayFor(model => model.LastName)</span>
-                    <span>@Html.DisplayFor(model => model.Bio)</span>
-                    <span>
-                        @if ( Model.MentorClassrooms.Count() == 0 )
+                <div id="classes" class="grid_table">
+                    <span class="headerSpan">
+                        <strong>Class Name</strong>
+                    </span>
+                    <span class="cellSpan">
+                        @if ( Model.Classrooms.Count() == 0 )
                         {
-                            <span>The mentor has not been assigned to any class so far</span>
+                        <span class="cellSpan">The mentor has not been assigned to any class so far</span>
                         }
-                        @foreach ( var item in Model.MentorClassrooms )
+                        @foreach ( var item in Model.Classrooms )
                         {
-                            @item.Name<br />
+                        <a>@item.Name</a>
                         }
                     </span>
                 </div>
 
+                <div id="groups" class="grid_table">
+                    <span class="headerSpan">
+                        <strong>Group Name</strong>
+                    </span>
+                    <span class="headerSpan">
+                        <strong>Group Wallet </strong>
+                    </span>
+                    @foreach ( var group in Model.Groups )
+                    {
+                    <span class="cellSpan">@group.Name</span>
+                    <span class="cellSpan">@group.GroupWallet</span>
+                    }
+
+                </div>
+
+
+                <div id="students" class="grid_table">
+                    <span class="headerSpan">
+                        <strong>First Name</strong>
+                    </span>
+                    <span class="headerSpan">
+                        <strong>Last Name</strong>
+                    </span>
+                    <span class="headerSpan">
+                        <strong>Wallet</strong>
+                    </span>
+
+                    @foreach ( var student in Model.Students )
+                    {
+                    <span class="cellSpan">@student.FirstName</span>
+                    <span class="cellSpan">@student.LastName</span>
+                    <span class="cellSpan">@student.Wallet</span>
+                    }
+                </div>
+            </div>
         </div>
 </div>

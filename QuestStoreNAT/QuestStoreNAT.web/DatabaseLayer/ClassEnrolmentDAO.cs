@@ -26,21 +26,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return allRecords;
         }
 
-        //public List<Classroom> LoadClassesListForMentorId( int id)
-        //{
-        //    using NpgsqlConnection connection = OpenConnectionToDB();
-        //    var query = $"SELECT CL.\"Name\" FROM \"NATQuest\".\"{DBTableName}\" CE LEFT JOIN \"NATQuest\".\"Classes\" CL ON CE.\"ClassID\" = CL.\"ID\" WHERE CE.\"ClassID\" = {id};";
-        //    using var command = new NpgsqlCommand(query , connection);
-        //    var reader = command.ExecuteReader();
-
-        //    var oneRecord = default(ClassEnrollment);
-        //    while ( reader.Read() )
-        //    {
-        //        oneRecord = ProvideOneRecord(reader);
-        //    };
-        //    return oneRecord;
-        //}
-
 
         public override ClassEnrollment ProvideOneRecord( NpgsqlDataReader reader )
         {
@@ -48,7 +33,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             classEnrol.Id = reader.GetInt32(0);
             classEnrol.MentorCE = new Mentor
             {
-                Id = reader.GetInt32(1) ,
+                Id = reader.GetInt32(1),
                 FirstName = reader.GetString(2) ,
                 LastName = reader.GetString(3)
             };
@@ -59,16 +44,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             };
 
             return classEnrol;
-        }
-
-        private string ProvideQueryFULL()
-        {
-            string query = "SELECT CE.\"ID\", ME.\"ID\", ME.\"FirstName\", ME.\"Surname\", CS.\"ID\", CS.\"Name\"" +
-                "FROM \"NATQuest\".\"ClassEnrollment\" CE " +
-                "FULL JOIN \"NATQuest\".\"Mentors\" ME on CE.\"MentorID\" = ME.\"ID\"" +
-                "FULL JOIN \"NATQuest\".\"Classes\" CS on CE.\"ClassID\" = CS.\"ID\"" +
-                "order by ME.\"ID\";";
-            return query;
         }
 
         private string ProvideQueryINNER()

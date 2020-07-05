@@ -13,14 +13,14 @@ namespace QuestStoreNAT.web.Controllers
     {
         private readonly ClassroomDAO _classroomDAO;
 
-        public ClassroomController(ClassroomDAO classroomDAO)
+        public ClassroomController( ClassroomDAO classroomDAO )
         {
             _classroomDAO = classroomDAO;
         }
 
         public IActionResult Index()
         {
-            return View(_classroomDAO.FetchAllRecords().OrderBy(c =>c.Id));
+            return View(_classroomDAO.FetchAllRecords().OrderBy(c => c.Id));
         }
 
         public IActionResult Create()
@@ -29,13 +29,13 @@ namespace QuestStoreNAT.web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromForm] Classroom classroom )
+        public IActionResult Create( [FromForm] Classroom classroom )
         {
             _classroomDAO.AddRecord(classroom);
             return RedirectToAction("Edit" , "Classroom");
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit( int id )
         {
             var classroom = _classroomDAO.FindOneRecordBy(id);
             return View(classroom);
@@ -45,7 +45,7 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult Edit( Classroom classroom )
         {
             _classroomDAO.UpdateRecord(classroom);
-            return RedirectToAction("Index", "Classroom");
+            return RedirectToAction("Index" , "Classroom");
         }
         public IActionResult Delete( int id )
         {

@@ -991,30 +991,61 @@ fieldset .dropdown__button {
 }
 
 
-/*----TABLE ------*/
-/*td {
-    white-space: pre;
-    word-wrap: break-word;
-}
 
-th {
-    white-space: normal;
-    word-wrap: break-word;
-}
 
-table {
-    table-layout: fixed;
-}*/
+
+
+/*----------------
+   MENTOR DETAILS 
+ -----------------*/
+
+.table_container {
+    display: grid;
+    column-gap: 2rem;
+    row-gap: 3rem;
+}
 
 .grid_table {
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: grid;
     border-top: 1px solid black;
     border-right: 1px solid black;
+    border-radius: 0.5rem;
+    background-color: rgba(34, 36, 49, 0.74);
 }
 
-.grid_table > span {
-    padding: 8px, 4px;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+    .grid_table > span {
+        padding: 1rem;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+.headerSpan {
+    text-align: center;
+}
+
+.cellSpan {
+    text-align: center;
+}
+
+#mentor {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column: 1/5;
+    grid-row: 1;
+}
+
+#groups {
+    grid-template-columns: repeat(2,1fr);
+    grid-column: 1/4;
+    grid-row: 2;
+}
+
+#classes {
+    grid-column: 4/5;
+    grid-row: 2;
+}
+
+#students {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column: 1/5;
+    grid-row: 3;
 }
