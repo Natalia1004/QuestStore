@@ -15,12 +15,14 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class ArtifactController : Controller
     {
-        private readonly ArtifactDAO artifactDAO;
+        private ArtifactDAO artifactDAO;
+        private StudentDAO studentDAO;
         private readonly ICurrentSession _session;
 
         public ArtifactController(ICurrentSession session)
         {
             artifactDAO = new ArtifactDAO();
+            studentDAO = new StudentDAO();
             _session = session;
         }
 
@@ -95,8 +97,8 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult BuyArtifact(int id)
         {
             var currentUser = _session.LoggedUser;
-            var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.CredentialID);
-            var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
+            var currentStudent = studentDAO.FindOneRecordBy(currentUser.CredentialID);
+            var artifactToBuy = artifactDAO.FindOneRecordBy(id);
             var model = new OwnedArtifactStudentDAO();
             var newRecord = new OwnedArtifactStudent()
             {
