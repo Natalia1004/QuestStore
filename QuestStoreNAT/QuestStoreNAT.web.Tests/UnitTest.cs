@@ -6,6 +6,7 @@ namespace QuestStoreNAT.web.Tests
     {
         public UnitTest()
         {
+
         }
     }
 }
