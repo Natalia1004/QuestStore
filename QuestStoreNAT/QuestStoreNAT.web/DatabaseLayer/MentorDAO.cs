@@ -5,7 +5,7 @@ using QuestStoreNAT.web.Models;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public class MentorDAO : DBAbstractRecord<Mentor>
+    public class MentorDAO : DBAbstractRecord_Credentials<Mentor>
     {
         public override string DBTableName { get; set; } = "Mentors";
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public class StudentDAO : DBAbstractRecord<Student>
+    public class StudentDAO : DBAbstractRecord_Credentials<Student>
     {
         public override string DBTableName { get; set; } = "Students";
 
