@@ -62,6 +62,37 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return query;
         }
 
+        internal List<Student> FetchAllRecordsByIdJoin( int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = ProvideQueryToGetStudentsAssignedToMentor(id);
+            using var command = new NpgsqlCommand(query , connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<Student>();
+            while ( reader.Read() )
+            {
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+        }
+
+        private string ProvideQueryToGetStudentsAssignedToMentor(int id)
+        {
+            var query = $"select ST.*" +
+                        $"FROM(select * " +
+                        $"from \"NATQuest\".\"ClassEnrollment\" CE " +
+                        $"inner join \"NATQuest\".\"Mentors\" ME " +
+                        $"on CE.\"MentorID\" = ME.\"ID\" " +
+                        $"inner join \"NATQuest\".\"Classes\" CL " +
+                        $"on CE.\"ClassID\" = CL.\"ID\") as klasy " +
+                        $"inner join \"NATQuest\".\"Students\" ST " +
+                        $"on klasy.\"ClassID\" = ST.\"ClassID\"; " +
+                        $"WHERE klasy.\"MentorID\" = {id};";
+            return query;
+        }
+        
+
         /*
         public override string ProvideQueryStringToUpdate(Student studentToUpdate)
         {
