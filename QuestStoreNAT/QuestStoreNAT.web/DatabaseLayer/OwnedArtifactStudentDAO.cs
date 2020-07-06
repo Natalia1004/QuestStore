@@ -45,7 +45,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public OwnedArtifactStudent FindOneRecordBy(int id, int studentID)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
-            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"ArtifactID\" = '{id}' AND \"StudentID\" = '{studentID}' LIMIT 1;";
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"ArtifactID\" = '{id}' AND \"StudentID\" = '{studentID}' AND \"ArtifactStatusID\" = 0 LIMIT 1;";
             using var command = new NpgsqlCommand(query, connection);
             var reader = command.ExecuteReader();
 
