@@ -377,7 +377,11 @@ ul {
     background-color: rgba(34, 36, 49, 0.74);
     transition: background-color 0.5s;
 }
-
+.questreward__remover {
+    margin-left: 170px;
+    color: #B22222;
+    font-weight: bold;
+}
 .questreward__title {
     margin-left: 10px;
     margin-right: 10px;
@@ -795,6 +799,20 @@ ul {
     grid-column: 2/2;
 }
 
+#Level {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 60px;
+    margin-right: 12px;
+}
+
+#Group {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 60px;
+    margin-left: 40px;
+}
+
 .artifacts {
     grid-template-rows: repeat(5, 4fr);
     padding: 0px 130px;
@@ -809,18 +827,6 @@ ul {
     margin-bottom: 20px;
 }
 
-#Level {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 60px;
-    margin-right: 12px;
-}
-#Group {
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 60px;
-    margin-left: 40px;
-}
 
 #artifact {
     grid-row: 2/6;

@@ -43,10 +43,10 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return query;
         }
 
-        public OwnedArtifactGroup FindOneRecordBy(int id, int groupID)
+        public OwnedArtifactGroup FindOneRecordBy(int id, int groupID, int completiotStatus)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
-            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"ArtifactID\" = '{id}' AND \"GroupID\" = '{groupID}' AND \"ArtifactStatusID\" = 0 LIMIT 1;";
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"ArtifactID\" = '{id}' AND \"GroupID\" = '{groupID}' AND \"ArtifactStatusID\" = {completiotStatus} LIMIT 1;";
             using var command = new NpgsqlCommand(query, connection);
             var reader = command.ExecuteReader();
 

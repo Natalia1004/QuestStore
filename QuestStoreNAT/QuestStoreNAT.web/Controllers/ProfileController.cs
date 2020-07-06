@@ -54,22 +54,46 @@ namespace QuestStoreNAT.web.Controllers
             var student = _session.LoggedUser;
             var currentStudent = new StudentDAO().FindOneRecordBy(student.CredentialID);
             var artifactToUse = new ArtifactDAO().FindOneRecordBy(id);
+            int completiotStatus = 0;
             if (artifactToUse.Type == 0)
             {
                 var ownedArtifactStudentDAO = new OwnedArtifactStudentDAO();
-                var model = ownedArtifactStudentDAO.FindOneRecordBy(id, currentStudent.Id);
+                var model = ownedArtifactStudentDAO.FindOneRecordBy(id, currentStudent.Id,completiotStatus);
                 model.CompletionStatus = 1;
                 ownedArtifactStudentDAO.UpdateRecord(model);
             }
             else
             {
                 var ownedArtifactGroupDAO = new OwnedArtifactGroupDAO();
-                var modelGroup = ownedArtifactGroupDAO.FindOneRecordBy(id, currentStudent.GroupID);
+                var modelGroup = ownedArtifactGroupDAO.FindOneRecordBy(id, currentStudent.GroupID,completiotStatus);
                 modelGroup.CompletionStatus = 1;
                 ownedArtifactGroupDAO.UpdateRecord(modelGroup);
             }
             return RedirectToAction("ShowStudentProfile", "Profile");
         }
-        
+
+        public IActionResult DeleteArtifact(int id)
+        {
+            ViewData["role"] = _session.LoggedUserRole;
+            var student = _session.LoggedUser;
+            var currentStudent = new StudentDAO().FindOneRecordBy(student.CredentialID);
+            var artifactToDelte = new ArtifactDAO().FindOneRecordBy(id);
+            int completiotStatus = 1;
+            if (artifactToDelte.Type == 0)
+            {
+                var ownedArtifactStudentDAO = new OwnedArtifactStudentDAO();
+                var model = ownedArtifactStudentDAO.FindOneRecordBy(id, currentStudent.Id, completiotStatus);
+                ownedArtifactStudentDAO.DeleteRecord(model.Id);
+            }
+            else
+            {
+                var ownedArtifactGroupDAO = new OwnedArtifactGroupDAO();
+                var modelGroup = ownedArtifactGroupDAO.FindOneRecordBy(id, currentStudent.GroupID, completiotStatus);
+                ownedArtifactGroupDAO.DeleteRecord(modelGroup.Id);
+            }
+            return RedirectToAction("ShowStudentProfile", "Profile");
+        }
+
+
     }
 }
