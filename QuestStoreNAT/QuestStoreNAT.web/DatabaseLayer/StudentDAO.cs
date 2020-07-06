@@ -11,7 +11,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         private enum StudentEnum
         {
-            Id, ClassId, GroupId, Email, Password, FirstName, Surname, CoinsTotal, CoinsBalance, CredentialID
+            Id, ClassId, GroupId, FirstName, Surname, CoinsTotal, CoinsBalance, CredentialID
         }
 
 
