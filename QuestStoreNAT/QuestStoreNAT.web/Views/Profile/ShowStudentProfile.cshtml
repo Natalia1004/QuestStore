@@ -12,6 +12,7 @@
             <div class="header_profile">
                 <div id="nameStudent">@Model.FirstName @Model.LastName</div>
                 <div id="coolcoins">Current coolcoins : @Model.Wallet</div>
+                <div id="Group">Group : @Model.GroupID</div>
             </div>
             <div id="Level">Level : @Model.level</div>
             <div class="artifacts">
@@ -19,14 +20,14 @@
                 <div id="artifact">
                     @foreach (var artifact in Model.StudentArtifacts)
                     {
-                    <div class="questreward questreward--individual">
-                        <h3 class="questreward__title">@artifact.Name</h3>
-                        <h3 class="questreward__cost">@artifact.Cost</h3>
-                        <p class="questreward__description">@artifact.Description</p>
-                        <div class="admin-controll">
-                        <a asp-action="UseArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Use</a>
+                        <div class="questreward questreward--individual">
+                            <h3 class="questreward__title">@artifact.Name</h3>
+                            <h3 class="questreward__cost">@artifact.Cost</h3>
+                            <p class="questreward__description">@artifact.Description</p>
+                            <div class="admin-controll">
+                                <a asp-action="UseArtifact" asp-route-id="@artifact.Id" class="dropdown__button dropdown--margin">Use</a>
+                            </div>
                         </div>
-                    </div>
                     }
                 </div>
             </div>
@@ -35,12 +36,11 @@
                 @foreach (var artifact in Model.UsedStudentArtifacts)
                 {
                     <div class="questreward questreward--individual">
-                    <h3 class="questreward__title">@artifact.Name</h3>
-                    <h3 class="questreward__cost">@artifact.Cost</h3>
-                    <p class="questreward__description">@artifact.Description</p>
-                </div>
+                        <h3 class="questreward__title">@artifact.Name</h3>
+                        <h3 class="questreward__cost">@artifact.Cost</h3>
+                        <p class="questreward__description">@artifact.Description</p>
+                    </div>
                 }
-            </div>
             </div>
         </div>
 </div>

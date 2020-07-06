@@ -815,6 +815,12 @@ ul {
     margin-bottom: 60px;
     margin-right: 12px;
 }
+#Group {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 60px;
+    margin-left: 40px;
+}
 
 #artifact {
     grid-row: 2/6;

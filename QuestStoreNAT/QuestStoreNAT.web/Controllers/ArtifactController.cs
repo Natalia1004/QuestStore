@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Http;
 using QuestStoreNAT.web.Services;
 using System.Runtime.ConstrainedExecution;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace QuestStoreNAT.web.Controllers
 {
     public class ArtifactController : Controller
@@ -118,8 +116,63 @@ namespace QuestStoreNAT.web.Controllers
             TempData["ArtifactMessage"] = $"You bought Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
-        
 
+        [HttpGet]
+        public IActionResult ViewGroupArtifacts()
+        {
+            ViewData["role"] = _session.LoggedUserRole;
+            var model = _session.LoggedUser;
+            var CredentialID = model.CredentialID;
+            var Student = new StudentDAO();
+            var targetStudent = Student.FindOneRecordBy(CredentialID);
+            targetStudent.GroupArtifacts = new ArtifactDAO().FetchAllGroupArtifacts(targetStudent.GroupID, 0);
+            targetStudent.UsedGroupArtifacts = new ArtifactDAO().FetchAllGroupArtifacts(targetStudent.GroupID, 1);
+            return View(targetStudent);
+        }
+
+        public IActionResult UseArtifact(int id)
+        {
+            ViewData["role"] = _session.LoggedUserRole;
+            var student = _session.LoggedUser;
+            var currentStudent = new StudentDAO().FindOneRecordBy(student.CredentialID);
+            var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
+            var ownedArtifactGroupDAO = new OwnedArtifactGroupDAO();
+            var model = ownedArtifactGroupDAO.FindOneRecordBy(id, currentStudent.GroupID);
+            model.CompletionStatus = 1;
+            ownedArtifactGroupDAO.UpdateRecord(model);
+            return RedirectToAction("ViewGroupArtifacts", "Artifact");
+        }
+
+        public IActionResult BuyGroupArtifact(int id)
+        {
+            var currentUser = _session.LoggedUser;
+            var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.CredentialID);
+            var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
+            var studentGroup = new GroupDAO().FindOneRecordBy(currentStudent.GroupID);
+            var model = new OwnedArtifactGroupDAO();
+            var newRecord = new OwnedArtifactGroup()
+            {
+                GroupId = currentStudent.GroupID,
+                ArtifactId = id,
+                CompletionStatus = 0,
+            };
+            if (studentGroup.GroupWallet < artifactToBuy.Cost)
+            {
+                TempData["ArtifactMessage"] = $"Your group don't have enough money. Sorry!";
+                return RedirectToAction("ViewAllArtifacts", "Artifact");
+            }
+            studentGroup.GroupStudents = new StudentDAO().FetchAllStudentInGroup(currentStudent.GroupID);
+            int amountStudents = studentGroup.GroupStudents.Count();
+            foreach (Student student in studentGroup.GroupStudents)
+            {
+                int currentWalletValue = student.Wallet - (artifactToBuy.Cost / amountStudents);
+                student.Wallet = currentWalletValue;
+                new StudentDAO().UpdateRecord(student);
+            }
+            model.AddRecord(newRecord);
+            TempData["ArtifactMessage"] = $"You bought Artifact!";
+            return RedirectToAction("ViewAllArtifacts", "Artifact");
+        }
     }
 }
 

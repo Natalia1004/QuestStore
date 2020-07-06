@@ -62,6 +62,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return query;
         }
 
+
         internal List<Student> FetchAllRecordsByIdJoin( int id)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
@@ -111,7 +112,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         }
 
         #region outOfAbstraction
-        public string ProvideQueryStringReturningID( Student studentToAdd )
+        public string ProvideQueryStringReturningID(Student studentToAdd)
         {
             var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" " +
                         $"(\"ClassID\", \"GroupID\", \"Credential_ID\", \"FirstName\", \"Surname\", \"CoinsBalance\", \"CoinsTotal\")" +
@@ -147,5 +148,21 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return Convert.ToInt32(command.ExecuteScalar());
         }
         #endregion
+
+        public List<Student> FetchAllStudentInGroup(int groupID)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT * FROM \"NATQuest\".\"Students\" WHERE \"NATQuest\".\"Students\".\"GroupID\" = '{groupID}';";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<Student>();
+            while (reader.Read())
+            {
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+        }
+
     }
 }

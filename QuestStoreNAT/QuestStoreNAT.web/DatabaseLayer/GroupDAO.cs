@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Npgsql;
 using QuestStoreNAT.web.Models;
 
+
 namespace QuestStoreNAT.web.DatabaseLayer
 {
     public class GroupDAO : DBAbstractRecord<Group>
@@ -79,6 +80,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return query;
         }
 
-      
+
     }
 }
