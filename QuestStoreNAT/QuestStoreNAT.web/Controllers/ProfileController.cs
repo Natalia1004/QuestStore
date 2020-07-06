@@ -43,6 +43,8 @@ namespace QuestStoreNAT.web.Controllers
             targetStudent.level = new LevelStudent().levelStudent(targetStudent.OverallWalletLevel);
             targetStudent.StudentArtifacts = new ArtifactDAO().FetchAllRecords(targetStudent.Id, 0);
             targetStudent.UsedStudentArtifacts = new ArtifactDAO().FetchAllRecords(targetStudent.Id, 1);
+            targetStudent.GroupArtifacts = new ArtifactDAO().FetchAllGroupArtifacts(targetStudent.GroupID, 0);
+            targetStudent.UsedGroupArtifacts = new ArtifactDAO().FetchAllGroupArtifacts(targetStudent.GroupID, 1);
             return View(targetStudent);
         }
 
@@ -51,12 +53,23 @@ namespace QuestStoreNAT.web.Controllers
             ViewData["role"] = _session.LoggedUserRole;
             var student = _session.LoggedUser;
             var currentStudent = new StudentDAO().FindOneRecordBy(student.CredentialID);
-            var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
-            var ownedArtifactStudentDAO = new OwnedArtifactStudentDAO();
-            var model = ownedArtifactStudentDAO.FindOneRecordBy(id, currentStudent.Id);
-            model.CompletionStatus = 1;
-            ownedArtifactStudentDAO.UpdateRecord(model);
+            var artifactToUse = new ArtifactDAO().FindOneRecordBy(id);
+            if (artifactToUse.Type == 0)
+            {
+                var ownedArtifactStudentDAO = new OwnedArtifactStudentDAO();
+                var model = ownedArtifactStudentDAO.FindOneRecordBy(id, currentStudent.Id);
+                model.CompletionStatus = 1;
+                ownedArtifactStudentDAO.UpdateRecord(model);
+            }
+            else
+            {
+                var ownedArtifactGroupDAO = new OwnedArtifactGroupDAO();
+                var modelGroup = ownedArtifactGroupDAO.FindOneRecordBy(id, currentStudent.GroupID);
+                modelGroup.CompletionStatus = 1;
+                ownedArtifactGroupDAO.UpdateRecord(modelGroup);
+            }
             return RedirectToAction("ShowStudentProfile", "Profile");
         }
+        
     }
 }

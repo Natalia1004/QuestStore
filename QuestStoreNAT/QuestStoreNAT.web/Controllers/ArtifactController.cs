@@ -130,19 +130,6 @@ namespace QuestStoreNAT.web.Controllers
             return View(targetStudent);
         }
 
-        public IActionResult UseArtifact(int id)
-        {
-            ViewData["role"] = _session.LoggedUserRole;
-            var student = _session.LoggedUser;
-            var currentStudent = new StudentDAO().FindOneRecordBy(student.CredentialID);
-            var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
-            var ownedArtifactGroupDAO = new OwnedArtifactGroupDAO();
-            var model = ownedArtifactGroupDAO.FindOneRecordBy(id, currentStudent.GroupID);
-            model.CompletionStatus = 1;
-            ownedArtifactGroupDAO.UpdateRecord(model);
-            return RedirectToAction("ViewGroupArtifacts", "Artifact");
-        }
-
         public IActionResult BuyGroupArtifact(int id)
         {
             var currentUser = _session.LoggedUser;
