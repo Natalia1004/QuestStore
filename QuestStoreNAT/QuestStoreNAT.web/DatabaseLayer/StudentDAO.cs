@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public class StudentDAO : DBAbstractRecord<Student>
+    public class StudentDAO : DBAbstractRecord_Credentials<Student>
     {
         public override string DBTableName { get; set; } = "Students";
 
         private enum StudentEnum
         {
-            Id, ClassId, GroupId, Email, Password, FirstName, Surname, CoinsTotal, CoinsBalance, CredentialID
+            Id, ClassId, GroupId, FirstName, Surname, CoinsTotal, CoinsBalance, CredentialID
         }
 
 
@@ -62,7 +62,49 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return query;
         }
 
-        public override void UpdateRecord(Student studentToUpdate)
+
+        internal List<Student> FetchAllRecordsByIdJoin( int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = ProvideQueryToGetStudentsAssignedToMentor(id);
+            using var command = new NpgsqlCommand(query , connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<Student>();
+            while ( reader.Read() )
+            {
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+        }
+
+        private string ProvideQueryToGetStudentsAssignedToMentor(int id)
+        {
+            var query = $"select ST.*" +
+                        $"FROM(select * " +
+                        $"from \"NATQuest\".\"ClassEnrollment\" CE " +
+                        $"inner join \"NATQuest\".\"Mentors\" ME " +
+                        $"on CE.\"MentorID\" = ME.\"ID\" " +
+                        $"inner join \"NATQuest\".\"Classes\" CL " +
+                        $"on CE.\"ClassID\" = CL.\"ID\") as klasy " +
+                        $"inner join \"NATQuest\".\"Students\" ST " +
+                        $"on klasy.\"ClassID\" = ST.\"ClassID\"; " +
+                        $"WHERE klasy.\"MentorID\" = {id};";
+            return query;
+        }
+        
+
+        /*
+        public override string ProvideQueryStringToUpdate(Student studentToUpdate)
+        {
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                        $"SET \"CoinsTotal\" = {studentToUpdate.Wallet} " +
+                        $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {studentToUpdate.Id};";
+            return query;
+        }
+        */
+
+        public override void UpdateRecord( Student studentToUpdate )
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
             string query = ProvideQueryStringToUpdate(studentToUpdate);

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.Models;
@@ -44,7 +45,8 @@ namespace QuestStoreNAT.web.Controllers
             if (_loginValidatorService.IsValidLogin(enterdCredentials))
             {
                 _session.LoggedUserRole = _loginValidatorService.GetUserRole();
-                _session.LoggedUser = _userFinderService.RetrieveUser(_session.LoggedUserRole, enterdCredentials.Email);
+                var credentialId = _loginValidatorService.GetUserCredentialId();
+                _session.LoggedUser = _userFinderService.RetrieveUser(_session.LoggedUserRole, credentialId);
                 return RedirectToAction("Welcome", "Profile");
             }
             TempData["Message"] = "Login failed. Either e-mail or password was incorect. Try again or contact us.";
@@ -54,6 +56,7 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult Contact()
         {
+            //throw new Exception("Error in Contacts"); testing ErrorController
             return View();
         }
 
