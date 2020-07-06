@@ -9,7 +9,6 @@
                 @if (Session.LoggedUserRole == Role.Student)
                 {
                     <li><a asp-action="ShowStudentProfile" asp-controller="Profile"><button class="dropdown__button">Show My Profile</button></a></li>
-                    <li><a asp-action="ViewGroupArtifacts" asp-controller="Artifact"><button class="dropdown__button">Group Artifacts</button></a></li>
                 }
                 else
                 {
