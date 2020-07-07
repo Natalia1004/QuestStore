@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestStoreNAT.web", "QuestS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestStoreNAT.web.Tests", "QuestStoreNAT.web.Tests\QuestStoreNAT.web.Tests.csproj", "{9A5A8037-8F6A-441D-976A-00E3C78E8912}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionPassword", "EncryptionPassword\EncryptionPassword.csproj", "{974B225D-9584-4DD2-BD2A-4162653F2F2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9A5A8037-8F6A-441D-976A-00E3C78E8912}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A5A8037-8F6A-441D-976A-00E3C78E8912}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A5A8037-8F6A-441D-976A-00E3C78E8912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{974B225D-9584-4DD2-BD2A-4162653F2F2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{974B225D-9584-4DD2-BD2A-4162653F2F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{974B225D-9584-4DD2-BD2A-4162653F2F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{974B225D-9584-4DD2-BD2A-4162653F2F2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

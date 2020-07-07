@@ -18,7 +18,7 @@ namespace LoginForm.Services
         public const int SALT_INDEX = 3;
         public const int PBKDF2_INDEX = 4;
 
-        public static byte[] CreateSALT()
+        public static string CreateSALT()
         {
             // Generate a random salt
             byte[] salt = new byte[SALT_BYTES];
@@ -26,7 +26,7 @@ namespace LoginForm.Services
             {
                 csprng.GetBytes(salt);
             }
-            return salt;
+            return Convert.ToBase64String(salt);
         }
 
         public static byte[] CreateHASH(string password, byte[] salt)
