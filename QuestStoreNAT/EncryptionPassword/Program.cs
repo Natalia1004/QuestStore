@@ -1,6 +1,6 @@
 ﻿using LoginForm.Services;
+using QuestStoreNAT.web.DatabaseLayer;
 using System;
-using System.Collections.Generic;
 
 namespace EncryptionPassword
 {
@@ -8,11 +8,17 @@ namespace EncryptionPassword
     {
         static void Main(string[] args)
         {
-            for (int i = 0; i < 60; i++)
-            {
+            var credentialsDAO = new CredentialsDAO();
+            var allCredentials = credentialsDAO.FetchAllRecords();
 
+            foreach (var credential in allCredentials)
+            {
+                var salt = EncryptPassword.CreateSALT();
+
+                Console.WriteLine($"{credential.Password} + " +
+                                  $"{Convert.ToBase64String(EncryptPassword.CreateHASH(credential.Password, salt))} + " +
+                                  $"{salt}");
             }
-            var newSALT = EncryptPassword.CreateSALT();
         }
     }
 }

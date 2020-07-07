@@ -29,10 +29,11 @@ namespace LoginForm.Services
             return Convert.ToBase64String(salt);
         }
 
-        public static byte[] CreateHASH(string password, byte[] salt)
+        public static byte[] CreateHASH(string password, string salt)
         {
+            var saltByte = Convert.FromBase64String(salt);
             //Generate hash from given password and string
-            byte[] hash = PBKDF2(password, salt, PBKDF2_ITERATIONS, HASH_BYTES);
+            byte[] hash = PBKDF2(password, saltByte, PBKDF2_ITERATIONS, HASH_BYTES);
             return hash;
         }
 

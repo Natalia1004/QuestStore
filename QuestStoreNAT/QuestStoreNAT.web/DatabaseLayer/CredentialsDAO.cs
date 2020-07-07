@@ -39,7 +39,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
             credentials.Role = (Role)reader.GetInt32((int)CredentialsEnum.Role);
             credentials.Email = reader.GetString((int)CredentialsEnum.Email);
             credentials.Password = reader.GetString((int)CredentialsEnum.Password);
-            credentials.SALT = reader.GetString((int)CredentialsEnum.Password);
+            credentials.SALT = reader.GetString((int)CredentialsEnum.Salt);
             return credentials;
         }
 

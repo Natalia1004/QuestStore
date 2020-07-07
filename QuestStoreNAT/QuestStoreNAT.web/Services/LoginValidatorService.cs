@@ -23,14 +23,14 @@ namespace QuestStoreNAT.web.Services
 
         public bool IsValidLogin(Credentials enteredCredentials)
         {
-            Credentials validUserCredentils = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
+            Credentials validUserCredentials = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
 
-            if (validUserCredentils is null) return false;
+            if (validUserCredentials is null) return false;
 
-            UserRole = validUserCredentils.Role;
-            CredentialId = validUserCredentils.Id;
+            UserRole = validUserCredentials.Role;
+            CredentialId = validUserCredentials.Id;
 
-            return (validUserCredentils.Password == enteredCredentials.Password);
+            return (validUserCredentials.Password == enteredCredentials.Password);
         }
 
         public bool IsValidPasswordHASH(Credentials enteredCredentials)
@@ -39,8 +39,8 @@ namespace QuestStoreNAT.web.Services
 
             if (userCredentialsInDb == null) return false;
 
-            var passwordFromDb = userCredentialsInDb.Password;
-            var saltFromDb = Convert.FromBase64String(userCredentialsInDb.SALT);
+            string passwordFromDb = userCredentialsInDb.Password;
+            string saltFromDb = userCredentialsInDb.SALT;
             var passwordFromForm = EncryptPassword.CreateHASH(enteredCredentials.Password, saltFromDb);
 
             if (SlowEquals(passwordFromDb.ConvertStringToByte(), passwordFromForm))
