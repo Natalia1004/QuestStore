@@ -8,6 +8,7 @@ namespace QuestStoreNAT.web.Services
     {
         private readonly CredentialsDAO _CredentialsDAO;
         private Role UserRole { get; set; }
+        private int CredentialId { get; set; }
 
         public LoginValidatorService()
         {
@@ -19,18 +20,16 @@ namespace QuestStoreNAT.web.Services
             return UserRole;
         }
 
-        public bool IsValidLogin (Credentials enteredCredentials)
+        public bool IsValidLogin(Credentials enteredCredentials)
         {
-            Credentials userCredentialsInDb = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
+            Credentials validUserCredentils = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
 
-            if (userCredentialsInDb is null) return false;
+            if (validUserCredentils is null) return false;
 
-            if (userCredentialsInDb.Password == enteredCredentials.Password)
-            {
-                UserRole = userCredentialsInDb.Role;
-                return true;
-            }
-            return false;
+            UserRole = validUserCredentils.Role;
+            CredentialId = validUserCredentils.Id;
+
+            return (validUserCredentils.Password == enteredCredentials.Password);
         }
 
         public bool IsValidPasswordHASH(Credentials enteredCredentials)
