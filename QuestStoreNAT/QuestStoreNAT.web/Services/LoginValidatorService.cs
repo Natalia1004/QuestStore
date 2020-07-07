@@ -46,6 +46,7 @@ namespace QuestStoreNAT.web.Services
             if (SlowEquals(passwordFromDb.ConvertStringToByte(), passwordFromForm))
             {
                 UserRole = userCredentialsInDb.Role;
+                CredentialId = userCredentialsInDb.Id;
                 return true;
             }
             return false;
