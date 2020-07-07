@@ -42,7 +42,7 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult Login(Credentials enterdCredentials)
         {
-            if (_loginValidatorService.IsValidPasswordHASH(enterdCredentials))
+            if (_loginValidatorService.IsValidLogin(enterdCredentials))
             {
                 _session.LoggedUserRole = _loginValidatorService.GetUserRole();
                 var credentialId = _loginValidatorService.GetUserCredentialId();

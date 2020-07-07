@@ -7,5 +7,6 @@ namespace QuestStoreNAT.web.Services
         public Role GetUserRole();
         public int GetUserCredentialId();
         public bool IsValidLogin(Credentials enteredCredentials);
+        public bool IsValidPasswordHASH(Credentials enteredCredentials);
     }
 }
