@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoginForm.Services;
 using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
@@ -28,6 +29,10 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult AddCredentialsAsAdmin([FromForm] Credentials newCredentials)
         {
+            newCredentials.SALT = EncryptPassword.CreateSALT();
+            string hashedPassword = Convert.ToBase64String(EncryptPassword.CreateHASH(newCredentials.Password, newCredentials.SALT));
+            newCredentials.Password = hashedPassword;
+
             var id = _credentialsDAO.AddRecordReturningID(newCredentials);
             switch ( newCredentials.Role )
             {
