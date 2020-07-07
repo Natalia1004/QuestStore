@@ -15,7 +15,7 @@ namespace QuestStoreNAT.web.Models
         public string Password { get; set; }
 
         [Required]
-        public byte[] SALT { get; set; }
+        public string SALT { get; set; }
 
         [Required]
         public Role Role { get; set; }

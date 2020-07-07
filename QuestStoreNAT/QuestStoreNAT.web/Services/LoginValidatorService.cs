@@ -1,6 +1,7 @@
 ﻿using LoginForm.Services;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
+using System;
 
 namespace QuestStoreNAT.web.Services
 {
@@ -39,7 +40,7 @@ namespace QuestStoreNAT.web.Services
             if (userCredentialsInDb == null) return false;
 
             var passwordFromDb = userCredentialsInDb.Password;
-            var saltFromDb = userCredentialsInDb.SALT;
+            var saltFromDb = Convert.FromBase64String(userCredentialsInDb.SALT);
             var passwordFromForm = EncryptPassword.CreateHASH(enteredCredentials.Password, saltFromDb);
 
             if (SlowEquals(passwordFromDb.ConvertStringToByte(), passwordFromForm))
