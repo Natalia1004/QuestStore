@@ -11,12 +11,11 @@ namespace QuestStoreNAT.web.Models
         [EmailAddress(ErrorMessage = "Invalid email")]
         public string Email { get; set; }
 
-        [PasswordPropertyText]
         [Required]
-        //[StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        //[RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required]
+        public byte[] SALT { get; set; }
 
         [Required]
         public Role Role { get; set; }
