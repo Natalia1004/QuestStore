@@ -14,18 +14,28 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class MessageController : Controller
     {
+        private StudentDAO studentDAO;
+        private readonly ICurrentSession _session;
+
+        public MessageController(ICurrentSession session)
+        {
+            studentDAO = new StudentDAO();
+            _session = session;
+        }
 
         [HttpGet]
         public IActionResult Message()
         {
-            var model = new StudentAcceptance()
-            return View();
+            var currentUser = _session.LoggedUser;
+            var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.CredentialID);
+            var model = new StudentAcceptanceDAO().FindOneRecordBy(currentStudent.Id);
+            return View(model);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult Acceptance(StudentAcceptance acceptance)
         {
 
-        }
+        }*/
     }
 }

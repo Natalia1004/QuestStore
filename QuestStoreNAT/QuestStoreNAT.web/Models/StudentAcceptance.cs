@@ -10,7 +10,7 @@ namespace QuestStoreNAT.web.Models
         public int artifactID { get; set; }
         public string artifactName { get; set; }
         public int amountOfAcceptance { get; set; }
-        public bool acceptance { get; set; }
+        public bool? acceptance { get; set; }
 
     }
 

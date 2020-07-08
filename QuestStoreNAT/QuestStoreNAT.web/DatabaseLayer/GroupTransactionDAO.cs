@@ -5,7 +5,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 {
     public class GroupTransactionDAO : DBAbstractRecord<GroupTransaction>
     {
-        public override string DBTableName { get; set; } = "GroupTransaction";
+        public override string DBTableName { get; set; } = "GroupChosenArtifacts";
         private enum GroupTransactionEnum
         {
             Id, artifactID, groupID, numberOfStudent, numberOfAcceptance
@@ -24,7 +24,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         public override string ProvideQueryStringToAdd(GroupTransaction groupTransactionToAdd)
         {
-            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"ID\", \"ArtifactID\", \"GroupID\", \"NumberOfStudents\", \"NumberOfAcceptance\")" +
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"ID\", \"ArtifactID\", \"GroupID\", \"NumberOfStudents\", \"NumberOfAcceptances\")" +
                         $"VALUES({(int)groupTransactionToAdd.ID}, " +
                                $"'{groupTransactionToAdd.artifactID}', " +
                                $"'{groupTransactionToAdd.groupID}', " +

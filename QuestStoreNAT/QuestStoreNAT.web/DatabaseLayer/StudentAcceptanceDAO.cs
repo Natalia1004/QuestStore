@@ -1,6 +1,5 @@
 ﻿using System;
 using QuestStoreNAT.web.Models;
-using System.Collections.Generic;
 using Npgsql;
 
 namespace QuestStoreNAT.web.DatabaseLayer
@@ -42,6 +41,21 @@ namespace QuestStoreNAT.web.DatabaseLayer
                             $"\"Acceptance\" = '{studentAcceptanceToUpdate.acceptance}', " +
                         $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {studentAcceptanceToUpdate.ID};";
             return query;
+        }
+
+        public override StudentAcceptance FindOneRecordBy(int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"StudentID\" = '{id}' LIMIT 1;";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var oneRecord = default(StudentAcceptance);
+            while (reader.Read())
+            {
+                oneRecord = ProvideOneRecord(reader);
+            };
+            return oneRecord;
         }
 
     }

@@ -123,6 +123,8 @@ namespace QuestStoreNAT.web.Controllers
             var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.CredentialID);
             var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
             var studentGroup = new GroupDAO().FindOneRecordBy(currentStudent.GroupID);
+            var groupTransaction = new GroupTransactionDAO();
+            var studentAcceptance = new StudentAcceptanceDAO();
             var model = new OwnedArtifactGroupDAO();
             var newRecord = new OwnedArtifactGroup()
             {
@@ -135,18 +137,42 @@ namespace QuestStoreNAT.web.Controllers
                 TempData["ArtifactMessage"] = $"Your group don't have enough money. Sorry!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
-
+            //if transaction for this group doesn't exist them create 
             studentGroup.GroupStudents = new StudentDAO().FetchAllStudentInGroup(currentStudent.GroupID);
             int amountStudents = studentGroup.GroupStudents.Count();
-            foreach (Student student in studentGroup.GroupStudents)
+            var newRecordGroupTransaction = new GroupTransaction()
+            {
+                ID = 1,
+                artifactID = artifactToBuy.Id,
+                groupID = currentStudent.GroupID,
+                numberOfStudents = amountStudents,
+                numberOfAcceptance = 1
+            };
+            groupTransaction.AddRecord(newRecordGroupTransaction);
+
+            foreach(Student student in studentGroup.GroupStudents)
+            {
+                if (student.Id != currentStudent.Id)
+                {
+                    var newStudentAcceptance = new StudentAcceptance()
+                    {
+                        studentID = student.Id,
+                        artifactID = artifactToBuy.Id,
+                        acceptance = null
+                    };
+                    studentAcceptance.AddRecord(newStudentAcceptance);
+                }
+
+            }
+            /*foreach (Student student in studentGroup.GroupStudents)
             {
                 int currentWalletValue = student.Wallet - (artifactToBuy.Cost / amountStudents);
                 student.Wallet = currentWalletValue;
                 new StudentDAO().UpdateRecord(student);
             }
 
-            model.AddRecord(newRecord);
-            TempData["ArtifactMessage"] = $"You bought Artifact!";
+            model.AddRecord(newRecord);*/
+            TempData["ArtifactMessage"] = $"Your group will retrive information!";
 
 
             return RedirectToAction("ViewAllArtifacts", "Artifact");
