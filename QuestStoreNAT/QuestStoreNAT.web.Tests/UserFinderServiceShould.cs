@@ -3,6 +3,7 @@ using Moq;
 using Moq.Protected;
 using QuestStoreNAT.web.Services;
 using QuestStoreNAT.web.Models;
+using System;
 
 namespace QuestStoreNAT.web.Tests
 {
@@ -21,9 +22,9 @@ namespace QuestStoreNAT.web.Tests
 
             _findIUserMockFail = new Mock<UserFinderService>();
             _findIUserMockFail.CallBase = true;
-            _findIUserMockFail.Protected().Setup<IUser>("FindStudentBy", new object[] { 0 }).Returns((Student)null);
-            _findIUserMockFail.Protected().Setup<IUser>("FindMentorBy", new object[] { 0 }).Returns((Mentor)null);
-            _findIUserMockFail.Protected().Setup<IUser>("FindAdminBy", new object[] { 0 }).Returns((Admin)null);
+            _findIUserMockFail.Protected().Setup<IUser>("FindStudentBy", new object[] { 2 }).Returns((Student)null);
+            _findIUserMockFail.Protected().Setup<IUser>("FindMentorBy", new object[] { 2 }).Returns((Mentor)null);
+            _findIUserMockFail.Protected().Setup<IUser>("FindAdminBy", new object[] { 2 }).Returns((Admin)null);
         }
 
         [Fact]
@@ -50,29 +51,35 @@ namespace QuestStoreNAT.web.Tests
         [Fact]
         public void ReturnNull_When_RoleIsStudentAndIdIsInvalid()
         {
-            var sut = _findIUserMockFail.Object.RetrieveUser(Role.Student, 0);
+            var sut = _findIUserMockFail.Object.RetrieveUser(Role.Student, 2);
             Assert.Null(sut);
         }
 
         [Fact]
         public void ReturnNull_When_RoleIsMentorAndIdIsInvalid()
         {
-            var sut = _findIUserMockFail.Object.RetrieveUser(Role.Mentor, 0);
+            var sut = _findIUserMockFail.Object.RetrieveUser(Role.Mentor, 2);
             Assert.Null(sut);
         }
 
         [Fact]
         public void ReturnNull_When_RoleIsAdminAndIdIsInvalid()
         {
-            var sut = _findIUserMockFail.Object.RetrieveUser(Role.Admin, 0);
+            var sut = _findIUserMockFail.Object.RetrieveUser(Role.Admin, 2);
             Assert.Null(sut);
         }
 
         [Fact]
         public void ReturnNull_When_RoleIsNone()
         {
-            var sut = _findIUserMockFail.Object.RetrieveUser(Role.None, 0);
+            var sut = _findIUserMockFail.Object.RetrieveUser(Role.None, 2);
             Assert.Null(sut);
+        }
+
+        [Fact]
+        public void ThrowArguementException_When_IdIsLessThan0()
+        {
+            Assert.Throws<ArgumentException>(() => _findIUserMockSuccess.Object.RetrieveUser(Role.Student, 0));
         }
     }
 }
