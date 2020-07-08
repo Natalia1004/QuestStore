@@ -1,5 +1,6 @@
 ﻿using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
+using System;
 
 namespace QuestStoreNAT.web.Services
 {
@@ -7,6 +8,8 @@ namespace QuestStoreNAT.web.Services
     {
         public IUser RetrieveUser(Role role, int credentialId)
         {
+            if (credentialId < 0) throw new ArgumentException("Credential Id should not be less than 0.", "credentialId");
+
             switch (role)
             {
                 case Role.Admin:
