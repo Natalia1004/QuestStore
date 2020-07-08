@@ -21,6 +21,11 @@ namespace QuestStoreNAT.web.Services
             return UserRole;
         }
 
+        public int GetUserCredentialId()
+        {
+            return CredentialId;
+        }
+
         public bool IsValidLogin(Credentials enteredCredentials)
         {
             Credentials validUserCredentials = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
@@ -61,11 +66,6 @@ namespace QuestStoreNAT.web.Services
                 diff |= (uint)(a[i] ^ b[i]);
             }
             return diff == 0;
-        }
-
-        public int GetUserCredentialId()
-        {
-            return CredentialId;
         }
     }
 }

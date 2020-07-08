@@ -10,31 +10,32 @@ namespace QuestStoreNAT.web.Services
             switch (role)
             {
                 case Role.Admin:
-                    var adminDAO = new AdminDAO();
-                    return adminDAO.FindOneRecordByCredentialId(credentialId);
+                    return FindAdminBy(credentialId);
                 case Role.Mentor:
-                    var mentorDAO = new MentorDAO();
-                    return mentorDAO.FindOneRecordByCredentialId(credentialId);
+                    return FindMentorBy(credentialId);
+                case Role.Student:
+                    return FindStudentBy(credentialId);
                 default:
-                    var studentDAO = new StudentDAO();
-                    return studentDAO.FindOneRecordByCredentialId(credentialId);
+                    return null;
             }
         }
 
-        public IUser RetrieveUser(Role role, string email)
+        protected virtual IUser FindStudentBy(int credentialId)
         {
-            switch (role)
-            {
-                case Role.Admin:
-                    var adminDAO = new AdminDAO();
-                    return adminDAO.FindOneRecordBy(email);
-                case Role.Mentor:
-                    var mentorDAO = new MentorDAO();
-                    return mentorDAO.FindOneRecordBy(email);
-                default:
-                    var studentDAO = new StudentDAO();
-                    return studentDAO.FindOneRecordBy(email);
-            }
+            var studentDAO = new StudentDAO();
+            return studentDAO.FindOneRecordByCredentialId(credentialId);
+        }
+
+        protected virtual IUser FindMentorBy(int credentialId)
+        {
+            var mentorDAO = new MentorDAO();
+            return mentorDAO.FindOneRecordByCredentialId(credentialId);
+        }
+
+        protected virtual IUser FindAdminBy(int credentialId)
+        {
+            var adminDAO = new AdminDAO();
+            return adminDAO.FindOneRecordByCredentialId(credentialId);
         }
     }
 }
