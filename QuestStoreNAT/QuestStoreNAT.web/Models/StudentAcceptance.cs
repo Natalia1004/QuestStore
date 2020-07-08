@@ -7,8 +7,12 @@ namespace QuestStoreNAT.web.Models
     {
         public int ID { get; set; }
         public int studentID { get; set; }
+        public int artifactID { get; set; }
         public string artifactName { get; set; }
         public int amountOfAcceptance { get; set; }
         public bool acceptance { get; set; }
+
     }
+
+
 }

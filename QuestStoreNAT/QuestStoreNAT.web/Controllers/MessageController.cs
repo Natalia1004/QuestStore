@@ -18,7 +18,14 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult Message()
         {
+            var model = new StudentAcceptance()
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Acceptance(StudentAcceptance acceptance)
+        {
+
         }
     }
 }

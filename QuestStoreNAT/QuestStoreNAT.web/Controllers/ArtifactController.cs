@@ -135,6 +135,7 @@ namespace QuestStoreNAT.web.Controllers
                 TempData["ArtifactMessage"] = $"Your group don't have enough money. Sorry!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
+
             studentGroup.GroupStudents = new StudentDAO().FetchAllStudentInGroup(currentStudent.GroupID);
             int amountStudents = studentGroup.GroupStudents.Count();
             foreach (Student student in studentGroup.GroupStudents)
@@ -143,8 +144,11 @@ namespace QuestStoreNAT.web.Controllers
                 student.Wallet = currentWalletValue;
                 new StudentDAO().UpdateRecord(student);
             }
+
             model.AddRecord(newRecord);
             TempData["ArtifactMessage"] = $"You bought Artifact!";
+
+
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
     }

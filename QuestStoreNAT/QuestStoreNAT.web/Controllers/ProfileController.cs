@@ -32,6 +32,7 @@ namespace QuestStoreNAT.web.Controllers
             ViewData["role"] = _session.LoggedUserRole;
             return View();
         }
+        
 
         public IActionResult ShowStudentProfile()
         {
