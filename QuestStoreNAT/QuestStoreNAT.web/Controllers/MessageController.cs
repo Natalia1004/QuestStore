@@ -33,7 +33,12 @@ namespace QuestStoreNAT.web.Controllers
             var currentUser = _session.LoggedUser;
             var currentStudent = studentDAO.FindOneRecordBy(currentUser.CredentialID);
             var model = new StudentAcceptanceDAO().FindOneRecordBy(currentStudent.Id);
-            return View(model);
+            if (model != null)
+            {
+                return View(model);
+            }
+            TempData["Message"] = $"You don't have any message";
+            return RedirectToAction("Welcome", "Profile");
         }
 
         [HttpPost]
