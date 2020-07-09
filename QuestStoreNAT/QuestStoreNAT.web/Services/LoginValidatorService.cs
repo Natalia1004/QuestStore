@@ -28,23 +28,31 @@ namespace QuestStoreNAT.web.Services
 
         public bool IsValidPasswordHASH(Credentials enteredCredentials)
         {
-            if (enteredCredentials.Equals(null)) throw new ArgumentException("Credentials cannot be null.", "enteredCredentials");
+            if (enteredCredentials == null) return false;
+            if (enteredCredentials.Email == null) return false;
+            if (enteredCredentials.Password == null) return false;
 
             Credentials userCredentialsInDb = _CredentialsDAO.FindOneRecordBy(enteredCredentials.Email);
 
             if (userCredentialsInDb == null) return false;
+            if (userCredentialsInDb.Password == null) return false;
+            if (userCredentialsInDb.SALT == null) return false;
 
             string passwordFromDb = userCredentialsInDb.Password;
-            string saltFromDb = userCredentialsInDb.SALT;
-            var passwordFromForm = EncryptPassword.CreateHASH(enteredCredentials.Password, saltFromDb);
+            byte[] passwordFromForm = EncryptPassword.CreateHASH(enteredCredentials.Password, userCredentialsInDb.SALT);
 
             if (SlowEquals(passwordFromDb.ConvertStringToByte(), passwordFromForm))
             {
-                UserRole = userCredentialsInDb.Role;
-                CredentialId = userCredentialsInDb.Id;
+                SetUserRoleAndCredentialId(userCredentialsInDb);
                 return true;
             }
             return false;
+        }
+
+        private void SetUserRoleAndCredentialId(Credentials userCredentialsInDb)
+        {
+            UserRole = userCredentialsInDb.Role;
+            CredentialId = userCredentialsInDb.Id;
         }
 
         private bool SlowEquals(byte[] a, byte[] b)
