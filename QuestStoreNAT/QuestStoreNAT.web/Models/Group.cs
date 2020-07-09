@@ -17,17 +17,5 @@ namespace QuestStoreNAT.web.Models
 
         public List<Student> GroupStudents { get; set; }
         public List<Quest> GroupQuests { get; set; }
-
-        public Group()
-        {
-            //GroupWallet = CalculateGroupWallet();
-        }
-
-        /* ---ponieważ na razie liczymy wallet dla grupy trochę inaczej tymczasowo to zakomentowałem ----
-        public int CalculateGroupWallet()
-        {
-            return GroupStudents.Sum(student => student.Wallet);
-        }
-        */
     }
 }
