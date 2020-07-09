@@ -142,7 +142,6 @@ namespace QuestStoreNAT.web.Controllers
             int amountStudents = studentGroup.GroupStudents.Count();
             var newRecordGroupTransaction = new GroupTransaction()
             {
-                ID = 1,
                 artifactID = artifactToBuy.Id,
                 groupID = currentStudent.GroupID,
                 numberOfStudents = amountStudents,
@@ -158,7 +157,7 @@ namespace QuestStoreNAT.web.Controllers
                     {
                         studentID = student.Id,
                         artifactID = artifactToBuy.Id,
-                        acceptance = null
+                        acceptance = false
                     };
                     studentAcceptance.AddRecord(newStudentAcceptance);
                 }

@@ -9,7 +9,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public override string DBTableName { get; set; } = "StudentAcceptance";
         private enum StudentAcceptanceEnum
         {
-            Id, studentID, artifactID, artifactName, amountOfAcceptance, acceptance
+            Id, studentID, artifactID, acceptance
         }
 
         public override StudentAcceptance ProvideOneRecord(NpgsqlDataReader reader)
@@ -18,8 +18,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             studentAcceptance.ID = reader.GetInt32((int)StudentAcceptanceEnum.Id);
             studentAcceptance.studentID = reader.GetInt32((int)StudentAcceptanceEnum.studentID);
             studentAcceptance.artifactID = reader.GetInt32((int)StudentAcceptanceEnum.artifactID);
-            studentAcceptance.artifactName = reader.GetString((int)StudentAcceptanceEnum.artifactName);
-            studentAcceptance.amountOfAcceptance = reader.GetInt32((int)StudentAcceptanceEnum.amountOfAcceptance);
             studentAcceptance.acceptance = reader.GetBoolean((int)StudentAcceptanceEnum.acceptance);
             return studentAcceptance;
         }

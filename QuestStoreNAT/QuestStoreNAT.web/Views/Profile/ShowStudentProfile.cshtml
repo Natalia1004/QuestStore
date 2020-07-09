@@ -1,7 +1,7 @@
 ﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
 @model Student
 
-@{ 
+@{
     ViewData["Title"] = "ShowStudentProfile";
 }
 
@@ -35,12 +35,12 @@
                 <div class="header_artifacts">Used Artifacts</div>
                 @foreach (var artifact in Model.UsedStudentArtifacts)
                 {
-                <div class="questreward questreward--individual">
-                    <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="questreward__remover"> X </a>
-                    <h3 class="questreward__title">@artifact.Name</h3>
-                    <h3 class="questreward__cost">@artifact.Cost</h3>
-                    <p class="questreward__description">@artifact.Description</p>
-                </div>
+                    <div class="questreward questreward--individual">
+                        <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="questreward__remover"> X </a>
+                        <h3 class="questreward__title">@artifact.Name</h3>
+                        <h3 class="questreward__cost">@artifact.Cost</h3>
+                        <p class="questreward__description">@artifact.Description</p>
+                    </div>
                 }
             </div>
             <div class="artifacts">
@@ -63,12 +63,12 @@
                 <div class="header_artifacts">Used Group Artifacts</div>
                 @foreach (var artifact in Model.UsedGroupArtifacts)
                 {
-            <div class="questreward questreward--individual">
-                <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="questreward__remover"> X </a>
-                <h3 class="questreward__title">@artifact.Name</h3>
-                <h3 class="questreward__cost">@artifact.Cost</h3>
-                <p class="questreward__description">@artifact.Description</p>
-            </div>
+                    <div class="questreward questreward--individual">
+                        <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="questreward__remover"> X </a>
+                        <h3 class="questreward__title">@artifact.Name</h3>
+                        <h3 class="questreward__cost">@artifact.Cost</h3>
+                        <p class="questreward__description">@artifact.Description</p>
+                    </div>
                 }
             </div>
         </div>
