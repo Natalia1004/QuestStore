@@ -9,7 +9,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public override string DBTableName { get; set; } = "StudentAcceptance";
         private enum StudentAcceptanceEnum
         {
-            Id, studentID, artifactID, acceptance
+            Id, studentID, artifactID, acceptance, groupID
         }
 
         public override StudentAcceptance ProvideOneRecord(NpgsqlDataReader reader)
@@ -18,16 +18,18 @@ namespace QuestStoreNAT.web.DatabaseLayer
             studentAcceptance.ID = reader.GetInt32((int)StudentAcceptanceEnum.Id);
             studentAcceptance.studentID = reader.GetInt32((int)StudentAcceptanceEnum.studentID);
             studentAcceptance.artifactID = reader.GetInt32((int)StudentAcceptanceEnum.artifactID);
-            studentAcceptance.acceptance = reader.GetBoolean((int)StudentAcceptanceEnum.acceptance);
+            studentAcceptance.acceptance = reader.GetInt32((int)StudentAcceptanceEnum.acceptance);
+            studentAcceptance.groupID = reader.GetInt32((int)StudentAcceptanceEnum.groupID);
             return studentAcceptance;
         }
 
         public override string ProvideQueryStringToAdd(StudentAcceptance studentAcceptanceToAdd)
         {
-            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"StudentID\", \"ArtifactID\", \"Acceptance\")" +
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"StudentID\", \"ArtifactID\", \"Acceptance\", \"GroupID\")" +
                         $"VALUES({(int)studentAcceptanceToAdd.studentID}, " +
                                $"'{studentAcceptanceToAdd.artifactID}', " +
-                               $"'{studentAcceptanceToAdd.acceptance}');";
+                               $"'{studentAcceptanceToAdd.acceptance}', " +
+                               $"'{studentAcceptanceToAdd.groupID}');";
             return query;
         }
 
@@ -37,6 +39,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
                         $"SET \"StudentID\" = {(int)studentAcceptanceToUpdate.studentID}, " +
                             $"\"ArtifactID\" = '{studentAcceptanceToUpdate.artifactID}', " +
                             $"\"Acceptance\" = '{studentAcceptanceToUpdate.acceptance}', " +
+                            $"\"GroupID\" = '{studentAcceptanceToUpdate.groupID}' " +
                         $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {studentAcceptanceToUpdate.ID};";
             return query;
         }
@@ -54,6 +57,13 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 oneRecord = ProvideOneRecord(reader);
             };
             return oneRecord;
+        }
+
+        public void DeleteAllTransactionForGroup(int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"GroupID\" = {id}";
+            ExecuteQuery(connection, query);
         }
 
     }

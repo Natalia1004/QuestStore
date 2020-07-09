@@ -38,9 +38,31 @@ namespace QuestStoreNAT.web.DatabaseLayer
                         $"SET \"ArtifactID\" = {(int)groupTransactionToUpdate.artifactID}, " +
                             $"\"GroupID\" = '{groupTransactionToUpdate.groupID}', " +
                             $"\"NumberOfStudents\" = '{groupTransactionToUpdate.numberOfStudents}', " +
-                            $"\"NumberOfAcceptance\" = '{groupTransactionToUpdate.numberOfAcceptance}', " +
+                            $"\"NumberOfAcceptances\" = '{groupTransactionToUpdate.numberOfAcceptance}' " +
                         $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {groupTransactionToUpdate.ID};";
             return query;
+        }
+
+        public override GroupTransaction FindOneRecordBy(int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"GroupID\" = '{id}' LIMIT 1;";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var oneRecord = default(GroupTransaction);
+            while (reader.Read())
+            {
+                oneRecord = ProvideOneRecord(reader);
+            };
+            return oneRecord;
+        }
+
+        public void DeleteAllTransactionForGroup(int id)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"GroupID\" = {id}";
+            ExecuteQuery(connection, query);
         }
     }
 }

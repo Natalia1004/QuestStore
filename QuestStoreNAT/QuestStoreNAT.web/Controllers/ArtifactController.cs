@@ -125,13 +125,7 @@ namespace QuestStoreNAT.web.Controllers
             var studentGroup = new GroupDAO().FindOneRecordBy(currentStudent.GroupID);
             var groupTransaction = new GroupTransactionDAO();
             var studentAcceptance = new StudentAcceptanceDAO();
-            var model = new OwnedArtifactGroupDAO();
-            var newRecord = new OwnedArtifactGroup()
-            {
-                GroupId = currentStudent.GroupID,
-                ArtifactId = id,
-                CompletionStatus = 0,
-            };
+            
             if (studentGroup.GroupWallet < artifactToBuy.Cost)
             {
                 TempData["ArtifactMessage"] = $"Your group don't have enough money. Sorry!";
@@ -157,20 +151,13 @@ namespace QuestStoreNAT.web.Controllers
                     {
                         studentID = student.Id,
                         artifactID = artifactToBuy.Id,
-                        acceptance = false
+                        acceptance = 0,
+                        groupID = currentStudent.GroupID
                     };
                     studentAcceptance.AddRecord(newStudentAcceptance);
                 }
 
             }
-            /*foreach (Student student in studentGroup.GroupStudents)
-            {
-                int currentWalletValue = student.Wallet - (artifactToBuy.Cost / amountStudents);
-                student.Wallet = currentWalletValue;
-                new StudentDAO().UpdateRecord(student);
-            }
-
-            model.AddRecord(newRecord);*/
             TempData["ArtifactMessage"] = $"Your group will retrive information!";
 
 

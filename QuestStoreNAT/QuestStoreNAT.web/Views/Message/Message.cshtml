@@ -1,5 +1,5 @@
 ﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
-@model StudentAcceptance
+@model QuestStoreNAT.web.Models.StudentAcceptance
 
 @{
     ViewData["Title"] = "Message";
@@ -14,12 +14,13 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <h3 class="dropdown--margin">Do you agree to buy Group Artifact ?</h3>
+
                     <div class="form-label">Artifact Name : @Model.ID</div>
 
                     <div class="form-label">Amount of acceptance : @Model.artifactID</div>
-
-                    <input asp-for="acceptance" class="dropdown--input dropdown--margin" placeholder="yes or no" />
-
+                    <label for="number">1 - NO , 2 - YES</label>
+                    <input asp-for="acceptance" class="dropdown--input dropdown--margin" value="0" min="1" max="2">
+                    <span asp-validation-for="acceptance" class="text-danger"></span><br />
                     <div class="form__submit">
                         <button type="submit" class="dropdown__button dropdown--margin">Submit</button>
                     </div>
