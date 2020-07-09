@@ -158,7 +158,7 @@ namespace QuestStoreNAT.web.Controllers
                 }
 
             }
-            TempData["ArtifactMessage"] = $"Your group will retrive information!";
+            TempData["ArtifactMessage"] = $"Your group will receive information!";
 
 
             return RedirectToAction("ViewAllArtifacts", "Artifact");
