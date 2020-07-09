@@ -7,13 +7,13 @@ namespace QuestStoreNAT.web.Services
 {
     public class LoginValidatorService : ILoginValidatorService
     {
-        private readonly CredentialsDAO _CredentialsDAO;
+        private IDB_GenericInterface<Credentials> _CredentialsDAO;
         private Role UserRole { get; set; }
         private int CredentialId { get; set; }
 
-        public LoginValidatorService()
+        public LoginValidatorService(IDB_GenericInterface<Credentials> credentialsDAO)
         {
-            _CredentialsDAO = new CredentialsDAO(); 
+            _CredentialsDAO = credentialsDAO ?? throw new ArgumentNullException(nameof(credentialsDAO)); 
         }
 
         public Role GetUserRole()
@@ -26,21 +26,11 @@ namespace QuestStoreNAT.web.Services
             return CredentialId;
         }
 
-        public bool IsValidLogin(Credentials enteredCredentials)
-        {
-            Credentials validUserCredentials = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
-
-            if (validUserCredentials is null) return false;
-
-            UserRole = validUserCredentials.Role;
-            CredentialId = validUserCredentials.Id;
-
-            return (validUserCredentials.Password == enteredCredentials.Password);
-        }
-
         public bool IsValidPasswordHASH(Credentials enteredCredentials)
         {
-            Credentials userCredentialsInDb = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
+            if (enteredCredentials.Equals(null)) throw new ArgumentException("Credentials cannot be null.", "enteredCredentials");
+
+            Credentials userCredentialsInDb = _CredentialsDAO.FindOneRecordBy(enteredCredentials.Email);
 
             if (userCredentialsInDb == null) return false;
 
