@@ -64,6 +64,18 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return query;
         }
 
+        public void UpdateOnlyGroupWallet(int groupID, int coinsTotal)
+        {
+
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
+                 $"SET \"CoinsTotal\" = {coinsTotal}" +
+                 $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {groupID};";
+
+            ExecuteQuery(connection, query);
+
+        }
+
         private string ProvideQueryToGetGroupAssignedToMentor(int id)
         {
             var query = $"SELECT grupy.\"GroupID\", grupy.\"ClassroomID\", " +

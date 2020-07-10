@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.Services;
@@ -8,11 +7,12 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class ArtifactController : Controller
     {
-        private ArtifactDAO artifactDAO;
         private StudentDAO studentDAO;
+        private Student _student { get; set; }
+        private ArtifactDAO artifactDAO;
         private readonly ICurrentSession _session;
-        private int _studentID { get; set; }
         private int _credentialID { get; set; }
+        public ArtifactManagement artifactManagmenet { get; set; }
 
         public ArtifactController(ICurrentSession session)
         {
@@ -20,6 +20,8 @@ namespace QuestStoreNAT.web.Controllers
             studentDAO = new StudentDAO();
             _session = session;
             _credentialID = _session.LoggedUser.CredentialID;
+            artifactManagmenet = new ArtifactManagement();
+            _student = studentDAO.FindOneRecordBy(_credentialID);
         }
 
         [HttpGet]
@@ -89,7 +91,7 @@ namespace QuestStoreNAT.web.Controllers
             TempData["ArtifactMessage"] = $"You have deleted the \"{artifactToDelete.Name}\" Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
-        
+
         public IActionResult BuyArtifact(int id)
         {
             if (new ArtifactManagement().CheckigStudentWallet(_credentialID, id) == false)
@@ -107,49 +109,23 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult BuyGroupArtifact(int id)
         {
-            var currentUser = _session.LoggedUser;
-            var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.CredentialID);
-            var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
-            var studentGroup = new GroupDAO().FindOneRecordBy(currentStudent.GroupID);
-            var groupTransaction = new GroupTransactionDAO();
-            var studentAcceptance = new StudentAcceptanceDAO();
-            
-            if (studentGroup.GroupWallet < artifactToBuy.Cost)
+            if (artifactManagmenet.CheckigGroupWallet(_student.GroupID, id, _credentialID) == false)
             {
-                TempData["ArtifactMessage"] = $"Your group don't have enough money. Sorry!";
+                TempData["ArtifactMessage"] = $"Your group don't have enough money or maybe You don't have enough coolcoins to share costs. Sorry!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
-            //if transaction for this group doesn't exist them create 
-            studentGroup.GroupStudents = new StudentDAO().FetchAllStudentInGroup(currentStudent.GroupID);
-            int amountStudents = studentGroup.GroupStudents.Count();
-            var newRecordGroupTransaction = new GroupTransaction()
+            else if(artifactManagmenet.CheckingIfTransactionForBoughtGroupArtifactExist(_student.GroupID) == false)
             {
-                artifactID = artifactToBuy.Id,
-                groupID = currentStudent.GroupID,
-                numberOfStudents = amountStudents,
-                numberOfAcceptance = 1
-            };
-            groupTransaction.AddRecord(newRecordGroupTransaction);
-
-            foreach(Student student in studentGroup.GroupStudents)
-            {
-                if (student.Id != currentStudent.Id)
-                {
-                    var newStudentAcceptance = new StudentAcceptance()
-                    {
-                        studentID = student.Id,
-                        artifactID = artifactToBuy.Id,
-                        acceptance = 0,
-                        groupID = currentStudent.GroupID
-                    };
-                    studentAcceptance.AddRecord(newStudentAcceptance);
-                }
-
+                TempData["ArtifactMessage"] = $"Transactions for purchase the new group artifact exist. You can't make another transaction!";
+                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
-            TempData["ArtifactMessage"] = $"Your group will receive information!";
-
-
-            return RedirectToAction("ViewAllArtifacts", "Artifact");
+            else
+            {
+                artifactManagmenet.CreateNewGroupTransaction(id, _student.GroupID);
+                artifactManagmenet.CreateRecordForAcceptance(_credentialID, _student.GroupID, id);
+                TempData["ArtifactMessage"] = $"Your group will receive information!";
+                return RedirectToAction("ViewAllArtifacts", "Artifact");
+            }
         }
     }
 }

@@ -65,6 +65,12 @@ namespace QuestStoreNAT.web.DatabaseLayer
             string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"GroupID\" = {id}";
             ExecuteQuery(connection, query);
         }
+        public void DeleteRecordForStudent(int studentID)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            string query = $"DELETE FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"StudentID\" = {studentID}";
+            ExecuteQuery(connection, query);
+        }
 
     }
 }
