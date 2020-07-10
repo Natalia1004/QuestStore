@@ -23,4 +23,7 @@
   <ItemGroup>
     <Compile Remove="Views\Home\StudentVIew.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Message\" />
+  </ItemGroup>
 </Project>

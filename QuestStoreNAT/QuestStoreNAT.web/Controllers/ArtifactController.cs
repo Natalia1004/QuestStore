@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
-using Microsoft.AspNetCore.Http;
 using QuestStoreNAT.web.Services;
-using System.Runtime.ConstrainedExecution;
 
 namespace QuestStoreNAT.web.Controllers
 {
     public class ArtifactController : Controller
     {
-        private ArtifactDAO artifactDAO;
         private StudentDAO studentDAO;
+        private Student _student { get; set; }
+        private ArtifactDAO artifactDAO;
         private readonly ICurrentSession _session;
+        private int _credentialID { get; set; }
+        public ArtifactManagement artifactManagmenet { get; set; }
 
         public ArtifactController(ICurrentSession session)
         {
             artifactDAO = new ArtifactDAO();
             studentDAO = new StudentDAO();
             _session = session;
+            _credentialID = _session.LoggedUser.CredentialID;
+            artifactManagmenet = new ArtifactManagement();
+            _student = studentDAO.FindOneRecordBy(_credentialID);
         }
 
         [HttpGet]
@@ -91,61 +91,41 @@ namespace QuestStoreNAT.web.Controllers
             TempData["ArtifactMessage"] = $"You have deleted the \"{artifactToDelete.Name}\" Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
-        
+
         public IActionResult BuyArtifact(int id)
         {
-            var currentUser = _session.LoggedUser;
-            var currentStudent = studentDAO.FindOneRecordBy(currentUser.CredentialID);
-            var artifactToBuy = artifactDAO.FindOneRecordBy(id);
-            var model = new OwnedArtifactStudentDAO();
-            var newRecord = new OwnedArtifactStudent()
-            {
-                StudentId = currentStudent.Id,
-                ArtifactId = id,
-                CompletionStatus = 0,
-            };
-            if (currentStudent.Wallet < artifactToBuy.Cost)
+            if (new ArtifactManagement().CheckigStudentWallet(_credentialID, id) == false)
             {
                 TempData["ArtifactMessage"] = $"You don't have enough money. Sorry!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
-            int currentWalletValue = currentStudent.Wallet - artifactToBuy.Cost;
-            currentStudent.Wallet = currentWalletValue;
-            new StudentDAO().UpdateRecord(currentStudent);
-            model.AddRecord(newRecord);
-            TempData["ArtifactMessage"] = $"You bought Artifact!";
-            return RedirectToAction("ViewAllArtifacts", "Artifact");
+            else
+            {
+                new ArtifactManagement().BuyIndiviudalArtifact(_credentialID, id);
+                TempData["ArtifactMessage"] = $"You bought Artifact!";
+                return RedirectToAction("ViewAllArtifacts", "Artifact");
+            }
         }
 
         public IActionResult BuyGroupArtifact(int id)
         {
-            var currentUser = _session.LoggedUser;
-            var currentStudent = new StudentDAO().FindOneRecordBy(currentUser.CredentialID);
-            var artifactToBuy = new ArtifactDAO().FindOneRecordBy(id);
-            var studentGroup = new GroupDAO().FindOneRecordBy(currentStudent.GroupID);
-            var model = new OwnedArtifactGroupDAO();
-            var newRecord = new OwnedArtifactGroup()
+            if (artifactManagmenet.CheckigGroupWallet(_student.GroupID, id, _credentialID) == false)
             {
-                GroupId = currentStudent.GroupID,
-                ArtifactId = id,
-                CompletionStatus = 0,
-            };
-            if (studentGroup.GroupWallet < artifactToBuy.Cost)
-            {
-                TempData["ArtifactMessage"] = $"Your group don't have enough money. Sorry!";
+                TempData["ArtifactMessage"] = $"Your group don't have enough money or maybe You don't have enough coolcoins to share costs. Sorry!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
-            studentGroup.GroupStudents = new StudentDAO().FetchAllStudentInGroup(currentStudent.GroupID);
-            int amountStudents = studentGroup.GroupStudents.Count();
-            foreach (Student student in studentGroup.GroupStudents)
+            else if(artifactManagmenet.CheckingIfTransactionForBoughtGroupArtifactExist(_student.GroupID) == false)
             {
-                int currentWalletValue = student.Wallet - (artifactToBuy.Cost / amountStudents);
-                student.Wallet = currentWalletValue;
-                new StudentDAO().UpdateRecord(student);
+                TempData["ArtifactMessage"] = $"Transactions for purchase the new group artifact exist. You can't make another transaction!";
+                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
-            model.AddRecord(newRecord);
-            TempData["ArtifactMessage"] = $"You bought Artifact!";
-            return RedirectToAction("ViewAllArtifacts", "Artifact");
+            else
+            {
+                artifactManagmenet.CreateNewGroupTransaction(id, _student.GroupID);
+                artifactManagmenet.CreateRecordForAcceptance(_credentialID, _student.GroupID, id);
+                TempData["ArtifactMessage"] = $"Your group will receive information!";
+                return RedirectToAction("ViewAllArtifacts", "Artifact");
+            }
         }
     }
 }
