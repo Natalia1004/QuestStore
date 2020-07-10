@@ -33,11 +33,11 @@ namespace QuestStoreNAT.web.Controllers
             {
                 _questDAO.AddRecord(questToAdd);
                 TempData["QuestMessage"] = $"You have succesfully added the \"{questToAdd.Name}\" Quest!";
-                return RedirectToAction("ViewAllQuests", "Quest");
+                return RedirectToAction($"ViewAllQuests", $"Quest");
             }
             Response.StatusCode = 406;
             ViewBag.ErrorMessage = "Sorry, adding new Quest failed.";
-            return View("Error");
+            return View($"Error");
         }
 
         [HttpGet]
@@ -48,7 +48,7 @@ namespace QuestStoreNAT.web.Controllers
             {
                 Response.StatusCode = 404;
                 ViewBag.ErrorMessage = "Sorry, you cannot edit this Quest!";
-                return View("NotFound", id);
+                return View($"NotFound", id);
             }
             return View(model);
         }
@@ -60,11 +60,11 @@ namespace QuestStoreNAT.web.Controllers
             {
                 _questDAO.UpdateRecord(questToEdit);
                 TempData["QuestMessage"] = $"You have updated the \"{questToEdit.Name}\" Quest!";
-                return RedirectToAction("ViewAllQuests", "Quest");
+                return RedirectToAction($"ViewAllQuests", $"Quest");
             }
             Response.StatusCode = 406;
             ViewBag.ErrorMessage = "Sorry, editing this Quest failed.";
-            return View("Error");
+            return View($"Error");
         }
 
         [HttpGet]
@@ -75,9 +75,9 @@ namespace QuestStoreNAT.web.Controllers
             {
                 Response.StatusCode = 404;
                 ViewBag.ErrorMessage = "Sorry, you cannot delete this Quest!";
-                return View("NotFound", id);
+                return View($"NotFound", id);
             }
-            return View("DeleteQuest", model);
+            return View($"DeleteQuest", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -85,9 +85,8 @@ namespace QuestStoreNAT.web.Controllers
         {
             var questToDeleteFromDB = _questDAO.FindOneRecordBy(questToDelete.Id);
             _questDAO.DeleteRecord(questToDelete.Id);
-            var message = $"You have deleted the \"{questToDeleteFromDB.Name}\" Quest!";
-            TempData["QuestMessage"] = message;
-            return RedirectToAction("ViewAllQuests", "Quest");
+            TempData["QuestMessage"] = $"You have deleted the \"{questToDeleteFromDB.Name}\" Quest!";
+            return RedirectToAction($"ViewAllQuests", $"Quest");
         }
     }
 }
