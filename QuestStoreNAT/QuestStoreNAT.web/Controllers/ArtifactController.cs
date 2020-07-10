@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
-using Microsoft.AspNetCore.Http;
 using QuestStoreNAT.web.Services;
-using System.Runtime.ConstrainedExecution;
 
 namespace QuestStoreNAT.web.Controllers
 {

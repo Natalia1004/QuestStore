@@ -15,11 +15,11 @@
 
                     <h3 class="dropdown--margin">Do you agree to buy Group Artifact ?</h3>
 
-                    <div class="form-label">Artifact Name : @Model.ID</div>
-
-                    <div class="form-label">Amount of acceptance : @Model.artifactID</div>
-                    <label for="number">1 - NO , 2 - YES</label>
-                    <input asp-for="acceptance" class="dropdown--input dropdown--margin" value="0" min="1" max="2">
+                    <div class="form-label">Artifact Name : @Model.artifactName</div><br>
+                    <div class="form-label" style="color:yellow">Artifact Cost : @Model.costArtifact</div><br>
+                    <div class="form-label">Amount of acceptance : @Model.currentAmountOfAcceptance</div><br>
+                    <label for="number">1 - NO , 2 - YES</label><br>
+                    <input asp-for="acceptance" class="dropdown--input dropdown--margin" value="0" min="1" max="2"><br>
                     <span asp-validation-for="acceptance" class="text-danger"></span><br />
                     <div class="form__submit">
                         <button type="submit" class="dropdown__button dropdown--margin">Submit</button>

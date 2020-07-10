@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.DatabaseLayer;
-using Microsoft.AspNetCore.Http;
 using QuestStoreNAT.web.Services;
-using System.Runtime.ConstrainedExecution;
 
 
 namespace QuestStoreNAT.web.Controllers
@@ -35,6 +30,9 @@ namespace QuestStoreNAT.web.Controllers
             var model = new StudentAcceptanceDAO().FindOneRecordBy(currentStudent.Id);
             if (model != null)
             {
+                model.costArtifact = new ArtifactDAO().FindOneRecordBy(model.artifactID).Cost;
+                model.artifactName = new ArtifactDAO().FindOneRecordBy(model.artifactID).Name;
+                model.currentAmountOfAcceptance = groupTransactionDAO.FindOneRecordBy(model.groupID).numberOfAcceptance;
                 return View(model);
             }
             TempData["Message"] = $"You don't have any message";

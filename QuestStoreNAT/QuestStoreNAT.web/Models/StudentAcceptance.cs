@@ -17,6 +17,11 @@ namespace QuestStoreNAT.web.Models
 
         public int groupID { get; set; }
 
+        public string artifactName { get; set; }
+
+        public int currentAmountOfAcceptance { get; set; }
+        public int costArtifact { get; set; }
+
     }
 
 
