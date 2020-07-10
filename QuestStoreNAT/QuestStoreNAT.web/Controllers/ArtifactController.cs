@@ -55,6 +55,8 @@ namespace QuestStoreNAT.web.Controllers
             var model = artifactDAO.FindOneRecordBy(id);
             if (model == null)
             {
+                Response.StatusCode = 404;
+                ViewBag.ErrorMessage = "Sorry, you cannot edit this Artifact!";
                 return RedirectToAction("Error", "Home");
             }
             return View(model);
@@ -66,7 +68,7 @@ namespace QuestStoreNAT.web.Controllers
             if (ModelState.IsValid)
             {
                 artifactDAO.UpdateRecord(artifactToEdit);
-                TempData["ArrifactMessage"] = $"You have updated the \"{artifactToEdit.Name}\" Artifact!";
+                TempData["ArtifactMessage"] = $"You have updated the \"{artifactToEdit.Name}\" Artifact!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             return RedirectToAction("Error", "Home");

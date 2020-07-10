@@ -6,17 +6,17 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class QuestController : Controller
     {
-        private readonly QuestDAO questDAO;
+        private readonly IDB_GenericInterface<Quest> _questDAO;
 
-        public QuestController()
+        public QuestController(IDB_GenericInterface<Quest> questDAO)
         {
-            questDAO = new QuestDAO();
+            _questDAO = questDAO;
         }
 
         [HttpGet]
         public IActionResult ViewAllQuests()
         {
-            var model = questDAO.FetchAllRecords();
+            var model = _questDAO.FetchAllRecords();
             return View(model);
         }
 
@@ -31,7 +31,7 @@ namespace QuestStoreNAT.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                questDAO.AddRecord(questToAdd);
+                _questDAO.AddRecord(questToAdd);
                 TempData["QuestMessage"] = $"You have succesfully added the \"{questToAdd.Name}\" Quest!";
                 return RedirectToAction("ViewAllQuests", "Quest");
             }
@@ -43,7 +43,7 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult EditQuest(int id)
         {
-            var model = questDAO.FindOneRecordBy(id);
+            var model = _questDAO.FindOneRecordBy(id);
             if (model == null)
             {
                 Response.StatusCode = 404;
@@ -58,7 +58,7 @@ namespace QuestStoreNAT.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                questDAO.UpdateRecord(questToEdit);
+                _questDAO.UpdateRecord(questToEdit);
                 TempData["QuestMessage"] = $"You have updated the \"{questToEdit.Name}\" Quest!";
                 return RedirectToAction("ViewAllQuests", "Quest");
             }
@@ -70,22 +70,23 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult DeleteQuest(int id)
         {
-            var model = questDAO.FindOneRecordBy(id);
+            var model = _questDAO.FindOneRecordBy(id);
             if (model == null)
             {
                 Response.StatusCode = 404;
                 ViewBag.ErrorMessage = "Sorry, you cannot delete this Quest!";
                 return View("NotFound", id);
             }
-            return View(model);
+            return View("DeleteQuest", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteQuest(Quest questToDelete)
         {
-            var questToDeleteFromDB = questDAO.FindOneRecordBy(questToDelete.Id);
-            questDAO.DeleteRecord(questToDelete.Id);
-            TempData["QuestMessage"] = $"You have deleted the \"{questToDeleteFromDB.Name}\" Quest!";
+            var questToDeleteFromDB = _questDAO.FindOneRecordBy(questToDelete.Id);
+            _questDAO.DeleteRecord(questToDelete.Id);
+            var message = $"You have deleted the \"{questToDeleteFromDB.Name}\" Quest!";
+            TempData["QuestMessage"] = message;
             return RedirectToAction("ViewAllQuests", "Quest");
         }
     }
