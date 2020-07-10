@@ -11,12 +11,15 @@ namespace QuestStoreNAT.web.Controllers
         private ArtifactDAO artifactDAO;
         private StudentDAO studentDAO;
         private readonly ICurrentSession _session;
+        private int _studentID { get; set; }
+        private int _credentialID { get; set; }
 
         public ArtifactController(ICurrentSession session)
         {
             artifactDAO = new ArtifactDAO();
             studentDAO = new StudentDAO();
             _session = session;
+            _credentialID = _session.LoggedUser.CredentialID;
         }
 
         [HttpGet]
@@ -89,27 +92,17 @@ namespace QuestStoreNAT.web.Controllers
         
         public IActionResult BuyArtifact(int id)
         {
-            var currentUser = _session.LoggedUser;
-            var currentStudent = studentDAO.FindOneRecordBy(currentUser.CredentialID);
-            var artifactToBuy = artifactDAO.FindOneRecordBy(id);
-            var model = new OwnedArtifactStudentDAO();
-            var newRecord = new OwnedArtifactStudent()
-            {
-                StudentId = currentStudent.Id,
-                ArtifactId = id,
-                CompletionStatus = 0,
-            };
-            if (currentStudent.Wallet < artifactToBuy.Cost)
+            if (new ArtifactManagement().CheckigStudentWallet(_credentialID, id) == false)
             {
                 TempData["ArtifactMessage"] = $"You don't have enough money. Sorry!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
-            int currentWalletValue = currentStudent.Wallet - artifactToBuy.Cost;
-            currentStudent.Wallet = currentWalletValue;
-            new StudentDAO().UpdateRecord(currentStudent);
-            model.AddRecord(newRecord);
-            TempData["ArtifactMessage"] = $"You bought Artifact!";
-            return RedirectToAction("ViewAllArtifacts", "Artifact");
+            else
+            {
+                new ArtifactManagement().BuyIndiviudalArtifact(_credentialID, id);
+                TempData["ArtifactMessage"] = $"You bought Artifact!";
+                return RedirectToAction("ViewAllArtifacts", "Artifact");
+            }
         }
 
         public IActionResult BuyGroupArtifact(int id)

@@ -17,7 +17,6 @@ namespace QuestStoreNAT.web.Controllers
             _session = session;
             _credentialID = _session.LoggedUser.CredentialID;
             _studentDAO = new StudentDAO();
-            _studentID = _studentDAO.FindOneRecordBy(_credentialID).Id;
         }
 
         public IActionResult Welcome()
@@ -37,7 +36,7 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult ShowStudentProfile()
         {
             ViewData["role"] = _session.LoggedUserRole;
-            var targetStudent = new StudentDetails().ShowStudentDetails(_studentID);
+            var targetStudent = new StudentDetails().ShowStudentDetails(_credentialID);
             return View(targetStudent);
         }
 
@@ -51,7 +50,7 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult DeleteArtifact(int id)
         {
             ViewData["role"] = _session.LoggedUserRole;
-            new ArtifactManagement().DeleteUsedArtifactFromView(_studentID, id);
+            new ArtifactManagement().DeleteUsedArtifactFromView(_credentialID, id);
             return RedirectToAction("ShowStudentProfile", "Profile");
         }
 
