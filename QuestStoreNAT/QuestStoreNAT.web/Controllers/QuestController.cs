@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
 
@@ -6,10 +7,12 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class QuestController : Controller
     {
+        private readonly ILogger<QuestController> _logger;
         private readonly IDB_GenericInterface<Quest> _questDAO;
 
-        public QuestController(IDB_GenericInterface<Quest> questDAO)
+        public QuestController(ILogger<QuestController> logger, IDB_GenericInterface<Quest> questDAO)
         {
+            _logger = logger;
             _questDAO = questDAO;
         }
 
@@ -17,13 +20,19 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult ViewAllQuests()
         {
             var model = _questDAO.FetchAllRecords();
-            return View(model);
+            if (model == null)
+            {
+                ViewBag.ErrorMessage = "Sorry, we could not retrieve the list of all Quests.";
+                _logger.LogError($"Could not retrieve the Quests from Db.");
+                return View($"Error");
+            }
+            return View($"ViewAllQuests", model);
         }
 
         [HttpGet]
         public IActionResult AddQuest()
         {
-            return View();
+            return View($"AddQuest");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -70,6 +79,8 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult DeleteQuest(int id)
         {
+            if (id < 0) return View($"NotFound", id);
+
             var model = _questDAO.FindOneRecordBy(id);
             if (model == null)
             {
@@ -83,9 +94,15 @@ namespace QuestStoreNAT.web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteQuest(Quest questToDelete)
         {
-            var questToDeleteFromDB = _questDAO.FindOneRecordBy(questToDelete.Id);
+            if (questToDelete == null)
+            {
+                ViewBag.ErrorMessage = "Sorry, there was an error in communication.";
+                return View($"Error");
+            }
+
+            var questToDeleteFromDb = _questDAO.FindOneRecordBy(questToDelete.Id);
             _questDAO.DeleteRecord(questToDelete.Id);
-            TempData["QuestMessage"] = $"You have deleted the \"{questToDeleteFromDB.Name}\" Quest!";
+            TempData["QuestMessage"] = $"You have deleted the \"{questToDeleteFromDb.Name}\" Quest!";
             return RedirectToAction($"ViewAllQuests", $"Quest");
         }
     }
