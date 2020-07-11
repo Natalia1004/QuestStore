@@ -382,6 +382,7 @@ ul {
     color: #B22222;
     font-weight: bold;
 }
+
 .questreward__title {
     margin-left: 10px;
     margin-right: 10px;
@@ -784,33 +785,27 @@ ul {
 }
 
 .header_profile {
-    display: grid;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     grid-template-columns: repeat(2, 4fr);
     text-align: center;
-    font-size: 50px;
+    font-size: 40px;
     padding: 50px;
 }
 
 #nameStudent {
-    grid-column: 1/2;
+    padding: 20px;
 }
 
 #coolcoins {
-    grid-column: 2/2;
+    padding: 20px;
 }
-
 #Level {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 60px;
-    margin-right: 12px;
+    margin-top:25px;
 }
-
 #Group {
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 60px;
-    margin-left: 40px;
+    margin-top: 25px;
 }
 
 .artifacts {
@@ -996,83 +991,8 @@ fieldset .dropdown__button {
     text-align: center;
 }
 
-/*DELETE QUEST VIEW*/
 .delete-title {
     width: 100%;
     text-align: center;
     margin-bottom: 20px;
-}
-
-
-
-
-
-
-/*----------------
-   MENTOR DETAILS 
- -----------------*/
-
-.table_container {
-    display: grid;
-    column-gap: 2rem;
-    row-gap: 3rem;
-}
-
-.grid_table {
-    display: grid;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-radius: 0.5rem;
-    background-color: rgba(34, 36, 49, 0.74);
-}
-
-    .grid_table > span {
-        padding: 1rem;
-        border-left: 1px solid black;
-        border-bottom: 1px solid black;
-    }
-
-.headerSpan {
-    text-align: center;
-}
-
-.cellSpan {
-    text-align: center;
-}
-
-#mentor {
-    grid-template-columns: repeat(3, 1fr);
-    grid-column: 1/5;
-    grid-row: 1;
-}
-
-#groups {
-    grid-template-columns: repeat(2,1fr);
-    grid-column: 1/4;
-    grid-row: 2;
-}
-
-#classes {
-    grid-column: 4/5;
-    grid-row: 2;
-}
-
-#students {
-    grid-template-columns: repeat(3, 1fr);
-    grid-column: 1/5;
-    grid-row: 3;
-}
-
-/*----------------------
-    GENERAL
------------------------*/
-
-.margin10 {
-    margin: 10px;
-}
-.margin50bottom {
-    margin-bottom: 50px;
-}
-.margin50top {
-    margin-top: 50px;
 }
