@@ -35,7 +35,9 @@ namespace QuestStoreNAT.web.Controllers
                 TempData["QuestMessage"] = $"You have succesfully added the \"{questToAdd.Name}\" Quest!";
                 return RedirectToAction("ViewAllQuests", "Quest");
             }
-            return RedirectToAction("Error", "Home");
+            Response.StatusCode = 406;
+            ViewBag.ErrorMessage = "Sorry, adding new Quest failed.";
+            return View("Error");
         }
 
         [HttpGet]
@@ -44,7 +46,9 @@ namespace QuestStoreNAT.web.Controllers
             var model = questDAO.FindOneRecordBy(id);
             if (model == null)
             {
-                return RedirectToAction("Error", "Home");
+                Response.StatusCode = 404;
+                ViewBag.ErrorMessage = "Sorry, you cannot edit this Quest!";
+                return View("NotFound", id);
             }
             return View(model);
         }
@@ -58,7 +62,9 @@ namespace QuestStoreNAT.web.Controllers
                 TempData["QuestMessage"] = $"You have updated the \"{questToEdit.Name}\" Quest!";
                 return RedirectToAction("ViewAllQuests", "Quest");
             }
-            return RedirectToAction("Error", "Home");
+            Response.StatusCode = 406;
+            ViewBag.ErrorMessage = "Sorry, editing this Quest failed.";
+            return View("Error");
         }
 
         [HttpGet]
@@ -67,7 +73,9 @@ namespace QuestStoreNAT.web.Controllers
             var model = questDAO.FindOneRecordBy(id);
             if (model == null)
             {
-                return RedirectToAction("Error", "Home");
+                Response.StatusCode = 404;
+                ViewBag.ErrorMessage = "Sorry, you cannot delete this Quest!";
+                return View("NotFound", id);
             }
             return View(model);
         }

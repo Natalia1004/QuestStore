@@ -377,6 +377,11 @@ ul {
     background-color: rgba(34, 36, 49, 0.74);
     transition: background-color 0.5s;
 }
+.questreward__remover {
+    margin-left: 170px;
+    color: #B22222;
+    font-weight: bold;
+}
 
 .questreward__title {
     margin-left: 10px;
@@ -780,19 +785,27 @@ ul {
 }
 
 .header_profile {
-    display: grid;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     grid-template-columns: repeat(2, 4fr);
     text-align: center;
-    font-size: 50px;
+    font-size: 40px;
     padding: 50px;
 }
 
 #nameStudent {
-    grid-column: 1/2;
+    padding: 20px;
 }
 
 #coolcoins {
-    grid-column: 2/2;
+    padding: 20px;
+}
+#Level {
+    margin-top:25px;
+}
+#Group {
+    margin-top: 25px;
 }
 
 .artifacts {
@@ -809,12 +822,6 @@ ul {
     margin-bottom: 20px;
 }
 
-#Level {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 60px;
-    margin-right: 12px;
-}
 
 #artifact {
     grid-row: 2/6;

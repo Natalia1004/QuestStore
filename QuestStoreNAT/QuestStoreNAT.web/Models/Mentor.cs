@@ -8,6 +8,8 @@ namespace QuestStoreNAT.web.Models
         public int Id { get; set; }
 
         public List<Classroom> MentorClassrooms { get; set; }
+        public List<Group> MentorGroups { get; set; }
+        public List<Student> MentorStudents { get; set; }
 
         [Required]
         public int CredentialID { get; set; }

@@ -3,41 +3,39 @@
 @{
     ViewData["Title"] = "EditMentor";
 }
+<div class="landing">
 
-<h1>Edit Mentor</h1>
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
 
-<h4>Mentor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <h3>@Model.Id</h3>
-        <form asp-action="Edit" asp-controller="Mentor" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+        <div id="landing__content" class="landing__content landing__content-justify ">
+            <div class="form-limit">
+
+                <form class="form" asp-action="Edit" asp-controller="Mentor" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <h3 class="dropdown--margin">Edit Mentor</h3>
+
+                    <label asp-for="FirstName" class="dropdown--margin form-label form-margin"></label>
+                    <input asp-for="FirstName" class="dropdown--input dropdown--margin form-margin" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span><br>
+
+                    <label asp-for="LastName" class="dropdown--margin form-label form-margin"></label>
+                    <input asp-for="LastName" class="dropdown--input dropdown--margin form-margin" />
+                    <span asp-validation-for="LastName" class="text-danger"></span><br>
+
+                    <label asp-for="Bio" class="dropdown--margin form-label form-margin"></label>
+                    @* <input asp-for="Bio" class="dropdown--input dropdown--margin form-margin" /> *@
+                    <textarea asp-for="Bio" class="dropdown--input dropdown--margin contact_textbox--height form-margin"></textarea>
+                    <span asp-validation-for="Bio" class="text-danger"></span><br>
+
+                    <div class="form-submit">
+                        <button type="submit" class="dropdown__button dropdown--margin">Save</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bio" class="control-label"></label>
-                <input asp-for="Bio" class="form-control" />
-                <span asp-validation-for="Bio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

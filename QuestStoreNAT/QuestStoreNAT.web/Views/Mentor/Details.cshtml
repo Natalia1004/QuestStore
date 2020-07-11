@@ -1,39 +1,84 @@
-﻿@model QuestStoreNAT.web.Models.Mentor
+﻿@model MentorDetailsViewModel
 
 @{
     ViewData["Title"] = "DetailsMentor";
 }
 
 
-<h1>Mentor Details</h1>
+<div class="landing">
 
-<div>
-    <h4>Mentor</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bio)
-        </dd>
-    </dl>
-</div>
-<div>
-    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>*@ |
-    <a asp-action="Index">Back to List</a>
-    <a asp-action="Index" asp-controller="ClassEnrolment" asp-route-id="@Model.Id">Enrolment</a> |
-    <a asp-action="Index">Back to List</a>
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+
+        <div>
+            <h1>Mentor Details</h1>
+            <div class="table_container">
+
+                <hr />
+                <div id="mentor" class="grid_table">
+                    <span class="headerSpan">
+                        <strong>First Name</strong>
+                    </span>
+                    <span class="headerSpan">
+                        <strong>Last Name</strong>
+                    </span>
+                    <span class="headerSpan">
+                        <strong>Bio</strong>
+                    </span>
+                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.FirstName)</span>
+                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.LastName)</span>
+                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.Bio)</span>
+                </div>
+
+                <div id="classes" class="grid_table">
+                    <span class="headerSpan">
+                        <strong>Class Name</strong>
+                    </span>
+                    <span class="cellSpan">
+                        @if ( Model.Classrooms.Count() == 0 )
+                        {
+                        <span class="cellSpan">The mentor has not been assigned to any class so far</span>
+                        }
+                        @foreach ( var item in Model.Classrooms )
+                        {
+                        <a>@item.Name</a>
+                        }
+                    </span>
+                </div>
+
+                <div id="groups" class="grid_table">
+                    <span class="headerSpan">
+                        <strong>Group Name</strong>
+                    </span>
+                    <span class="headerSpan">
+                        <strong>Group Wallet </strong>
+                    </span>
+                    @foreach ( var group in Model.Groups )
+                    {
+                    <span class="cellSpan">@group.Name</span>
+                    <span class="cellSpan">@group.GroupWallet</span>
+                    }
+
+                </div>
+
+
+                <div id="students" class="grid_table">
+                    <span class="headerSpan">
+                        <strong>First Name</strong>
+                    </span>
+                    <span class="headerSpan">
+                        <strong>Last Name</strong>
+                    </span>
+                    <span class="headerSpan">
+                        <strong>Wallet</strong>
+                    </span>
+
+                    @foreach ( var student in Model.Students )
+                    {
+                    <span class="cellSpan">@student.FirstName</span>
+                    <span class="cellSpan">@student.LastName</span>
+                    <span class="cellSpan">@student.Wallet</span>
+                    }
+                </div>
+            </div>
+        </div>
 </div>

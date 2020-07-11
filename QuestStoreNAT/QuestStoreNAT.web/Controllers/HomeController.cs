@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.Models;
@@ -41,19 +42,31 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult Login(Credentials enterdCredentials)
         {
-            if (_loginValidatorService.IsValidLogin(enterdCredentials))
+            if (!_loginValidatorService.IsValidPasswordHASH(enterdCredentials)) return RedirectToAction("FailedLogin");
+            
+            _session.LoggedUserRole = _loginValidatorService.GetUserRole();
+            var credentialId = _loginValidatorService.GetUserCredentialId();
+            try
             {
-                _session.LoggedUserRole = _loginValidatorService.GetUserRole();
-                _session.LoggedUser = _userFinderService.RetrieveUser(_session.LoggedUserRole, enterdCredentials.Email);
+                _session.LoggedUser = _userFinderService.RetrieveUser(_session.LoggedUserRole, credentialId);
+                if (_session.LoggedUser.Equals(null))
+                {
+                    _logger.LogWarning($"Could not retrieve the user with CredentialId = {credentialId}. Such user does not exist.");
+                    return RedirectToAction("FailedLogin");
+                }
                 return RedirectToAction("Welcome", "Profile");
             }
-            TempData["Message"] = "Login failed. Either e-mail or password was incorect. Try again or contact us.";
-            return View("Contact");
+            catch(ArgumentException e)
+            {
+                _logger.LogWarning(e.Message);
+                return RedirectToAction("FailedLogin");
+            }
         }
 
         [HttpGet]
         public IActionResult Contact()
         {
+            //throw new Exception("Error in Contacts"); for testing ErrorController
             return View();
         }
 
@@ -67,6 +80,13 @@ namespace QuestStoreNAT.web.Controllers
                 return RedirectToAction("Index");
             }
             return View("Error");
+        }
+
+        [HttpGet]
+        public IActionResult FailedLogin()
+        {
+            TempData["Message"] = "Login failed. Either e-mail or password was incorect. Try again or contact us.";
+            return View("Contact");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
