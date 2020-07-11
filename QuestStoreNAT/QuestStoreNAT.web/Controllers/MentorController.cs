@@ -55,18 +55,26 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult Details( int id )
         {
+            return View(GetMentorDetals(id));
+        }
+
+
+        #region priv
+        private MentorDetailsViewModel GetMentorDetals(int id)
+        {
             var mentor = _mentorDAO.FetchAllRecords().FirstOrDefault(m => m.Id == id);
             var mentorClassrooms = _classEnrolmentDAO.FetchAllRecordsJoin().Where(ce => ce.MentorCE.Id == id).Select(ce => ce.ClassroomCE).ToList();
             var mentorGroups = _groupDAO.FetchAllRecordsByIdJoin(id).GroupBy(g => g.Id).Select(g => g.FirstOrDefault()).ToList();
             var mentorStudents = _studentDAO.FetchAllRecordsByIdJoin(id);
             var mentorViewModel = new MentorDetailsViewModel
             {
-                Mentor = mentor ,
-                Classrooms = mentorClassrooms ,
-                Groups = mentorGroups ,
+                Mentor = mentor,
+                Classrooms = mentorClassrooms,
+                Groups = mentorGroups,
                 Students = mentorStudents
             };
-            return View(mentorViewModel);
+            return mentorViewModel;
         }
+        #endregion
     }
 }

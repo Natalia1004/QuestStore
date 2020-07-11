@@ -1,0 +1,64 @@
+﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
+
+@model Student
+
+@{
+    ViewData["Title"] = "Details Student";
+}
+
+
+<div class="landing">
+
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+        @if (Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor)
+        {
+            <div>
+                <h1>Student Details</h1>
+                <div class="table_container">
+
+                    <hr />
+                    <div id="mentor" class="grid_table">
+                        <span class="headerSpan"><strong>First Name</strong></span>
+                        <span class="headerSpan"><strong>Last Name</strong></span>
+                        <span class="headerSpan"><strong>Wallet</strong></span>
+
+                        <span class="cellSpan">@Model.FirstName </span>
+                        <span class="cellSpan">@Model.LastName</span>
+                        <span class="cellSpan">@Model.Wallet</span>
+                    </div>
+
+                    <div id="students" class="grid_table">
+                        <span class="headerSpan"><strong>Quest Name</strong></span>
+                        <span class="headerSpan"><strong>Completion Status</strong></span>
+                        <span class="headerSpan"><strong>Change Status</strong></span>
+
+                        @if (Model.OwnedStudentQuests.Count == 0)
+                        {
+                            <span class="cellSpan">&nbsp;</span>
+                            <span class="cellSpan">The student has not tackled any quest so far</span>
+                            <span class="cellSpan">&nbsp;</span>
+                        }
+                        @foreach (var quest in Model.OwnedStudentQuests)
+                        {
+                            <span class="cellSpan">@quest.Name</span>
+                            @if (@quest.CompletionStatus == 1)
+                            {
+                 
+                                <span class="cellSpan">ongoing</span>
+                                <span class="cellSpan">
+                                    <a asp-action="Confirmation" asp-controller="Student" asp-route-questId="@quest.Id" class="dropdown__button dropdown--margin">Change status</a>
+                                </span>
+                                   
+                            }
+                            else
+                            {
+                                <span class="cellSpan">completed<a class="btn btn-primary" value="Change status"></a></span>
+                                <span class="cellSpan">
+                                </span>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+</div>

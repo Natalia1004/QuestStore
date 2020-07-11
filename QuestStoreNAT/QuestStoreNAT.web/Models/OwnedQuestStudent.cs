@@ -14,5 +14,7 @@ namespace QuestStoreNAT.web.Models
 
         [Required]
         public int CompletionStatus { get; set; }
+        public virtual string Name { get; set; }
+        public virtual int Cost { get; set; }
     }
 }

@@ -35,6 +35,8 @@ namespace QuestStoreNAT.web
             services.AddScoped<ClassEnrolmentDAO>();
             services.AddScoped<ClassroomDAO>();
             services.AddScoped<GroupDAO>();
+            services.AddScoped<OwnedQuestStudentDAO>();
+            services.AddScoped<QuestDAO>();
 
             services.AddControllersWithViews();
         }
