@@ -3,7 +3,7 @@ using QuestStoreNAT.web.Models;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public class AdminDAO : DBAbstractRecord_Credentials<Admin>
+    public class AdminDAO : DBAbstractRecord_WithCredentials<Admin>
     {
         public override string DBTableName { get; set; } = "Admins";
         private enum AdminsEnum

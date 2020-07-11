@@ -7,13 +7,13 @@ namespace QuestStoreNAT.web.Services
 {
     public class LoginValidatorService : ILoginValidatorService
     {
-        private readonly CredentialsDAO _CredentialsDAO;
+        private IDB_GenericInterface<Credentials> _CredentialsDAO;
         private Role UserRole { get; set; }
         private int CredentialId { get; set; }
 
-        public LoginValidatorService()
+        public LoginValidatorService(IDB_GenericInterface<Credentials> credentialsDAO)
         {
-            _CredentialsDAO = new CredentialsDAO(); 
+            _CredentialsDAO = credentialsDAO ?? throw new ArgumentNullException(nameof(credentialsDAO)); 
         }
 
         public Role GetUserRole()
@@ -26,35 +26,33 @@ namespace QuestStoreNAT.web.Services
             return CredentialId;
         }
 
-        public bool IsValidLogin(Credentials enteredCredentials)
-        {
-            Credentials validUserCredentials = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
-
-            if (validUserCredentials is null) return false;
-
-            UserRole = validUserCredentials.Role;
-            CredentialId = validUserCredentials.Id;
-
-            return (validUserCredentials.Password == enteredCredentials.Password);
-        }
-
         public bool IsValidPasswordHASH(Credentials enteredCredentials)
         {
-            Credentials userCredentialsInDb = _CredentialsDAO.FindCredentials(enteredCredentials.Email);
+            if (enteredCredentials == null) return false;
+            if (enteredCredentials.Email == null) return false;
+            if (enteredCredentials.Password == null) return false;
+
+            Credentials userCredentialsInDb = _CredentialsDAO.FindOneRecordBy(enteredCredentials.Email);
 
             if (userCredentialsInDb == null) return false;
+            if (userCredentialsInDb.Password == null) return false;
+            if (userCredentialsInDb.SALT == null) return false;
 
             string passwordFromDb = userCredentialsInDb.Password;
-            string saltFromDb = userCredentialsInDb.SALT;
-            var passwordFromForm = EncryptPassword.CreateHASH(enteredCredentials.Password, saltFromDb);
+            byte[] passwordFromForm = EncryptPassword.CreateHASH(enteredCredentials.Password, userCredentialsInDb.SALT);
 
             if (SlowEquals(passwordFromDb.ConvertStringToByte(), passwordFromForm))
             {
-                UserRole = userCredentialsInDb.Role;
-                CredentialId = userCredentialsInDb.Id;
+                SetUserRoleAndCredentialId(userCredentialsInDb);
                 return true;
             }
             return false;
+        }
+
+        private void SetUserRoleAndCredentialId(Credentials userCredentialsInDb)
+        {
+            UserRole = userCredentialsInDb.Role;
+            CredentialId = userCredentialsInDb.Id;
         }
 
         private bool SlowEquals(byte[] a, byte[] b)

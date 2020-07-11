@@ -79,7 +79,7 @@ namespace QuestStoreNAT.web.Tests
         [Fact]
         public void ThrowArguementException_When_IdIsLessThan0()
         {
-            Assert.Throws<ArgumentException>(() => _findIUserMockSuccess.Object.RetrieveUser(Role.Student, 0));
+            Assert.Throws<ArgumentException>(() => _findIUserMockSuccess.Object.RetrieveUser(Role.Student, -1));
         }
     }
 }
