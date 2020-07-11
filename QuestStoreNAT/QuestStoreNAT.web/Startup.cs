@@ -19,6 +19,7 @@ namespace QuestStoreNAT.web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConnectDB.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
