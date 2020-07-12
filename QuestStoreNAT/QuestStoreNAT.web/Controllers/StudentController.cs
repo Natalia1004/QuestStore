@@ -16,6 +16,7 @@ namespace QuestStoreNAT.web.Controllers
         private readonly QuestDAO _questDAO;
         private readonly OwnedQuestStudentDAO _ownedQuestStudentDAO;
         private readonly ICurrentSession _session;
+        private static int studentId;
 
         public StudentController(StudentDAO studentDAO, 
                                 QuestDAO questDAO,
@@ -57,36 +58,33 @@ namespace QuestStoreNAT.web.Controllers
             return RedirectToAction("Index" , "Student");
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int Id)
         {
-            return View(GetStudentDetails(id));
+            return View(GetStudentDetails(Id));
 
         }
 
         public IActionResult Confirmation(int questId)
         {
-            //var checkid = model.QuestIDToUpdate;
             var questToConfirm = _ownedQuestStudentDAO.FetchAllRecords().FirstOrDefault(q => q.Id == questId);
             questToConfirm.CompletionStatus = 0;
             _ownedQuestStudentDAO.UpdateRecord(questToConfirm);
-            var Id = _session.LoggedUser.CredentialID;
-            return RedirectToAction("Details", "Student", new { id = Id });// nie przekazuje Id do Details
+            return RedirectToAction("Details", "Student", new { Id = studentId });
         }
 
         #region priv
-        private Student GetStudentDetails(int id)
+        private Student GetStudentDetails(int Id)
         {
-            var student = _studentDAO.FetchAllRecords().FirstOrDefault(s => s.CredentialID == id);
+            studentId = Id;
+            var student = _studentDAO.FetchAllRecords().FirstOrDefault(s => s.Id == Id);
             var studentQuests = _ownedQuestStudentDAO.FetchAllRecords().Where(q => q.StudentId == student.Id).ToList();
             var quests = _questDAO.FetchAllRecords();
 
-            student.OwnedStudentQuests = quests.Join(studentQuests, q => q.Id, s => s.QuestId, (q, s) => new OwnedQuestStudent
-                                               {Id = s.Id, StudentId = s.StudentId, QuestId = s.QuestId, 
-                                                CompletionStatus = s.CompletionStatus,Name = q.Name,Cost = q.Cost})
-                                                .OrderBy(q=>q.CompletionStatus)
-                                                .ToList();
-            
-
+            student.OwnedStudentQuests = quests
+                                         .Join(studentQuests, q => q.Id, s => s.QuestId, (q, s) => new OwnedQuestStudent
+                                               {Id = s.Id, StudentId = s.StudentId, QuestId = s.QuestId, CompletionStatus = s.CompletionStatus,Name = q.Name,Cost = q.Cost})
+                                          .OrderBy(q=>q.CompletionStatus)
+                                          .ToList();
             return student;
         }
         #endregion
