@@ -30,12 +30,15 @@ namespace QuestStoreNAT.web
             services.AddScoped<ILoginValidatorService, LoginValidatorService>();
             services.AddScoped<IUserFinderService, UserFinderService>();
             services.AddSingleton<ICurrentSession, CurrentSession>();
+          
             services.AddScoped<MentorDAO>();
             services.AddScoped<StudentDAO>();
             services.AddScoped<CredentialsDAO>();
             services.AddScoped<ClassEnrolmentDAO>();
             services.AddScoped<ClassroomDAO>();
             services.AddScoped<GroupDAO>();
+            services.AddScoped<OwnedQuestStudentDAO>();
+            services.AddScoped<QuestDAO>();
             services.AddScoped<IDB_GenericInterface<Credentials>, CredentialsDAO>();
             services.AddScoped<IDB_GenericInterface<Quest>, QuestDAO>();
 
