@@ -3,7 +3,7 @@ using System;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public abstract class DBAbstractRecord_IdReturning<T> : DBAbstractRecord<T>
+    public abstract class DBAbstractRecord_WithIdReturning<T> : DBAbstractRecord<T>
     {
         public virtual int AddRecordReturningID( T recordToAdd )
         {

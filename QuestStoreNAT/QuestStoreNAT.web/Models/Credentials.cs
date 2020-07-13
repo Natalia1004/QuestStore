@@ -9,13 +9,13 @@ namespace QuestStoreNAT.web.Models
 
         [Required(ErrorMessage = "Email required")]
         [EmailAddress(ErrorMessage = "Invalid email")]
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public virtual string Password { get; set; }
 
         [Required]
-        public string SALT { get; set; }
+        public virtual string SALT { get; set; }
 
         [Required]
         public Role Role { get; set; }

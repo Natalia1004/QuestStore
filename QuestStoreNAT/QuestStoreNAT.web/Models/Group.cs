@@ -17,6 +17,5 @@ namespace QuestStoreNAT.web.Models
 
         public List<Student> GroupStudents { get; set; }
         public List<Quest> GroupQuests { get; set; }
-
     }
 }
