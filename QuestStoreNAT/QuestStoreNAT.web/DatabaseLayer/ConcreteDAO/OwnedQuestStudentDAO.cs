@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Npgsql;
+﻿using Npgsql;
 using QuestStoreNAT.web.Models;
 
 namespace QuestStoreNAT.web.DatabaseLayer
@@ -15,6 +11,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         {
             Id, StudentId, QuestId, QuestStatusId
         }
+
         public override OwnedQuestStudent ProvideOneRecord(NpgsqlDataReader reader)
         {
             return new OwnedQuestStudent
@@ -23,14 +20,26 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 StudentId = reader.GetInt32((int)OwnedQuestStudentEnum.StudentId),
                 QuestId = reader.GetInt32((int)OwnedQuestStudentEnum.QuestId),
                 CompletionStatus = reader.GetInt32((int)OwnedQuestStudentEnum.QuestStatusId)
+                //Why not Enum
+                //CompletionStatus = (CompletionStatus)reader.GetInt32((int)OwnedQuestStudentEnum.QuestStatusId)
             };
         }
 
-        public override void UpdateRecord(OwnedQuestStudent ownedQuestToUpdate)
+        //TODO DELETE IF NO ERRORS UNTIL 17.07
+        //public override void UpdateRecord(OwnedQuestStudent ownedQuestToUpdate)
+        //{
+        //    using NpgsqlConnection connection = OpenConnectionToDB();
+        //    string query = ProvideQueryStringToUpdate(ownedQuestToUpdate);
+        //    ExecuteQuery(connection, query);
+        //}
+
+        public override string ProvideQueryStringToAdd(OwnedQuestStudent recordToAdd)
         {
-            using NpgsqlConnection connection = OpenConnectionToDB();
-            string query = ProvideQueryStringToUpdate(ownedQuestToUpdate);
-            ExecuteQuery(connection, query);
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"StudentID\", \"QuestID\", \"QuestStatusID\")" +
+                        $"VALUES({recordToAdd.StudentId}, " +
+                        $"'{recordToAdd.QuestId}', " +
+                        $"'{recordToAdd.CompletionStatus}');";
+            return query;
         }
 
         public override string ProvideQueryStringToUpdate(OwnedQuestStudent ownedQuestToUpdate)
@@ -39,12 +48,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
                         $"SET \"QuestStatusID\" = {ownedQuestToUpdate.CompletionStatus}"+
                         $"WHERE \"ID\" = {ownedQuestToUpdate.Id};";
             return query;
-        }
-
-        
-        public override string ProvideQueryStringToAdd(OwnedQuestStudent recordToAdd)
-        {
-            throw new NotImplementedException();
         }
     }
 }
