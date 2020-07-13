@@ -5,8 +5,8 @@ namespace QuestStoreNAT.web.DatabaseLayer.ConcreteDAO
 {
     public class OwnedQuestGroupDAO : DBAbstractRecord<OwnedQuestGroup>
     {
-        public override string DBTableName { get; set; } = "OwnedQuestGroup";
-
+        public override string DBTableName { get; set; } = "fruits";
+        //TODO fruits to proper table name
         private enum OwnedQuestGroupEnum
         {
             Id, GroupId, QuestId, QuestStatusId

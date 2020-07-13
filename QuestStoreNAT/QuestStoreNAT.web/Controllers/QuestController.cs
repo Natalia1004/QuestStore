@@ -126,7 +126,8 @@ namespace QuestStoreNAT.web.Controllers
             {
                 StudentId = _session.LoggedUser.Id,
                 QuestId = claimedIndividualQuest.Id,
-                //CompletionStatus = CompletionStatus.Unfinished,
+                CompletionStatus = 1
+                //TODO CompletionStatus = CompletionStatus.Unfinished,
             };
             _ownedQuestStudentDAO.AddRecord(ownedIndividualQuest);
             TempData["QuestMessage"] = $"You have claimed the \"{claimedIndividualQuest.Name}\" Quest!";
@@ -139,7 +140,7 @@ namespace QuestStoreNAT.web.Controllers
             var claimedGroupQuest = _questDAO.FindOneRecordBy(id);
             var ownedGroupQuest = new OwnedQuestGroup()
             {
-                //TODO GroupId = 
+                //TODO GroupId = set up proper group id retrival
                 GroupId = 2,
                 QuestId = claimedGroupQuest.Id,
                 CompletionStatus = CompletionStatus.Unfinished,
