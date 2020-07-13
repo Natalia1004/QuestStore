@@ -19,6 +19,7 @@ namespace QuestStoreNAT.web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConnectDB.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -35,6 +36,8 @@ namespace QuestStoreNAT.web
             services.AddScoped<ClassEnrolmentDAO>();
             services.AddScoped<ClassroomDAO>();
             services.AddScoped<GroupDAO>();
+            services.AddScoped<IDB_GenericInterface<Credentials>, CredentialsDAO>();
+            services.AddScoped<IDB_GenericInterface<Quest>, QuestDAO>();
 
             services.AddControllersWithViews();
         }

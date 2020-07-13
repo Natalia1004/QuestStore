@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public abstract class DBAbstractRecord<T>
+    public abstract class DBAbstractRecord<T> : IDB_GenericInterface<T>
     {
         public abstract string DBTableName { get; set; }
         public abstract T ProvideOneRecord(NpgsqlDataReader reader);
@@ -55,7 +55,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             return allRecords;
         }
 
-
         public virtual void AddRecord(T recordToAdd)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
@@ -91,11 +90,12 @@ namespace QuestStoreNAT.web.DatabaseLayer
             command.ExecuteNonQuery();
         }
 
-        protected void ExecuteReader( NpgsqlConnection connection , string query )
-        {
-            using var command = new NpgsqlCommand(query , connection);
-            command.Prepare();
-            command.ExecuteNonQuery();
-        }
+        //TODO DELETE IF NO ERRORS UNTIL 17.07
+        //protected void ExecuteReader( NpgsqlConnection connection , string query )
+        //{
+        //    using var command = new NpgsqlCommand(query , connection);
+        //    command.Prepare();
+        //    command.ExecuteNonQuery();
+        //}
     }
 }

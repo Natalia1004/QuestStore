@@ -2,7 +2,7 @@
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public abstract class DBAbstractRecord_Credentials<T> : DBAbstractRecord<T>
+    public abstract class DBAbstractRecord_WithCredentials<T> : DBAbstractRecord<T>
     {
         public virtual T FindOneRecordByCredentialId(int CredentialsId)
         {

@@ -4,7 +4,7 @@ using Npgsql;
 
 namespace QuestStoreNAT.web.DatabaseLayer
 {
-    public class CredentialsDAO : DBAbstractRecord_IdReturning<Credentials>
+    public class CredentialsDAO : DBAbstractRecord_WithIdReturning<Credentials>
     {
         public override string DBTableName { get; set; } = "Credentials";
 
@@ -14,24 +14,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
         }
 
         #region standardDAOimplementation
-        public Credentials FindCredentials(string email)
-        {
-            if (String.IsNullOrEmpty(email)) throw new ArgumentNullException(nameof(email));
-
-            using NpgsqlConnection connection = ConnectDB.CreateNewConnection();
-            connection.Open();
-            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"NATQuest\".\"{DBTableName}\".\"Email\" = '{email}' LIMIT 1;";
-            using var command = new NpgsqlCommand(query, connection);
-            var reader = command.ExecuteReader();
-
-            Credentials foundCredentials = null;
-            while (reader.Read())
-            {
-                foundCredentials = ProvideOneRecord(reader);
-            };
-            return foundCredentials;
-        }
-
         public override Credentials ProvideOneRecord(NpgsqlDataReader reader)
         {
             var credentials = new Credentials();
