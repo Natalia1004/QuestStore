@@ -99,14 +99,13 @@ namespace QuestStoreNAT.web.Controllers
             if (new ArtifactManagement().CheckigStudentWallet(_credentialID, id) == false)
             {
                 TempData["ArtifactMessage"] = $"You don't have enough money. Sorry!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             else
             {
                 new ArtifactManagement().BuyIndiviudalArtifact(_credentialID, id);
                 TempData["ArtifactMessage"] = $"You bought Artifact!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
+            return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
 
         public IActionResult BuyGroupArtifact(int id)
@@ -114,20 +113,18 @@ namespace QuestStoreNAT.web.Controllers
             if (artifactManagmenet.CheckigGroupWallet(_student.GroupID, id, _credentialID) == false)
             {
                 TempData["ArtifactMessage"] = $"Your group don't have enough money or maybe You don't have enough coolcoins to share costs. Sorry!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             else if(artifactManagmenet.CheckingIfTransactionForBoughtGroupArtifactExist(_student.GroupID) == false)
             {
                 TempData["ArtifactMessage"] = $"Transactions for purchase the new group artifact exist. You can't make another transaction!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             else
             {
                 artifactManagmenet.CreateNewGroupTransaction(id, _student.GroupID);
                 artifactManagmenet.CreateRecordForAcceptance(_credentialID, _student.GroupID, id);
                 TempData["ArtifactMessage"] = $"Your group will receive information!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
+            return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
     }
 }
