@@ -105,5 +105,15 @@ namespace QuestStoreNAT.web.Controllers
             TempData["QuestMessage"] = $"You have deleted the \"{questToDeleteFromDb.Name}\" Quest!";
             return RedirectToAction($"ViewAllQuests", $"Quest");
         }
+
+        public IActionResult ClaimQuest(int id)
+        {
+            return View($"Error");
+        }
+
+        public IActionResult ClaimGroupQuest(int id)
+        {
+            return View($"Error");
+        }
     }
 }

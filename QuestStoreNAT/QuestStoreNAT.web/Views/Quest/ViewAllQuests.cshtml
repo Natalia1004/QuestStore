@@ -34,6 +34,12 @@
                     <a asp-action="DeleteQuest" asp-route-id="@quest.Id" class="dropdown__button">Delete</a>
                 </div>
                 }
+                @if (Session.LoggedUserRole == Role.Student)
+                {
+                    <div class="admin-controll">
+                        <a asp-action="ClaimQuest" asp-route-id="@quest.Id" class="dropdown__button">Claim</a>
+                    </div>
+                }
             </div>
         }
 
@@ -52,6 +58,12 @@
                     <a asp-action="EditQuest" asp-route-id="@quest.Id" class="dropdown__button">Edit</a>
                     <a asp-action="DeleteQuest" asp-route-id="@quest.Id" class="dropdown__button">Delete</a>
                 </div>
+                }
+                @if (Session.LoggedUserRole == Role.Student)
+                {
+                    <div class="admin-controll">
+                        <a asp-action="ClaimGroupQuest" asp-route-id="@quest.Id" class="dropdown__button">Claim</a>
+                    </div>
                 }
             </div>
         }
