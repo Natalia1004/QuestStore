@@ -16,15 +16,15 @@ namespace QuestStoreNAT.web.Services
             _groupTrasanctionDAO = new GroupTransactionDAO();
         }
 
-        public void StudentAcceptance(StudentAcceptance studentAcceptance, int groupID,int artifactID, int artifactCost, int studentID)
+        public void StudentAcceptance(string answear, int groupID,int artifactID, int artifactCost, int studentID)
         {
-            switch(studentAcceptance.acceptance)
+            switch(answear)
             {
-                case (int)Acceptance.No:
+                case "No, I don't agree":
                     _studentAcceptanceDAO.DeleteAllTransactionForGroup(groupID);
                     _groupTrasanctionDAO.DeleteAllTransactionForGroup(groupID);
                     break;
-                case (int)Acceptance.Yes:
+                case "Accept":
                     if(CheckAmountOfAcceptance(groupID) == true)
                     {
                         CreateAndAddNewRecordGroupArtifact(groupID, artifactID);
@@ -81,7 +81,7 @@ namespace QuestStoreNAT.web.Services
             }
         }
 
-        public enum Acceptance
+        public enum answear
         {
             No = 1,
             Yes = 2
