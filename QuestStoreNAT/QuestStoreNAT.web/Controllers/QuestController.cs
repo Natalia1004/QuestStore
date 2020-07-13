@@ -38,14 +38,15 @@ namespace QuestStoreNAT.web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddQuest(Quest questToAdd)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && questToAdd != null)
             {
                 _questDAO.AddRecord(questToAdd);
-                TempData["QuestMessage"] = $"You have succesfully added the \"{questToAdd.Name}\" Quest!";
+                TempData["QuestMessage"] = $"You have successfully added the \"{questToAdd.Name}\" Quest!";
                 return RedirectToAction($"ViewAllQuests", $"Quest");
             }
             Response.StatusCode = 406;
             ViewBag.ErrorMessage = "Sorry, adding new Quest failed.";
+            _logger.LogError($"Could not add the Quest to Db. Quest was null or Invalid");
             return View($"Error");
         }
 
@@ -59,13 +60,13 @@ namespace QuestStoreNAT.web.Controllers
                 ViewBag.ErrorMessage = "Sorry, you cannot edit this Quest!";
                 return View($"NotFound", id);
             }
-            return View(model);
+            return View($"EditQuest", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditQuest(Quest questToEdit)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && questToEdit != null)
             {
                 _questDAO.UpdateRecord(questToEdit);
                 TempData["QuestMessage"] = $"You have updated the \"{questToEdit.Name}\" Quest!";
@@ -73,14 +74,13 @@ namespace QuestStoreNAT.web.Controllers
             }
             Response.StatusCode = 406;
             ViewBag.ErrorMessage = "Sorry, editing this Quest failed.";
+            _logger.LogError($"Could not add the Quest to Db. Quest was null or Invalid");
             return View($"Error");
         }
 
         [HttpGet]
         public IActionResult DeleteQuest(int id)
         {
-            if (id < 0) return View($"NotFound", id);
-
             var model = _questDAO.FindOneRecordBy(id);
             if (model == null)
             {
