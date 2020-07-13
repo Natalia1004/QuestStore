@@ -2,18 +2,31 @@
 using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
     public class QuestController : Controller
     {
         private readonly ILogger<QuestController> _logger;
+        private readonly ICurrentSession _session;
         private readonly IDB_GenericInterface<Quest> _questDAO;
+        private readonly IDB_GenericInterface<OwnedQuestStudent> _ownedQuestStudentDAO;
+        private readonly IDB_GenericInterface<OwnedQuestGroup> _ownedQuestGroupDAO;
 
-        public QuestController(ILogger<QuestController> logger, IDB_GenericInterface<Quest> questDAO)
+        public QuestController(
+            ILogger<QuestController> logger,
+            ICurrentSession session,
+            IDB_GenericInterface<Quest> questDAO,
+            IDB_GenericInterface<OwnedQuestStudent> ownedQuestStudentDAO,
+            IDB_GenericInterface<OwnedQuestGroup> ownedQuestGroupDAO
+            )
         {
             _logger = logger;
+            _session = session;
             _questDAO = questDAO;
+            _ownedQuestStudentDAO = ownedQuestStudentDAO;
+            _ownedQuestGroupDAO = ownedQuestGroupDAO;
         }
 
         [HttpGet]
@@ -108,12 +121,31 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult ClaimQuest(int id)
         {
-            return View($"Error");
+            var claimedIndividualQuest = _questDAO.FindOneRecordBy(id);
+            var ownedIndividualQuest = new OwnedQuestStudent()
+            {
+                StudentId = _session.LoggedUser.Id,
+                QuestId = claimedIndividualQuest.Id,
+                //CompletionStatus = CompletionStatus.Unfinished,
+            };
+            _ownedQuestStudentDAO.AddRecord(ownedIndividualQuest);
+            TempData["QuestMessage"] = $"You have claimed the \"{claimedIndividualQuest.Name}\" Quest!";
+            return RedirectToAction($"ViewAllQuests", $"Quest");
+
         }
 
         public IActionResult ClaimGroupQuest(int id)
         {
-            return View($"Error");
+            var claimedGroupQuest = _questDAO.FindOneRecordBy(id);
+            var ownedGroupQuest = new OwnedQuestGroup()
+            {
+                //TODO GroupId = 
+                QuestId = claimedGroupQuest.Id,
+                CompletionStatus = CompletionStatus.Unfinished,
+            };
+            _ownedQuestGroupDAO.AddRecord(ownedGroupQuest);
+            TempData["QuestMessage"] = $"You have claimed the \"{claimedGroupQuest.Name}\" Quest!";
+            return RedirectToAction($"ViewAllQuests", $"Quest");
         }
     }
 }

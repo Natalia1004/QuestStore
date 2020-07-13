@@ -35,7 +35,7 @@ namespace QuestStoreNAT.web.DatabaseLayer.ConcreteDAO
         public override string ProvideQueryStringToUpdate(OwnedQuestGroup recordToUpdate)
         {
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
-                        $"SET \"QuestStatusID\" = {recordToUpdate.CompletionStatus}" +
+                        $"SET \"QuestStatusID\" = {(int)recordToUpdate.CompletionStatus}" +
                         $"WHERE \"ID\" = {recordToUpdate.Id};";
             return query;
         }

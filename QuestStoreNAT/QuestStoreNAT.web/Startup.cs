@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuestStoreNAT.web.DatabaseLayer;
+using QuestStoreNAT.web.DatabaseLayer.ConcreteDAO;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.Services;
 
@@ -41,6 +42,8 @@ namespace QuestStoreNAT.web
             services.AddScoped<QuestDAO>();
             services.AddScoped<IDB_GenericInterface<Credentials>, CredentialsDAO>();
             services.AddScoped<IDB_GenericInterface<Quest>, QuestDAO>();
+            services.AddScoped<IDB_GenericInterface<OwnedQuestStudent>, OwnedQuestStudentDAO>();
+            services.AddScoped<IDB_GenericInterface<OwnedQuestGroup>, OwnedQuestGroupDAO>();
 
             services.AddControllersWithViews();
         }

@@ -8,6 +8,7 @@ using Moq;
 using QuestStoreNAT.web.Controllers;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.Services;
 using Xunit;
 
 namespace QuestStoreNAT.web.Tests
@@ -17,12 +18,17 @@ namespace QuestStoreNAT.web.Tests
         private readonly QuestController _sutController;
         private readonly Mock<ILogger<QuestController>> _mockLogger;
         private readonly Mock<IDB_GenericInterface<Quest>> _mockQuestDao;
+        private readonly Mock<IDB_GenericInterface<OwnedQuestStudent>> _mockOwnedQuestStudentDao;
+        private readonly Mock<IDB_GenericInterface<OwnedQuestGroup>> _mockOwnedQuestGroupDao;
         private readonly Mock<HttpResponse> _mockHttpResponse;
 
         public QuestControllerShould()
         {
             _mockLogger = new Mock<ILogger<QuestController>>();
+            var mockICurrentSession = new Mock<ICurrentSession>();
             _mockQuestDao = new Mock<IDB_GenericInterface<Quest>>();
+            _mockOwnedQuestStudentDao = new Mock<IDB_GenericInterface<OwnedQuestStudent>>();
+            _mockOwnedQuestGroupDao = new Mock<IDB_GenericInterface<OwnedQuestGroup>>();
 
             _mockHttpResponse = new Mock<HttpResponse>();
             _mockHttpResponse.SetupAllProperties();
@@ -32,7 +38,12 @@ namespace QuestStoreNAT.web.Tests
 
             var mockTempData = new Mock<ITempDataDictionary>();
 
-            _sutController = new QuestController( _mockLogger.Object, _mockQuestDao.Object)
+            _sutController = new QuestController( 
+                _mockLogger.Object,
+                mockICurrentSession.Object,
+                _mockQuestDao.Object, 
+                _mockOwnedQuestStudentDao.Object,
+                _mockOwnedQuestGroupDao.Object )
             {
                 TempData = mockTempData.Object,
                 ControllerContext = new ControllerContext {HttpContext = mockHttpContext.Object}
