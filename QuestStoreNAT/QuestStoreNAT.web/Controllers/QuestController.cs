@@ -140,6 +140,7 @@ namespace QuestStoreNAT.web.Controllers
             var ownedGroupQuest = new OwnedQuestGroup()
             {
                 //TODO GroupId = 
+                GroupId = 2,
                 QuestId = claimedGroupQuest.Id,
                 CompletionStatus = CompletionStatus.Unfinished,
             };

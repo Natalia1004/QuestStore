@@ -37,8 +37,8 @@ namespace QuestStoreNAT.web.DatabaseLayer
         {
             var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"StudentID\", \"QuestID\", \"QuestStatusID\")" +
                         $"VALUES({recordToAdd.StudentId}, " +
-                        $"'{recordToAdd.QuestId}', " +
-                        $"'{recordToAdd.CompletionStatus}');";
+                        $"{recordToAdd.QuestId}, " +
+                        $"{(int)recordToAdd.CompletionStatus});";
             return query;
         }
 

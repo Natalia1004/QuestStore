@@ -27,8 +27,8 @@ namespace QuestStoreNAT.web.DatabaseLayer.ConcreteDAO
         {
             var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"GroupID\", \"QuestID\", \"QuestStatusID\")" +
                         $"VALUES({recordToAdd.GroupId}, " +
-                        $"'{recordToAdd.QuestId}', " +
-                        $"'{recordToAdd.CompletionStatus}');";
+                        $"{recordToAdd.QuestId}, " +
+                        $"{(int)recordToAdd.CompletionStatus});";
             return query;
         }
 
