@@ -94,15 +94,27 @@ namespace QuestStoreNAT.web.Controllers
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
 
+        [HttpGet]
         public IActionResult BuyArtifact(int id)
         {
-            if (new ArtifactManagement().CheckigStudentWallet(_credentialID, id) == false)
+            var model = artifactDAO.FindOneRecordBy(id);
+            if (model == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult BuyArtifact(Artifact artifact)
+        {
+            if (new ArtifactManagement().CheckigStudentWallet(_credentialID, artifact.Id) == false)
             {
                 TempData["ArtifactMessage"] = $"You don't have enough money. Sorry!";
             }
             else
             {
-                new ArtifactManagement().BuyIndiviudalArtifact(_credentialID, id);
+                new ArtifactManagement().BuyIndiviudalArtifact(_credentialID, artifact.Id);
                 TempData["ArtifactMessage"] = $"You bought Artifact!";
             }
             return RedirectToAction("ViewAllArtifacts", "Artifact");
