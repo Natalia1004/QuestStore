@@ -6,22 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.ViewModels;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
     public class MentorController : Controller
     {
+        private readonly ICurrentSession _session;
+        private int _credentialID { get; set; }
         private readonly MentorDAO _mentorDAO;
         private readonly ClassEnrolmentDAO _classEnrolmentDAO;
         private readonly GroupDAO _groupDAO;
         private readonly StudentDAO _studentDAO;
 
-        public MentorController(MentorDAO mentorDAO, ClassEnrolmentDAO classEnrolmentDAO, GroupDAO groupDAO, StudentDAO studentDAO )
+        public MentorController(MentorDAO mentorDAO, ClassEnrolmentDAO classEnrolmentDAO, GroupDAO groupDAO, StudentDAO studentDAO, ICurrentSession session)
         {
             _mentorDAO = mentorDAO;
             _classEnrolmentDAO = classEnrolmentDAO;
             _groupDAO = groupDAO;
             _studentDAO = studentDAO;
+            _session = session;
+            _credentialID = _session.LoggedUser.CredentialID;
         }
         public IActionResult Index()
         {
@@ -56,6 +61,12 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult Details( int id )
         {
             return View(GetMentorDetals(id));
+        }
+
+        public IActionResult ShowMentorProfile()
+        {
+            int mentorID = _mentorDAO.FindOneRecordByCredentialId(_credentialID).Id;
+            return View(GetMentorDetals(mentorID));
         }
 
 
