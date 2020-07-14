@@ -9,7 +9,7 @@
                 @if (Session.LoggedUserRole == Role.Student)
                 {
                     <li><a asp-action="ShowStudentProfile" asp-controller="Profile"><button class="dropdown__button">Show My Profile</button></a></li>
-                    <li><a asp-action="Message" asp-controller="Message"><button class="dropdown__button">Message</button></a></li>
+                    <li><a asp-action="Message" asp-controller="Message"><button class="dropdown__button">Messages</button></a></li>
                 }
                 else
                 {

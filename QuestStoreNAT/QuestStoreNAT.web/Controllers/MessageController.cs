@@ -40,7 +40,7 @@ namespace QuestStoreNAT.web.Controllers
                 model.currentAmountOfAcceptance = _groupTransactionDAO.FindOneRecordBy(model.groupID).numberOfAcceptance;
                 return View(model);
             }
-            TempData["Message"] = $"You don't have any message";
+            TempData["Message"] = $"You don't have any messages";
             return RedirectToAction("Welcome", "Profile");
         }
 
