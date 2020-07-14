@@ -7,7 +7,7 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class ArtifactController : Controller
     {
-        private StudentDAO studentDAO;
+        private StudentDAO _studentDAO;
         private Student _student { get; set; }
         private ArtifactDAO artifactDAO;
         private readonly ICurrentSession _session;
@@ -17,11 +17,11 @@ namespace QuestStoreNAT.web.Controllers
         public ArtifactController(ICurrentSession session)
         {
             artifactDAO = new ArtifactDAO();
-            studentDAO = new StudentDAO();
+            _studentDAO = new StudentDAO();
             _session = session;
             _credentialID = _session.LoggedUser.CredentialID;
             artifactManagmenet = new ArtifactManagement();
-            _student = studentDAO.FindOneRecordBy(_credentialID);
+            _student = _studentDAO.FindOneRecordBy(_credentialID);
         }
 
         [HttpGet]

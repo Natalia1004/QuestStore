@@ -20,16 +20,16 @@ namespace QuestStoreNAT.web.DatabaseLayer
             ownedArtifactGroup.Id = reader.GetInt32((int)OwnedArtifactGroupEnum.Id);
             ownedArtifactGroup.GroupId = reader.GetInt32((int)OwnedArtifactGroupEnum.GroupId);
             ownedArtifactGroup.ArtifactId = reader.GetInt32((int)OwnedArtifactGroupEnum.ArtifactId);
-            ownedArtifactGroup.CompletionStatus = reader.GetInt32((int)OwnedArtifactGroupEnum.CompletionStatus);
+            ownedArtifactGroup.CompletionStatus = (CompletionStatus)reader.GetInt32((int)OwnedArtifactGroupEnum.CompletionStatus);
             return ownedArtifactGroup;
         }
 
         public override string ProvideQueryStringToAdd(OwnedArtifactGroup OwnedArtifactGroupToAdd)
         {
             var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"GroupID\", \"ArtifactID\", \"ArtifactStatusID\")" +
-                        $"VALUES({(int)OwnedArtifactGroupToAdd.GroupId}, " +
+                        $"VALUES({OwnedArtifactGroupToAdd.GroupId}, " +
                                $"'{OwnedArtifactGroupToAdd.ArtifactId}', " +
-                               $"'{OwnedArtifactGroupToAdd.CompletionStatus}');";
+                               $"'{(int)OwnedArtifactGroupToAdd.CompletionStatus}');";
             return query;
         }
 
@@ -38,15 +38,15 @@ namespace QuestStoreNAT.web.DatabaseLayer
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
                         $"SET \"GroupID\" = {OwnedArtifactGroupToUpdate.GroupId}, " +
                             $"\"ArtifactID\" = '{OwnedArtifactGroupToUpdate.ArtifactId}', " +
-                            $"\"ArtifactStatusID\" = '{OwnedArtifactGroupToUpdate.CompletionStatus}' " +
+                            $"\"ArtifactStatusID\" = '{(int)OwnedArtifactGroupToUpdate.CompletionStatus}' " +
                         $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {OwnedArtifactGroupToUpdate.Id};";
             return query;
         }
 
-        public OwnedArtifactGroup FindOneRecordBy(int id, int groupID, int completiotStatus)
+        public OwnedArtifactGroup FindOneRecordBy(int id, int groupID, CompletionStatus completiotStatus)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
-            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"ArtifactID\" = '{id}' AND \"GroupID\" = '{groupID}' AND \"ArtifactStatusID\" = {completiotStatus} LIMIT 1;";
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"ArtifactID\" = '{id}' AND \"GroupID\" = '{groupID}' AND \"ArtifactStatusID\" = {(int)completiotStatus} LIMIT 1;";
             using var command = new NpgsqlCommand(query, connection);
             var reader = command.ExecuteReader();
 

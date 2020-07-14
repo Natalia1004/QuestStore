@@ -19,16 +19,16 @@ namespace QuestStoreNAT.web.DatabaseLayer
             ownedArtifactStudent.Id = reader.GetInt32((int)OwnedArtifactStudentEnum.Id);
             ownedArtifactStudent.StudentId = reader.GetInt32((int)OwnedArtifactStudentEnum.StudentId);
             ownedArtifactStudent.ArtifactId = reader.GetInt32((int)OwnedArtifactStudentEnum.ArtifactId);
-            ownedArtifactStudent.CompletionStatus = reader.GetInt32((int)OwnedArtifactStudentEnum.CompletionStatus);
+            ownedArtifactStudent.CompletionStatus = (CompletionStatus)reader.GetInt32((int)OwnedArtifactStudentEnum.CompletionStatus);
             return ownedArtifactStudent;
         }
 
         public override string ProvideQueryStringToAdd(OwnedArtifactStudent OwnedArtifactStudentToAdd)
         {
             var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"StudentID\", \"ArtifactID\", \"ArtifactStatusID\")" +
-                        $"VALUES({(int)OwnedArtifactStudentToAdd.StudentId}, " +
+                        $"VALUES({OwnedArtifactStudentToAdd.StudentId}, " +
                                $"'{OwnedArtifactStudentToAdd.ArtifactId}', " +
-                               $"'{OwnedArtifactStudentToAdd.CompletionStatus}');";
+                               $"'{(int)OwnedArtifactStudentToAdd.CompletionStatus}');";
             return query;
         }
 
@@ -37,15 +37,15 @@ namespace QuestStoreNAT.web.DatabaseLayer
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
                         $"SET \"StudentID\" = {OwnedArtifactStudentToUpdate.StudentId}, " +
                             $"\"ArtifactID\" = '{OwnedArtifactStudentToUpdate.ArtifactId}', " +
-                            $"\"ArtifactStatusID\" = '{OwnedArtifactStudentToUpdate.CompletionStatus}' " +
+                            $"\"ArtifactStatusID\" = '{(int)OwnedArtifactStudentToUpdate.CompletionStatus}' " +
                         $"WHERE \"NATQuest\".\"{DBTableName}\".\"ID\" = {OwnedArtifactStudentToUpdate.Id};";
             return query;
         }
 
-        public OwnedArtifactStudent FindOneRecordBy(int id, int studentID, int completiotStatus)
+        public OwnedArtifactStudent FindOneRecordBy(int id, int studentID, CompletionStatus completiotStatus)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();
-            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"ArtifactID\" = '{id}' AND \"StudentID\" = '{studentID}' AND \"ArtifactStatusID\" = {completiotStatus} LIMIT 1;";
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"ArtifactID\" = '{id}' AND \"StudentID\" = '{studentID}' AND \"ArtifactStatusID\" = {(int)completiotStatus} LIMIT 1;";
             using var command = new NpgsqlCommand(query, connection);
             var reader = command.ExecuteReader();
 

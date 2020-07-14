@@ -11,6 +11,7 @@ namespace QuestStoreNAT.web.Services
         private OwnedArtifactGroupDAO _ownedArtifactGroup { get; set; }
         private OwnedArtifactStudentDAO _ownedArtifactStudent { get; set; }
         private GroupDAO _groupDAO { get; set; }
+        private Student student { get; set; }
 
         public ArtifactManagement()
         {
@@ -21,39 +22,37 @@ namespace QuestStoreNAT.web.Services
             _groupDAO = new GroupDAO();
         }
 
-        public void UseArtifact(int credentialID, int artifactID)
+        public void UseArtifact(Student student, int artifactID)
         {
-            var currentStudent = _student.FindOneRecordBy(credentialID);
             var artifactToUse = _artifact.FindOneRecordBy(artifactID);
-            int completiotStatus = 0;
+            CompletionStatus completionStatus = CompletionStatus.Unfinished;
             switch(artifactToUse.Type)
             {
                 case TypeClassification.Individual:
-                    var model =_ownedArtifactStudent.FindOneRecordBy(artifactID, currentStudent.Id, completiotStatus);
-                    model.CompletionStatus = 1;
+                    var model =_ownedArtifactStudent.FindOneRecordBy(artifactID, student.Id, completionStatus);
+                    model.CompletionStatus = CompletionStatus.Finished;
                     _ownedArtifactStudent.UpdateRecord(model);
                     break;
                 case TypeClassification.Group:
-                    var modelGroup = _ownedArtifactGroup.FindOneRecordBy(artifactID, currentStudent.Id, completiotStatus);
-                    modelGroup.CompletionStatus = 1;
+                    var modelGroup = _ownedArtifactGroup.FindOneRecordBy(artifactID, student.GroupID, completionStatus);
+                    modelGroup.CompletionStatus = CompletionStatus.Finished;
                     _ownedArtifactGroup.UpdateRecord(modelGroup);
                     break;
             }
         }
 
-        public void DeleteUsedArtifactFromView(int credentialID, int artifactID)
+        public void DeleteUsedArtifactFromView(Student student, int artifactID)
         {
-            var currentStudent = _student.FindOneRecordBy(credentialID);
             var artifactToDelete = _artifact.FindOneRecordBy(artifactID);
-            int completiotStatus = 1;
+            CompletionStatus completionStatus = CompletionStatus.Finished;
             switch (artifactToDelete.Type)
             {
                 case TypeClassification.Individual:
-                    var model = _ownedArtifactStudent.FindOneRecordBy(artifactID, currentStudent.Id, completiotStatus);
+                    var model = _ownedArtifactStudent.FindOneRecordBy(artifactID, student.Id, completionStatus);
                     _ownedArtifactStudent.DeleteRecord(model.Id);
                     break;
                 case TypeClassification.Group:
-                    var modelGroup = _ownedArtifactGroup.FindOneRecordBy(artifactID, currentStudent.GroupID, completiotStatus);
+                    var modelGroup = _ownedArtifactGroup.FindOneRecordBy(artifactID, student.GroupID, completionStatus);
                     _ownedArtifactGroup.DeleteRecord(modelGroup.Id);
                     break;
             }
