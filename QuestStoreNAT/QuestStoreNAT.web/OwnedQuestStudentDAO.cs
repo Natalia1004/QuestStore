@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using System.Collections.Generic;
 using QuestStoreNAT.web.Models;
 
 namespace QuestStoreNAT.web.DatabaseLayer
@@ -48,6 +49,22 @@ namespace QuestStoreNAT.web.DatabaseLayer
                         $"SET \"QuestStatusID\" = {ownedQuestToUpdate.CompletionStatus}"+
                         $"WHERE \"ID\" = {ownedQuestToUpdate.Id};";
             return query;
+        }
+
+        public List<OwnedQuestStudent> FetchAllRecords(int studentID)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"StudentID\" = '{studentID}';";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<OwnedQuestStudent>();
+            while (reader.Read())
+            {
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+
         }
     }
 }

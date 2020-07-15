@@ -10,6 +10,7 @@
                 {
                     <li><a asp-action="ShowStudentProfile" asp-controller="Profile"><button class="dropdown__button">Show My Profile</button></a></li>
                     <li><a asp-action="Message" asp-controller="Message"><button class="dropdown__button">Messages</button></a></li>
+                    <li><a asp-action="StudentQuestView" asp-controller="Quest"><button class="dropdown__button">Student Quests</button></a></li>
                 }
                 else if (Session.LoggedUserRole == Role.Mentor)
                 {

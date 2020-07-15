@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using QuestStoreNAT.web.Models;
+using System.Collections.Generic;
 
 namespace QuestStoreNAT.web.DatabaseLayer.ConcreteDAO
 {
@@ -38,6 +39,21 @@ namespace QuestStoreNAT.web.DatabaseLayer.ConcreteDAO
                         $"SET \"QuestStatusID\" = {(int)recordToUpdate.CompletionStatus}" +
                         $"WHERE \"ID\" = {recordToUpdate.Id};";
             return query;
+        }
+        public List<OwnedQuestGroup> FetchAllRecords(int groupID)
+        {
+            using NpgsqlConnection connection = OpenConnectionToDB();
+            var query = $"SELECT * FROM \"NATQuest\".\"{DBTableName}\" WHERE \"GroupID\" = '{groupID}';";
+            using var command = new NpgsqlCommand(query, connection);
+            var reader = command.ExecuteReader();
+
+            var allRecords = new List<OwnedQuestGroup>();
+            while (reader.Read())
+            {
+                allRecords.Add(ProvideOneRecord(reader));
+            };
+            return allRecords;
+
         }
     }
 }

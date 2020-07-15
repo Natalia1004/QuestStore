@@ -13,6 +13,10 @@ namespace QuestStoreNAT.web.Controllers
         private readonly IDB_GenericInterface<Quest> _questDAO;
         private readonly IDB_GenericInterface<OwnedQuestStudent> _ownedQuestStudentDAO;
         private readonly IDB_GenericInterface<OwnedQuestGroup> _ownedQuestGroupDAO;
+        private int _credentialID;
+        private StudentDAO _studentDAO;
+        private Student _student;
+
 
         public QuestController(
             ILogger<QuestController> logger,
@@ -24,9 +28,12 @@ namespace QuestStoreNAT.web.Controllers
         {
             _logger = logger;
             _session = session;
+            _credentialID = _session.LoggedUser.CredentialID;
             _questDAO = questDAO;
             _ownedQuestStudentDAO = ownedQuestStudentDAO;
             _ownedQuestGroupDAO = ownedQuestGroupDAO;
+            _studentDAO = new StudentDAO();
+            _student = _studentDAO.FindOneRecordBy(_credentialID);
         }
 
         [HttpGet]
@@ -148,6 +155,17 @@ namespace QuestStoreNAT.web.Controllers
             _ownedQuestGroupDAO.AddRecord(ownedGroupQuest);
             TempData["QuestMessage"] = $"You have claimed the \"{claimedGroupQuest.Name}\" Quest!";
             return RedirectToAction($"ViewAllQuests", $"Quest");
+        }
+
+        public IActionResult StudentQuestView()
+        {
+            var model = new QuestManagement().returnListOfAllQuest(_student.Id, _student.GroupID);
+            if (model != null)
+            {
+                return View(model);
+            }
+            TempData["Message"] = $"You don't have any quests";
+            return RedirectToAction("Welcome", "Profile");
         }
     }
 }

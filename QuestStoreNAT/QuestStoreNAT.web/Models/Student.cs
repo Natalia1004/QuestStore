@@ -29,6 +29,7 @@ namespace QuestStoreNAT.web.Models
         [Required]
         public int OverallWalletLevel { get; set; }
         public List<OwnedQuestStudent> OwnedStudentQuests { get; set; }
+        public List<OwnedQuestStudent> OwnedGroupQuests { get; set; }
         public List<Quest> StudentQuests { get; set; }
         public List<Artifact> StudentArtifacts { get; set; }
         public List<Artifact> UsedStudentArtifacts { get; set; }
