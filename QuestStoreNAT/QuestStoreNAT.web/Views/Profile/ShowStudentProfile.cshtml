@@ -16,8 +16,9 @@
                     <span class="cellSpan">Group : @Model.groupName</span>
                     <span class="cellSpan">Level : @Model.level</span>
                 </div>
-                </div>
-                
+            </div>
+            @if (Model.StudentArtifacts.Count != 0)
+            {
                 <div class="artifacts">
                     <div class="header_artifacts">Your Artifacts</div>
                     <div id="artifact">
@@ -34,6 +35,9 @@
                         }
                     </div>
                 </div>
+            }
+            @if (Model.UsedStudentArtifacts.Count != 0)
+            {
                 <div class="artifacts">
                     <div class="header_artifacts">Used Artifacts</div>
                     @foreach (var artifact in Model.UsedStudentArtifacts)
@@ -46,6 +50,9 @@
                         </div>
                     }
                 </div>
+            }
+            @if (Model.GroupArtifacts.Count != 0)
+            {
                 <div class="artifacts">
                     <div class="header_artifacts">Group Artifacts</div>
                     <div id="artifact">
@@ -62,6 +69,9 @@
                         }
                     </div>
                 </div>
+            }
+            @if (Model.UsedGroupArtifacts.Count != 0)
+            { 
                 <div class="artifacts">
                     <div class="header_artifacts">Used Group Artifacts</div>
                     @foreach (var artifact in Model.UsedGroupArtifacts)
@@ -74,5 +84,6 @@
                         </div>
                     }
                 </div>
-            </div>
+            }
+        </div>
         </div>
