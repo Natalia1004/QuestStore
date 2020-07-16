@@ -26,7 +26,6 @@ namespace QuestStoreNAT.web.Controllers
             _credentialID = _session.LoggedUser.CredentialID;
             _artifactDAO = new ArtifactDAO();
             _student = _studentDAO.FindOneRecordBy(_credentialID);
-
         }
 
         [HttpGet]
@@ -40,7 +39,7 @@ namespace QuestStoreNAT.web.Controllers
                 model.currentAmountOfAcceptance = _groupTransactionDAO.FindOneRecordBy(model.groupID).numberOfAcceptance;
                 return View(model);
             }
-            TempData["Message"] = $"You don't have any messages";
+            TempData["MessageX"] = $"You don't have any messages.";
             return RedirectToAction("Welcome", "Profile");
         }
 

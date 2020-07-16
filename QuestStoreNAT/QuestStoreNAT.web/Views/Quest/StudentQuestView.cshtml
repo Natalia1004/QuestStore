@@ -9,7 +9,7 @@
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
         <div class="student_panel">
                 <div class="artifacts">
-                    <div class="header_artifacts">Individual Unfinished Quest</div>
+                    <div class="header_artifacts">Individual Unfinished Quests</div>
                     <div id="artifact">
                         @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Unfinished && q.Type == TypeClassification.Individual))
                         {
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="artifacts">
-                    <div class="header_artifacts">Individual Finished Quest</div>
+                    <div class="header_artifacts">Individual Finished Quests</div>
                     <div id="artifact">
                         @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Finished && q.Type == TypeClassification.Individual))
                         {
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="artifacts">
-                    <div class="header_artifacts">Group Unfinished Quest</div>
+                    <div class="header_artifacts">Group Unfinished Quests</div>
                     <div id="artifact">
                         @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Unfinished && q.Type == TypeClassification.Group))
                         {
@@ -49,7 +49,7 @@
                 </div>
       
                 <div class="artifacts">
-                    <div class="header_artifacts">Group Finished Quest</div>
+                    <div class="header_artifacts">Group Finished Quests</div>
                     <div id="artifact">
                         @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Finished && q.Type == TypeClassification.Group))
                         {

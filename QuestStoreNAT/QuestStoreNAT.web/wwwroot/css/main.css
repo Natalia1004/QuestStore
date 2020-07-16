@@ -64,6 +64,14 @@ ul {
 }
 
 /*----------
+    GENERAL
+----------*/
+
+.margin50top {
+    margin-top: 50px;
+}
+
+/*----------
     MAIN NAVIGATION STYLE
 ----------*/
 .logo {
@@ -328,9 +336,6 @@ ul {
     margin-bottom: 0;
 }
 
-.form-select {
-}
-
 .form input {
     width: 350px;
 }
@@ -412,6 +417,14 @@ ul {
 
 .questreward--group:hover {
     background-color: rgba(34, 88, 124, 0.74);
+}
+
+.questreward--used > * {
+    color: gray;
+}
+
+.questreward--used .questreward__remover {
+    color: #B22222;
 }
 
 .admin-controll {
@@ -762,6 +775,7 @@ ul {
     box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     line-height: 500%;
@@ -996,8 +1010,6 @@ fieldset .dropdown__button {
     text-align: center;
     margin-bottom: 20px;
 }
-
-
 
 
 /*----------------
