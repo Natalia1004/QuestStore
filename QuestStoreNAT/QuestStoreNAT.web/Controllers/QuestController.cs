@@ -9,31 +9,22 @@ namespace QuestStoreNAT.web.Controllers
     public class QuestController : Controller
     {
         private readonly ILogger<QuestController> _logger;
+        private readonly Student _loggedStudent;
         private readonly ICurrentSession _session;
         private readonly IDB_GenericInterface<Quest> _questDAO;
-        private readonly IDB_GenericInterface<OwnedQuestStudent> _ownedQuestStudentDAO;
-        private readonly IDB_GenericInterface<OwnedQuestGroup> _ownedQuestGroupDAO;
-        private int _credentialID;
-        private StudentDAO _studentDAO;
-        private Student _student;
-
+        private readonly QuestManagement _questManager;
 
         public QuestController(
             ILogger<QuestController> logger,
             ICurrentSession session,
-            IDB_GenericInterface<Quest> questDAO,
-            IDB_GenericInterface<OwnedQuestStudent> ownedQuestStudentDAO,
-            IDB_GenericInterface<OwnedQuestGroup> ownedQuestGroupDAO
+            IDB_GenericInterface<Quest> questDAO
             )
         {
             _logger = logger;
             _session = session;
-            _credentialID = _session.LoggedUser.CredentialID;
+            _loggedStudent = _session.LoggedUser as Student;
             _questDAO = questDAO;
-            _ownedQuestStudentDAO = ownedQuestStudentDAO;
-            _ownedQuestGroupDAO = ownedQuestGroupDAO;
-            _studentDAO = new StudentDAO();
-            _student = _studentDAO.FindOneRecordBy(_credentialID);
+            _questManager = new QuestManagement();
         }
 
         [HttpGet]
@@ -135,7 +126,8 @@ namespace QuestStoreNAT.web.Controllers
                 QuestId = claimedIndividualQuest.Id,
                 CompletionStatus = CompletionStatus.Unfinished,
             };
-            _ownedQuestStudentDAO.AddRecord(ownedIndividualQuest);
+
+            _questManager.ClaimIndividualQuest(ownedIndividualQuest);
             TempData["QuestMessage"] = $"You have claimed the \"{claimedIndividualQuest.Name}\" Quest!";
             return RedirectToAction($"ViewAllQuests", $"Quest");
         }
@@ -151,14 +143,14 @@ namespace QuestStoreNAT.web.Controllers
                 QuestId = claimedGroupQuest.Id,
                 CompletionStatus = CompletionStatus.Unfinished,
             };
-            _ownedQuestGroupDAO.AddRecord(ownedGroupQuest);
+            _questManager.ClaimGroupQuest(ownedGroupQuest);
             TempData["QuestMessage"] = $"You have claimed the \"{claimedGroupQuest.Name}\" Quest!";
             return RedirectToAction($"ViewAllQuests", $"Quest");
         }
 
         public IActionResult StudentQuestView()
         {
-            var model = new QuestManagement().returnListOfAllQuest(_student.Id, _student.GroupID);
+            var model = _questManager.returnListOfAllQuest(_loggedStudent.Id, _loggedStudent.GroupID);
             if (model != null)
             {
                 return View($"StudentQuestView", model);

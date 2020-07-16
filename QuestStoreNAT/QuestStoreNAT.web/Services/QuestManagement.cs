@@ -54,5 +54,15 @@ namespace QuestStoreNAT.web.Services
             ListGroupQuest.ForEach(item => ListOfAllQuest.Add(item));
             return ListOfAllQuest;
         }
+
+        public void ClaimIndividualQuest(OwnedQuestStudent claimedOwnedQuest)
+        {
+            _ownedStudentDAO.AddRecord(claimedOwnedQuest);
+        }
+
+        public void ClaimGroupQuest(OwnedQuestGroup claimedOwnedQuest)
+        {
+            _ownedGroupDAO.AddRecord(claimedOwnedQuest);
+        }
     }
 }
