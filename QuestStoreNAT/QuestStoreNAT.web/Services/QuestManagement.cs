@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.DatabaseLayer.ConcreteDAO;
@@ -11,6 +10,7 @@ namespace QuestStoreNAT.web.Services
         private OwnedQuestStudentDAO _ownedStudentDAO { get; set; }
         private OwnedQuestGroupDAO _ownedGroupDAO { get; set; }
         private QuestDAO _questDAO { get; set; }
+
         public QuestManagement()
         {
             _ownedStudentDAO = new OwnedQuestStudentDAO();
@@ -21,11 +21,11 @@ namespace QuestStoreNAT.web.Services
         private List<Quest> returnAllIndividualQuest(int studentID)
         {
             List<OwnedQuestStudent> allOwnedQuestStudent = _ownedStudentDAO.FetchAllRecords(studentID);
-            List<Quest> allStudentQuest = new List<Quest> { };
+            List<Quest> allStudentQuest = new List<Quest>();
             foreach(OwnedQuestStudent ownedQuestStudent in allOwnedQuestStudent)
             {
                 var model = _questDAO.FindOneRecordBy(ownedQuestStudent.QuestId);
-                model.statusQuest = ownedQuestStudent.CompletionStatus;
+                model.QuestStatus = ownedQuestStudent.CompletionStatus;
                 allStudentQuest.Add(model);
             }
             return allStudentQuest;
@@ -38,7 +38,7 @@ namespace QuestStoreNAT.web.Services
             foreach (OwnedQuestGroup ownedQuestGroup in allOwnedQuestGroup)
             {
                 var model = _questDAO.FindOneRecordBy(ownedQuestGroup.QuestId);
-                model.statusQuest = (int)ownedQuestGroup.CompletionStatus;
+                model.QuestStatus = ownedQuestGroup.CompletionStatus;
                 allGroupQuest.Add(model);
             }
             return allGroupQuest;

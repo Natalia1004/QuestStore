@@ -20,19 +20,9 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 Id = reader.GetInt32((int)OwnedQuestStudentEnum.Id),
                 StudentId = reader.GetInt32((int)OwnedQuestStudentEnum.StudentId),
                 QuestId = reader.GetInt32((int)OwnedQuestStudentEnum.QuestId),
-                CompletionStatus = reader.GetInt32((int)OwnedQuestStudentEnum.QuestStatusId)
-                //Why not Enum
-                //CompletionStatus = (CompletionStatus)reader.GetInt32((int)OwnedQuestStudentEnum.QuestStatusId)
+                CompletionStatus = (CompletionStatus)reader.GetInt32((int)OwnedQuestStudentEnum.QuestStatusId)
             };
         }
-
-        //TODO DELETE IF NO ERRORS UNTIL 17.07
-        //public override void UpdateRecord(OwnedQuestStudent ownedQuestToUpdate)
-        //{
-        //    using NpgsqlConnection connection = OpenConnectionToDB();
-        //    string query = ProvideQueryStringToUpdate(ownedQuestToUpdate);
-        //    ExecuteQuery(connection, query);
-        //}
 
         public override string ProvideQueryStringToAdd(OwnedQuestStudent recordToAdd)
         {
@@ -64,7 +54,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 allRecords.Add(ProvideOneRecord(reader));
             };
             return allRecords;
-
         }
     }
 }

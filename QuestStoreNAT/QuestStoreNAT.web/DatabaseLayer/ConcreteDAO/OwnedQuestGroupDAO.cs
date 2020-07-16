@@ -6,7 +6,7 @@ namespace QuestStoreNAT.web.DatabaseLayer.ConcreteDAO
 {
     public class OwnedQuestGroupDAO : DBAbstractRecord<OwnedQuestGroup>
     {
-        public override string DBTableName { get; set; } = "fruits";
+        public override string DBTableName { get; set; } = "OwnedQuestGroup";
         //TODO fruits to proper table name
         private enum OwnedQuestGroupEnum
         {
@@ -40,6 +40,7 @@ namespace QuestStoreNAT.web.DatabaseLayer.ConcreteDAO
                         $"WHERE \"ID\" = {recordToUpdate.Id};";
             return query;
         }
+
         public List<OwnedQuestGroup> FetchAllRecords(int groupID)
         {
             using NpgsqlConnection connection = OpenConnectionToDB();

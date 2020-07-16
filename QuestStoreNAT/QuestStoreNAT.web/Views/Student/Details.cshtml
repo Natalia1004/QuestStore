@@ -41,7 +41,7 @@
                         @foreach (var quest in Model.OwnedStudentQuests)
                         {
                             <span class="cellSpan">@quest.Name</span>
-                            @if (@quest.CompletionStatus == 1)
+                            @if (@quest.CompletionStatus == CompletionStatus.Finished)
                             {
                  
                                 <span class="cellSpan">ongoing</span>

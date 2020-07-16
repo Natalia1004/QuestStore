@@ -133,22 +133,21 @@ namespace QuestStoreNAT.web.Controllers
             {
                 StudentId = _session.LoggedUser.Id,
                 QuestId = claimedIndividualQuest.Id,
-                CompletionStatus = 1
-                //TODO CompletionStatus = CompletionStatus.Unfinished,
+                CompletionStatus = CompletionStatus.Unfinished,
             };
             _ownedQuestStudentDAO.AddRecord(ownedIndividualQuest);
             TempData["QuestMessage"] = $"You have claimed the \"{claimedIndividualQuest.Name}\" Quest!";
             return RedirectToAction($"ViewAllQuests", $"Quest");
-
         }
 
         public IActionResult ClaimGroupQuest(int id)
         {
+            var loggedStudent = _session.LoggedUser as Student;
+
             var claimedGroupQuest = _questDAO.FindOneRecordBy(id);
             var ownedGroupQuest = new OwnedQuestGroup()
             {
-                //TODO GroupId = set up proper group id retrival
-                GroupId = 2,
+                GroupId = loggedStudent.GroupID,
                 QuestId = claimedGroupQuest.Id,
                 CompletionStatus = CompletionStatus.Unfinished,
             };
@@ -162,10 +161,10 @@ namespace QuestStoreNAT.web.Controllers
             var model = new QuestManagement().returnListOfAllQuest(_student.Id, _student.GroupID);
             if (model != null)
             {
-                return View(model);
+                return View($"StudentQuestView", model);
             }
             TempData["Message"] = $"You don't have any quests";
-            return RedirectToAction("Welcome", "Profile");
+            return RedirectToAction($"Welcome", $"Profile");
         }
     }
 }

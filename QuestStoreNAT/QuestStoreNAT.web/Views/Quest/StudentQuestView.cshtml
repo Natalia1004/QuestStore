@@ -11,7 +11,7 @@
                 <div class="artifacts">
                     <div class="header_artifacts">Individual Unfinished Quest</div>
                     <div id="artifact">
-                        @foreach (var quest in Model.Where(q => q.statusQuest == 0 && q.Type == TypeClassification.Individual))
+                        @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Unfinished && q.Type == TypeClassification.Individual))
                         {
                             <div class="questreward questreward--individual">
                                 <h3 class="questreward__title">@quest.Name</h3>
@@ -24,7 +24,7 @@
                 <div class="artifacts">
                     <div class="header_artifacts">Individual Finished Quest</div>
                     <div id="artifact">
-                        @foreach (var quest in Model.Where(q => q.statusQuest == 1 && q.Type == TypeClassification.Individual))
+                        @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Finished && q.Type == TypeClassification.Individual))
                         {
                             <div class="questreward questreward--individual">
                                 <h3 class="questreward__title">@quest.Name</h3>
@@ -37,7 +37,7 @@
                 <div class="artifacts">
                     <div class="header_artifacts">Group Unfinished Quest</div>
                     <div id="artifact">
-                        @foreach (var quest in Model.Where(q => q.statusQuest == 0 && q.Type == TypeClassification.Group))
+                        @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Unfinished && q.Type == TypeClassification.Group))
                         {
                             <div class="questreward questreward--individual">
                                 <h3 class="questreward__title">@quest.Name</h3>
@@ -51,7 +51,7 @@
                 <div class="artifacts">
                     <div class="header_artifacts">Group Finished Quest</div>
                     <div id="artifact">
-                        @foreach (var quest in Model.Where(q => q.statusQuest == 1 && q.Type == TypeClassification.Group))
+                        @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Finished && q.Type == TypeClassification.Group))
                         {
                             <div class="questreward questreward--individual">
                                 <h3 class="questreward__title">@quest.Name</h3>
