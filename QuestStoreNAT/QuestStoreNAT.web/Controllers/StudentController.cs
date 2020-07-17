@@ -101,7 +101,7 @@ namespace QuestStoreNAT.web.Controllers
         private void ConfirmQuestAndUpdateWallet(int questId)
         {
             var questToConfirm = _ownedQuestStudentDAO.FetchAllRecords().SingleOrDefault(q => q.Id == questId);
-            questToConfirm.CompletionStatus = 0;
+            questToConfirm.CompletionStatus = CompletionStatus.Finished;
             _ownedQuestStudentDAO.UpdateRecord(questToConfirm);
             AddCoolCoinsIfAccomplished(questToConfirm);
         } 
