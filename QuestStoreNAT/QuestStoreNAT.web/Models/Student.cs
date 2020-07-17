@@ -8,17 +8,21 @@ namespace QuestStoreNAT.web.Models
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Class name: ")]
         public int ClassID { get; set; }
 
+        [Display(Name = "Group name: ")]
         public int GroupID { get; set; }
 
         [Required]
         public int CredentialID { get; set; }
 
+        [Display(Name = "First name: ")]
         [Required(ErrorMessage = "First name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
         public string FirstName { get; set; }
 
+        [Display(Name = "Last name: ")]
         [Required(ErrorMessage = "Last name required")]
         [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
         public string LastName { get; set; }

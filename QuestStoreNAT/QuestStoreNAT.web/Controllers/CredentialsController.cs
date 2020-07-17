@@ -37,11 +37,11 @@ namespace QuestStoreNAT.web.Controllers
             switch ( newCredentials.Role )
             {
                 case Role.Admin:
-                    return RedirectToAction("Index" , "Admin" , id);
+                    return RedirectToAction("Index" , "Admin" , new { id });
                 case Role.Mentor:
-                    return RedirectToAction("Create" , "Mentor" , id);
+                    return RedirectToAction("Create" , "Mentor" , new { id });
                 case Role.Student:
-                    return RedirectToAction("Create" , "Student" , id);
+                    return RedirectToAction("Create" , "Student" , new { id });
                 default:
                     return View();
             }

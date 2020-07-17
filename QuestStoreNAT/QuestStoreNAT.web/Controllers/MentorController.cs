@@ -54,8 +54,14 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult Delete(int id)
         {
-            _mentorDAO.DeleteRecord(id);
-            return RedirectToAction("Index" , "Mentor");
+            return View(_mentorDAO.FetchAllRecords().SingleOrDefault(m=>m.Id == id));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Mentor mentor)
+        {
+            _mentorDAO.DeleteRecord(mentor.Id);
+            return RedirectToAction("Index", "Mentor");
         }
 
         public IActionResult Details( int id )

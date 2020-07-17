@@ -9,6 +9,7 @@
 
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
 
+
     <div id="landing__content">
         <div class="inside_landing">
             @foreach ( var student in Model )
@@ -25,8 +26,7 @@
                             <div class="admin-controll"><a asp-action="Details" asp-route-Id="@student.Id" class="dropdown__button dropdown--margin">Details</a></div>
                         }
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
-    </div>
 </div>
