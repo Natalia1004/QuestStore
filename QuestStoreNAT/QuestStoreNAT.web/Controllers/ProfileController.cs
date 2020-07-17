@@ -54,7 +54,5 @@ namespace QuestStoreNAT.web.Controllers
             new ArtifactManagement().DeleteUsedArtifactFromView(_student, id);
             return RedirectToAction("ShowStudentProfile", "Profile");
         }
-
-
     }
 }

@@ -64,5 +64,15 @@ namespace QuestStoreNAT.web.Services
         {
             _ownedGroupDAO.AddRecord(claimedOwnedQuest);
         }
+
+        public void DeclaimIndividualQuest(int id)
+        {
+            _ownedStudentDAO.DeleteRecord(id);
+        }
+
+        public void DeclaimGroupQuest(int id)
+        {
+            _ownedGroupDAO.DeleteRecord(id);
+        }
     }
 }

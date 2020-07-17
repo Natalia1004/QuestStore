@@ -62,7 +62,7 @@
                 @if (Session.LoggedUserRole == Role.Student)
                 {
                     <div class="admin-controll">
-                        <a asp-action="ClaimGroupQuest" asp-route-id="@quest.Id" class="dropdown__button">Claim</a>
+                        <a asp-action="ClaimQuest" asp-route-id="@quest.Id" class="dropdown__button">Claim</a>
                     </div>
                 }
             </div>

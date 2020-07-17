@@ -31,7 +31,5 @@ namespace QuestStoreNAT.web.Services
             Unused,
             Used
         };
-
-
     }
 }

@@ -26,11 +26,12 @@
                     <div id="artifact">
                         @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Finished && q.Type == TypeClassification.Individual))
                         {
-                            <div class="questreward questreward--individual">
-                                <h3 class="questreward__title">@quest.Name</h3>
-                                <h3 class="questreward__cost">@quest.Cost</h3>
-                                <p class="questreward__description">@quest.Description</p>
-                            </div>
+                        <div class="questreward questreward--used">
+                            <a asp-action="DeclaimQuest" asp-controller="Quest" asp-route-id="@quest.Id" class="questreward__remover"> X </a>
+                            <h3 class="questreward__title">@quest.Name</h3>
+                            <h3 class="questreward__cost">@quest.Cost</h3>
+                            <p class="questreward__description">@quest.Description</p>
+                        </div>
                         }
                     </div>
                 </div>
@@ -53,7 +54,7 @@
                     <div id="artifact">
                         @foreach (var quest in Model.Where(q => q.QuestStatus == CompletionStatus.Finished && q.Type == TypeClassification.Group))
                         {
-                            <div class="questreward questreward--individual">
+                            <div class="questreward questreward--used">
                                 <h3 class="questreward__title">@quest.Name</h3>
                                 <h3 class="questreward__cost">@quest.Cost</h3>
                                 <p class="questreward__description">@quest.Description</p>

@@ -795,7 +795,7 @@ ul {
     height: 80%;
     grid-template-rows: repeat(5, 5fr);
     border-radius: 15px;
-    align-items: center;
+    align-items: start;
 }
 
 .header_profile {
@@ -824,7 +824,8 @@ ul {
 
 .artifacts {
     grid-template-rows: repeat(5, 4fr);
-    padding: 0px 130px;
+    justify-content: start;
+    padding: 0px 110px;
 }
 
 .header_artifacts {
@@ -838,7 +839,8 @@ ul {
 
 
 #artifact {
-    grid-row: 2/6;
+    display: flex;
+    flex-wrap: wrap;
     margin-left: 30px;
     margin-bottom: 40px;
     margin: auto;
