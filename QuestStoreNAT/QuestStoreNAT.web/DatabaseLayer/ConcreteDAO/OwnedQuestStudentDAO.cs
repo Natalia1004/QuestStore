@@ -36,7 +36,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
         public override string ProvideQueryStringToUpdate(OwnedQuestStudent ownedQuestToUpdate)
         {
             var query = $"UPDATE \"NATQuest\".\"{DBTableName}\" " +
-                        $"SET \"QuestStatusID\" = {ownedQuestToUpdate.CompletionStatus}"+
+                        $"SET \"QuestStatusID\" = {(int)ownedQuestToUpdate.CompletionStatus}"+
                         $"WHERE \"ID\" = {ownedQuestToUpdate.Id};";
             return query;
         }

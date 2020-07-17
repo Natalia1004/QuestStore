@@ -67,7 +67,7 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult Confirmation(int questId)
         {
             var questToConfirm = _ownedQuestStudentDAO.FetchAllRecords().FirstOrDefault(q => q.Id == questId);
-            questToConfirm.CompletionStatus = 0;
+            questToConfirm.CompletionStatus = CompletionStatus.Finished;
             _ownedQuestStudentDAO.UpdateRecord(questToConfirm);
             return RedirectToAction("Details", "Student", new { Id = studentId });
         }

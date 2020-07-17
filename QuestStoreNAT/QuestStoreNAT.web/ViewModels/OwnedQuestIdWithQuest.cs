@@ -2,7 +2,7 @@
 
 namespace QuestStoreNAT.web.ViewModels
 {
-    public class OwnedQuestIdWithQuestList
+    public class OwnedQuestIdWithQuest
     {
         public int OwnedId { get; set; }
         public Quest OwnedQuest { get; set; }

@@ -149,27 +149,20 @@ namespace QuestStoreNAT.web.Controllers
             return RedirectToAction($"ViewAllQuests", $"Quest");
         }
 
-        public IActionResult DeclaimQuest(int id)
+        public IActionResult DeclaimIndividualQuest(int id)
         {
-            var declaimedQuest = _questDAO.FindOneRecordBy(id);
-            switch (declaimedQuest.Type)
-            {
-                case TypeClassification.Individual:
-                    _questManager.DeclaimIndividualQuest(id);
-                    break;
-                case TypeClassification.Group:
-                    _questManager.DeclaimGroupQuest(id);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            TempData["QuestMessage"] = $"You have declaimed the \"{declaimedQuest.Name}\" Quest!";
+            _questManager.DeclaimIndividualQuest(id);
+            return RedirectToAction($"StudentQuestView", $"Quest");
+        }
+        public IActionResult DeclaimGroupQuest(int id)
+        {
+            _questManager.DeclaimGroupQuest(id);
             return RedirectToAction($"StudentQuestView", $"Quest");
         }
 
         public IActionResult StudentQuestView()
         {
-            var model = _questManager.returnListOfAllQuest(_loggedStudent.Id, _loggedStudent.GroupID);
+            var model = _questManager.ReturnListOfAllQuest(_loggedStudent.Id, _loggedStudent.GroupID);
             if (model != null)
             {
                 return View($"StudentQuestView", model);

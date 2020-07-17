@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.DatabaseLayer.ConcreteDAO;
+using QuestStoreNAT.web.ViewModels;
 
 namespace QuestStoreNAT.web.Services
 {
@@ -18,41 +20,50 @@ namespace QuestStoreNAT.web.Services
             _ownedGroupDAO = new OwnedQuestGroupDAO();
         }
 
-        private List<Quest> returnAllIndividualQuest(int studentID)
+        private List<OwnedQuestIdWithQuest> ReturnAllIndividualQuest(int studentId)
         {
-            List<OwnedQuestStudent> allOwnedQuestStudent = _ownedStudentDAO.FetchAllRecords(studentID);
-            List<Quest> allStudentQuest = new List<Quest>();
-            foreach(OwnedQuestStudent ownedQuestStudent in allOwnedQuestStudent)
+            var ownedQuestIdWithQuestList = new List<OwnedQuestIdWithQuest>();
+
+            var allOwnedQuestByStudent = _ownedStudentDAO.FetchAllRecords(studentId);
+
+            foreach(var ownedQuestByStudent in allOwnedQuestByStudent)
             {
-                var model = _questDAO.FindOneRecordBy(ownedQuestStudent.QuestId);
-                model.QuestStatus = ownedQuestStudent.CompletionStatus;
-                allStudentQuest.Add(model);
+                var ownedQuestIdWithQuest = new OwnedQuestIdWithQuest {OwnedId = ownedQuestByStudent.Id};
+
+                var model = _questDAO.FindOneRecordBy(ownedQuestByStudent.QuestId);
+                model.QuestStatus = ownedQuestByStudent.CompletionStatus;
+                ownedQuestIdWithQuest.OwnedQuest = model;
+
+                ownedQuestIdWithQuestList.Add(ownedQuestIdWithQuest);
             }
-            return allStudentQuest;
+            return ownedQuestIdWithQuestList;
         }
 
-        private List<Quest> returnAllGroupQuest(int groupID)
+        private List<OwnedQuestIdWithQuest> ReturnAllGroupQuest(int groupId)
         {
-            List<OwnedQuestGroup> allOwnedQuestGroup = _ownedGroupDAO.FetchAllRecords(groupID);
-            List<Quest> allGroupQuest = new List<Quest> { };
-            foreach (OwnedQuestGroup ownedQuestGroup in allOwnedQuestGroup)
+            var ownedQuestIdWithQuestList = new List<OwnedQuestIdWithQuest>();
+
+            var allOwnedQuestByGroup = _ownedGroupDAO.FetchAllRecords(groupId);
+
+            foreach (var ownedQuestByGroup in allOwnedQuestByGroup)
             {
-                var model = _questDAO.FindOneRecordBy(ownedQuestGroup.QuestId);
-                model.QuestStatus = ownedQuestGroup.CompletionStatus;
-                allGroupQuest.Add(model);
+                var ownedQuestIdWithQuest = new OwnedQuestIdWithQuest {OwnedId = ownedQuestByGroup.Id};
+
+                var model = _questDAO.FindOneRecordBy(ownedQuestByGroup.QuestId);
+                model.QuestStatus = ownedQuestByGroup.CompletionStatus;
+                ownedQuestIdWithQuest.OwnedQuest = model;
+
+                ownedQuestIdWithQuestList.Add(ownedQuestIdWithQuest);
             }
-            return allGroupQuest;
+            return ownedQuestIdWithQuestList;
         }
 
-        public List<Quest> returnListOfAllQuest(int studentID, int groupID)
+        public List<OwnedQuestIdWithQuest> ReturnListOfAllQuest(int studentId, int groupId)
         {
-            var ListIndividualQuest = returnAllIndividualQuest(studentID);
-            var ListGroupQuest = returnAllGroupQuest(groupID);
-            ListGroupQuest.ForEach(item => ListIndividualQuest.Add(item));
-            List<Quest> ListOfAllQuest = new List<Quest> { };
-            ListIndividualQuest.ForEach(item => ListOfAllQuest.Add(item));
-            ListGroupQuest.ForEach(item => ListOfAllQuest.Add(item));
-            return ListOfAllQuest;
+            var listIndividualQuest = ReturnAllIndividualQuest(studentId);
+            var listGroupQuest = ReturnAllGroupQuest(groupId);
+
+            return listIndividualQuest.Concat(listGroupQuest).ToList();
         }
 
         public void ClaimIndividualQuest(OwnedQuestStudent claimedOwnedQuest)

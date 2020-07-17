@@ -165,9 +165,7 @@ namespace QuestStoreNAT.web.Services
                     };
                     studentAcceptance.AddRecord(newStudentAcceptance);
                 }
-
             }
         }
-
     }
 }
