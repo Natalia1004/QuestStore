@@ -15,6 +15,10 @@ namespace QuestStoreNAT.web.Services
         private GroupTransactionDAO _groupTransactionDAO { get; set; }
         private StudentAcceptanceDAO _studentAcceptanceDAO { get; set; }
 
+        public ArtifactManagement(IDB_GenericInterface<GroupTransaction> groupTranscation)
+        {
+            _groupTransactionDAO = groupTranscation as GroupTransactionDAO;
+        }
         public ArtifactManagement()
         {
             _studentDAO = new StudentDAO();
@@ -24,7 +28,7 @@ namespace QuestStoreNAT.web.Services
             _groupDAO = new GroupDAO();
             _groupTransactionDAO = new GroupTransactionDAO();
             _studentAcceptanceDAO = new StudentAcceptanceDAO();
-    }
+        }
 
         public void UseArtifact(Student student, int artifactID)
         {

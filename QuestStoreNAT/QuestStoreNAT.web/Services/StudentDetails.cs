@@ -19,17 +19,12 @@ namespace QuestStoreNAT.web.Services
         {
             var targetStudent = _student.FindOneRecordBy(CredentialID);
             targetStudent.level = new LevelStudent().levelStudent(targetStudent.OverallWalletLevel);
-            targetStudent.StudentArtifacts = _artifact.FetchAllRecords(targetStudent.Id, (int)ArtifactStatus.Unused);
-            targetStudent.UsedStudentArtifacts = _artifact.FetchAllRecords(targetStudent.Id, (int)ArtifactStatus.Used);
-            targetStudent.GroupArtifacts = _artifact.FetchAllGroupArtifacts(targetStudent.GroupID, (int)ArtifactStatus.Unused);
-            targetStudent.UsedGroupArtifacts = _artifact.FetchAllGroupArtifacts(targetStudent.GroupID, (int)ArtifactStatus.Used);
+            targetStudent.StudentArtifacts = _artifact.FetchAllRecords(targetStudent.Id, (int)CompletionStatus.Unfinished);
+            targetStudent.UsedStudentArtifacts = _artifact.FetchAllRecords(targetStudent.Id, (int)CompletionStatus.Finished);
+            targetStudent.GroupArtifacts = _artifact.FetchAllGroupArtifacts(targetStudent.GroupID, (int)CompletionStatus.Unfinished);
+            targetStudent.UsedGroupArtifacts = _artifact.FetchAllGroupArtifacts(targetStudent.GroupID, (int)CompletionStatus.Finished);
             return (targetStudent);
         }
 
-        public enum ArtifactStatus
-        {
-            Unused,
-            Used
-        };
     }
 }
