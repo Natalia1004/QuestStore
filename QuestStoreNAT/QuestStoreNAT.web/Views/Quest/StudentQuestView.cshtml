@@ -42,7 +42,7 @@
                 <div id="artifact">
                     @foreach (var quest in Model.Where(q => q.OwnedQuest.QuestStatus == CompletionStatus.Unfinished && q.OwnedQuest.Type == TypeClassification.Group))
                     {
-                    <div class="questreward questreward--individual">
+                    <div class="questreward questreward--group">
                         <a asp-action="DeclaimGroupQuest" asp-controller="Quest" asp-route-id="@quest.OwnedId" class="questreward__remover"> X </a>
                         <h3 class="questreward__title">@quest.OwnedQuest.Name</h3>
                         <h3 class="questreward__cost">@quest.OwnedQuest.Cost</h3>
