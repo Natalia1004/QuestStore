@@ -32,12 +32,12 @@ namespace QuestStoreNAT.web.Controllers
             ViewData["role"] = _session.LoggedUserRole;
             return View();
         }
-        
 
         public IActionResult ShowStudentProfile()
         {
             ViewData["role"] = _session.LoggedUserRole;
             var targetStudent = new StudentDetails().ShowStudentDetails(_credentialID);
+            targetStudent.groupName = new GroupDAO().FindOneRecordBy(targetStudent.GroupID).Name;
             return View(targetStudent);
         }
 
@@ -54,7 +54,5 @@ namespace QuestStoreNAT.web.Controllers
             new ArtifactManagement().DeleteUsedArtifactFromView(_student, id);
             return RedirectToAction("ShowStudentProfile", "Profile");
         }
-
-
     }
 }

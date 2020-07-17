@@ -6,20 +6,28 @@ namespace QuestStoreNAT.web.Services
 {
     public class ArtifactManagement
     {
-        private StudentDAO _student { get; set; }
+        private StudentDAO _studentDAO { get; set; }
         private ArtifactDAO _artifact { get; set; }
         private OwnedArtifactGroupDAO _ownedArtifactGroup { get; set; }
         private OwnedArtifactStudentDAO _ownedArtifactStudent { get; set; }
         private GroupDAO _groupDAO { get; set; }
         private Student student { get; set; }
+        private GroupTransactionDAO _groupTransactionDAO { get; set; }
+        private StudentAcceptanceDAO _studentAcceptanceDAO { get; set; }
 
+        public ArtifactManagement(IDB_GenericInterface<GroupTransaction> groupTranscation)
+        {
+            _groupTransactionDAO = groupTranscation as GroupTransactionDAO;
+        }
         public ArtifactManagement()
         {
-            _student = new StudentDAO();
+            _studentDAO = new StudentDAO();
             _artifact = new ArtifactDAO();
             _ownedArtifactGroup = new OwnedArtifactGroupDAO();
             _ownedArtifactStudent = new OwnedArtifactStudentDAO();
             _groupDAO = new GroupDAO();
+            _groupTransactionDAO = new GroupTransactionDAO();
+            _studentAcceptanceDAO = new StudentAcceptanceDAO();
         }
 
         public void UseArtifact(Student student, int artifactID)
@@ -60,7 +68,7 @@ namespace QuestStoreNAT.web.Services
 
         public void BuyIndiviudalArtifact(int credentialID, int artifactID)
         {
-            var currentStudent = _student.FindOneRecordBy(credentialID);
+            var currentStudent = _studentDAO.FindOneRecordBy(credentialID);
             var artifactToBuy = _artifact.FindOneRecordBy(artifactID);
             var newRecord = new OwnedArtifactStudent()
             {
@@ -71,13 +79,13 @@ namespace QuestStoreNAT.web.Services
             int currentWalletValue = currentStudent.Wallet - artifactToBuy.Cost;
             currentStudent.Wallet = currentWalletValue;
             UpdateGroupWallet(currentStudent.GroupID, artifactToBuy.Cost);
-            new StudentDAO().UpdateRecord(currentStudent);
+            _studentDAO.UpdateRecord(currentStudent);
             _ownedArtifactStudent.AddRecord(newRecord);
         }
 
         public bool CheckigStudentWallet(int credentialID, int artifactID)
         {
-            var currentStudent = _student.FindOneRecordBy(credentialID).Wallet;
+            var currentStudent = _studentDAO.FindOneRecordBy(credentialID).Wallet;
             var artifactToBuy = _artifact.FindOneRecordBy(artifactID).Cost;
             if (currentStudent < artifactToBuy)
             {
@@ -100,10 +108,10 @@ namespace QuestStoreNAT.web.Services
 
         private bool CheckingStudentToBoughtGroupArtifact(int groupID, int credentialID, int artifactID)
         {
-            var currentStudent = _student.FindOneRecordBy(credentialID);
-            var studentGroup = new GroupDAO().FindOneRecordBy(currentStudent.GroupID);
+            var currentStudent = _studentDAO.FindOneRecordBy(credentialID);
+            var studentGroup = _groupDAO.FindOneRecordBy(currentStudent.GroupID);
             var artifactToBuy = _artifact.FindOneRecordBy(artifactID);
-            studentGroup.GroupStudents = _student.FetchAllStudentInGroup(groupID);
+            studentGroup.GroupStudents = _studentDAO.FetchAllStudentInGroup(groupID);
             int amountStudents = studentGroup.GroupStudents.Count;
             if(currentStudent.Wallet - (artifactToBuy.Cost / amountStudents) > 0)
             {
@@ -121,8 +129,7 @@ namespace QuestStoreNAT.web.Services
 
         public bool CheckingIfTransactionForBoughtGroupArtifactExist(int groupID)
         {
-            var groupTransactionDAO = new GroupTransactionDAO();
-            if (groupTransactionDAO.FindOneRecordBy(groupID) != null)
+            if (_groupTransactionDAO.FindOneRecordBy(groupID) != null)
             {
                 return false;
             }
@@ -131,9 +138,8 @@ namespace QuestStoreNAT.web.Services
 
         public void CreateNewGroupTransaction(int artifactID, int GroupID)
         {
-            var groupTransaction = new GroupTransactionDAO();
-            var studentGroup = new GroupDAO().FindOneRecordBy(GroupID);
-            studentGroup.GroupStudents = _student.FetchAllStudentInGroup(GroupID);
+            var studentGroup = _groupDAO.FindOneRecordBy(GroupID);
+            studentGroup.GroupStudents = _studentDAO.FetchAllStudentInGroup(GroupID);
             int amountOfStudentInGroup = studentGroup.GroupStudents.Count;
             var newRecordGroupTransaction = new GroupTransaction()
             {
@@ -142,15 +148,14 @@ namespace QuestStoreNAT.web.Services
                 numberOfStudents = amountOfStudentInGroup,
                 numberOfAcceptance = 1
             };
-            groupTransaction.AddRecord(newRecordGroupTransaction);
+            _groupTransactionDAO.AddRecord(newRecordGroupTransaction);
         }
 
         public void CreateRecordForAcceptance(int credentialID, int groupID, int artifactID)
         {
-            var currentStudent = _student.FindOneRecordBy(credentialID);
-            var studentGroup = new GroupDAO().FindOneRecordBy(groupID);
-            studentGroup.GroupStudents = _student.FetchAllStudentInGroup(groupID);
-            var studentAcceptance = new StudentAcceptanceDAO();
+            var currentStudent = _studentDAO.FindOneRecordBy(credentialID);
+            var studentGroup = _groupDAO.FindOneRecordBy(groupID);
+            studentGroup.GroupStudents = _studentDAO.FetchAllStudentInGroup(groupID);
 
             foreach (Student student in studentGroup.GroupStudents)
             {
@@ -163,11 +168,9 @@ namespace QuestStoreNAT.web.Services
                         acceptance = 0,
                         groupID = groupID
                     };
-                    studentAcceptance.AddRecord(newStudentAcceptance);
+                    _studentAcceptanceDAO.AddRecord(newStudentAcceptance);
                 }
-
             }
         }
-
     }
 }

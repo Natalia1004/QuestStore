@@ -8,13 +8,19 @@
 <div class="landing">
 
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
-        <div class="student_panel">
-            <div class="header_profile">
-                <div id="nameStudent">@Model.FirstName @Model.LastName</div>
-                <div id="coolcoins">Coolcoins : @Model.Wallet</div>
-                <div id="Group">Group : @Model.GroupID</div>
-                <div id="Level">Level : @Model.level</div>
+
+    <div class="student_panel">
+        <div class="table_container">
+            <div id="student" class="grid_table">
+                <span class="cellSpan">Student Name : @Model.FirstName @Model.LastName</span>
+                <span class="cellSpan">Coolcoins : @Model.Wallet</span>
+                <span class="cellSpan">Group : @Model.groupName</span>
+                <span class="cellSpan">Level : @Model.level</span>
             </div>
+        </div>
+
+        @if (Model.StudentArtifacts.Count != 0)
+        {
             <div class="artifacts">
                 <div class="header_artifacts">Your Artifacts</div>
                 <div id="artifact">
@@ -31,24 +37,34 @@
                     }
                 </div>
             </div>
+        }
+
+        @if (Model.UsedStudentArtifacts.Count != 0)
+        {
             <div class="artifacts">
                 <div class="header_artifacts">Used Artifacts</div>
-                @foreach (var artifact in Model.UsedStudentArtifacts)
-                {
-                    <div class="questreward questreward--individual">
-                        <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="questreward__remover"> X </a>
-                        <h3 class="questreward__title">@artifact.Name</h3>
-                        <h3 class="questreward__cost">@artifact.Cost</h3>
-                        <p class="questreward__description">@artifact.Description</p>
-                    </div>
-                }
+                <div id="artifact">
+                    @foreach (var artifact in Model.UsedStudentArtifacts)
+                    {
+                        <div class="questreward questreward--used">
+                            <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="questreward__remover"> X </a>
+                            <h3 class="questreward__title">@artifact.Name</h3>
+                            <h3 class="questreward__cost">@artifact.Cost</h3>
+                            <p class="questreward__description">@artifact.Description</p>
+                        </div>
+                    }
+                </div>
             </div>
+        }
+
+        @if (Model.GroupArtifacts.Count != 0)
+        {
             <div class="artifacts">
                 <div class="header_artifacts">Group Artifacts</div>
                 <div id="artifact">
                     @foreach (var artifact in Model.GroupArtifacts)
                     {
-                        <div class="questreward questreward--individual">
+                        <div class="questreward questreward--group">
                             <h3 class="questreward__title">@artifact.Name</h3>
                             <h3 class="questreward__cost">@artifact.Cost</h3>
                             <p class="questreward__description">@artifact.Description</p>
@@ -59,17 +75,23 @@
                     }
                 </div>
             </div>
+        }
+        @if (Model.UsedGroupArtifacts.Count != 0)
+        {
             <div class="artifacts">
                 <div class="header_artifacts">Used Group Artifacts</div>
-                @foreach (var artifact in Model.UsedGroupArtifacts)
-                {
-                    <div class="questreward questreward--individual">
-                        <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="questreward__remover"> X </a>
-                        <h3 class="questreward__title">@artifact.Name</h3>
-                        <h3 class="questreward__cost">@artifact.Cost</h3>
-                        <p class="questreward__description">@artifact.Description</p>
-                    </div>
-                }
+                <div id="artifact">
+                    @foreach (var artifact in Model.UsedGroupArtifacts)
+                    {
+                        <div class="questreward questreward--used">
+                            <a asp-action="DeleteArtifact" asp-route-id="@artifact.Id" class="questreward__remover"> X </a>
+                            <h3 class="questreward__title">@artifact.Name</h3>
+                            <h3 class="questreward__cost">@artifact.Cost</h3>
+                            <p class="questreward__description">@artifact.Description</p>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
+        }
+    </div>
 </div>

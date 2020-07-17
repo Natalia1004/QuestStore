@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
@@ -9,24 +10,22 @@ namespace QuestStoreNAT.web.Controllers
     public class QuestController : Controller
     {
         private readonly ILogger<QuestController> _logger;
+        private readonly Student _loggedStudent;
         private readonly ICurrentSession _session;
         private readonly IDB_GenericInterface<Quest> _questDAO;
-        private readonly IDB_GenericInterface<OwnedQuestStudent> _ownedQuestStudentDAO;
-        private readonly IDB_GenericInterface<OwnedQuestGroup> _ownedQuestGroupDAO;
+        private readonly QuestManagement _questManager;
 
         public QuestController(
             ILogger<QuestController> logger,
             ICurrentSession session,
-            IDB_GenericInterface<Quest> questDAO,
-            IDB_GenericInterface<OwnedQuestStudent> ownedQuestStudentDAO,
-            IDB_GenericInterface<OwnedQuestGroup> ownedQuestGroupDAO
+            IDB_GenericInterface<Quest> questDAO
             )
         {
             _logger = logger;
             _session = session;
+            _loggedStudent = _session.LoggedUser as Student;
             _questDAO = questDAO;
-            _ownedQuestStudentDAO = ownedQuestStudentDAO;
-            _ownedQuestGroupDAO = ownedQuestGroupDAO;
+            _questManager = new QuestManagement();
         }
 
         [HttpGet]
@@ -121,33 +120,55 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult ClaimQuest(int id)
         {
-            var claimedIndividualQuest = _questDAO.FindOneRecordBy(id);
-            var ownedIndividualQuest = new OwnedQuestStudent()
-            {
-                StudentId = _session.LoggedUser.Id,
-                QuestId = claimedIndividualQuest.Id,
-                CompletionStatus = 1
-                //TODO CompletionStatus = CompletionStatus.Unfinished,
-            };
-            _ownedQuestStudentDAO.AddRecord(ownedIndividualQuest);
-            TempData["QuestMessage"] = $"You have claimed the \"{claimedIndividualQuest.Name}\" Quest!";
-            return RedirectToAction($"ViewAllQuests", $"Quest");
+            var claimedQuest = _questDAO.FindOneRecordBy(id);
 
+            switch (claimedQuest.Type)
+            {
+                case TypeClassification.Individual:
+                    var ownedIndividualQuest = new OwnedQuestStudent()
+                    {
+                        StudentId = _loggedStudent.Id,
+                        QuestId = claimedQuest.Id,
+                        CompletionStatus = CompletionStatus.Unfinished,
+                    };
+                    _questManager.ClaimIndividualQuest(ownedIndividualQuest);
+                    break;
+                case TypeClassification.Group:
+                    var ownedGroupQuest = new OwnedQuestGroup()
+                    {
+                        GroupId = _loggedStudent.GroupID,
+                        QuestId = claimedQuest.Id,
+                        CompletionStatus = CompletionStatus.Unfinished,
+                    };
+                    _questManager.ClaimGroupQuest(ownedGroupQuest);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            TempData["QuestMessage"] = $"You have claimed the \"{claimedQuest.Name}\" Quest!";
+            return RedirectToAction($"ViewAllQuests", $"Quest");
         }
 
-        public IActionResult ClaimGroupQuest(int id)
+        public IActionResult DeclaimIndividualQuest(int id)
         {
-            var claimedGroupQuest = _questDAO.FindOneRecordBy(id);
-            var ownedGroupQuest = new OwnedQuestGroup()
+            _questManager.DeclaimIndividualQuest(id);
+            return RedirectToAction($"StudentQuestView", $"Quest");
+        }
+        public IActionResult DeclaimGroupQuest(int id)
+        {
+            _questManager.DeclaimGroupQuest(id);
+            return RedirectToAction($"StudentQuestView", $"Quest");
+        }
+
+        public IActionResult StudentQuestView()
+        {
+            var model = _questManager.ReturnListOfAllQuest(_loggedStudent.Id, _loggedStudent.GroupID);
+            if (model != null)
             {
-                //TODO GroupId = set up proper group id retrival
-                GroupId = 2,
-                QuestId = claimedGroupQuest.Id,
-                CompletionStatus = CompletionStatus.Unfinished,
-            };
-            _ownedQuestGroupDAO.AddRecord(ownedGroupQuest);
-            TempData["QuestMessage"] = $"You have claimed the \"{claimedGroupQuest.Name}\" Quest!";
-            return RedirectToAction($"ViewAllQuests", $"Quest");
+                return View($"StudentQuestView", model);
+            }
+            TempData["Message"] = $"You don't have any quests";
+            return RedirectToAction($"Welcome", $"Profile");
         }
     }
 }

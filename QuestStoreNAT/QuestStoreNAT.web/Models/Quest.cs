@@ -25,5 +25,7 @@ namespace QuestStoreNAT.web.Models
         [Required(ErrorMessage = "Description required")]
         [StringLength(255, ErrorMessage = "1 to 255 characters.", MinimumLength = 1)]
         public string Description { get; set; }
+
+        public CompletionStatus QuestStatus { get; set; }
     }
 }

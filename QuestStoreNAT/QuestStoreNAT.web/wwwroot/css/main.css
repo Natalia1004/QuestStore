@@ -64,6 +64,14 @@ ul {
 }
 
 /*----------
+    GENERAL
+----------*/
+
+.margin50top {
+    margin-top: 50px;
+}
+
+/*----------
     MAIN NAVIGATION STYLE
 ----------*/
 .logo {
@@ -334,9 +342,6 @@ ul {
     margin-bottom: 0;
 }
 
-.form-select {
-}
-
 .form input {
     width: 350px;
 }
@@ -418,6 +423,14 @@ ul {
 
 .questreward--group:hover {
     background-color: rgba(34, 88, 124, 0.74);
+}
+
+.questreward--used > * {
+    color: gray;
+}
+
+.questreward--used .questreward__remover {
+    color: #B22222;
 }
 
 .admin-controll {
@@ -764,6 +777,7 @@ ul {
     box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     line-height: 500%;
@@ -783,7 +797,7 @@ ul {
     height: 80%;
     grid-template-rows: repeat(5, 5fr);
     border-radius: 15px;
-    align-items: center;
+    align-items: start;
 }
 
 .header_profile {
@@ -812,7 +826,8 @@ ul {
 
 .artifacts {
     grid-template-rows: repeat(5, 4fr);
-    padding: 0px 130px;
+    justify-content: start;
+    padding: 0px 110px;
 }
 
 .header_artifacts {
@@ -826,7 +841,8 @@ ul {
 
 
 #artifact {
-    grid-row: 2/6;
+    display: flex;
+    flex-wrap: wrap;
     margin-left: 30px;
     margin-bottom: 40px;
     margin: auto;
@@ -997,8 +1013,6 @@ fieldset .dropdown__button {
 }
 
 
-
-
 /*----------------
    MENTOR DETAILS 
     prosze, nie usuwajcie 
@@ -1035,6 +1049,11 @@ fieldset .dropdown__button {
 
 #mentor {
     grid-template-columns: repeat(3, 1fr);
+    grid-column: 1/5;
+    grid-row: 1;
+}
+#student {
+    grid-template-columns: repeat(4, 1fr);
     grid-column: 1/5;
     grid-row: 1;
 }

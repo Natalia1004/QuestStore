@@ -9,11 +9,12 @@
                 @if (Session.LoggedUserRole == Role.Student)
                 {
                     <li><a asp-action="ShowStudentProfile" asp-controller="Profile"><button class="dropdown__button">Show My Profile</button></a></li>
-                    <li><a asp-action="Message" asp-controller="Message"><button class="dropdown__button">Message</button></a></li>
+                    <li><a asp-action="StudentQuestView" asp-controller="Quest"><button class="dropdown__button">My Quests</button></a></li>
+                    <li><a asp-action="Message" asp-controller="Message"><button class="dropdown__button">Messages</button></a></li>
                 }
-                else
+                else if (Session.LoggedUserRole == Role.Mentor)
                 {
-                    <li><input class="dropdown__button" type="button" value="Show My Profile" onclick="location.href='@Url.Action("MyProfile", "Profile")'" /></li>
+                    <li><input class="dropdown__button" type="button" value="Show My Profile" onclick="location.href='@Url.Action("ShowMentorProfile", "Mentor")'" /></li>
                 }
                 <li><a asp-action="ViewAllArtifacts" asp-controller="Artifact"><button class="dropdown__button">Artifacts Shop</button></a></li>
                 <li><input class="dropdown__button" type="button" value="View all Quests" onclick="location.href='@Url.Action("ViewAllQuests", "Quest")'" /></li>
