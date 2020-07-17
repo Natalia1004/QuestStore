@@ -9,23 +9,25 @@
 
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
 
-        @if ( Session.LoggedUserRole == Role.Admin )
+        @if (Session.LoggedUserRole == Role.Admin)
         {
 
             <div id="landing__content" class="landing__content landing__content-justify ">
-                <form id="form-quest-reward" asp-controller="Classroom" asp-action="Create" method="post" class="form-width">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form">
+                <div class="form-limit">
+                    <form class="form" asp-controller="Classroom" asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                         <h3 class="dropdown--margin">Add Classroom</h3>
 
-                        <label asp-for="Name" class="dropdown--margin"></label><br />
-                        <input asp-for="Name" class="dropdown--input dropdown--margin" /><br />
+                        <label asp-for="Name" class="dropdown--margin"></label>
+                        <input asp-for="Name" class="dropdown--input dropdown--margin" />
                         <span asp-validation-for="Name" class="text-danger"></span><br />
-                    </div>
-                    <div class="form__submit">
-                        <input type="submit" value="Add Classroom" class="dropdown__button dropdown--margin" />
-                    </div>
-                </form>
+
+                        <div class="form__submit">
+                            <input type="submit" value="Add Classroom" class="dropdown__button dropdown--margin" />
+                        </div>
+                    </form>
+                </div>
             </div>
         }
 

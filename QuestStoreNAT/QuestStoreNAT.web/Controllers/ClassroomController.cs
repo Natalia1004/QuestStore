@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Differencing;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
+    
     public class ClassroomController : Controller
     {
         private readonly ClassroomDAO _classroomDAO;
 
-        public ClassroomController( ClassroomDAO classroomDAO )
+
+        public ClassroomController( ClassroomDAO classroomDAO)
         {
             _classroomDAO = classroomDAO;
         }

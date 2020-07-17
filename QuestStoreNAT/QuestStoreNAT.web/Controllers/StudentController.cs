@@ -15,77 +15,160 @@ namespace QuestStoreNAT.web.Controllers
         private readonly StudentDAO _studentDAO;
         private readonly QuestDAO _questDAO;
         private readonly OwnedQuestStudentDAO _ownedQuestStudentDAO;
-        private readonly ICurrentSession _session;
+        private readonly ClassroomDAO _classroomDAO;
+        private readonly GroupDAO _groupDAO;
         private static int studentId;
 
-        public StudentController(StudentDAO studentDAO, 
+        public StudentController(StudentDAO studentDAO,
                                 QuestDAO questDAO,
                                 OwnedQuestStudentDAO ownedQuestStudentDAO,
-                                ICurrentSession session)
+                                ClassroomDAO classroomDAO,
+                                GroupDAO groupDAO)
         {
             _studentDAO = studentDAO;
             _questDAO = questDAO;
             _ownedQuestStudentDAO = ownedQuestStudentDAO;
-            _session = session;
+            _classroomDAO = classroomDAO;
+            _groupDAO = groupDAO;
         }
-        public IActionResult Index()
-        {
-            return View(_studentDAO.FetchAllRecords().OrderBy(s => s.Id).ToList());
-        }
+        public IActionResult Index() => View(_studentDAO.FetchAllRecords().OrderBy(s => s.Id).ToList());
 
         public IActionResult Create(int id)
         {
             var Id = _studentDAO.AddStudentByCredentialsReturningID(id);
-            return RedirectToAction("Edit" , "Student" , new { Id = Id });
+            return RedirectToAction("Edit" , "Student" , new { Id });
         }
+
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            var studentToEdit = _studentDAO.FindOneRecordBy(Id);
-            return View(studentToEdit);
+            studentId = Id;
+            var studentEditVM = PrepareEditModel(Id);
+            return View(studentEditVM); 
         }
 
         [HttpPost]
-        public IActionResult Edit(Student Student)
+        public IActionResult Edit(StudentEditViewModel studentVM)
         {
-            _studentDAO.UpdateRecord(Student);
+            if (ModelState.IsValid)
+            {
+                var student = new Student
+                {
+                    Id = studentVM.Id,
+                    ClassID = studentVM.ClassID,
+                    GroupID = studentVM.GroupID,
+                    FirstName = studentVM.FirstName,
+                    LastName = studentVM.LastName
+                };
+                _studentDAO.UpdateRecord(student);
+                return RedirectToAction("Index", "Student");
+            }
+            return View(studentVM);
+        }
+
+        
+        public IActionResult Delete(int id)
+        {
+            var student = _studentDAO.FetchAllRecords().SingleOrDefault(s=>s.Id == id);
+            if (student == null)
+            {
+                Response.StatusCode = 404;
+                return View($"NotFound", id);
+            }
+            return View(student);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteStudent([FromForm] Student student)
+        {
+            _studentDAO.DeleteRecord(student.Id);
             return RedirectToAction("Index" , "Student");
         }
 
-        public IActionResult Delete( int id )
-        {
-            _studentDAO.DeleteRecord(id);
-            return RedirectToAction("Index" , "Student");
-        }
+        public IActionResult Details(int Id) => View(GetStudentViewModel(Id));
 
-        public IActionResult Details(int Id)
-        {
-            return View(GetStudentDetails(Id));
-
-        }
 
         public IActionResult Confirmation(int questId)
         {
-            var questToConfirm = _ownedQuestStudentDAO.FetchAllRecords().FirstOrDefault(q => q.Id == questId);
-            questToConfirm.CompletionStatus = 0;
-            _ownedQuestStudentDAO.UpdateRecord(questToConfirm);
+            ConfirmQuestAndUpdateWallet(questId);
             return RedirectToAction("Details", "Student", new { Id = studentId });
         }
 
+
+
         #region priv
-        private Student GetStudentDetails(int Id)
+
+        private void ConfirmQuestAndUpdateWallet(int questId)
+        {
+            var questToConfirm = _ownedQuestStudentDAO.FetchAllRecords().SingleOrDefault(q => q.Id == questId);
+            questToConfirm.CompletionStatus = 0;
+            _ownedQuestStudentDAO.UpdateRecord(questToConfirm);
+            AddCoolCoinsIfAccomplished(questToConfirm);
+        } 
+
+        private StudentEditViewModel GetStudentViewModel(int Id)
         {
             studentId = Id;
-            var student = _studentDAO.FetchAllRecords().FirstOrDefault(s => s.Id == Id);
+            var student = _studentDAO.FetchAllRecords().SingleOrDefault(s => s.Id == studentId);
             var studentQuests = _ownedQuestStudentDAO.FetchAllRecords().Where(q => q.StudentId == student.Id).ToList();
             var quests = _questDAO.FetchAllRecords();
 
-            student.OwnedStudentQuests = quests
+             var ownedStudentQuests = quests
                                          .Join(studentQuests, q => q.Id, s => s.QuestId, (q, s) => new OwnedQuestStudent
-                                               {Id = s.Id, StudentId = s.StudentId, QuestId = s.QuestId, CompletionStatus = s.CompletionStatus,Name = q.Name,Cost = q.Cost})
-                                          .OrderBy(q=>q.CompletionStatus)
+                                         { Id = s.Id, StudentId = s.StudentId, QuestId = s.QuestId, CompletionStatus = s.CompletionStatus, Name = q.Name, Cost = q.Cost })
+                                          .OrderBy(q => q.CompletionStatus)
                                           .ToList();
-            return student;
+
+            var classrooms = _classroomDAO.FetchAllRecords().Where(c => c.Id == student.ClassID).ToList();
+            var groups = _groupDAO.FetchAllRecords().Where(g => g.Id == student.GroupID).ToList();
+
+
+            var studentEVM = new StudentEditViewModel
+            {
+                Id = student.Id,
+                CredentialID = student.CredentialID,
+                ClassID = student.ClassID,
+                GroupID = student.GroupID,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                Wallet = student.Wallet,
+                Classrooms = classrooms,
+                Groups = groups,
+                OwnedStudentQuests = ownedStudentQuests
+            };
+            return studentEVM;
+        }
+
+
+        private StudentEditViewModel PrepareEditModel(int studentId)
+        {
+            var student = _studentDAO.FetchAllRecords().SingleOrDefault(s => s.Id == studentId);
+            var allGroups = _groupDAO.FetchAllRecords().OrderBy(g => g.Name);
+            var allClasses = _classroomDAO.FetchAllRecords().OrderBy(c => c.Name);
+            return new StudentEditViewModel
+            {
+                Id = student.Id,
+                CredentialID = student.CredentialID,
+                ClassID = student.ClassID,
+                GroupID = student.GroupID,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                Wallet = student.Wallet,
+                Classrooms = allClasses,
+                Groups = allGroups
+            };
+        }
+
+
+        private void AddCoolCoinsIfAccomplished(OwnedQuestStudent ownedQuestStudent)
+        {
+            if (ownedQuestStudent.CompletionStatus == 0)
+            {
+                var studentToUpdate = _studentDAO.FetchAllRecords().SingleOrDefault(s => s.Id == studentId);
+                var quest = _questDAO.FetchAllRecords().SingleOrDefault(q => q.Id == ownedQuestStudent.QuestId);
+                studentToUpdate.Wallet += quest.Cost;
+                _studentDAO.UpdateRecord(studentToUpdate);
+            }
         }
         #endregion
     }

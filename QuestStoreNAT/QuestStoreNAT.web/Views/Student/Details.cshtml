@@ -1,6 +1,6 @@
 ﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
 
-@model Student
+@model StudentEditViewModel
 
 @{
     ViewData["Title"] = "Details Student";
@@ -27,12 +27,38 @@
                         <span class="cellSpan">@Model.Wallet</span>
                     </div>
 
+
+                    <div id="classes" class="grid_table">
+                        <span class="headerSpan"><strong>Class Name</strong></span>
+                        <span class="cellSpan">
+                            @if (Model.Classrooms.Count() == 0)
+                            {
+                                <span class="cellSpan">The student has not been assigned to any class so far</span>
+                            }
+                            @foreach (var item in Model.Classrooms)
+                            {
+                                <a>@item.Name</a>
+                            }
+                        </span>
+                    </div>
+
+                    <div id="groups" class="grid_table">
+                        <span class="headerSpan"><strong>Group Name</strong></span>
+                        <span class="headerSpan"><strong>Group Wallet </strong></span>
+                        @foreach (var group in Model.Groups)
+                        {
+                            <span class="cellSpan">@group.Name</span>
+                            <span class="cellSpan">@group.GroupWallet</span>
+                        }
+
+                    </div>
+
                     <div id="students" class="grid_table">
                         <span class="headerSpan"><strong>Quest Name</strong></span>
                         <span class="headerSpan"><strong>Completion Status</strong></span>
                         <span class="headerSpan"><strong>Change Status</strong></span>
 
-                        @if (Model.OwnedStudentQuests.Count == 0)
+                        @if (Model.OwnedStudentQuests.Count() == 0)
                         {
                             <span class="cellSpan">&nbsp;</span>
                             <span class="cellSpan">The student has not tackled any quest so far</span>
@@ -43,12 +69,12 @@
                             <span class="cellSpan">@quest.Name</span>
                             @if (@quest.CompletionStatus == 1)
                             {
-                 
+
                                 <span class="cellSpan">ongoing</span>
                                 <span class="cellSpan">
                                     <a asp-action="Confirmation" asp-controller="Student" asp-route-questId="@quest.Id" class="dropdown__button dropdown--margin">Change status</a>
                                 </span>
-                                   
+
                             }
                             else
                             {
