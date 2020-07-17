@@ -12,7 +12,7 @@
 
     <div id="landing__content">
         <div class="inside_landing">
-            @foreach ( var student in Model )
+            @foreach (var student in Model)
             {
                 <div class="show-all_box">
                     <div class="show-all_user">
@@ -26,7 +26,7 @@
                             <div class="admin-controll"><a asp-action="Details" asp-route-Id="@student.Id" class="dropdown__button dropdown--margin">Details</a></div>
                         }
                     </div>
-                }
             </div>
+            }
         </div>
 </div>
