@@ -106,17 +106,17 @@ namespace QuestStoreNAT.web.Controllers
         }
 
         [HttpPost]
-        public IActionResult BuyArtifact(Artifact artifact)
+        public IActionResult BuyArtifact(int id)
         {
-            var artifactInDb = _artifactDao.FindOneRecordBy(artifact.Id);
+            var artifactInDb = _artifactDao.FindOneRecordBy(id);
 
-            if (new ArtifactManagement().CheckigStudentWallet(CredentialId, artifact.Id) == false)
+            if (new ArtifactManagement().CheckigStudentWallet(CredentialId, id) == false)
             {
                 TempData["ArtifactMessage"] = $"You don't have enough money. Sorry!";
             }
             else
             {
-                new ArtifactManagement().BuyIndiviudalArtifact(CredentialId, artifact.Id);
+                new ArtifactManagement().BuyIndiviudalArtifact(CredentialId, id);
                 TempData["ArtifactMessage"] = $"You bought \"{artifactInDb.Name}\" Artifact!";
             }
             return RedirectToAction("ViewAllArtifacts", "Artifact");

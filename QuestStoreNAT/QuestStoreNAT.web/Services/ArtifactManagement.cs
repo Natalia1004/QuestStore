@@ -74,7 +74,7 @@ namespace QuestStoreNAT.web.Services
             {
                 StudentId = currentStudent.Id,
                 ArtifactId = artifactID,
-                CompletionStatus = 0,
+                CompletionStatus = CompletionStatus.Unfinished,
             };
             int currentWalletValue = currentStudent.Wallet - artifactToBuy.Cost;
             currentStudent.Wallet = currentWalletValue;
