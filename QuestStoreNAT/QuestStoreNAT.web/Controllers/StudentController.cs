@@ -162,11 +162,17 @@ namespace QuestStoreNAT.web.Controllers
 
         private void AddCoolCoinsIfAccomplished(OwnedQuestStudent ownedQuestStudent)
         {
-            if (ownedQuestStudent.CompletionStatus == 0)
+            if (ownedQuestStudent.CompletionStatus == CompletionStatus.Finished)
             {
                 var studentToUpdate = _studentDAO.FetchAllRecords().SingleOrDefault(s => s.Id == studentId);
+                var studentGroupToBeUpdated = _groupDAO.FetchAllRecords().SingleOrDefault(g => g.Id == studentToUpdate.GroupID);
                 var quest = _questDAO.FetchAllRecords().SingleOrDefault(q => q.Id == ownedQuestStudent.QuestId);
+
                 studentToUpdate.Wallet += quest.Cost;
+                studentToUpdate.OverallWalletLevel += quest.Cost;
+                studentGroupToBeUpdated.GroupWallet += quest.Cost;
+
+                _groupDAO.UpdateRecord(studentGroupToBeUpdated);
                 _studentDAO.UpdateRecord(studentToUpdate);
             }
         }
