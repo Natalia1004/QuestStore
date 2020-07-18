@@ -36,7 +36,7 @@ namespace QuestStoreNAT.web.Controllers
         public IActionResult Create( [FromForm] Classroom classroom )
         {
             _classroomDAO.AddRecord(classroom);
-            return RedirectToAction("Edit" , "Classroom");
+            return RedirectToAction("Index" , "Classroom");
         }
 
         public IActionResult Edit( int id )
