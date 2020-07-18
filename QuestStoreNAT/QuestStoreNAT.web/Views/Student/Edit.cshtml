@@ -17,7 +17,7 @@
                     <h3 class="dropdown--margin">Edit Student</h3>
 
                     <div>
-                        <label class="dropdown--margin form-select form-margin" asp-for="ClassID">Class Name</label>
+                        <label class="dropdown--margin form-select form-margin" asp-for="ClassID">Class Name:</label>
                         <select asp-for="ClassID"
                                 class=" dropdown--input dropdown--margin"
                                 asp-items="@(new SelectList(Model.Classrooms.ToList(), "Id", "Name"))">
@@ -26,7 +26,7 @@
                         <span asp-validation-for="ClassID" class="text-danger"></span><br />
                     </div>
                     <div>
-                        <label class="dropdown--margin form-select form-margin" asp-for="GroupID"></label>
+                        <label class="dropdown--margin form-select form-margin" asp-for="GroupID">Group Name:</label>
                         <select asp-for="GroupID"
                                 class=" dropdown--input dropdown--margin"
                                 asp-items="@(new SelectList(Model.Groups.ToList(), "Id", "Name"))">
