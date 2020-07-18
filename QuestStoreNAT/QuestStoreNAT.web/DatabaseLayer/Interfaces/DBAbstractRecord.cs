@@ -89,13 +89,5 @@ namespace QuestStoreNAT.web.DatabaseLayer
             command.Prepare();
             command.ExecuteNonQuery();
         }
-
-        //TODO DELETE IF NO ERRORS UNTIL 17.07
-        //protected void ExecuteReader( NpgsqlConnection connection , string query )
-        //{
-        //    using var command = new NpgsqlCommand(query , connection);
-        //    command.Prepare();
-        //    command.ExecuteNonQuery();
-        //}
     }
 }
