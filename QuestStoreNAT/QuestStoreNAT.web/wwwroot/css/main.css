@@ -259,6 +259,13 @@ ul {
     LANDING STYLE
 ----------*/
 
+.landing__content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: 40px auto 15px auto;
+}
+
 @media screen and (min-width: 1150px) {
     .landing {
         display: flex;
@@ -295,8 +302,6 @@ ul {
         flex-wrap: wrap;
         width: 60%;
         margin: 40px auto 15px auto;
-        /*delete this after page is done*/
-        /*background-color: rgba(255, 255, 0, 0.308);*/
     }
 
     .landing__content-justify {
@@ -731,23 +736,11 @@ ul {
     grid-gap: 0.05rem;
 }
 
-
-@media (max-width: 860px) {
-    .inside_landing {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .show-all_box {
-        margin-bottom: 1rem;
-    }
-}
-
 .show-all_box {
     background-color: rgba(54, 56, 68, 0.74);
     color: rgb(226, 226, 226);
     border-radius: 4px;
-    padding:3rem;
+    padding:2rem;
     margin: 0.5rem 0.5rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);
 }
