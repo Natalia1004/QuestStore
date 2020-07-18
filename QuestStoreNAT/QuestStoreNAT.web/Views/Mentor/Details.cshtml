@@ -1,7 +1,7 @@
 ﻿@model MentorDetailsViewModel
 
 @{
-    ViewData["Title"] = "DetailsMentor";
+    ViewData["Title"] = "Details Mentor";
 }
 
 
@@ -10,29 +10,20 @@
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
 
         <div>
-            <h1>Mentor Details</h1>
+            <h1></h1>
             <div class="table_container">
 
-                <hr />
                 <div id="mentor" class="grid_table">
-                    <span class="headerSpan">
-                        <strong>First Name</strong>
-                    </span>
-                    <span class="headerSpan">
-                        <strong>Last Name</strong>
-                    </span>
-                    <span class="headerSpan">
-                        <strong>Bio</strong>
-                    </span>
-                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.FirstName)</span>
-                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.LastName)</span>
-                    <span class="cellSpan">@Html.DisplayFor(model => model.Mentor.Bio)</span>
+                    <span class="headerSpan"><strong>First Name</strong></span>
+                    <span class="headerSpan"><strong>Last Name</strong></span>
+                    <span class="headerSpan"><strong>Bio</strong></span>
+                    <span class="cellSpan">@Model.Mentor.FirstName </span>
+                    <span class="cellSpan">@Model.Mentor.LastName</span>
+                    <span class="cellSpan">@Model.Mentor.Bio</span>
                 </div>
 
                 <div id="classes" class="grid_table">
-                    <span class="headerSpan">
-                        <strong>Class Name</strong>
-                    </span>
+                    <span class="headerSpan"><strong>Class Name</strong></span>
                     <span class="cellSpan">
                         @if ( Model.Classrooms.Count() == 0 )
                         {
@@ -46,12 +37,8 @@
                 </div>
 
                 <div id="groups" class="grid_table">
-                    <span class="headerSpan">
-                        <strong>Group Name</strong>
-                    </span>
-                    <span class="headerSpan">
-                        <strong>Group Wallet </strong>
-                    </span>
+                    <span class="headerSpan"><strong>Group Name</strong></span>
+                    <span class="headerSpan"><strong>Group Wallet </strong></span>
                     @foreach ( var group in Model.Groups )
                     {
                     <span class="cellSpan">@group.Name</span>
@@ -62,15 +49,9 @@
 
 
                 <div id="students" class="grid_table">
-                    <span class="headerSpan">
-                        <strong>First Name</strong>
-                    </span>
-                    <span class="headerSpan">
-                        <strong>Last Name</strong>
-                    </span>
-                    <span class="headerSpan">
-                        <strong>Wallet</strong>
-                    </span>
+                    <span class="headerSpan"><strong>First Name</strong></span>
+                    <span class="headerSpan"><strong>Last Name</strong></span>
+                    <span class="headerSpan"><strong>Wallet</strong></span>
 
                     @foreach ( var student in Model.Students )
                     {

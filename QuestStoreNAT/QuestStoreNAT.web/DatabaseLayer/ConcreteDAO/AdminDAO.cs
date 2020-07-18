@@ -17,7 +17,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
             admin.Id = reader.GetInt32((int)AdminsEnum.Id);
             admin.FirstName = reader.GetString((int)AdminsEnum.FirstName);
             admin.LastName = reader.GetString((int)AdminsEnum.LastName);
-            //TODO Credential retrieval ?
             return admin;
         }
 

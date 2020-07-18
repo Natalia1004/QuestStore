@@ -26,7 +26,6 @@ namespace QuestStoreNAT.web.Controllers
             _credentialID = _session.LoggedUser.CredentialID;
             _artifactDAO = new ArtifactDAO();
             _student = _studentDAO.FindOneRecordBy(_credentialID);
-
         }
 
         [HttpGet]
@@ -40,18 +39,18 @@ namespace QuestStoreNAT.web.Controllers
                 model.currentAmountOfAcceptance = _groupTransactionDAO.FindOneRecordBy(model.groupID).numberOfAcceptance;
                 return View(model);
             }
-            TempData["Message"] = $"You don't have any message";
+            TempData["MessageX"] = $"You don't have any messages.";
             return RedirectToAction("Welcome", "Profile");
         }
 
         [HttpPost]
-        public IActionResult Acceptance(StudentAcceptance studentAcceptance)
+        public IActionResult Acceptance(string answear)
         {
             var currentStudentAcceptanceToUpdate = _studentAcceptanceDAO.FindOneRecordBy(_student.Id);
             var artifactToBuy = new ArtifactDAO().FindOneRecordBy(currentStudentAcceptanceToUpdate.artifactID);
             if (ModelState.IsValid)
             {
-                new AcceptanceMenagement().StudentAcceptance(studentAcceptance, _student.GroupID, artifactToBuy.Id,artifactToBuy.Cost, _student.Id);
+                new AcceptanceMenagement().StudentAcceptance(answear, _student.GroupID, artifactToBuy.Id,artifactToBuy.Cost, _student.Id);
                 return RedirectToAction("ShowStudentProfile", "Profile");   
             }
             return RedirectToAction("Error", "Home");

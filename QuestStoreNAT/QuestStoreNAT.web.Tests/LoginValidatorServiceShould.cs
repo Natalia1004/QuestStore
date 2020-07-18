@@ -8,7 +8,7 @@ namespace QuestStoreNAT.web.Tests
 {
     public class LoginValidatorServiceShould
     {
-        private LoginValidatorService sut;
+        private readonly LoginValidatorService sut;
         private Mock<Credentials> mockEnteredValidCredentials;
         private Mock<Credentials> mockEnteredInvalidCredentials;
         private Mock<Credentials> mockRetrievedCredentials;

@@ -7,27 +7,27 @@ namespace QuestStoreNAT.web.Controllers
 {
     public class ArtifactController : Controller
     {
-        private StudentDAO studentDAO;
-        private Student _student { get; set; }
-        private ArtifactDAO artifactDAO;
+        private readonly StudentDAO _studentDAO;
+        private Student Student { get; set; }
+        private readonly ArtifactDAO _artifactDao;
         private readonly ICurrentSession _session;
-        private int _credentialID { get; set; }
-        public ArtifactManagement artifactManagmenet { get; set; }
+        private int CredentialId { get; }
+        public ArtifactManagement ArtifactManagmenet { get; set; }
 
         public ArtifactController(ICurrentSession session)
         {
-            artifactDAO = new ArtifactDAO();
-            studentDAO = new StudentDAO();
+            _artifactDao = new ArtifactDAO();
+            _studentDAO = new StudentDAO();
             _session = session;
-            _credentialID = _session.LoggedUser.CredentialID;
-            artifactManagmenet = new ArtifactManagement();
-            _student = studentDAO.FindOneRecordBy(_credentialID);
+            CredentialId = _session.LoggedUser.CredentialID;
+            ArtifactManagmenet = new ArtifactManagement();
+            Student = _studentDAO.FindOneRecordBy(CredentialId);
         }
 
         [HttpGet]
         public IActionResult ViewAllArtifacts()
         {
-            var model = artifactDAO.FetchAllRecords();
+            var model = _artifactDao.FetchAllRecords();
             return View(model);
         }
 
@@ -42,7 +42,7 @@ namespace QuestStoreNAT.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                artifactDAO.AddRecord(artifactToAdd);
+                _artifactDao.AddRecord(artifactToAdd);
                 TempData["ArtifactMessage"] = $"You have succesfully added the \"{artifactToAdd.Name}\" Artifact!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
@@ -52,9 +52,11 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult EditArtifact(int id)
         {
-            var model = artifactDAO.FindOneRecordBy(id);
+            var model = _artifactDao.FindOneRecordBy(id);
             if (model == null)
             {
+                Response.StatusCode = 404;
+                ViewBag.ErrorMessage = "Sorry, you cannot edit this Artifact!";
                 return RedirectToAction("Error", "Home");
             }
             return View(model);
@@ -65,8 +67,8 @@ namespace QuestStoreNAT.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                artifactDAO.UpdateRecord(artifactToEdit);
-                TempData["ArrifactMessage"] = $"You have updated the \"{artifactToEdit.Name}\" Artifact!";
+                _artifactDao.UpdateRecord(artifactToEdit);
+                TempData["ArtifactMessage"] = $"You have updated the \"{artifactToEdit.Name}\" Artifact!";
                 return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             return RedirectToAction("Error", "Home");
@@ -75,7 +77,7 @@ namespace QuestStoreNAT.web.Controllers
         [HttpGet]
         public IActionResult DeleteArtifact(int id)
         {
-            var model = artifactDAO.FindOneRecordBy(id);
+            var model = _artifactDao.FindOneRecordBy(id);
             if (model == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -86,46 +88,57 @@ namespace QuestStoreNAT.web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteArtifact(Artifact artifactToDelete)
         {
-            var questToDeleteFromDB = artifactDAO.FindOneRecordBy(artifactToDelete.Id);
-            artifactDAO.DeleteRecord(questToDeleteFromDB.Id);
+            var questToDeleteFromDB = _artifactDao.FindOneRecordBy(artifactToDelete.Id);
+            _artifactDao.DeleteRecord(questToDeleteFromDB.Id);
             TempData["ArtifactMessage"] = $"You have deleted the \"{artifactToDelete.Name}\" Artifact!";
             return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
 
+        [HttpGet]
         public IActionResult BuyArtifact(int id)
         {
-            if (new ArtifactManagement().CheckigStudentWallet(_credentialID, id) == false)
+            var model = _artifactDao.FindOneRecordBy(id);
+            if (model == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult BuyArtifact(Artifact artifact)
+        {
+            var artifactInDb = _artifactDao.FindOneRecordBy(artifact.Id);
+
+            if (new ArtifactManagement().CheckigStudentWallet(CredentialId, artifact.Id) == false)
             {
                 TempData["ArtifactMessage"] = $"You don't have enough money. Sorry!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             else
             {
-                new ArtifactManagement().BuyIndiviudalArtifact(_credentialID, id);
-                TempData["ArtifactMessage"] = $"You bought Artifact!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
+                new ArtifactManagement().BuyIndiviudalArtifact(CredentialId, artifact.Id);
+                TempData["ArtifactMessage"] = $"You bought \"{artifactInDb.Name}\" Artifact!";
             }
+            return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
 
         public IActionResult BuyGroupArtifact(int id)
         {
-            if (artifactManagmenet.CheckigGroupWallet(_student.GroupID, id, _credentialID) == false)
+            if (ArtifactManagmenet.CheckigGroupWallet(Student.GroupID, id, CredentialId) == false)
             {
                 TempData["ArtifactMessage"] = $"Your group don't have enough money or maybe You don't have enough coolcoins to share costs. Sorry!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
-            else if(artifactManagmenet.CheckingIfTransactionForBoughtGroupArtifactExist(_student.GroupID) == false)
+            else if(ArtifactManagmenet.CheckingIfTransactionForBoughtGroupArtifactExist(Student.GroupID) == false)
             {
                 TempData["ArtifactMessage"] = $"Transactions for purchase the new group artifact exist. You can't make another transaction!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
             else
             {
-                artifactManagmenet.CreateNewGroupTransaction(id, _student.GroupID);
-                artifactManagmenet.CreateRecordForAcceptance(_credentialID, _student.GroupID, id);
+                ArtifactManagmenet.CreateNewGroupTransaction(id, Student.GroupID);
+                ArtifactManagmenet.CreateRecordForAcceptance(CredentialId, Student.GroupID, id);
                 TempData["ArtifactMessage"] = $"Your group will receive information!";
-                return RedirectToAction("ViewAllArtifacts", "Artifact");
             }
+            return RedirectToAction("ViewAllArtifacts", "Artifact");
         }
     }
 }

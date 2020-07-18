@@ -6,22 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.ViewModels;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
     public class MentorController : Controller
     {
+        private readonly ICurrentSession _session;
+        private int _credentialID { get; set; }
         private readonly MentorDAO _mentorDAO;
         private readonly ClassEnrolmentDAO _classEnrolmentDAO;
         private readonly GroupDAO _groupDAO;
         private readonly StudentDAO _studentDAO;
 
-        public MentorController(MentorDAO mentorDAO, ClassEnrolmentDAO classEnrolmentDAO, GroupDAO groupDAO, StudentDAO studentDAO )
+        public MentorController(MentorDAO mentorDAO, ClassEnrolmentDAO classEnrolmentDAO, GroupDAO groupDAO, StudentDAO studentDAO, ICurrentSession session)
         {
             _mentorDAO = mentorDAO;
             _classEnrolmentDAO = classEnrolmentDAO;
             _groupDAO = groupDAO;
             _studentDAO = studentDAO;
+            _session = session;
+            _credentialID = _session.LoggedUser.CredentialID;
         }
         public IActionResult Index()
         {
@@ -49,11 +54,30 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult Delete(int id)
         {
-            _mentorDAO.DeleteRecord(id);
-            return RedirectToAction("Index" , "Mentor");
+            return View(_mentorDAO.FetchAllRecords().SingleOrDefault(m=>m.Id == id));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Mentor mentor)
+        {
+            _mentorDAO.DeleteRecord(mentor.Id);
+            return RedirectToAction("Index", "Mentor");
         }
 
         public IActionResult Details( int id )
+        {
+            return View(GetMentorDetals(id));
+        }
+
+        public IActionResult ShowMentorProfile()
+        {
+            int mentorID = _mentorDAO.FindOneRecordByCredentialId(_credentialID).Id;
+            return View(GetMentorDetals(mentorID));
+        }
+
+
+        #region priv
+        private MentorDetailsViewModel GetMentorDetals(int id)
         {
             var mentor = _mentorDAO.FetchAllRecords().FirstOrDefault(m => m.Id == id);
             var mentorClassrooms = _classEnrolmentDAO.FetchAllRecordsJoin().Where(ce => ce.MentorCE.Id == id).Select(ce => ce.ClassroomCE).ToList();
@@ -61,12 +85,13 @@ namespace QuestStoreNAT.web.Controllers
             var mentorStudents = _studentDAO.FetchAllRecordsByIdJoin(id);
             var mentorViewModel = new MentorDetailsViewModel
             {
-                Mentor = mentor ,
-                Classrooms = mentorClassrooms ,
-                Groups = mentorGroups ,
+                Mentor = mentor,
+                Classrooms = mentorClassrooms,
+                Groups = mentorGroups,
                 Students = mentorStudents
             };
-            return View(mentorViewModel);
+            return mentorViewModel;
         }
+        #endregion
     }
 }

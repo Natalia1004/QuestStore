@@ -64,6 +64,22 @@ ul {
 }
 
 /*----------
+    GENERAL
+----------*/
+
+.margin50top {
+    margin-top: 50px;
+}
+
+.padding20 {
+    padding: 20px;
+}
+
+.padding20top {
+    padding: 20px 0 0 0;
+}
+
+/*----------
     MAIN NAVIGATION STYLE
 ----------*/
 .logo {
@@ -181,6 +197,8 @@ ul {
     margin: 10px;
 }
 
+
+
 .dropdown--input {
     padding: 10px 10px;
     box-sizing: border-box;
@@ -249,6 +267,15 @@ ul {
     LANDING STYLE
 ----------*/
 
+@media screen and (min-width: 900px) {
+    .landing__content {
+        display: flex;
+        flex-wrap: wrap;
+        width: 60%;
+        margin: 40px auto 15px auto;
+    }
+}
+
 @media screen and (min-width: 1150px) {
     .landing {
         display: flex;
@@ -280,15 +307,6 @@ ul {
                 border-color: rgba(224, 41, 41, 0.8);
             }
 
-    .landing__content {
-        display: flex;
-        flex-wrap: wrap;
-        width: 60%;
-        margin: 40px auto 15px auto;
-        /*delete this after page is done*/
-        /*background-color: rgba(255, 255, 0, 0.308);*/
-    }
-
     .landing__content-justify {
         justify-content: center;
     }
@@ -309,6 +327,10 @@ ul {
     .inside_landing {
         display: flex;
     }
+
+    .show-all_box {
+        display:flex;
+    }
 }
 
 /*----------
@@ -326,9 +348,6 @@ ul {
 .form-label {
     display: block;
     margin-bottom: 0;
-}
-
-.form-select {
 }
 
 .form input {
@@ -414,10 +433,18 @@ ul {
     background-color: rgba(34, 88, 124, 0.74);
 }
 
-.admin-controll {
-    margin-bottom: 20px;
+.questreward--used > * {
+    color: gray;
 }
 
+.questreward--used .questreward__remover {
+    color: #B22222;
+}
+
+.admin-controll {
+    margin-bottom: 20px;
+    
+}
 
 /*----------
     POPUP BOX STYLE
@@ -708,27 +735,31 @@ ul {
 .inside_landing {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* grid-template-columns: auto auto auto auto; */
-    grid-auto-flow: row;
-    grid-auto-columns: auto;
+    grid-gap: 0.05rem;
 }
 
 .show-all_box {
-    position: relative;
     background-color: rgba(54, 56, 68, 0.74);
-    /*background-color: #FAFAFA;*/
-    /*        color: #424242;*/
     color: rgb(226, 226, 226);
     border-radius: 4px;
-    padding: 2rem 2rem 3rem 2rem;
-    margin: 1.5rem 1.5rem;
+    padding:0.5rem 2rem;
+    margin: 0.5rem 0.5rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);
 }
 
 .show-all_user {
     text-align: center;
-    margin: 1.5rem 0 1rem 0;
+    /*margin: 1rem 0 1rem 0;*/
+    /*padding: 0.5rem 0 0 0;*/
 }
+
+/*
+@media screen and (min-width: 1835px) {
+    .show-all_user {
+        height: 120px;
+    }
+}
+    */
 
 .user_name {
     font-size: 2.15rem;
@@ -737,7 +768,6 @@ ul {
 
 .user_position {
     color: rgb(151, 87, 87);
-    /*color: #bdbdbd;*/
     margin-top: 0.4rem;
     font-size: 1rem;
     font-weight: 900;
@@ -762,6 +792,7 @@ ul {
     box-shadow: inset -3px -3px 10px #eee;
     border-radius: 15px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     line-height: 500%;
@@ -781,7 +812,7 @@ ul {
     height: 80%;
     grid-template-rows: repeat(5, 5fr);
     border-radius: 15px;
-    align-items: center;
+    align-items: start;
 }
 
 .header_profile {
@@ -810,7 +841,8 @@ ul {
 
 .artifacts {
     grid-template-rows: repeat(5, 4fr);
-    padding: 0px 130px;
+    justify-content: start;
+    padding: 0px 110px;
 }
 
 .header_artifacts {
@@ -822,9 +854,9 @@ ul {
     margin-bottom: 20px;
 }
 
-
 #artifact {
-    grid-row: 2/6;
+    display: flex;
+    flex-wrap: wrap;
     margin-left: 30px;
     margin-bottom: 40px;
     margin: auto;
@@ -940,10 +972,7 @@ fieldset {
     color: #d8d2d2;
     padding: 2rem 2rem 3rem 2rem;
     text-align: center;
-    /*    box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);*/
-    /*    -moz-box-shadow: inset -3px -3px 10px #eee;*/
     -webkit-box-shadow: inset -3px -3px 10px #eee;
-    /*    box-shadow: inset -3px -3px 10px #eee;*/
     border-radius: 15px;
 }
 
@@ -995,4 +1024,66 @@ fieldset .dropdown__button {
     width: 100%;
     text-align: center;
     margin-bottom: 20px;
+}
+
+/*----------------
+   MENTOR DETAILS 
+    prosze, nie usuwajcie 
+    znowu tego fragmentu :)
+ -----------------*/
+
+.table_container {
+    display: grid;
+    column-gap: 2rem;
+    row-gap: 3rem;
+}
+
+.grid_table {
+    display: grid;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-radius: 0.5rem;
+    background-color: rgba(34, 36, 49, 0.74);
+}
+
+    .grid_table > span {
+        padding: 1rem;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+.headerSpan {
+    text-align: center;
+}
+
+.cellSpan {
+    text-align: center;
+}
+
+#mentor {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column: 1/5;
+    grid-row: 1;
+}
+#student {
+    grid-template-columns: repeat(4, 1fr);
+    grid-column: 1/5;
+    grid-row: 1;
+}
+
+#groups {
+    grid-template-columns: repeat(2,1fr);
+    grid-column: 1/4;
+    grid-row: 2;
+}
+
+#classes {
+    grid-column: 4/5;
+    grid-row: 2;
+}
+
+#students {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column: 1/5;
+    grid-row: 3;
 }

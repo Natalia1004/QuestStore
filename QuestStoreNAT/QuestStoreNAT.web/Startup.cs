@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuestStoreNAT.web.DatabaseLayer;
+using QuestStoreNAT.web.DatabaseLayer.ConcreteDAO;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.Services;
 
@@ -19,6 +20,7 @@ namespace QuestStoreNAT.web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConnectDB.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -29,13 +31,19 @@ namespace QuestStoreNAT.web
             services.AddScoped<ILoginValidatorService, LoginValidatorService>();
             services.AddScoped<IUserFinderService, UserFinderService>();
             services.AddSingleton<ICurrentSession, CurrentSession>();
+          
             services.AddScoped<MentorDAO>();
             services.AddScoped<StudentDAO>();
             services.AddScoped<CredentialsDAO>();
             services.AddScoped<ClassEnrolmentDAO>();
             services.AddScoped<ClassroomDAO>();
             services.AddScoped<GroupDAO>();
+            services.AddScoped<OwnedQuestStudentDAO>();
+            services.AddScoped<QuestDAO>();
             services.AddScoped<IDB_GenericInterface<Credentials>, CredentialsDAO>();
+            services.AddScoped<IDB_GenericInterface<Quest>, QuestDAO>();
+            services.AddScoped<IDB_GenericInterface<OwnedQuestStudent>, OwnedQuestStudentDAO>();
+            services.AddScoped<IDB_GenericInterface<OwnedQuestGroup>, OwnedQuestGroupDAO>();
 
             services.AddControllersWithViews();
         }

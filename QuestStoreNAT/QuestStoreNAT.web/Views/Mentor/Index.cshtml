@@ -9,8 +9,8 @@
 
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
 
-        <div id="landing__content">
-            <div class="inside_landing">
+        <div id="landing__content" class="landing__content">
+
                 @foreach (var mentor in Model)
                 {
                     <div class="show-all_box">
@@ -20,13 +20,13 @@
                             <p class="show-all_text">@mentor.Bio</p>
                             @if (Session.LoggedUserRole == Role.Admin)
                             {
-                                <a asp-action="Edit" asp-route-Id="@mentor.Id" class="dropdown__button dropdown--margin">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@mentor.Id" class="dropdown__button dropdown--margin">Delete</a>
-                                <a asp-action="Details" asp-route-id="@mentor.Id" class="dropdown__button dropdown--margin">Details</a>
+                                <div class="admin-controll"><a asp-action="Edit" asp-route-Id="@mentor.Id" class="dropdown__button dropdown--margin">Edit</a></div>
+                                <div class="admin-controll"><a asp-action="Delete" asp-route-id="@mentor.Id" class="dropdown__button dropdown--margin">Delete</a></div>
+                                <div class="admin-controll"><a asp-action="Details" asp-route-id="@mentor.Id" class="dropdown__button dropdown--margin">Details</a></div>
                             }
                         </div>
                     </div>
                 }
-            </div>
+
         </div>
 </div>

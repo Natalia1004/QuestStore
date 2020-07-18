@@ -9,7 +9,6 @@
 
         <div id="landing__content" class="landing__content landing__content-justify ">
             <div class="form-limit">
-
                 <form class="form" asp-action="Edit" asp-controller="Mentor" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -24,11 +23,10 @@
                     <span asp-validation-for="LastName" class="text-danger"></span><br>
 
                     <label asp-for="Bio" class="dropdown--margin form-label form-margin"></label>
-                    @* <input asp-for="Bio" class="dropdown--input dropdown--margin form-margin" /> *@
                     <textarea asp-for="Bio" class="dropdown--input dropdown--margin contact_textbox--height form-margin"></textarea>
                     <span asp-validation-for="Bio" class="text-danger"></span><br>
 
-                    <div class="form-submit">
+                    <div class="form__submit">
                         <button type="submit" class="dropdown__button dropdown--margin">Save</button>
                     </div>
                 </form>
