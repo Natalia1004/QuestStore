@@ -11,9 +11,9 @@
 
         @if (Session.LoggedUserRole == Role.Admin)
         {
-
             <div id="landing__content" class="landing__content landing__content-justify ">
                 <div class="form-limit">
+
                     <form class="form" asp-controller="Classroom" asp-action="Create" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

@@ -1,10 +1,10 @@
 ﻿@inject QuestStoreNAT.web.Services.ICurrentSession Session
-
 @model QuestStoreNAT.web.Models.Classroom
 
 @{
     ViewData["Title"] = "EditClassroom";
 }
+
 <div class="landing">
 
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
@@ -23,8 +23,7 @@
                         <input asp-for="Name" class="dropdown--input dropdown--margin form-margin" />
                         <span asp-validation-for="Name" class="text-danger"></span><br>
 
-
-                        <div class="form-submit">
+                        <div class="form__submit">
                             <button type="submit" class="dropdown__button dropdown--margin">Save</button>
                         </div>
                     </form>
