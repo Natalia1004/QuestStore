@@ -6,17 +6,17 @@
     ViewData["Title"] = "Details Student";
 }
 
-
 <div class="landing">
 
     <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+
         @if (Session.LoggedUserRole == Role.Admin | Session.LoggedUserRole == Role.Mentor)
         {
             <div>
-                <h1>Student Details</h1>
+                <h1></h1>
                 <div class="table_container">
 
-                    <hr />
+
                     <div id="mentor" class="grid_table">
                         <span class="headerSpan"><strong>First Name</strong></span>
                         <span class="headerSpan"><strong>Last Name</strong></span>
@@ -53,6 +53,14 @@
 
                     </div>
 
+                    @if (Model.OwnedStudentQuests.Count() == 0)
+                    {
+                        <div id="info_box" class="hero-landing" onclick="TurnOff()">
+                            <h5 class="info-box">The student has not tackled any quest so far</h5>
+                        </div>
+                    }
+
+
                     <div id="students" class="grid_table">
                         <span class="headerSpan"><strong>Quest Name</strong></span>
                         <span class="headerSpan"><strong>Completion Status</strong></span>
@@ -61,7 +69,7 @@
                         @if (Model.OwnedStudentQuests.Count() == 0)
                         {
                             <span class="cellSpan">&nbsp;</span>
-                            <span class="cellSpan">The student has not tackled any quest so far</span>
+                            <span class="cellSpan">&nbsp;</span>
                             <span class="cellSpan">&nbsp;</span>
                         }
                         @foreach (var quest in Model.OwnedStudentQuests)
