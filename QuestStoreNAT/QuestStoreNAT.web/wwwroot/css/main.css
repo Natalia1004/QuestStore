@@ -259,6 +259,15 @@ ul {
     LANDING STYLE
 ----------*/
 
+@media screen and (min-width: 900px) {
+    .landing__content {
+        display: flex;
+        flex-wrap: wrap;
+        width: 60%;
+        margin: 40px auto 15px auto;
+    }
+}
+
 @media screen and (min-width: 1150px) {
     .landing {
         display: flex;
@@ -289,15 +298,6 @@ ul {
                 background-color: rgba(224, 41, 41, 0.8);
                 border-color: rgba(224, 41, 41, 0.8);
             }
-
-    .landing__content {
-        display: flex;
-        flex-wrap: wrap;
-        width: 60%;
-        margin: 40px auto 15px auto;
-        /*delete this after page is done*/
-        /*background-color: rgba(255, 255, 0, 0.308);*/
-    }
 
     .landing__content-justify {
         justify-content: center;
@@ -731,23 +731,11 @@ ul {
     grid-gap: 0.05rem;
 }
 
-
-@media (max-width: 860px) {
-    .inside_landing {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .show-all_box {
-        margin-bottom: 1rem;
-    }
-}
-
 .show-all_box {
     background-color: rgba(54, 56, 68, 0.74);
     color: rgb(226, 226, 226);
     border-radius: 4px;
-    padding:3rem;
+    padding:0.5rem 2rem;
     margin: 0.5rem 0.5rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);
 }
@@ -774,7 +762,6 @@ ul {
 .show-all_text {
     text-align: center;
 }
-
 
 /*----------
    Student View
@@ -851,7 +838,6 @@ ul {
     color: #d71c2f;
     margin-bottom: 20px;
 }
-
 
 #artifact {
     display: flex;
@@ -1024,7 +1010,6 @@ fieldset .dropdown__button {
     text-align: center;
     margin-bottom: 20px;
 }
-
 
 /*----------------
    MENTOR DETAILS 
