@@ -435,6 +435,7 @@ ul {
 
 .admin-controll {
     margin-bottom: 20px;
+    
 }
 
 
@@ -746,14 +747,15 @@ ul {
     background-color: rgba(54, 56, 68, 0.74);
     color: rgb(226, 226, 226);
     border-radius: 4px;
-    padding:1rem;
-    margin: 1.5rem 1.5rem;
+    padding:3rem;
+    margin: 0.5rem 0.5rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), rgba(0,0,0,0.24);
 }
 
 .show-all_user {
     text-align: center;
-    margin: 1.5rem 0 1rem 0;
+/*    margin: 1rem 0 1rem 0;*/
+/*    padding:0.5rem;*/
 }
 
 .user_name {
@@ -772,6 +774,7 @@ ul {
 .show-all_text {
     text-align: center;
 }
+
 
 /*----------
    Student View
