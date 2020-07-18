@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Differencing;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
-using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
-    
+
     public class ClassroomController : Controller
     {
         private readonly ClassroomDAO _classroomDAO;
-
 
         public ClassroomController( ClassroomDAO classroomDAO)
         {
@@ -51,9 +44,16 @@ namespace QuestStoreNAT.web.Controllers
             _classroomDAO.UpdateRecord(classroom);
             return RedirectToAction("Index" , "Classroom");
         }
-        public IActionResult Delete( int id )
+
+        [HttpGet]
+        public IActionResult Delete(int id)
         {
-            _classroomDAO.DeleteRecord(id);
+            return View(_classroomDAO.FindOneRecordBy(id));
+        }
+        [HttpPost]
+        public IActionResult Delete( Classroom classroomToDelete)
+        {
+            _classroomDAO.DeleteRecord(classroomToDelete.Id);
             return RedirectToAction("Index" , "Classroom");
         }
     }

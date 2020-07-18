@@ -13,9 +13,9 @@
             <h3 class="delete-title">Are you sure you want to delete chosen Student?</h3>
 
             <div class="hero-landing">
-                <div class="questreward questreward--individual">
+                <div class="questreward">
                     <h3 class="questreward__title">@Model.FirstName</h3>
-                    <h3 class="questreward__cost">@Model.LastName</h3>
+                    <h3 class="user_position">@Model.LastName</h3>
                 </div>
                 <form asp-action="DeleteStudent" asp-controller="Student" method="post">
                     @Html.HiddenFor(m => m.Id)
