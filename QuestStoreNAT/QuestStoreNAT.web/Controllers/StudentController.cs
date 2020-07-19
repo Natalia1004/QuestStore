@@ -52,21 +52,20 @@ namespace QuestStoreNAT.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var student = new Student
-                {
-                    Id = studentVM.Id,
-                    ClassID = studentVM.ClassID,
-                    GroupID = studentVM.GroupID,
-                    FirstName = studentVM.FirstName,
-                    LastName = studentVM.LastName
-                };
+                var student = _studentDAO.FetchAllRecords().SingleOrDefault(s => s.Id == studentVM.Id);
+
+                student.Id = studentVM.Id;
+                student.ClassID = studentVM.ClassID;
+                student.GroupID = studentVM.GroupID;
+                student.FirstName = studentVM.FirstName;
+                student.LastName = studentVM.LastName;
+
                 _studentDAO.UpdateRecord(student);
                 return RedirectToAction("Index", "Student");
             }
             return View(studentVM);
         }
 
-        
         public IActionResult Delete(int id)
         {
             var student = _studentDAO.FetchAllRecords().SingleOrDefault(s=>s.Id == id);
