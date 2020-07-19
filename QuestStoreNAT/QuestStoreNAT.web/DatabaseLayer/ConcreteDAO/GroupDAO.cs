@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Npgsql;
 using QuestStoreNAT.web.Models;
 
@@ -16,7 +13,6 @@ namespace QuestStoreNAT.web.DatabaseLayer
         {
             Id, ClassroomID, Name, GroupWallet
         }
-
 
         public List<Group> FetchAllRecordsByIdJoin( int id )
         {
@@ -47,10 +43,10 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         public override string ProvideQueryStringToAdd( Group groupToAdd )
         {
-            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"ClassID\", \"Name\", \"CoinsTotal\"" +
-              $"VALUES({groupToAdd.ClassroomId}," +
-                     $"'{groupToAdd.Name}'," +
-                     $"{groupToAdd.GroupWallet}";
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"ClassID\", \"Name\", \"CoinsTotal\")" +
+                        $"VALUES({groupToAdd.ClassroomId}," +
+                        $"'{groupToAdd.Name}'," +
+                        $"{groupToAdd.GroupWallet});";
             return query;
         }
 
@@ -91,7 +87,5 @@ namespace QuestStoreNAT.web.DatabaseLayer
                 $"WHERE klasy.\"MentorID\" = {id};"; // 
             return query;
         }
-
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using QuestStoreNAT.web.Models;
+﻿using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.DatabaseLayer;
 
 namespace QuestStoreNAT.web.Services
@@ -25,6 +24,5 @@ namespace QuestStoreNAT.web.Services
             targetStudent.UsedGroupArtifacts = _artifact.FetchAllGroupArtifacts(targetStudent.GroupID, (int)CompletionStatus.Finished);
             return (targetStudent);
         }
-
     }
 }

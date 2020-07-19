@@ -66,18 +66,17 @@ namespace QuestStoreNAT.web.Controllers
 
         public IActionResult Details( int id )
         {
-            return View(GetMentorDetals(id));
+            return View(GetMentorDetails(id));
         }
 
         public IActionResult ShowMentorProfile()
         {
             int mentorID = _mentorDAO.FindOneRecordByCredentialId(_credentialID).Id;
-            return View(GetMentorDetals(mentorID));
+            return View(GetMentorDetails(mentorID));
         }
 
-
         #region priv
-        private MentorDetailsViewModel GetMentorDetals(int id)
+        private MentorDetailsViewModel GetMentorDetails(int id)
         {
             var mentor = _mentorDAO.FetchAllRecords().FirstOrDefault(m => m.Id == id);
             var mentorClassrooms = _classEnrolmentDAO.FetchAllRecordsJoin().Where(ce => ce.MentorCE.Id == id).Select(ce => ce.ClassroomCE).ToList();

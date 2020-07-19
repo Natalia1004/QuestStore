@@ -15,6 +15,7 @@
                 else if (Session.LoggedUserRole == Role.Mentor)
                 {
                     <li><input class="dropdown__button" type="button" value="Show My Profile" onclick="location.href='@Url.Action("ShowMentorProfile", "Mentor")'" /></li>
+                    <li><button class="dropdown__button" onclick="location.href='@Url.Action("Index", "Group")'">All Groups</button></li>
                 }
                 <li><a asp-action="ViewAllArtifacts" asp-controller="Artifact"><button class="dropdown__button">Artifacts Shop</button></a></li>
                 <li><input class="dropdown__button" type="button" value="View all Quests" onclick="location.href='@Url.Action("ViewAllQuests", "Quest")'" /></li>

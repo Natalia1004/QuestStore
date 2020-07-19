@@ -11,6 +11,7 @@ namespace QuestStoreNAT.web.Models
         public int ClassroomId { get; set; }
 
         [Required]
+        [Display(Name = "Name:")]
         public string Name { get; set; }
 
         public int GroupWallet { get; set; }

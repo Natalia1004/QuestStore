@@ -45,7 +45,6 @@ namespace QuestStoreNAT.web.Controllers
                 default:
                     return View();
             }
-
         }
     }
 }
