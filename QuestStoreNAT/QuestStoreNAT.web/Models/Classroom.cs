@@ -9,7 +9,7 @@ namespace QuestStoreNAT.web.Models
 
         [Required]
         [Display(Name = "Name:")]
-        [StringLength(20, ErrorMessage = "2 to 16 characters.", MinimumLength = 2)]
+        [StringLength(20, ErrorMessage = "2 to 20 characters.", MinimumLength = 2)]
         public string Name { get; set; }
 
         public List<Group> ClassroomGroups { get; set; }

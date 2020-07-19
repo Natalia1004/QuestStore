@@ -1,0 +1,34 @@
+﻿@model QuestStoreNAT.web.Models.Group
+
+@{
+    ViewData["Title"] = "AddGroup";
+}
+
+<div class="landing">
+
+    <partial name="~/Views/Shared/_SidebarMenu.cshtml">
+
+    <div id="landing__content" class="landing__content landing__content-justify ">
+        <div class="form-limit">
+
+            <form class="form" asp-controller="Group" asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <h3 class="dropdown--margin">Add Group</h3>
+
+                <label asp-for="Name" class="dropdown--margin form-label form-margin"></label>
+                <input asp-for="Name" class="dropdown--input dropdown--margin form-margin" />
+                <span asp-validation-for="Name" class="text-danger"></span><br />
+
+                <div class="form__submit">
+                    <input type="submit" value="Add Group" class="dropdown__button dropdown--margin" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

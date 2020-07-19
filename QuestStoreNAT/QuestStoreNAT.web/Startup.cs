@@ -42,6 +42,7 @@ namespace QuestStoreNAT.web
             services.AddScoped<QuestDAO>();
             services.AddScoped<IDB_GenericInterface<Credentials>, CredentialsDAO>();
             services.AddScoped<IDB_GenericInterface<Quest>, QuestDAO>();
+            services.AddScoped<IDB_GenericInterface<Group>, GroupDAO>();
             services.AddScoped<IDB_GenericInterface<OwnedQuestStudent>, OwnedQuestStudentDAO>();
             services.AddScoped<IDB_GenericInterface<OwnedQuestGroup>, OwnedQuestGroupDAO>();
 
