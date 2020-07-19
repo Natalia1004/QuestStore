@@ -43,7 +43,7 @@ namespace QuestStoreNAT.web.DatabaseLayer
 
         public override string ProvideQueryStringToAdd( Group groupToAdd )
         {
-            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"ClassID\", \"Name\", \"CoinsTotal\"" +
+            var query = $"INSERT INTO \"NATQuest\".\"{DBTableName}\" (\"ClassID\", \"Name\", \"CoinsTotal\")" +
                         $"VALUES({groupToAdd.ClassroomId}," +
                         $"'{groupToAdd.Name}'," +
                         $"{groupToAdd.GroupWallet});";

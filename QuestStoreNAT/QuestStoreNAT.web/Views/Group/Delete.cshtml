@@ -15,7 +15,7 @@
             <div class="hero-landing">
                 <div class="questreward">
                     <h3 class="questreward__cost padding20">@Model.Name</h3>
-                    <h3 class="questreward__cost">@Model.GroupWallet CC</h3>
+                    <h3 class="questreward__cost padding20">@Model.GroupWallet CC</h3>
                 </div>
                 <form asp-action="Delete" asp-controller="Group" method="post">
                     @Html.HiddenFor(m => m.Id)

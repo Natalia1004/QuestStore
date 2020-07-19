@@ -25,6 +25,5 @@ namespace QuestStoreNAT.web.Services
             targetStudent.UsedGroupArtifacts = _artifact.FetchAllGroupArtifacts(targetStudent.GroupID, (int)CompletionStatus.Finished);
             return (targetStudent);
         }
-
     }
 }
