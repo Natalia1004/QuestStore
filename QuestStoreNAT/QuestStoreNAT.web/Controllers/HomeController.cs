@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.Services;
 
@@ -53,6 +54,12 @@ namespace QuestStoreNAT.web.Controllers
                 {
                     _logger.LogWarning($"Could not retrieve the user with CredentialId = {credentialId}. Such user does not exist.");
                     return RedirectToAction("FailedLogin");
+                }
+                if (_session.LoggedUserRole == Role.Mentor)
+                {
+                    var classEnrolmentDAO = new ClassEnrolmentDAO();
+                    var mentorDetails = new MentorDetails(classEnrolmentDAO);
+                    mentorDetails.GetMentorClassrooms((Mentor)_session.LoggedUser);
                 }
                 return RedirectToAction("Welcome", "Profile");
             }

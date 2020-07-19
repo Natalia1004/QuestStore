@@ -1,5 +1,4 @@
-﻿using System;
-using QuestStoreNAT.web.Models;
+﻿using QuestStoreNAT.web.Models;
 using QuestStoreNAT.web.DatabaseLayer;
 
 namespace QuestStoreNAT.web.Services

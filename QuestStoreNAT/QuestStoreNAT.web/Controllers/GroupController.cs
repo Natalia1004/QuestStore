@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using QuestStoreNAT.web.DatabaseLayer;
 using QuestStoreNAT.web.Models;
+using QuestStoreNAT.web.Services;
 
 namespace QuestStoreNAT.web.Controllers
 {
@@ -27,7 +28,6 @@ namespace QuestStoreNAT.web.Controllers
         [HttpPost]
         public IActionResult Create([FromForm] Group group)
         {
-            group.ClassroomId = 0;
             group.GroupWallet = 0;
             _groupDAO.AddRecord(group);
             return RedirectToAction("Index", "Group");
